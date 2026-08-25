@@ -1,0 +1,33 @@
+# ---- Subrepos: backend y frontend ya son sus propios repos ----
+# Esta carpeta madre los aloja como clones de trabajo; no se versionan aquí dentro.
+FusaRoute-BACKEND/
+FusaRoute-FRONTEND/
+
+# ---- Lock files de Office (Word/PowerPoint crean ~$archivo mientras están abiertos) ----
+~*.docx
+~*.pptx
+~*.xlsx
+
+# ---- Salida temporal del script build_v3.py ----
+extracted_v2/
+extracted_v3/
+
+# ---- Audio de clase (no es entregable, pesa 61MB) ----
+*.m4a
+
+# ---- Ruido de sistema operativo ----
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ---- Node / build genérico por si aparece algo a futuro ----
+node_modules/
+dist/
+build/
+*.log
+
+# ---- Editores ----
+.vscode/
+.idea/
+*.swp
+*.swo

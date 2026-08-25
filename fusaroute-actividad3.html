@@ -1,0 +1,500 @@
+<title>FusaRoute: Cierre de Brechas</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,500&family=Work+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');
+
+  :root {
+    --bg: #F2F5F3;
+    --surface: #FFFFFF;
+    --surface-2: #E7ECE9;
+    --ink: #172621;
+    --ink-soft: #4B5C56;
+    --line: #D3DBD7;
+    --accent: #1F6E5C;
+    --accent-strong: #164F42;
+    --accent-tint: #E1EFEA;
+    --amber: #A9711A;
+    --amber-tint: #F5EBD9;
+    --clay: #A6472F;
+    --clay-tint: #F6E4DE;
+    --mono: 'IBM Plex Mono', ui-monospace, monospace;
+    --display: 'Newsreader', Georgia, 'Times New Roman', serif;
+    --body: 'Work Sans', -apple-system, 'Segoe UI', sans-serif;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #12211D;
+      --surface: #172A25;
+      --surface-2: #1D332C;
+      --ink: #E9F1EC;
+      --ink-soft: #A9BFB6;
+      --line: #2B443C;
+      --accent: #4FBE9F;
+      --accent-strong: #7DD6BC;
+      --accent-tint: #1E3B33;
+      --amber: #E0AC5C;
+      --amber-tint: #3A2E17;
+      --clay: #E08468;
+      --clay-tint: #3B2620;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #12211D;
+    --surface: #172A25;
+    --surface-2: #1D332C;
+    --ink: #E9F1EC;
+    --ink-soft: #A9BFB6;
+    --line: #2B443C;
+    --accent: #4FBE9F;
+    --accent-strong: #7DD6BC;
+    --accent-tint: #1E3B33;
+    --amber: #E0AC5C;
+    --amber-tint: #3A2E17;
+    --clay: #E08468;
+    --clay-tint: #3B2620;
+  }
+
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--body);
+    line-height: 1.6;
+    font-size: 16px;
+  }
+  ::selection { background: var(--accent-tint); color: var(--accent-strong); }
+
+  .wrap {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 4rem 1.5rem 6rem;
+  }
+
+  header.hero {
+    margin-bottom: 3.5rem;
+  }
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent);
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-bottom: 1.1rem;
+  }
+  .eyebrow::before {
+    content: "";
+    width: 22px;
+    height: 1px;
+    background: var(--accent);
+  }
+  h1 {
+    font-family: var(--display);
+    font-weight: 600;
+    font-size: clamp(2.1rem, 5vw, 2.9rem);
+    line-height: 1.12;
+    letter-spacing: -0.01em;
+    margin: 0 0 0.9rem;
+    text-wrap: balance;
+    color: var(--ink);
+  }
+  .lede {
+    font-size: 1.08rem;
+    color: var(--ink-soft);
+    max-width: 56ch;
+    margin: 0;
+  }
+
+  .stat-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 2rem;
+  }
+  .stat {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 0.85rem 1.1rem;
+    flex: 1 1 140px;
+  }
+  .stat b {
+    display: block;
+    font-family: var(--display);
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: var(--accent-strong);
+    line-height: 1.1;
+  }
+  .stat span {
+    font-size: 0.82rem;
+    color: var(--ink-soft);
+  }
+
+  section { margin-bottom: 3.4rem; }
+  section > h2 {
+    font-family: var(--display);
+    font-weight: 600;
+    font-size: 1.55rem;
+    letter-spacing: -0.005em;
+    margin: 0 0 0.3rem;
+    text-wrap: balance;
+  }
+  section > .section-note {
+    color: var(--ink-soft);
+    font-size: 0.95rem;
+    margin: 0 0 1.4rem;
+    max-width: 62ch;
+  }
+  p { margin: 0 0 1rem; max-width: 68ch; }
+  p:last-child { margin-bottom: 0; }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 1.4rem 1.5rem;
+  }
+  .card + .card { margin-top: 0.9rem; }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.93rem;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  .table-scroll { overflow-x: auto; border-radius: 12px; }
+  th, td {
+    text-align: left;
+    padding: 0.7rem 0.9rem;
+    border-bottom: 1px solid var(--line);
+    vertical-align: top;
+  }
+  thead th {
+    background: var(--surface-2);
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+  tbody tr:last-child td { border-bottom: none; }
+
+  .tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    font-weight: 600;
+    padding: 0.15rem 0.55rem;
+    border-radius: 999px;
+  }
+  .tag.ok { background: var(--accent-tint); color: var(--accent-strong); }
+  .tag.warn { background: var(--amber-tint); color: var(--amber); }
+  .tag.miss { background: var(--clay-tint); color: var(--clay); }
+
+  .grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.9rem;
+  }
+  @media (max-width: 620px) { .grid-2 { grid-template-columns: 1fr; } }
+
+  .box-title {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin: 0 0 0.6rem;
+  }
+  .box-title.si { color: var(--accent-strong); }
+  .box-title.no { color: var(--clay); }
+  ul.plain { margin: 0; padding-left: 1.1rem; }
+  ul.plain li { margin-bottom: 0.4rem; }
+  ul.plain li:last-child { margin-bottom: 0; }
+
+  .scope-diagram {
+    display: block;
+    width: 100%;
+    height: auto;
+    margin: 1.6rem 0 0.6rem;
+  }
+  .scope-caption {
+    font-size: 0.82rem;
+    color: var(--ink-soft);
+    text-align: center;
+    margin-top: 0.4rem;
+  }
+
+  .decisions dl {
+    display: grid;
+    grid-template-columns: minmax(0,1fr);
+    gap: 0;
+    margin: 0;
+  }
+  .decisions .row {
+    display: grid;
+    grid-template-columns: 90px 1fr;
+    gap: 1rem;
+    padding: 0.85rem 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .decisions .row:last-child { border-bottom: none; }
+  @media (max-width: 560px) {
+    .decisions .row { grid-template-columns: 1fr; gap: 0.2rem; }
+  }
+  .decisions dt {
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    color: var(--accent);
+    font-weight: 600;
+  }
+  .decisions dd { margin: 0; color: var(--ink); }
+
+  .script-step {
+    display: grid;
+    grid-template-columns: 64px 1fr;
+    gap: 1rem;
+    padding: 1.1rem 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .script-step:last-child { border-bottom: none; }
+  .script-step .time {
+    font-family: var(--mono);
+    font-size: 0.8rem;
+    color: var(--ink-soft);
+    padding-top: 0.15rem;
+  }
+  .script-step h3 {
+    font-family: var(--body);
+    font-weight: 600;
+    font-size: 1.02rem;
+    margin: 0 0 0.35rem;
+  }
+  .script-step p { margin: 0; font-size: 0.96rem; color: var(--ink); }
+
+  .qa {
+    border-left: 3px solid var(--amber);
+    background: var(--amber-tint);
+    border-radius: 0 10px 10px 0;
+    padding: 0.95rem 1.1rem;
+    margin-bottom: 0.8rem;
+  }
+  .qa:last-child { margin-bottom: 0; }
+  .qa .q { font-weight: 600; margin-bottom: 0.3rem; }
+  .qa .a { color: var(--ink-soft); font-size: 0.95rem; }
+
+  .pending {
+    border-left: 3px solid var(--clay);
+    background: var(--clay-tint);
+    border-radius: 0 10px 10px 0;
+    padding: 1rem 1.2rem;
+  }
+
+  footer {
+    border-top: 1px solid var(--line);
+    padding-top: 1.6rem;
+    font-size: 0.85rem;
+    color: var(--ink-soft);
+    font-family: var(--mono);
+  }
+  footer code {
+    background: var(--surface-2);
+    padding: 0.1rem 0.35rem;
+    border-radius: 4px;
+    font-size: 0.82rem;
+  }
+
+  code, .mono { font-family: var(--mono); }
+</style>
+
+<div class="wrap">
+
+  <header class="hero">
+    <div class="eyebrow">Actividad Clase 3 · Comité de Arquitectura</div>
+    <h1>Lo que le faltaba al documento de FusaRoute, y lo que ya le añadimos</h1>
+    <p class="lede">Comparamos la guía del docente, la presentación de la Clase 3 y el documento que ya tenían escrito. Esto explica, en palabras simples, qué estaba bien, qué faltaba y qué se añadió — sin tocar una sola palabra de lo que ya habían redactado.</p>
+    <div class="stat-row">
+      <div class="stat"><b>8 → 8</b><span>secciones de la guía, todas resueltas</span></div>
+      <div class="stat"><b>+14</b><span>requisitos funcionales, con ID</span></div>
+      <div class="stat"><b>4</b><span>tablas nuevas (alcance, RF, RNF, métricas)</span></div>
+      <div class="stat"><b>1</b><span>frase corregida en todo el texto original</span></div>
+    </div>
+  </header>
+
+  <section>
+    <h2>El punto de partida</h2>
+    <p class="section-note">La guía del docente pide 8 secciones. La diapositiva de cierre de la Clase 3 pide otras 6 para el Comité. Solo se cruzan en dos: problema y alcance.</p>
+    <div class="card">
+      <p>El documento que ya tenían era fuerte contando <b>el problema</b>: la desorientación de la gente en Fusagasugá, las más de 20 rutas sin información clara, y que ni Google Maps las tiene. Eso no se tocó, porque ya estaba bien resuelto.</p>
+      <p>Pero al compararlo contra las dos listas de secciones, quedaban huecos reales: no había una respuesta directa a «¿qué pasaría si el sistema no existiera?», el alcance («qué sí y qué no») estaba disuelto dentro de la narrativa en vez de declarado, y no existían requisitos funcionales, no funcionales, ni una tabla de métricas — justo lo que la Clase 3 insiste en que «un atributo sin métrica es solo una intención».</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>Cómo quedó cada sección de la guía</h2>
+    <div class="table-scroll">
+      <table>
+        <thead>
+          <tr><th>Sección pedida</th><th>Estado antes</th><th>Qué se hizo</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Nombre del proyecto</td><td><span class="tag warn">Implícito</span></td><td>Se añadió un párrafo explicando por qué «FusaRoute» es representativo.</td></tr>
+          <tr><td>Problema a resolver</td><td><span class="tag ok">Fuerte</span></td><td>Intacto — era la mejor parte del documento.</td></tr>
+          <tr><td>Usuarios del sistema</td><td><span class="tag warn">Incompleto</span></td><td>Se añadió que <b>no</b> hay un tercer tipo de usuario en esta fase, y por qué.</td></tr>
+          <tr><td>Valor de la solución</td><td><span class="tag miss">Faltante</span></td><td>Nuevo párrafo, incluida la pregunta que no se respondía: qué pasaría si no existiera.</td></tr>
+          <tr><td>Alcance inicial</td><td><span class="tag miss">Faltante</span></td><td>Nuevo párrafo + <b>Tabla 1</b> (sí incluye / no incluye por ahora).</td></tr>
+          <tr><td>Arquitectura (F/B/BD)</td><td><span class="tag ok">Bien</span></td><td>Intacto.</td></tr>
+          <tr><td>Suposiciones y riesgos</td><td><span class="tag ok">Bien</span></td><td>Se amplió con el riesgo real de levantar rutas a Pasca y Arbeláez.</td></tr>
+          <tr><td>Requisitos F. / no F. / atributos / métricas</td><td><span class="tag miss">No existían</span></td><td>Nuevo: <b>Tabla 2</b> (14 RF), <b>Tabla 3</b> (8 RNF), <b>Tabla 4</b> (8 métricas medibles).</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <h2>El alcance geográfico, resuelto</h2>
+    <p class="section-note">El texto original prometía tres municipios sueltos (Fusagasugá, Arbeláez y Silvania), lo cual no era realista para un equipo que integra mapas por primera vez. Se corrigió por una regla simple y defendible.</p>
+    <div class="card">
+      <p><b>Regla de frontera:</b> toda ruta que entra en el alcance de este semestre tiene que tocar a Fusagasugá. Pasca y Arbeláez no tienen rutas urbanas propias — solo llegan a Fusagasugá por ruta intermunicipal — así que sí entran. Silvania no toca ninguna de las rutas comprometidas, así que queda fuera de este semestre.</p>
+      <svg class="scope-diagram" viewBox="0 0 640 220" role="img" aria-label="Diagrama de alcance: Fusagasugá como centro, conectado a Chinauta, Pasca y Arbeláez; Silvania fuera de alcance">
+        <line x1="320" y1="110" x2="120" y2="45" stroke="var(--accent)" stroke-width="3"/>
+        <line x1="320" y1="110" x2="520" y2="45" stroke="var(--accent)" stroke-width="3"/>
+        <line x1="320" y1="110" x2="320" y2="195" stroke="var(--accent)" stroke-width="3"/>
+        <line x1="320" y1="110" x2="530" y2="180" stroke="var(--line)" stroke-width="2.5" stroke-dasharray="5 5"/>
+        <circle cx="320" cy="110" r="34" fill="var(--accent)"/>
+        <text x="320" y="115" text-anchor="middle" font-family="Work Sans, sans-serif" font-size="12" font-weight="700" fill="var(--surface)">FUSA</text>
+
+        <circle cx="120" cy="45" r="26" fill="var(--surface)" stroke="var(--accent)" stroke-width="2.5"/>
+        <text x="120" y="49" text-anchor="middle" font-family="Work Sans, sans-serif" font-size="10.5" font-weight="600" fill="var(--ink)">Chinauta</text>
+
+        <circle cx="520" cy="45" r="26" fill="var(--surface)" stroke="var(--accent)" stroke-width="2.5"/>
+        <text x="520" y="49" text-anchor="middle" font-family="Work Sans, sans-serif" font-size="10.5" font-weight="600" fill="var(--ink)">Arbeláez</text>
+
+        <circle cx="320" cy="195" r="26" fill="var(--surface)" stroke="var(--accent)" stroke-width="2.5"/>
+        <text x="320" y="199" text-anchor="middle" font-family="Work Sans, sans-serif" font-size="10.5" font-weight="600" fill="var(--ink)">Pasca</text>
+
+        <circle cx="530" cy="180" r="24" fill="var(--surface)" stroke="var(--line)" stroke-width="2.5"/>
+        <text x="530" y="184" text-anchor="middle" font-family="Work Sans, sans-serif" font-size="10" font-weight="600" fill="var(--ink-soft)">Silvania</text>
+      </svg>
+      <p class="scope-caption">Línea sólida = dentro del alcance de este semestre · línea punteada = fuera, no toca a Fusagasugá.</p>
+    </div>
+    <div class="grid-2" style="margin-top:0.9rem;">
+      <div class="card">
+        <p class="box-title si">Sí incluye</p>
+        <ul class="plain">
+          <li>Rutas urbanas de Fusagasugá</li>
+          <li>Ruta a Chinauta (corregimiento)</li>
+          <li>Fusagasugá ↔ Pasca (intermunicipal)</li>
+          <li>Fusagasugá ↔ Arbeláez (intermunicipal)</li>
+        </ul>
+      </div>
+      <div class="card">
+        <p class="box-title no">No incluye (por ahora)</p>
+        <ul class="plain">
+          <li>Silvania y el resto del Sumapaz</li>
+          <li>Rutas que no toquen a Fusagasugá</li>
+          <li>GPS en tiempo real de las busetas</li>
+          <li>Pagos en línea y notificaciones push</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Lo que se añadió, sección por sección</h2>
+    <p class="section-note">Todo en el mismo estilo de ensayo del documento original — nada de títulos nuevos ni de párrafos reescritos. Once párrafos nuevos, en este orden, más las cuatro tablas.</p>
+    <div class="decisions">
+      <div class="row"><dt>01</dt><dd><b>Nombre del proyecto:</b> por qué «FusaRoute» es representativo.</dd></div>
+      <div class="row"><dt>02</dt><dd><b>Valor de la solución:</b> qué mejora frente a hoy y qué pasaría si el sistema no existiera.</dd></div>
+      <div class="row"><dt>03</dt><dd><b>Alcance + Tabla 1:</b> qué sí y qué no hará el sistema por ahora.</dd></div>
+      <div class="row"><dt>04</dt><dd><b>Usuarios:</b> se declara que no hay un tercer tipo de usuario en esta fase.</dd></div>
+      <div class="row"><dt>05</dt><dd><b>Tabla 2:</b> 14 requisitos funcionales con ID, actor y prioridad.</dd></div>
+      <div class="row"><dt>06</dt><dd><b>Tabla 3:</b> 8 requisitos no funcionales por categoría ISO/IEC 25010.</dd></div>
+      <div class="row"><dt>07</dt><dd><b>Tabla 4:</b> atributos de calidad, métrica e instrumento de medición — las 5 del docente más 3 propias, todas realistas.</dd></div>
+      <div class="row"><dt>08</dt><dd><b>Decisiones técnicas:</b> Spring Boot + hexagonal, React + TypeScript, Supabase solo como PostgreSQL, y el cambio a Spring Security + JWT explicado.</dd></div>
+      <div class="row"><dt>09</dt><dd><b>Riesgos ampliados:</b> conseguir mapas de Pasca y Arbeláez, con plan B de levantamiento manual.</dd></div>
+      <div class="row"><dt>10</dt><dd><b>Referencias:</b> DANE, encuesta propia 2025, ISO/IEC 25010, guía del docente — con el dato exacto del DANE marcado como pendiente por completar.</dd></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Guion para sustentar (5–7 min)</h2>
+    <p class="section-note">Un orden de exposición ante el Comité, con los tiempos aproximados que ya suman las tablas nuevas.</p>
+    <div class="card" style="padding: 0.4rem 1.5rem;">
+      <div class="script-step">
+        <span class="time">0:00</span>
+        <div><h3>Apertura</h3><p>El nombre, el problema y por qué importa: más de 20 rutas en Fusagasugá sin información clara, ni siquiera en Google Maps, y una población regional que ronda los 285.000 habitantes según el DANE.</p></div>
+      </div>
+      <div class="script-step">
+        <span class="time">0:30</span>
+        <div><h3>Valor</h3><p>Qué cambia con la app y qué seguiría pasando si no existiera: nadie más está resolviendo esto todavía.</p></div>
+      </div>
+      <div class="script-step">
+        <span class="time">1:00</span>
+        <div><h3>Alcance</h3><p>La regla de «toda ruta debe tocar a Fusagasugá», con los cuatro destinos y lo que queda fuera por ahora.</p></div>
+      </div>
+      <div class="script-step">
+        <span class="time">2:00</span>
+        <div><h3>Usuarios y requisitos</h3><p>Los dos tipos de usuario y un repaso rápido de la Tabla 2 (RF) y la Tabla 3 (RNF) sin leerlas completas.</p></div>
+      </div>
+      <div class="script-step">
+        <span class="time">3:00</span>
+        <div><h3>Arquitectura y decisiones técnicas</h3><p>Hexagonal en el backend, React + TypeScript en el frontend, Supabase solo como base de datos, y por qué el login se programa con Spring Security + JWT en vez de usar el de Supabase.</p></div>
+      </div>
+      <div class="script-step">
+        <span class="time">4:30</span>
+        <div><h3>Calidad y métricas</h3><p>La Tabla 4: las 5 métricas del docente más las 3 propias del dominio, todas con su forma de medirse.</p></div>
+      </div>
+      <div class="script-step">
+        <span class="time">5:30</span>
+        <div><h3>Riesgos y cierre</h3><p>El riesgo de conseguir los mapas de Pasca y Arbeláez, el plan B de levantarlos a mano, y el siguiente paso: diseñar la arquitectura.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Preguntas que probablemente haga el Comité</h2>
+    <div class="qa">
+      <p class="q">¿Por qué Supabase si van a programar su propio login?</p>
+      <p class="a">Porque solo se usa como motor de PostgreSQL ya montado en internet — sin su Auth, Storage ni Realtime. El login lo hacen ustedes con Spring Security y JWT para aprender el stack completo y no depender de un proveedor externo.</p>
+    </div>
+    <div class="qa">
+      <p class="q">¿Por qué no GPS en tiempo real?</p>
+      <p class="a">Implica hardware y coordinación con las empresas de transporte que se sale de lo que el equipo puede hacer en un semestre. Queda declarado como fuera de alcance, no como algo olvidado.</p>
+    </div>
+    <div class="qa">
+      <p class="q">¿Cómo van a conseguir las rutas de Pasca y Arbeláez?</p>
+      <p class="a">Es un riesgo declarado: si las empresas de transporte no comparten la información, se levanta a mano — preguntando en paraderos, validando con conductores y, si hace falta, recorriendo el trayecto.</p>
+    </div>
+    <div class="qa">
+      <p class="q">¿Cómo miden la calidad, no solo la nombran?</p>
+      <p class="a">Cada atributo de la Tabla 4 tiene un instrumento de medición concreto (herramientas de red del navegador, checklist de arquitectura en cada PR, pruebas con usuarios externos), no solo un número suelto.</p>
+    </div>
+    <div class="qa">
+      <p class="q">¿Por qué esos cuatro destinos y no todo el Sumapaz?</p>
+      <p class="a">Porque la regla es que toda ruta debe tocar a Fusagasugá — eso da un límite claro y verificable, en vez de prometer una cobertura regional que no es realista para la primera vez del equipo integrando mapas.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="pending">
+      <p class="box-title no" style="margin-bottom:0.4rem;">Pendiente antes de entregar</p>
+      <p style="margin:0;">La cifra de población del DANE quedó citada de forma genérica (sin URL ni año exacto) para no inventar una fuente. Antes de imprimir el documento final, busquen la proyección exacta de población municipal del DANE y complétenla en la sección de Referencias.</p>
+    </div>
+  </section>
+
+  <footer>
+    Archivo generado: <code>actividad 3 ing soft_APA v2.docx</code> — el original no se modificó.<br>
+    Plan completo: <code>read-the-claude-md-to-quirky-stroustrov.md</code>
+  </footer>
+
+</div>

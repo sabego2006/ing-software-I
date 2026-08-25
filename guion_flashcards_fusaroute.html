@@ -1,0 +1,1825 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>FusaRoute — Guión de Sustentación & Flashcards de Estudio (10 Min)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600;9..144,700;9..144,900&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+  /* =========================================================
+     FUSAROUTE DESIGN SYSTEM — ESTUDIO & SUSTENTACIÓN
+     ========================================================= */
+  :root {
+    --ink: #0E2A47;
+    --ink-dark: #071727;
+    --ink-soft: #1E3A5F;
+    --paper: #F9F6F0;
+    --paper-2: #F0EAE1;
+    --paper-card: #FFFFFF;
+    --bus: #E8743B;
+    --bus-light: #FDF1EA;
+    --bus-glow: rgba(232, 116, 59, 0.25);
+    --route: #2A6F4A;
+    --route-light: #EBF5F0;
+    --route-glow: rgba(42, 111, 74, 0.2);
+    --urban: #4A4A4A;
+    --muted: #7A7670;
+    --rail: #DCD4C5;
+    --border: rgba(14, 42, 71, 0.12);
+    --shadow: 0 10px 30px -10px rgba(14, 42, 71, 0.08), 0 4px 12px rgba(0,0,0,0.03);
+    --shadow-hover: 0 20px 40px -12px rgba(14, 42, 71, 0.16), 0 8px 20px rgba(0,0,0,0.06);
+
+    --display: 'Fraunces', Georgia, serif;
+    --body: 'Inter', system-ui, sans-serif;
+    --mono: 'JetBrains Mono', monospace;
+
+    --santiago-color: #1A5FB4;
+    --santiago-bg: #EBF2FA;
+    --angelica-color: #9C27B0;
+    --angelica-bg: #F8EDFA;
+  }
+
+  [data-theme="dark"] {
+    --ink: #F0EAE1;
+    --ink-dark: #FFFFFF;
+    --ink-soft: #D0C8BC;
+    --paper: #0F1722;
+    --paper-2: #162232;
+    --paper-card: #1D2B3F;
+    --bus: #FF8850;
+    --bus-light: #3D2214;
+    --route: #45B079;
+    --route-light: #163625;
+    --urban: #A0B0C4;
+    --muted: #8292A6;
+    --rail: #2B3D55;
+    --border: rgba(255, 255, 255, 0.1);
+    --shadow: 0 12px 36px rgba(0,0,0,0.4);
+    --shadow-hover: 0 20px 50px rgba(0,0,0,0.6);
+    --santiago-color: #62A0EA;
+    --santiago-bg: #1B3352;
+    --angelica-color: #DC8ADD;
+    --angelica-bg: #3B1E40;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: var(--body);
+    background-color: var(--paper);
+    color: var(--ink);
+    line-height: 1.6;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  /* Container */
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem 6rem;
+  }
+
+  /* Header & Hero */
+  header.hero-header {
+    border-bottom: 2px solid var(--rail);
+    padding-bottom: 2rem;
+    margin-bottom: 2.5rem;
+    position: relative;
+  }
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--bus-light);
+    color: var(--bus);
+    font-family: var(--mono);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.35rem 0.85rem;
+    border-radius: 999px;
+    border: 1px solid rgba(232, 116, 59, 0.3);
+    margin-bottom: 1rem;
+  }
+  .hero-badge .dot {
+    width: 8px; height: 8px;
+    background: var(--bus);
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.4; transform: scale(1.3); } }
+
+  h1.title {
+    font-family: var(--display);
+    font-size: clamp(2.4rem, 4.5vw, 3.8rem);
+    line-height: 1.08;
+    margin: 0 0 0.8rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+  }
+  h1.title em {
+    font-style: italic;
+    color: var(--bus);
+    font-weight: 400;
+  }
+  .hero-subtitle {
+    font-size: 1.15rem;
+    color: var(--urban);
+    max-width: 75ch;
+    margin: 0 0 1.5rem;
+  }
+
+  .meta-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    align-items: center;
+    font-size: 0.88rem;
+  }
+  .pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.35rem 0.75rem;
+    border-radius: 6px;
+    background: var(--paper-2);
+    border: 1px solid var(--border);
+    font-weight: 500;
+  }
+  .pill.santiago { background: var(--santiago-bg); color: var(--santiago-color); font-weight: 600; }
+  .pill.angelica { background: var(--angelica-bg); color: var(--angelica-color); font-weight: 600; }
+  .pill.timer { font-family: var(--mono); background: var(--route-light); color: var(--route); font-weight: 700; }
+
+  /* Navigation Tabs */
+  .tabs-nav {
+    display: flex;
+    gap: 0.5rem;
+    border-bottom: 2px solid var(--rail);
+    margin-bottom: 2rem;
+    overflow-x: auto;
+    padding-bottom: 0.2rem;
+    position: sticky;
+    top: 0;
+    background: var(--paper);
+    z-index: 100;
+    padding-top: 0.5rem;
+  }
+  .tab-btn {
+    background: transparent;
+    border: none;
+    font-family: var(--body);
+    font-size: 1rem;
+    font-weight: 600;
+    padding: 0.75rem 1.25rem;
+    color: var(--urban);
+    cursor: pointer;
+    border-radius: 8px 8px 0 0;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    white-space: nowrap;
+    border-bottom: 3px solid transparent;
+    margin-bottom: -2px;
+  }
+  .tab-btn:hover {
+    color: var(--ink);
+    background: var(--paper-2);
+  }
+  .tab-btn.active {
+    color: var(--bus);
+    border-bottom: 3px solid var(--bus);
+    background: var(--paper-2);
+  }
+
+  .tab-pane {
+    display: none;
+    animation: fadeIn 0.3s ease forwards;
+  }
+  .tab-pane.active {
+    display: block;
+  }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+
+  /* =========================================================
+     TIMER & PRACTICE TOOLBAR
+     ========================================================= */
+  .teleprompter-bar {
+    background: var(--paper-card);
+    border: 2px solid var(--border);
+    border-radius: 12px;
+    padding: 1.2rem 1.5rem;
+    margin-bottom: 2rem;
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    position: sticky;
+    top: 55px;
+    z-index: 90;
+    backdrop-filter: blur(8px);
+  }
+  .timer-display {
+    display: flex;
+    align-items: baseline;
+    gap: 0.6rem;
+  }
+  .timer-clock {
+    font-family: var(--mono);
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: var(--ink);
+    letter-spacing: -0.03em;
+    min-width: 140px;
+  }
+  .timer-clock.running { color: var(--route); }
+  .timer-clock.warning { color: var(--bus); }
+  .timer-clock.danger { color: #D32F2F; animation: blink 1s infinite; }
+  @keyframes blink { 50% { opacity: 0.5; } }
+  .timer-total { font-family: var(--mono); font-size: 0.95rem; color: var(--muted); }
+
+  .timer-controls {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    font-family: var(--body);
+    font-size: 0.9rem;
+    font-weight: 600;
+    padding: 0.55rem 1.1rem;
+    border-radius: 8px;
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  .btn-primary { background: var(--bus); color: #fff; }
+  .btn-primary:hover { background: #D25E25; transform: translateY(-1px); }
+  .btn-secondary { background: var(--paper-2); color: var(--ink); border-color: var(--border); }
+  .btn-secondary:hover { background: var(--rail); }
+  .btn-icon { padding: 0.55rem; width: 38px; height: 38px; }
+
+  .filter-group {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.85rem;
+  }
+  .filter-btn {
+    padding: 0.35rem 0.75rem;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    background: var(--paper-2);
+    color: var(--urban);
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.15s ease;
+  }
+  .filter-btn.active {
+    background: var(--ink);
+    color: var(--paper);
+    border-color: var(--ink);
+  }
+
+  /* Progress Bar */
+  .timeline-bar {
+    width: 100%;
+    height: 8px;
+    background: var(--rail);
+    border-radius: 999px;
+    overflow: hidden;
+    margin-top: 0.6rem;
+  }
+  .timeline-progress {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, var(--santiago-color) 0%, var(--bus) 50%, var(--angelica-color) 100%);
+    transition: width 0.3s ease;
+  }
+
+  /* =========================================================
+     SLIDE BY SLIDE SCRIPT CARDS
+     ========================================================= */
+  .script-timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .script-card {
+    background: var(--paper-card);
+    border: 2px solid var(--border);
+    border-radius: 14px;
+    padding: 1.8rem;
+    box-shadow: var(--shadow);
+    transition: all 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+    position: relative;
+  }
+  .script-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-hover);
+  }
+  .script-card.active-slide {
+    border-color: var(--bus);
+    box-shadow: 0 0 0 4px var(--bus-glow), var(--shadow-hover);
+  }
+
+  .script-card-header {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.75rem;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 1rem;
+    margin-bottom: 1.2rem;
+  }
+  .slide-tag {
+    font-family: var(--mono);
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: var(--bus);
+    background: var(--bus-light);
+    padding: 0.25rem 0.65rem;
+    border-radius: 4px;
+    letter-spacing: 0.05em;
+  }
+  .slide-duration {
+    font-family: var(--mono);
+    font-size: 0.85rem;
+    color: var(--muted);
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+  }
+
+  .speaker-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-weight: 700;
+    font-size: 0.88rem;
+    padding: 0.3rem 0.8rem;
+    border-radius: 999px;
+  }
+  .speaker-badge.santiago { background: var(--santiago-bg); color: var(--santiago-color); }
+  .speaker-badge.angelica { background: var(--angelica-bg); color: var(--angelica-color); }
+  .speaker-badge.duo { background: var(--route-light); color: var(--route); }
+
+  .slide-heading {
+    font-family: var(--display);
+    font-size: 1.5rem;
+    margin: 0 0 0.5rem;
+    color: var(--ink);
+    font-weight: 700;
+  }
+  .slide-heading em { color: var(--bus); font-style: italic; }
+
+  .slide-objective {
+    font-size: 0.88rem;
+    color: var(--muted);
+    font-style: italic;
+    margin-bottom: 1.2rem;
+    background: var(--paper-2);
+    padding: 0.5rem 0.85rem;
+    border-radius: 6px;
+    border-left: 3px solid var(--border);
+  }
+
+  /* Spoken text */
+  .speech-bubble {
+    background: var(--paper-2);
+    border-left: 4px solid var(--ink);
+    border-radius: 0 10px 10px 0;
+    padding: 1.2rem 1.4rem;
+    font-size: 1.05rem;
+    line-height: 1.65;
+    color: var(--ink);
+    margin-bottom: 1.2rem;
+    position: relative;
+  }
+  .speech-bubble.santiago { border-left-color: var(--santiago-color); }
+  .speech-bubble.angelica { border-left-color: var(--angelica-color); }
+  .speech-bubble.duo { border-left-color: var(--route); }
+
+  .speech-bubble p { margin: 0 0 0.8rem; }
+  .speech-bubble p:last-child { margin-bottom: 0; }
+  .speech-bubble strong { color: var(--ink-dark); font-weight: 700; }
+  .speech-bubble .cue {
+    font-family: var(--mono);
+    font-size: 0.8rem;
+    color: var(--bus);
+    background: rgba(232, 116, 59, 0.12);
+    padding: 0.15rem 0.45rem;
+    border-radius: 4px;
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+
+  .script-footer-tips {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.8rem;
+    font-size: 0.85rem;
+  }
+  @media (max-width: 768px) { .script-footer-tips { grid-template-columns: 1fr; } }
+  .tip-box {
+    background: var(--paper);
+    border: 1px dashed var(--rail);
+    padding: 0.6rem 0.85rem;
+    border-radius: 6px;
+    color: var(--urban);
+  }
+  .tip-box b { color: var(--ink); }
+
+  /* =========================================================
+     FLASHCARDS TAB (3D FLIP)
+     ========================================================= */
+  .flashcard-controls {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.8rem;
+    background: var(--paper-card);
+    padding: 1rem 1.4rem;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+  }
+  .fc-filters {
+    display: flex;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+  }
+  .fc-stats {
+    font-family: var(--mono);
+    font-size: 0.88rem;
+    color: var(--muted);
+  }
+  .fc-stats b { color: var(--bus); }
+
+  .flashcards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 1.5rem;
+    perspective: 1200px;
+  }
+  @media (max-width: 480px) { .flashcards-grid { grid-template-columns: 1fr; } }
+
+  .fc-card {
+    height: 380px;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.6s cubic-bezier(0.4, 0.2, 0.2, 1);
+    cursor: pointer;
+  }
+  .fc-card.flipped {
+    transform: rotateY(180deg);
+  }
+
+  .fc-face {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    border-radius: 14px;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: var(--shadow);
+    border: 2px solid var(--border);
+    background: var(--paper-card);
+  }
+
+  .fc-front {
+    background: var(--paper-card);
+  }
+  .fc-back {
+    transform: rotateY(180deg);
+    background: var(--paper-2);
+    border-color: var(--bus);
+  }
+
+  .fc-card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.75rem;
+  }
+  .fc-number {
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--muted);
+    letter-spacing: 0.05em;
+  }
+  .fc-badge {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 0.2rem 0.6rem;
+    border-radius: 4px;
+    text-transform: uppercase;
+  }
+  .fc-badge.santiago { background: var(--santiago-bg); color: var(--santiago-color); }
+  .fc-badge.angelica { background: var(--angelica-bg); color: var(--angelica-color); }
+  .fc-badge.grill { background: var(--bus-light); color: var(--bus); }
+  .fc-badge.iso { background: var(--route-light); color: var(--route); }
+
+  .fc-question {
+    font-family: var(--display);
+    font-size: 1.25rem;
+    line-height: 1.35;
+    font-weight: 700;
+    color: var(--ink);
+    margin: auto 0;
+    text-align: center;
+  }
+  .fc-hint {
+    font-size: 0.8rem;
+    color: var(--muted);
+    text-align: center;
+    font-family: var(--mono);
+  }
+
+  .fc-back-content {
+    overflow-y: auto;
+    padding-right: 0.3rem;
+    font-size: 0.92rem;
+    color: var(--ink);
+    line-height: 1.5;
+    margin: auto 0;
+  }
+  .fc-back-content ul {
+    margin: 0.3rem 0;
+    padding-left: 1.2rem;
+  }
+  .fc-back-content li {
+    margin-bottom: 0.35rem;
+  }
+  .fc-back-content strong {
+    color: var(--bus);
+  }
+  .fc-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 0.6rem;
+    border-top: 1px solid var(--border);
+    font-size: 0.8rem;
+  }
+  .fc-flip-btn {
+    background: transparent;
+    border: none;
+    font-family: var(--mono);
+    font-size: 0.8rem;
+    color: var(--bus);
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+  }
+  .fc-mastered-btn {
+    background: var(--paper);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 0.2rem 0.5rem;
+    cursor: pointer;
+    font-size: 0.78rem;
+    color: var(--urban);
+  }
+  .fc-mastered-btn.active {
+    background: var(--route-light);
+    color: var(--route);
+    border-color: var(--route);
+    font-weight: 700;
+  }
+
+  /* =========================================================
+     GRILL SIMULATOR TAB
+     ========================================================= */
+  .grill-arena {
+    background: var(--paper-card);
+    border: 2px solid var(--border);
+    border-radius: 16px;
+    padding: 2rem;
+    box-shadow: var(--shadow);
+    max-width: 860px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .grill-avatar {
+    width: 68px;
+    height: 68px;
+    border-radius: 50%;
+    background: var(--ink);
+    color: var(--paper);
+    display: grid;
+    place-items: center;
+    font-size: 2rem;
+    margin: 0 auto 1rem;
+    border: 3px solid var(--bus);
+  }
+  .grill-title {
+    font-family: var(--display);
+    font-size: 1.8rem;
+    margin: 0 0 0.5rem;
+  }
+  .grill-intro {
+    font-size: 0.95rem;
+    color: var(--urban);
+    max-width: 55ch;
+    margin: 0 auto 1.5rem;
+  }
+  .grill-box {
+    background: var(--paper-2);
+    border: 2px solid var(--rail);
+    border-radius: 12px;
+    padding: 1.6rem;
+    margin: 1.5rem 0;
+    text-align: left;
+    min-height: 180px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .grill-q-label {
+    font-family: var(--mono);
+    font-size: 0.8rem;
+    color: var(--bus);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 0.5rem;
+  }
+  .grill-q-text {
+    font-family: var(--display);
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1.3;
+    margin: 0 0 1rem;
+  }
+  .grill-a-box {
+    display: none;
+    background: var(--paper-card);
+    border-left: 4px solid var(--route);
+    border-radius: 0 8px 8px 0;
+    padding: 1rem 1.2rem;
+    font-size: 0.95rem;
+    color: var(--ink);
+    animation: fadeIn 0.3s ease;
+  }
+  .grill-a-box.show { display: block; }
+  .grill-controls {
+    display: flex;
+    justify-content: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+  }
+
+  /* =========================================================
+     METRICS & MATRIX TAB
+     ========================================================= */
+  .matrix-table-wrap {
+    background: var(--paper-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow-x: auto;
+    box-shadow: var(--shadow);
+    margin-bottom: 2rem;
+  }
+  table.matrix-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.92rem;
+    text-align: left;
+  }
+  table.matrix-table th {
+    background: var(--ink);
+    color: var(--paper);
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: 0.8rem 1rem;
+  }
+  table.matrix-table td {
+    padding: 0.85rem 1rem;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  table.matrix-table tr:hover { background: var(--paper-2); }
+  table.matrix-table td.attr-name { font-weight: 700; color: var(--ink); }
+  table.matrix-table td.attr-val { font-family: var(--mono); font-size: 0.85rem; color: var(--bus); font-weight: 600; }
+  table.matrix-table td.attr-tool { font-style: italic; color: var(--urban); }
+
+  /* Theme Switcher Button */
+  .theme-fab {
+    position: fixed;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    background: var(--ink);
+    color: var(--paper);
+    border: 2px solid var(--border);
+    border-radius: 50%;
+    width: 48px;
+    height: 48px;
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.3);
+    z-index: 1000;
+    transition: transform 0.2s ease;
+  }
+  .theme-fab:hover { transform: scale(1.1); }
+
+  /* Utilities */
+  .text-center { text-align: center; }
+  .mt-4 { margin-top: 2rem; }
+
+  /* Print Styles */
+  @media print {
+    .tabs-nav, .teleprompter-bar, .theme-fab, .btn, .flashcard-controls { display: none !important; }
+    .tab-pane { display: block !important; }
+    .script-card, .fc-card { break-inside: avoid; box-shadow: none !important; border: 1px solid #ccc !important; }
+    .fc-face { position: relative !important; transform: none !important; height: auto !important; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- HERO HEADER -->
+  <header class="hero-header">
+    <div class="hero-badge">
+      <span class="dot"></span>
+      Comité de Arquitectura · Ingeniería de Software I
+    </div>
+    <h1 class="title">FusaRoute <em>Guión & Flashcards</em></h1>
+    <p class="hero-subtitle">
+      Material de preparación y ensayo cronometrado para la sustentación de 10 minutos. 
+      Estructura 50/50 entre <strong>Santiago Bermúdez</strong> y <strong>Angélica Aranguren</strong> con defensa de arquitectura hexagonal, calidad ISO 25010 y métricas v3.
+    </p>
+
+    <div class="meta-pills">
+      <span class="pill timer">⏱️ Tiempo total: 10:00 exactos</span>
+      <span class="pill santiago">👨‍💻 Santiago: 5 slides (~5:00)</span>
+      <span class="pill angelica">👩‍💻 Angélica: 5 slides (~5:00)</span>
+      <span class="pill">🏛️ Docente: Ing. Luiferney Ortiz</span>
+      <span class="pill">🎯 Versión: v3 (Agosto 2026)</span>
+    </div>
+  </header>
+
+  <!-- NAVIGATION TABS -->
+  <nav class="tabs-nav" aria-label="Secciones de estudio">
+    <button class="tab-btn active" data-tab="guion">🎙️ Guión Teleprompter (10 min)</button>
+    <button class="tab-btn" data-tab="flashcards">🎴 Flashcards Interactivas (3D)</button>
+    <button class="tab-btn" data-tab="grill">🎯 Simulador Grill del Comité</button>
+    <button class="tab-btn" data-tab="metricas">📊 Matriz ISO 25010 & Arquitectura</button>
+  </nav>
+
+  <!-- =======================================================
+       TAB 1: GUIÓN & TELEPROMPTER
+       ======================================================= -->
+  <section id="guion" class="tab-pane active">
+
+    <!-- PRACTICE TOOLBAR -->
+    <div class="teleprompter-bar">
+      <div class="timer-display">
+        <div class="timer-clock" id="timerDisplay">10:00</div>
+        <span class="timer-total">/ 10:00</span>
+      </div>
+
+      <div class="timer-controls">
+        <button class="btn btn-primary" id="btnStartTimer">▶ Iniciar Ensayo</button>
+        <button class="btn btn-secondary" id="btnPauseTimer">⏸ Pausar</button>
+        <button class="btn btn-secondary btn-icon" id="btnResetTimer" title="Reiniciar reloj">↺</button>
+      </div>
+
+      <div class="filter-group">
+        <span>Filtrar por:</span>
+        <button class="filter-btn active" data-speaker="all">Todos</button>
+        <button class="filter-btn" data-speaker="santiago">Santiago</button>
+        <button class="filter-btn" data-speaker="angelica">Angélica</button>
+      </div>
+
+      <div class="timeline-bar">
+        <div class="timeline-progress" id="timelineProgress"></div>
+      </div>
+    </div>
+
+    <!-- SCRIPT TIMELINE -->
+    <div class="script-timeline">
+
+      <!-- SLIDE 1 -->
+      <article class="script-card" data-speaker="santiago" data-time-start="0" data-time-end="60">
+        <div class="script-card-header">
+          <div>
+            <span class="slide-tag">Slide 01 / 10</span>
+            <span class="slide-duration">⏱️ 00:00 – 01:00 (1 min)</span>
+          </div>
+          <span class="speaker-badge santiago">🗣️ Santiago</span>
+        </div>
+
+        <h2 class="slide-heading">Portada Ejecutiva <em>FusaRoute: La ruta, sin perderse</em></h2>
+        <div class="slide-objective">🎯 <strong>Objetivo del slide:</strong> Presentar el equipo, ubicar el proyecto en el marco del curso como empresa simulada y captar la atención con formalidad.</div>
+
+        <div class="speech-bubble santiago">
+          <p><span class="cue">Inicio</span> <em>"Buenos días profesor Luiferney y miembros del Comité. Hoy, junto con mi compañera Angélica Aranguren y yo, Santiago Bermúdez, presentamos la definición formal y arquitectura de nuestro proyecto integrador: <strong>FusaRoute — La ruta, sin perderse</strong>."</em></p>
+          <p><em>"FusaRoute es un sistema de información web orientado a resolver la desorientación en el transporte público de Fusagasugá y la provincia del Sumapaz. En esta sesión de 10 minutos sustentaremos el problema real que abordamos, el alcance delimitado para este semestre, la matriz de 14 requisitos funcionales, el diseño de calidad bajo la norma <strong>ISO/IEC 25010</strong> con métricas medibles, y las decisiones de arquitectura que respaldan nuestra solución."</em></p>
+          <p><span class="cue">Pase de voz</span> <em>"Doy paso a Angélica para dimensionar el problema real que dio origen a FusaRoute."</em></p>
+        </div>
+
+        <div class="script-footer-tips">
+          <div class="tip-box">💡 <strong>Tip escénico:</strong> Voz firme, mirada a los ojos del profesor. Postura recta.</div>
+          <div class="tip-box">🔑 <strong>Punto clave:</strong> Establecer desde el segundo 10 que el proyecto se rige por calidad y métricas reales.</div>
+        </div>
+      </article>
+
+      <!-- SLIDE 2 -->
+      <article class="script-card" data-speaker="angelica" data-time-start="60" data-time-end="135">
+        <div class="script-card-header">
+          <div>
+            <span class="slide-tag">Slide 02 / 10</span>
+            <span class="slide-duration">⏱️ 01:00 – 02:15 (1 min 15 s)</span>
+          </div>
+          <span class="speaker-badge angelica">🗣️ Angélica</span>
+        </div>
+
+        <h2 class="slide-heading">Contexto y Problema Real <em>Fusagasugá crece, las rutas no</em></h2>
+        <div class="slide-objective">🎯 <strong>Objetivo del slide:</strong> Demostrar que el problema está respaldado por cifras reales (+285k hab, +20 rutas) y una encuesta de campo propia.</div>
+
+        <div class="speech-bubble angelica">
+          <p><span class="cue">Entrada</span> <em>"Gracias, Santiago. Fusagasugá es el centro urbano y comercial de la región del Sumapaz, una zona con más de <strong>285.000 habitantes</strong> según estimaciones del DANE. Sin embargo, su movilidad pública tiene una falla crítica: operan <strong>más de 20 rutas urbanas de busetas</strong> diariamente, pero <strong>ninguna</strong> cuenta con información pública digitalizada. Ni siquiera Google Maps las tiene registradas."</em></p>
+          <p><em>"A partir de una encuesta que realizamos en 2025, evidenciamos que el usuario local o turista se mueve bajo el esquema de 'preguntar, adivinar o ensayar'. Esto genera pérdidas de tiempo, pagos dobles de pasaje y desorientación. Además, en horas pico hay trancones en sectores específicos y el ciudadano no tiene cómo anticiparlo."</em></p>
+          <p><span class="cue">Remate</span> <em>"Las soluciones tecnológicas siempre se han concentrado en grandes capitales como Bogotá. FusaRoute nace para cerrar esa brecha con datos reales de nuestra región."</em></p>
+        </div>
+
+        <div class="script-footer-tips">
+          <div class="tip-box">💡 <strong>Tip escénico:</strong> Enfatizar la frase 'preguntar, adivinar o ensayar' con tono de empatía con el usuario.</div>
+          <div class="tip-box">🔑 <strong>Cifra a memorizar:</strong> <strong>285.000 habitantes</strong> (DANE) y <strong>+20 rutas</strong> sin trazabilidad.</div>
+        </div>
+      </article>
+
+      <!-- SLIDE 3 -->
+      <article class="script-card" data-speaker="santiago" data-time-start="135" data-time-end="210">
+        <div class="script-card-header">
+          <div>
+            <span class="slide-tag">Slide 03 / 10</span>
+            <span class="slide-duration">⏱️ 02:15 – 03:30 (1 min 15 s)</span>
+          </div>
+          <span class="speaker-badge santiago">🗣️ Santiago</span>
+        </div>
+
+        <h2 class="slide-heading">Solución Propuesta <em>Marca origen y destino; calculamos la ruta</em></h2>
+        <div class="slide-objective">🎯 <strong>Objetivo del slide:</strong> Explicar el valor del producto, la lógica del catálogo de rutas y la frontera geográfica estricta.</div>
+
+        <div class="speech-bubble santiago">
+          <p><span class="cue">Entrada</span> <em>"FusaRoute resuelve este caos con una aplicación web ágil y directa. El usuario marca su punto de origen y su destino en el mapa. El sistema no inventa rutas arbitrarias: consulta nuestro catálogo verificado y sugiere la mejor opción de buseta disponible, detallando <strong>los barrios y comunas por donde pasa y el costo exacto del pasaje</strong>."</em></p>
+          <p><em>"Incorporamos dos características clave:  
+          1. <strong>Aviso de trancón:</strong> alerta si el trayecto presenta congestión habitual en esa franja horaria.  
+          2. <strong>Destino favorito:</strong> que pre-carga la búsqueda recurrente con un solo toque al abrir la app."</em></p>
+          <p><span class="cue">Frontera geográfica</span> <em>"Nuestra frontera para este semestre está rigurosamente definida: cubrimos el 100% urbano de <strong>Fusagasugá</strong>, el corregimiento de <strong>Chinauta</strong>, y dos rutas intermunicipales: <strong>Pasca y Arbeláez</strong>. La regla de oro es: <strong>toda ruta debe tocar Fusagasugá</strong>."</em></p>
+        </div>
+
+        <div class="script-footer-tips">
+          <div class="tip-box">💡 <strong>Defensa clave:</strong> Si preguntan por Silvania: 'Queda para fase 2 para no sobrecargar el alcance inicial'.</div>
+          <div class="tip-box">🔑 <strong>Punto técnico:</strong> Aclarar que comparamos rutas existentes del catálogo, no grafos inventados.</div>
+        </div>
+      </article>
+
+      <!-- SLIDE 4 -->
+      <article class="script-card" data-speaker="angelica" data-time-start="210" data-time-end="270">
+        <div class="script-card-header">
+          <div>
+            <span class="slide-tag">Slide 04 / 10</span>
+            <span class="slide-duration">⏱️ 03:30 – 04:30 (1 min)</span>
+          </div>
+          <span class="speaker-badge angelica">🗣️ Angélica</span>
+        </div>
+
+        <h2 class="slide-heading">Usuarios y Alcance <em>Dos roles y un alcance honesto</em></h2>
+        <div class="slide-objective">🎯 <strong>Objetivo del slide:</strong> Definir Usuario Final vs Administrador y declarar con transparencia qué queda fuera de alcance.</div>
+
+        <div class="speech-bubble angelica">
+          <p><span class="cue">Entrada</span> <em>"Para asegurar un software terminado y funcional, modelamos <strong>dos roles claros</strong>:"</em></p>
+          <p><em>"1. El <strong>Usuario Final:</strong> se registra, inicia sesión, consulta rutas, visualiza barrios y tarifas, guarda su destino favorito y deja comentarios en el buzón.  
+          2. El <strong>Administrador:</strong> gestiona el catálogo de rutas (CRUD), realiza suspensiones temporales —muy comunes en festivos— notificando a los usuarios afectados, y monitorea métricas de uso."</em></p>
+          <p><span class="cue">Límites declarados</span> <em>"Declaramos explícitamente lo que <strong>NO</strong> incluye este semestre: descartamos GPS en tiempo real de los vehículos por viabilidad técnica; excluimos pagos en línea y notificaciones push; y no agregamos un tercer rol innecesario. Esto garantiza que lo comprometido se entregue con excelencia."</em></p>
+        </div>
+
+        <div class="script-footer-tips">
+          <div class="tip-box">💡 <strong>Tip escénico:</strong> Pronunciar los 'No incluye' con seguridad profesional, no con timidez.</div>
+          <div class="tip-box">🔑 <strong>Criterio de ingeniería:</strong> Saber decir qué NO hace el software es señal de madurez de arquitectura.</div>
+        </div>
+      </article>
+
+      <!-- SLIDE 5 -->
+      <article class="script-card" data-speaker="santiago" data-time-start="270" data-time-end="345">
+        <div class="script-card-header">
+          <div>
+            <span class="slide-tag">Slide 05 / 10</span>
+            <span class="slide-duration">⏱️ 04:30 – 05:45 (1 min 15 s)</span>
+          </div>
+          <span class="speaker-badge santiago">🗣️ Santiago</span>
+        </div>
+
+        <h2 class="slide-heading">Requisitos Funcionales <em>14 requisitos con criterio de cumplimiento</em></h2>
+        <div class="slide-objective">🎯 <strong>Objetivo del slide:</strong> Repasar la matriz de 14 RFs y resaltar las mejoras introducidas en la versión 3.</div>
+
+        <div class="speech-bubble santiago">
+          <p><span class="cue">Entrada</span> <em>"La estructura funcional de FusaRoute se resume en <strong>14 requisitos funcionales</strong> con actores y prioridades asignadas:"</em></p>
+          <p><em>"Para el <strong>Usuario Final (RF-01 al RF-10)</strong> priorizamos como Alta: autenticación segura (RF-01 y 02), búsqueda origen-destino (RF-04), visualización de comunas y costo del pasaje (RF-05 y 06), y aviso de trancón (RF-09). Con prioridad Media: edición de perfil, historial y destino favorito (RF-10)."</em></p>
+          <p><em>"Para el <strong>Administrador (RF-11 al RF-14)</strong>: CRUD de rutas (RF-11), suspensión temporal con notificación automática a quienes tengan la ruta guardada (RF-12), y un panel cerrado con <strong>5 métricas de uso</strong> (RF-13): usuarios, búsquedas/día, top 5 rutas, comentarios pendientes y suspensiones activas."</em></p>
+          <p><span class="cue">Pase de voz</span> <em>"Doy paso a Angélica para sustentar los Requisitos No Funcionales bajo la norma ISO/IEC 25010."</em></p>
+        </div>
+
+        <div class="script-footer-tips">
+          <div class="tip-box">💡 <strong>Cambio v3 clave:</strong> RF-10 ahora es 'Destino favorito' y RF-12 ahora 'Notifica al suspender'.</div>
+          <div class="tip-box">🔑 <strong>Detalle:</strong> Mencionar que las 5 métricas del admin caben en una sola pantalla limpia.</div>
+        </div>
+      </article>
+
+      <!-- SLIDE 6 -->
+      <article class="script-card" data-speaker="angelica" data-time-start="345" data-time-end="420">
+        <div class="script-card-header">
+          <div>
+            <span class="slide-tag">Slide 06 / 10</span>
+            <span class="slide-duration">⏱️ 05:45 – 07:00 (1 min 15 s)</span>
+          </div>
+          <span class="speaker-badge angelica">🗣️ Angélica</span>
+        </div>
+
+        <h2 class="slide-heading">Requisitos No Funcionales <em>Calidad medible, no buena intención</em></h2>
+        <div class="slide-objective">🎯 <strong>Objetivo del slide:</strong> Defender los 7 RNFs con números realistas y justificar la eliminación del RNF-08.</div>
+
+        <div class="speech-bubble angelica">
+          <p><span class="cue">Entrada</span> <em>"Siguiendo las exigencias del curso, ningún atributo de calidad se enuncia sin un criterio cuantitativo. Definimos <strong>7 requisitos no funcionales</strong>:"</em></p>
+          <p><em>"• <strong>Eficiencia (RNF-01):</strong> tiempo de respuesta p95 menor a 5 segundos de extremo a extremo en red móvil 4G, con modo offline básico que muestra rutas y paradas almacenadas.  
+          • <strong>Fiabilidad (RNF-02):</strong> disponibilidad mayor o igual al 95% mensual en horario hábil (lun–vie 7 a 21 h), con RTO menor a 1 hora y RPO menor a 24 horas.  
+          • <strong>Mantenibilidad (RNF-03):</strong> arquitectura hexagonal estricta sin dependencias de frameworks en el dominio.  
+          • <strong>Usabilidad (RNF-04):</strong> búsqueda en 4 o menos acciones de usuario con login persistente semanal.  
+          • <strong>Seguridad (RNF-05 y 06):</strong> 0 vulnerabilidades altas/críticas y contraseñas hasheadas obligatoriamente con BCrypt factor 10.  
+          • <strong>Compatibilidad (RNF-07):</strong> navegadores móviles Chrome y Safari, más escritorio."</em></p>
+        </div>
+
+        <div class="script-footer-tips">
+          <div class="tip-box">💡 <strong>Defensa RNF-08:</strong> Se eliminó porque el respaldo (`pg_dump`) es práctica de ingeniería, no RNF formal.</div>
+          <div class="tip-box">🔑 <strong>Modo offline:</strong> Aclarar que NO calcula tiempo de llegada sin internet (honesto).</div>
+        </div>
+      </article>
+
+      <!-- SLIDE 7 -->
+      <article class="script-card" data-speaker="santiago" data-time-start="420" data-time-end="495">
+        <div class="script-card-header">
+          <div>
+            <span class="slide-tag">Slide 07 / 10</span>
+            <span class="slide-duration">⏱️ 07:00 – 08:15 (1 min 15 s)</span>
+          </div>
+          <span class="speaker-badge santiago">🗣️ Santiago</span>
+        </div>
+
+        <h2 class="slide-heading">Calidad y Métricas ISO 25010 <em>Atributo + Métrica + Instrumento</em></h2>
+        <div class="slide-objective">🎯 <strong>Objetivo del slide:</strong> El slide más importante de evaluación: mostrar la correspondencia 1 a 1 entre atributo, métrica e instrumento ejecutable en CI.</div>
+
+        <div class="speech-bubble santiago">
+          <p><span class="cue">Entrada</span> <em>"En la versión 3 aplicamos un principio inquebrantable: <strong>lo que no se puede medir en CI o con usuarios, no se promete</strong>. Establecimos 5 métricas, una por atributo ISO/IEC 25010:"</em></p>
+          <p><em>"1. <strong>Rendimiento:</strong> p95 &lt; 5 s en `/api/routes/search` y LCP &lt; 2.5 s. ➔ <strong>Instrumento:</strong> Spring Boot Actuator con Micrometer y Lighthouse en CI.  
+          2. <strong>Fiabilidad:</strong> ≥ 95% uptime mensual hábil, RTO &lt; 1 h. ➔ <strong>Instrumento:</strong> UptimeRobot con monitoreo cada 5 min y backup diario de PostgreSQL.  
+          3. <strong>Mantenibilidad:</strong> 0 violaciones hexagonales y ≥ 70% cobertura en dominio. ➔ <strong>Instrumento:</strong> Reglas bloqueantes de <strong>ArchUnit</strong> y reporte de <strong>JaCoCo</strong> en CI.  
+          4. <strong>Usabilidad:</strong> Flujo en ≤ 4 pasos con tasa de éxito ≥ 80%. ➔ <strong>Instrumento:</strong> Pruebas con al menos 5 usuarios externos antes de cada entrega.  
+          5. <strong>Seguridad:</strong> 0 vulnerabilidades conocidas. ➔ <strong>Instrumento:</strong> <strong>OWASP Dependency-Check</strong> en cada Pull Request."</em></p>
+        </div>
+
+        <div class="script-footer-tips">
+          <div class="tip-box">💡 <strong>Mención obligatoria:</strong> Citar los nombres de las herramientas: ArchUnit, JaCoCo, UptimeRobot, OWASP.</div>
+          <div class="tip-box">🔑 <strong>Defensa del 95%:</strong> Explicar que 95% es realista para capa gratuita (36 h/mes) vs el 99% que requiere pago.</div>
+        </div>
+      </article>
+
+      <!-- SLIDE 8 -->
+      <article class="script-card" data-speaker="angelica" data-time-start="495" data-time-end="540">
+        <div class="script-card-header">
+          <div>
+            <span class="slide-tag">Slide 08 / 10</span>
+            <span class="slide-duration">⏱️ 08:15 – 09:00 (45 s)</span>
+          </div>
+          <span class="speaker-badge angelica">🗣️ Angélica</span>
+        </div>
+
+        <h2 class="slide-heading">Arquitectura Hexagonal <em>Puertos y Adaptadores</em></h2>
+        <div class="slide-objective">🎯 <strong>Objetivo del slide:</strong> Explicar el desacoplamiento del backend, la regla de dependencia hacia adentro y el aislamiento de la base de datos.</div>
+
+        <div class="speech-bubble angelica">
+          <p><span class="cue">Entrada</span> <em>"En la arquitectura técnica implementamos el patrón de <strong>Puertos y Adaptadores (Arquitectura Hexagonal)</strong> en el backend:"</em></p>
+          <p><em>"En el núcleo se encuentra el <strong>Dominio</strong> (`Route`, `Stop`, `Fare`), que contiene la lógica pura de transporte. El dominio <strong>no importa Spring Boot, no importa JPA y no conoce Supabase</strong>. La regla de dependencia apunta siempre hacia adentro: `domain ← application ← infrastructure`."</em></p>
+          <p><em>"Los <strong>Puertos de Entrada</strong> exponen los casos de uso a la API REST. Los <strong>Puertos de Salida</strong> definen las interfaces para que los adaptadores de infraestructura persistan en PostgreSQL o consuman Google Maps. El frontend en React solo habla con el backend mediante JSON y JWT; jamás toca la base de datos directamente."</em></p>
+        </div>
+
+        <div class="script-footer-tips">
+          <div class="tip-box">💡 <strong>Concepto clave:</strong> 'Dos modelos a propósito': `Route` de dominio vs `RouteJpaEntity` de persistencia.</div>
+          <div class="tip-box">🔑 <strong>Beneficio:</strong> Cambiar de motor de base de datos no altera ni una sola línea del dominio.</div>
+        </div>
+      </article>
+
+      <!-- SLIDE 9 -->
+      <article class="script-card" data-speaker="duo" data-time-start="540" data-time-end="580">
+        <div class="script-card-header">
+          <div>
+            <span class="slide-tag">Slide 09 / 10</span>
+            <span class="slide-duration">⏱️ 09:00 – 09:40 (40 s)</span>
+          </div>
+          <span class="speaker-badge duo">👥 Santiago & Angélica (Dúo)</span>
+        </div>
+
+        <h2 class="slide-heading">Stack y Decisiones Críticas <em>Construir, medir y defender</em></h2>
+        <div class="slide-objective">🎯 <strong>Objetivo del slide:</strong> Defender la decisión de programar login propio con Spring Security + JWT en vez de usar Supabase Auth.</div>
+
+        <div class="speech-bubble duo">
+          <p><strong>[Santiago]:</strong> <em>"Nuestro stack está compuesto por React con TypeScript en frontend, Java 21 con Spring Boot 3 en backend, y PostgreSQL en Supabase. Queremos sustentar una decisión técnica fundamental de la versión 3:"</em></p>
+          <p><strong>[Angélica]:</strong> <em>"Decidimos implementar **autenticación propia con Spring Security y JWT**, descartando el módulo de login de Supabase. Razones:  
+          1. Cumple la exigencia de que ambos aprendamos la seguridad completa del stack.  
+          2. Mantiene el dominio desacoplado de proveedores externos (coherencia hexagonal).  
+          3. Google Maps se usa solo como referencia de tiempo, pues las rutas las trazamos y validamos en campo con los transportadores."</em></p>
+        </div>
+
+        <div class="script-footer-tips">
+          <div class="tip-box">💡 <strong>Pregunta cantada del docente:</strong> ¿Por qué no Supabase Auth? ➔ La respuesta está memorizada aquí.</div>
+          <div class="tip-box">🔑 <strong>Riesgo declarado:</strong> Dificultad de mapas oficiales ➔ Plan B: Trazado manual con conductores.</div>
+        </div>
+      </article>
+
+      <!-- SLIDE 10 -->
+      <article class="script-card" data-speaker="duo" data-time-start="580" data-time-end="600">
+        <div class="script-card-header">
+          <div>
+            <span class="slide-tag">Slide 10 / 10</span>
+            <span class="slide-duration">⏱️ 09:40 – 10:00 (20 s)</span>
+          </div>
+          <span class="speaker-badge duo">👥 Ambos</span>
+        </div>
+
+        <h2 class="slide-heading">Cierre Ejecutivo <em>¿Preguntas del Comité?</em></h2>
+        <div class="slide-objective">🎯 <strong>Objetivo del slide:</strong> Cierre limpio, agradecimiento y apertura a la ronda de preguntas en el minuto exacto 10:00.</div>
+
+        <div class="speech-bubble duo">
+          <p><strong>[Santiago]:</strong> <em>"En conclusión, FusaRoute combina una necesidad social tangible en Fusagasugá con una rigurosa práctica de ingeniería de software: alcance acotado, métricas ISO 25010 ejecutables y arquitectura desacoplada."</em></p>
+          <p><strong>[Angélica]:</strong> <em>"Muchas gracias por su atención. Quedamos a total disposición del Comité para responder sus preguntas."</em></p>
+        </div>
+
+        <div class="script-footer-tips">
+          <div class="tip-box">💡 <strong>Postura final:</strong> Mirar al jurado, sonreír, esperar la primera pregunta con calma.</div>
+          <div class="tip-box">🔑 <strong>Regla de oro:</strong> Si le preguntan a uno, el otro puede complementar respetuosamente para mostrar equipo.</div>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+
+  <!-- =======================================================
+       TAB 2: FLASHCARDS (3D FLIP)
+       ======================================================= -->
+  <section id="flashcards" class="tab-pane">
+
+    <div class="flashcard-controls">
+      <div class="fc-filters">
+        <button class="filter-btn active" data-fc-filter="all">Todas (12)</button>
+        <button class="filter-btn" data-fc-filter="santiago">Santiago (4)</button>
+        <button class="filter-btn" data-fc-filter="angelica">Angélica (4)</button>
+        <button class="filter-btn" data-fc-filter="grill">Grill Comité (4)</button>
+      </div>
+
+      <div class="fc-stats">
+        Tarjetas dominadas: <b id="masteredCount">0</b> / <span id="totalCardsCount">12</span>
+      </div>
+    </div>
+
+    <div class="flashcards-grid" id="flashcardsGrid">
+
+      <!-- CARD 1: SANTIAGO -->
+      <div class="fc-card" data-category="santiago">
+        <div class="fc-face fc-front">
+          <div class="fc-card-top">
+            <span class="fc-number">FC-01</span>
+            <span class="fc-badge santiago">Santiago · Datos</span>
+          </div>
+          <div class="fc-question">¿Cuáles son las cifras que sustentan el problema de FusaRoute?</div>
+          <div class="fc-hint">💡 Haz clic para ver el reverso (espacio)</div>
+          <div class="fc-actions">
+            <span class="fc-flip-btn">Girar ↻</span>
+          </div>
+        </div>
+        <div class="fc-face fc-back">
+          <div class="fc-card-top">
+            <span class="fc-number">FC-01 · Respuesta</span>
+            <span class="fc-badge santiago">Santiago</span>
+          </div>
+          <div class="fc-back-content">
+            <ul>
+              <li><strong>285.000 hab:</strong> Población regional del Sumapaz (DANE).</li>
+              <li><strong>+20 rutas urbanas:</strong> Operando en Fusagasugá sin registro digital público.</li>
+              <li><strong>Google Maps:</strong> NO tiene registradas las rutas de busetas locales.</li>
+              <li><strong>Encuesta 2025:</strong> Realizada por el equipo, evidenció pérdidas de tiempo y costo por desinformación.</li>
+            </ul>
+          </div>
+          <div class="fc-actions">
+            <button class="fc-mastered-btn" onclick="toggleMastered(this, event)">✓ La domino</button>
+            <span class="fc-flip-btn">Volver ↺</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- CARD 2: SANTIAGO -->
+      <div class="fc-card" data-category="santiago">
+        <div class="fc-face fc-front">
+          <div class="fc-card-top">
+            <span class="fc-number">FC-02</span>
+            <span class="fc-badge santiago">Santiago · Métricas</span>
+          </div>
+          <div class="fc-question">¿Cuáles son las 5 métricas ISO 25010 y sus instrumentos de medición?</div>
+          <div class="fc-hint">💡 Haz clic para ver el reverso</div>
+          <div class="fc-actions"><span class="fc-flip-btn">Girar ↻</span></div>
+        </div>
+        <div class="fc-face fc-back">
+          <div class="fc-card-top">
+            <span class="fc-number">FC-02 · Respuesta</span>
+            <span class="fc-badge santiago">Santiago</span>
+          </div>
+          <div class="fc-back-content">
+            <ul>
+              <li><strong>Rendimiento:</strong> p95 &lt; 5 s + LCP &lt; 2.5 s ➔ <em>Actuator + Micrometer + Lighthouse</em>.</li>
+              <li><strong>Fiabilidad:</strong> ≥ 95% uptime hábil ➔ <em>UptimeRobot + backup diario PostgreSQL</em>.</li>
+              <li><strong>Mantenibilidad:</strong> 0 violaciones + ≥ 70% cobertura ➔ <em>ArchUnit + JaCoCo</em>.</li>
+              <li><strong>Usabilidad:</strong> ≤ 4 pasos + ≥ 80% éxito ➔ <em>Tests con ≥ 5 usuarios externos</em>.</li>
+              <li><strong>Seguridad:</strong> 0 vulns críticas ➔ <em>OWASP Dependency-Check</em>.</li>
+            </ul>
+          </div>
+          <div class="fc-actions">
+            <button class="fc-mastered-btn" onclick="toggleMastered(this, event)">✓ La domino</button>
+            <span class="fc-flip-btn">Volver ↺</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- CARD 3: SANTIAGO -->
+      <div class="fc-card" data-category="santiago">
+        <div class="fc-face fc-front">
+          <div class="fc-card-top">
+            <span class="fc-number">FC-03</span>
+            <span class="fc-badge santiago">Santiago · Cambios v3</span>
+          </div>
+          <div class="fc-question">¿Qué cambió en los Requisitos Funcionales en la versión v3?</div>
+          <div class="fc-hint">💡 RF-10, RF-12 y RF-13</div>
+          <div class="fc-actions"><span class="fc-flip-btn">Girar ↻</span></div>
+        </div>
+        <div class="fc-face fc-back">
+          <div class="fc-card-top">
+            <span class="fc-number">FC-03 · Respuesta</span>
+            <span class="fc-badge santiago">Santiago</span>
+          </div>
+          <div class="fc-back-content">
+            <ul>
+              <li><strong>RF-10:</strong> De 'ruta guardada a hora fija' pasó a <strong>'Destino favorito'</strong> pre-cargado con aviso de trancón actual (evita schedulers y push complejos).</li>
+              <li><strong>RF-12:</strong> La suspensión de ruta ahora <strong>notifica automáticamente</strong> a quienes la tengan como favorita.</li>
+              <li><strong>RF-13:</strong> Métricas del administrador acotadas a <strong>5 indicadores cerrados</strong> en una pantalla.</li>
+            </ul>
+          </div>
+          <div class="fc-actions">
+            <button class="fc-mastered-btn" onclick="toggleMastered(this, event)">✓ La domino</button>
+            <span class="fc-flip-btn">Volver ↺</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- CARD 4: SANTIAGO -->
+      <div class="fc-card" data-category="santiago">
+        <div class="fc-face fc-front">
+          <div class="fc-card-top">
+            <span class="fc-number">FC-04</span>
+            <span class="fc-badge santiago">Santiago · Defensa</span>
+          </div>
+          <div class="fc-question">¿Por qué 95% de disponibilidad y no 99% como proponía la plantilla inicial?</div>
+          <div class="fc-hint">💡 Pregunta típica del Ing. Luiferney</div>
+          <div class="fc-actions"><span class="fc-flip-btn">Girar ↻</span></div>
+        </div>
+        <div class="fc-face fc-back">
+          <div class="fc-card-top">
+            <span class="fc-number">FC-04 · Respuesta</span>
+            <span class="fc-badge santiago">Santiago</span>
+          </div>
+          <div class="fc-back-content">
+            <p><strong>Argumento de ingeniería honesta:</strong></p>
+            <ul>
+              <li><strong>99%</strong> permite solo 7.3 horas de caída/mes y exige infraestructura redundante paga y guardia 24/7.</li>
+              <li><strong>95% en horario hábil (7-21h):</strong> permite ~36 h/mes de margen, perfectamente realista en free tier y sostenible por 2 estudiantes.</li>
+              <li>Prometer 99% sin presupuesto de hosting sería una falta de rigor técnico ante el comité.</li>
+            </ul>
+          </div>
+          <div class="fc-actions">
+            <button class="fc-mastered-btn" onclick="toggleMastered(this, event)">✓ La domino</button>
+            <span class="fc-flip-btn">Volver ↺</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- CARD 5: ANGELICA -->
+      <div class="fc-card" data-category="angelica">
+        <div class="fc-face fc-front">
+          <div class="fc-card-top">
+            <span class="fc-number">FC-05</span>
+            <span class="fc-badge angelica">Angélica · Arquitectura</span>
+          </div>
+          <div class="fc-question">¿Cuál es la regla de oro de la Arquitectura Hexagonal en FusaRoute?</div>
+          <div class="fc-hint">💡 Dependencia y capas</div>
+          <div class="fc-actions"><span class="fc-flip-btn">Girar ↻</span></div>
+        </div>
+        <div class="fc-face fc-back">
+          <div class="fc-card-top">
+            <span class="fc-number">FC-05 · Respuesta</span>
+            <span class="fc-badge angelica">Angélica</span>
+          </div>
+          <div class="fc-back-content">
+            <ul>
+              <li><strong>Regla de Dependencia:</strong> Siempre apunta hacia adentro: <code>domain ← application ← infrastructure</code>.</li>
+              <li><strong>Dominio puro:</strong> En <code>domain/</code> NUNCA hay imports de Spring, JPA, Jackson ni HTTP.</li>
+              <li><strong>Dos modelos distintos:</strong> <code>Route</code> (objeto de negocio puro) vs <code>RouteJpaEntity</code> (tabla BD), traducidos por mappers.</li>
+              <li><strong>Verificación:</strong> Reglas bloqueantes en CI con <strong>ArchUnit</strong>.</li>
+            </ul>
+          </div>
+          <div class="fc-actions">
+            <button class="fc-mastered-btn" onclick="toggleMastered(this, event)">✓ La domino</button>
+            <span class="fc-flip-btn">Volver ↺</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- CARD 6: ANGELICA -->
+      <div class="fc-card" data-category="angelica">
+        <div class="fc-face fc-front">
+          <div class="fc-card-top">
+            <span class="fc-number">FC-06</span>
+            <span class="fc-badge angelica">Angélica · Seguridad</span>
+          </div>
+          <div class="fc-question">¿Por qué NO usan Supabase Auth y crearon autenticación propia con Spring Security?</div>
+          <div class="fc-hint">💡 3 razones técnicas fundamentales</div>
+          <div class="fc-actions"><span class="fc-flip-btn">Girar ↻</span></div>
+        </div>
+        <div class="fc-face fc-back">
+          <div class="fc-card-top">
+            <span class="fc-number">FC-06 · Respuesta</span>
+            <span class="fc-badge angelica">Angélica</span>
+          </div>
+          <div class="fc-back-content">
+            <ul>
+              <li><strong>1. Aprendizaje del stack:</strong> El docente exige que ambos aprendamos todo el backend (Spring Security, JWT, filtros, BCrypt).</li>
+              <li><strong>2. Desacoplamiento (Hexagonal):</strong> Supabase Auth ataría nuestro negocio a un proveedor externo. Con JWT propio, cambiamos de hosting sin tocar el dominio.</li>
+              <li><strong>3. Calidad y control:</strong> Permite tests automatizados de hashing BCrypt (factor ≥ 10) en CI.</li>
+            </ul>
+          </div>
+          <div class="fc-actions">
+            <button class="fc-mastered-btn" onclick="toggleMastered(this, event)">✓ La domino</button>
+            <span class="fc-flip-btn">Volver ↺</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- CARD 7: ANGELICA -->
+      <div class="fc-card" data-category="angelica">
+        <div class="fc-face fc-front">
+          <div class="fc-card-top">
+            <span class="fc-number">FC-07</span>
+            <span class="fc-badge angelica">Angélica · Alcance</span>
+          </div>
+          <div class="fc-question">¿Cuál es la delimitación geográfica y qué municipios están incluidos y excluidos?</div>
+          <div class="fc-hint">💡 Regla de frontera de Fusagasugá</div>
+          <div class="fc-actions"><span class="fc-flip-btn">Girar ↻</span></div>
+        </div>
+        <div class="fc-face fc-back">
+          <div class="fc-card-top">
+            <span class="fc-number">FC-07 · Respuesta</span>
+            <span class="fc-badge angelica">Angélica</span>
+          </div>
+          <div class="fc-back-content">
+            <ul>
+              <li><strong>Incluido este semestre:</strong> 100% rutas urbanas de Fusagasugá, corregimiento de Chinauta, e intermunicipales Fusagasugá–Pasca y Fusagasugá–Arbeláez.</li>
+              <li><strong>Regla de frontera:</strong> Toda ruta debe <strong>tocar Fusagasugá</strong> (Pasca y Arbeláez no tienen transporte urbano propio registrado).</li>
+              <li><strong>Excluidos (Fase 2):</strong> Silvania, Granada, Tibacuy, Venecia y rutas que no pasen por Fusa.</li>
+            </ul>
+          </div>
+          <div class="fc-actions">
+            <button class="fc-mastered-btn" onclick="toggleMastered(this, event)">✓ La domino</button>
+            <span class="fc-flip-btn">Volver ↺</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- CARD 8: ANGELICA -->
+      <div class="fc-card" data-category="angelica">
+        <div class="fc-face fc-front">
+          <div class="fc-card-top">
+            <span class="fc-number">FC-08</span>
+            <span class="fc-badge angelica">Angélica · RNFs</span>
+          </div>
+          <div class="fc-question">¿Cómo funciona el Modo Offline (RNF-01.b) y cuál es su limitación honesta?</div>
+          <div class="fc-hint">💡 Lo que sí hace vs lo que no puede hacer</div>
+          <div class="fc-actions"><span class="fc-flip-btn">Girar ↻</span></div>
+        </div>
+        <div class="fc-face fc-back">
+          <div class="fc-card-top">
+            <span class="fc-number">FC-08 · Respuesta</span>
+            <span class="fc-badge angelica">Angélica</span>
+          </div>
+          <div class="fc-back-content">
+            <ul>
+              <li><strong>Qué sí hace:</strong> La app almacena en caché las rutas, paradas y barrios/comunas para que el usuario pueda orientarse si se queda sin señal en la calle.</li>
+              <li><strong>Límite honesto declarado:</strong> <strong>NO calcula tiempo de llegada ni tráfico en tiempo real</strong>, ya que eso requiere obligatoriamente consulta a la API en línea.</li>
+            </ul>
+          </div>
+          <div class="fc-actions">
+            <button class="fc-mastered-btn" onclick="toggleMastered(this, event)">✓ La domino</button>
+            <span class="fc-flip-btn">Volver ↺</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- CARD 9: GRILL COMITE -->
+      <div class="fc-card" data-category="grill">
+        <div class="fc-face fc-front">
+          <div class="fc-card-top">
+            <span class="fc-number">FC-09</span>
+            <span class="fc-badge grill">🔥 Grill Comité</span>
+          </div>
+          <div class="fc-question">¿Cómo consiguen las rutas de busetas si Google Maps no las tiene?</div>
+          <div class="fc-hint">💡 Riesgo de información declarado</div>
+          <div class="fc-actions"><span class="fc-flip-btn">Girar ↻</span></div>
+        </div>
+        <div class="fc-face fc-back">
+          <div class="fc-card-top">
+            <span class="fc-number">FC-09 · Respuesta</span>
+            <span class="fc-badge grill">Defensa Grill</span>
+          </div>
+          <div class="fc-back-content">
+            <p><strong>Respuesta directa:</strong></p>
+            <ul>
+              <li>Es justamente el problema que resolvemos. Realizamos <strong>trazado digital a mano (KML/GeoJSON)</strong> de las rutas.</li>
+              <li>Validamos los trazados directamente en campo con los conductores y despachadores de las empresas de transporte de Fusagasugá (Cootransfusa, etc.).</li>
+            </ul>
+          </div>
+          <div class="fc-actions">
+            <button class="fc-mastered-btn" onclick="toggleMastered(this, event)">✓ La domino</button>
+            <span class="fc-flip-btn">Volver ↺</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- CARD 10: GRILL COMITE -->
+      <div class="fc-card" data-category="grill">
+        <div class="fc-face fc-front">
+          <div class="fc-card-top">
+            <span class="fc-number">FC-10</span>
+            <span class="fc-badge grill">🔥 Grill Comité</span>
+          </div>
+          <div class="fc-question">¿Por qué eliminaron el RNF-08 de la base de datos en la versión 3?</div>
+          <div class="fc-hint">💡 Requisito vs Práctica de Ingeniería</div>
+          <div class="fc-actions"><span class="fc-flip-btn">Girar ↻</span></div>
+        </div>
+        <div class="fc-face fc-back">
+          <div class="fc-card-top">
+            <span class="fc-number">FC-10 · Respuesta</span>
+            <span class="fc-badge grill">Defensa Grill</span>
+          </div>
+          <div class="fc-back-content">
+            <p><strong>Respuesta de criterio técnico:</strong></p>
+            <ul>
+              <li>El RNF-08 pedía 'que la BD se pueda exportar'. Dado que usamos <strong>PostgreSQL estándar</strong> en Supabase, ejecutar un <code>pg_dump</code> es trivial.</li>
+              <li>No amerita ser un RNF con métrica; se documentó como un procedimiento de backup en el README técnico del backend.</li>
+            </ul>
+          </div>
+          <div class="fc-actions">
+            <button class="fc-mastered-btn" onclick="toggleMastered(this, event)">✓ La domino</button>
+            <span class="fc-flip-btn">Volver ↺</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- CARD 11: GRILL COMITE -->
+      <div class="fc-card" data-category="grill">
+        <div class="fc-face fc-front">
+          <div class="fc-card-top">
+            <span class="fc-number">FC-11</span>
+            <span class="fc-badge grill">🔥 Grill Comité</span>
+          </div>
+          <div class="fc-question">¿Cómo demuestran que ambos trabajaron por igual si es su primera vez en Spring y React?</div>
+          <div class="fc-hint">💡 Flujo Git y PRs</div>
+          <div class="fc-actions"><span class="fc-flip-btn">Girar ↻</span></div>
+        </div>
+        <div class="fc-face fc-back">
+          <div class="fc-card-top">
+            <span class="fc-number">FC-11 · Respuesta</span>
+            <span class="fc-badge grill">Defensa Grill</span>
+          </div>
+          <div class="fc-back-content">
+            <p><strong>Evidencia verificable en GitHub:</strong></p>
+            <ul>
+              <li>Flujo Trunk-based con <strong>Pull Requests cruzados obligatorios</strong> en ambos repositorios.</li>
+              <li>Ningún integrante puede mergear su propio PR a <code>main</code> sin la revisión y aprobación técnica del otro.</li>
+              <li>Ambos participamos en frontend, backend y base de datos sin especialización artificial.</li>
+            </ul>
+          </div>
+          <div class="fc-actions">
+            <button class="fc-mastered-btn" onclick="toggleMastered(this, event)">✓ La domino</button>
+            <span class="fc-flip-btn">Volver ↺</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- CARD 12: GRILL COMITE -->
+      <div class="fc-card" data-category="grill">
+        <div class="fc-face fc-front">
+          <div class="fc-card-top">
+            <span class="fc-number">FC-12</span>
+            <span class="fc-badge grill">🔥 Grill Comité</span>
+          </div>
+          <div class="fc-question">¿Qué pasa si la cuota de la API de Google Maps se agota o se cae?</div>
+          <div class="fc-hint">💡 Manejo de errores y caché</div>
+          <div class="fc-actions"><span class="fc-flip-btn">Girar ↻</span></div>
+        </div>
+        <div class="fc-face fc-back">
+          <div class="fc-card-top">
+            <span class="fc-number">FC-12 · Respuesta</span>
+            <span class="fc-badge grill">Defensa Grill</span>
+          </div>
+          <div class="fc-back-content">
+            <ul>
+              <li><strong>Caché en backend:</strong> Las distancias y tiempos entre paradas recurrentes se guardan en caché para no saturar la cuota.</li>
+              <li><strong>Resiliencia:</strong> Si la API externa no responde, el sistema entrega la ruta y los barrios basándose en el catálogo propio, informando que el tiempo estimado está temporalmente no disponible.</li>
+            </ul>
+          </div>
+          <div class="fc-actions">
+            <button class="fc-mastered-btn" onclick="toggleMastered(this, event)">✓ La domino</button>
+            <span class="fc-flip-btn">Volver ↺</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- =======================================================
+       TAB 3: SIMULADOR DE GRILL DEL COMITÉ
+       ======================================================= -->
+  <section id="grill" class="tab-pane">
+    <div class="grill-arena">
+      <div class="grill-avatar">👨‍🏫</div>
+      <h2 class="grill-title">Simulador de Preguntas del Comité</h2>
+      <p class="grill-intro">
+        El profesor Luiferney pondrá a prueba el criterio técnico del equipo. 
+        Genera preguntas aleatorias y ensaya la respuesta verbal antes de revelar la defensa recomendada.
+      </p>
+
+      <div class="grill-box">
+        <div class="grill-q-label" id="grillQLabel">Pregunta #1 · Criterio de Arquitectura</div>
+        <div class="grill-q-text" id="grillQText">"¿Por qué decidieron usar Arquitectura Hexagonal en un proyecto pequeño en lugar de un MVC tradicional?"</div>
+        
+        <div class="grill-a-box" id="grillABox">
+          <strong>Defensa recomendada (Angélica / Santiago):</strong><br>
+          <em>"Aunque el proyecto inicie con 20 rutas, la premisa de la ingeniería de software es diseñar para crecer. Hexagonal nos permite aislar el modelo de transporte (`Route`, `Fare`) de cualquier tecnología externa. Si mañana cambiamos de Supabase a una base de datos propia, o si cambiamos la API de mapas por OpenStreetMap, el núcleo de negocio no sufre ningún cambio. Además, nos permite hacer pruebas unitarias con JUnit y Mockito a los casos de uso sin necesidad de levantar Spring Boot, garantizando velocidad y alta cobertura."</em>
+        </div>
+      </div>
+
+      <div class="grill-controls">
+        <button class="btn btn-secondary" id="btnRevealGrill">👁️ Ver Respuesta Sugerida</button>
+        <button class="btn btn-primary" id="btnNextGrill">🎲 Siguiente Pregunta Aleatoria</button>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- =======================================================
+       TAB 4: MATRIZ ISO 25010 & ARQUITECTURA
+       ======================================================= -->
+  <section id="metricas" class="tab-pane">
+    <h2 style="font-family: var(--display); margin-bottom: 0.5rem;">Matriz de Métricas de Calidad (ISO/IEC 25010) — v3</h2>
+    <p style="color: var(--urban); margin-bottom: 1.5rem;">Resumen de las 5 métricas oficiales aprobadas tras la revisión interna del 2026-08-24.</p>
+
+    <div class="matrix-table-wrap">
+      <table class="matrix-table">
+        <thead>
+          <tr>
+            <th style="width: 22%;">Atributo ISO 25010</th>
+            <th style="width: 32%;">Métrica Comprometida</th>
+            <th>Instrumento de Medición en CI</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="attr-name">Eficiencia de Desempeño</td>
+            <td class="attr-val">p95 &lt; 5 s en /api/routes/search + LCP &lt; 2.5 s</td>
+            <td class="attr-tool">Spring Boot Actuator + Micrometer (percentil 95) y Lighthouse en CI sobre red móvil Slow 4G.</td>
+          </tr>
+          <tr>
+            <td class="attr-name">Fiabilidad (Disponibilidad)</td>
+            <td class="attr-val">≥ 95% mensual en horario hábil (7-21h), RTO &lt; 1 h, RPO &lt; 24 h</td>
+            <td class="attr-tool">UptimeRobot (sonda cada 5 min) + backup diario de PostgreSQL con prueba de restore al cierre de sprint.</td>
+          </tr>
+          <tr>
+            <td class="attr-name">Mantenibilidad</td>
+            <td class="attr-val">0 violaciones hexagonales en CI + ≥ 70% cobertura en domain/</td>
+            <td class="attr-tool">ArchUnit sobre los paquetes del backend + reporte JaCoCo con umbral bloqueante en PR.</td>
+          </tr>
+          <tr>
+            <td class="attr-name">Usabilidad</td>
+            <td class="attr-val">Flujo ≤ 4 acciones + tasa de éxito ≥ 80% al 1er intento</td>
+            <td class="attr-tool">Prueba de usabilidad con ≥ 5 usuarios externos al equipo antes de cada sustentación quincenal.</td>
+          </tr>
+          <tr>
+            <td class="attr-name">Seguridad</td>
+            <td class="attr-val">0 vulnerabilidades altas o críticas en la entrega</td>
+            <td class="attr-tool">OWASP Dependency-Check + analizador estático en GitHub Actions en cada Pull Request.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
+      <div style="background: var(--paper-card); border: 1px solid var(--border); padding: 1.5rem; border-radius: 12px;">
+        <h3 style="font-family: var(--display); margin-top: 0; color: var(--bus);">Reglas de la Arquitectura Hexagonal</h3>
+        <ul style="font-size: 0.9rem; padding-left: 1.2rem; color: var(--ink);">
+          <li><strong>Dirección:</strong> <code>domain ← application ← infrastructure</code>.</li>
+          <li><strong>Dominio:</strong> Cero imports de <code>org.springframework.*</code>, <code>javax.persistence.*</code> o librerías HTTP.</li>
+          <li><strong>Puertos:</strong> Interfaces en <code>domain/port/in</code> y <code>domain/port/out</code>.</li>
+          <li><strong>Adaptadores:</strong> Web controllers en <code>in/web</code>, repositorios JPA en <code>out/persistence</code>.</li>
+        </ul>
+      </div>
+
+      <div style="background: var(--paper-card); border: 1px solid var(--border); padding: 1.5rem; border-radius: 12px;">
+        <h3 style="font-family: var(--display); margin-top: 0; color: var(--route);">Decisiones Clave del Stack</h3>
+        <ul style="font-size: 0.9rem; padding-left: 1.2rem; color: var(--ink);">
+          <li><strong>PostgreSQL en Supabase:</strong> Usado exclusivamente como motor de BD relacional (sin Auth ni Realtime).</li>
+          <li><strong>Seguridad:</strong> Spring Security + JWT propio con BCrypt (factor ≥ 10).</li>
+          <li><strong>Google Maps API:</strong> Solo para geocodificación y tiempos estimados; nunca como fuente de rutas de busetas.</li>
+          <li><strong>Git:</strong> PRs cruzados obligatorios (ninguno aprueba su propio PR).</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<!-- THEME SWITCHER FAB -->
+<button class="theme-fab" id="themeToggle" title="Cambiar Tema (Claro/Oscuro)">◐</button>
+
+<script>
+  /* =========================================================
+     INTERACTIVE JAVASCRIPT LOGIC
+     ========================================================= */
+
+  // 1. Theme Toggle
+  const themeToggle = document.getElementById('themeToggle');
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  const savedTheme = localStorage.getItem('fusaroute-theme');
+
+  if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+    document.documentElement.setAttribute('data-theme', 'dark');
+  }
+
+  themeToggle.addEventListener('click', () => {
+    const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+    const newTheme = isDark ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', newTheme);
+    localStorage.setItem('fusaroute-theme', newTheme);
+  });
+
+  // 2. Navigation Tabs
+  const tabBtns = document.querySelectorAll('.tab-btn');
+  const tabPanes = document.querySelectorAll('.tab-pane');
+
+  tabBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      tabBtns.forEach(b => b.classList.remove('active'));
+      tabPanes.forEach(p => p.classList.remove('active'));
+      btn.classList.add('active');
+      const targetId = btn.getAttribute('data-tab');
+      document.getElementById(targetId).classList.add('active');
+    });
+  });
+
+  // 3. Teleprompter Timer
+  let totalSeconds = 600; // 10 minutes
+  let currentSeconds = totalSeconds;
+  let timerInterval = null;
+  let isRunning = false;
+
+  const timerDisplay = document.getElementById('timerDisplay');
+  const timelineProgress = document.getElementById('timelineProgress');
+  const btnStart = document.getElementById('btnStartTimer');
+  const btnPause = document.getElementById('btnPauseTimer');
+  const btnReset = document.getElementById('btnResetTimer');
+  const scriptCards = document.querySelectorAll('.script-card');
+
+  function formatTime(sec) {
+    const m = Math.floor(sec / 60);
+    const s = sec % 60;
+    return `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
+  }
+
+  function updateTimerUI() {
+    timerDisplay.textContent = formatTime(currentSeconds);
+    const elapsed = totalSeconds - currentSeconds;
+    const pct = (elapsed / totalSeconds) * 100;
+    timelineProgress.style.width = pct + '%';
+
+    // Classes for color
+    timerDisplay.className = 'timer-clock';
+    if (isRunning) timerDisplay.classList.add('running');
+    if (currentSeconds <= 120 && currentSeconds > 30) timerDisplay.classList.add('warning');
+    if (currentSeconds <= 30) timerDisplay.classList.add('danger');
+
+    // Highlight active slide based on elapsed time
+    scriptCards.forEach(card => {
+      const start = parseInt(card.getAttribute('data-time-start'), 10);
+      const end = parseInt(card.getAttribute('data-time-end'), 10);
+      if (elapsed >= start && elapsed < end) {
+        card.classList.add('active-slide');
+      } else {
+        card.classList.remove('active-slide');
+      }
+    });
+  }
+
+  btnStart.addEventListener('click', () => {
+    if (!isRunning && currentSeconds > 0) {
+      isRunning = true;
+      btnStart.textContent = '▶ Reanudar';
+      timerInterval = setInterval(() => {
+        if (currentSeconds > 0) {
+          currentSeconds--;
+          updateTimerUI();
+        } else {
+          clearInterval(timerInterval);
+          isRunning = false;
+          alert('⏰ ¡Tiempo cumplido! 10:00 exactos alcanzados.');
+          updateTimerUI();
+        }
+      }, 1000);
+      updateTimerUI();
+    }
+  });
+
+  btnPause.addEventListener('click', () => {
+    if (isRunning) {
+      clearInterval(timerInterval);
+      isRunning = false;
+      updateTimerUI();
+    }
+  });
+
+  btnReset.addEventListener('click', () => {
+    clearInterval(timerInterval);
+    isRunning = false;
+    currentSeconds = totalSeconds;
+    btnStart.textContent = '▶ Iniciar Ensayo';
+    updateTimerUI();
+  });
+
+  // 4. Speaker Filters in Script
+  const filterBtns = document.querySelectorAll('.filter-btn[data-speaker]');
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const speaker = btn.getAttribute('data-speaker');
+
+      scriptCards.forEach(card => {
+        const cardSpeaker = card.getAttribute('data-speaker');
+        if (speaker === 'all' || cardSpeaker === speaker || cardSpeaker === 'duo') {
+          card.style.display = 'block';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    });
+  });
+
+  // 5. Flashcards 3D Flip & Filter
+  const fcCards = document.querySelectorAll('.fc-card');
+  fcCards.forEach(card => {
+    card.addEventListener('click', (e) => {
+      if (e.target.tagName === 'BUTTON') return;
+      card.classList.toggle('flipped');
+    });
+  });
+
+  const fcFilterBtns = document.querySelectorAll('.filter-btn[data-fc-filter]');
+  fcFilterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      fcFilterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const filter = btn.getAttribute('data-fc-filter');
+
+      fcCards.forEach(card => {
+        const cat = card.getAttribute('data-category');
+        if (filter === 'all' || cat === filter) {
+          card.style.display = 'block';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    });
+  });
+
+  let masteredCount = 0;
+  window.toggleMastered = function(btn, event) {
+    event.stopPropagation();
+    const card = btn.closest('.fc-card');
+    btn.classList.toggle('active');
+    if (btn.classList.contains('active')) {
+      btn.textContent = '✓ Dominada';
+      masteredCount++;
+    } else {
+      btn.textContent = '✓ La domino';
+      masteredCount--;
+    }
+    document.getElementById('masteredCount').textContent = masteredCount;
+  };
+
+  // 6. Grill Questions Simulator
+  const grillQuestions = [
+    {
+      label: "Pregunta #1 · Criterio de Arquitectura",
+      question: "¿Por qué decidieron usar Arquitectura Hexagonal en un proyecto pequeño en lugar de un MVC tradicional?",
+      answer: "Porque la calidad se diseña desde el día uno. Hexagonal aísla completamente el dominio de transporte (Route, Stop, Fare) de frameworks y persistencia. Si cambiamos Supabase por PostgreSQL local o Google Maps por OpenStreetMap, el núcleo no sufre cambios. Además, permite testear casos de uso en milisegundos con JUnit y Mockito sin levantar Spring Boot."
+    },
+    {
+      label: "Pregunta #2 · Decisión de Seguridad",
+      question: "¿Por qué no utilizaron el sistema de autenticación listo de Supabase y prefirieron programar Spring Security?",
+      answer: "Por tres motivos: 1) Cumplir con el objetivo pedagógico del docente de dominar todo el stack por igual; 2) Evitar acoplamiento con un proveedor SaaS propietario en el dominio; y 3) Permitir auditar y verificar con pruebas automatizadas en CI el cifrado BCrypt (factor ≥ 10) y tokens JWT propios."
+    },
+    {
+      label: "Pregunta #3 · Realismo en Métricas",
+      question: "¿Por qué se comprometieron con 95% de disponibilidad mensual y no con el estándar de 99%?",
+      answer: "Porque 99% permite solo 7.3 horas de caída al mes y exige planes pagos e infraestructura redundante. En capa gratuita (free tier) y con un equipo de dos estudiantes, 95% en horario hábil (7:00 a 21:00) es un compromiso honesto, medible con UptimeRobot y verificable en la sustentación."
+    },
+    {
+      label: "Pregunta #4 · Riesgo de Información",
+      question: "¿Cómo garantizan la veracidad de las rutas si las empresas de busetas no publican mapas oficiales?",
+      answer: "Es el valor central de FusaRoute: realizamos trazados vectoriales a mano en GeoJSON/KML y los validamos directamente en campo con los conductores y despachadores de las rutas en Fusagasugá (Cootransfusa/Cootransfusagasugá)."
+    },
+    {
+      label: "Pregunta #5 · Alcance y Frontera",
+      question: "¿Por qué incluyeron Pasca y Arbeláez pero dejaron por fuera a Silvania?",
+      answer: "Porque Pasca y Arbeláez operan como extensiones directas que llegan a Fusagasugá por ruta intermunicipal sin rutas urbanas propias separadas. Silvania tiene dinámicas que excedían el límite realista de nuestra primera integración con mapas; queda formalmente declarada para la fase 2."
+    },
+    {
+      label: "Pregunta #6 · Modo Offline",
+      question: "¿Cómo responde el sistema cuando el usuario pierde la conexión a internet en la calle?",
+      answer: "Mediante el RNF-01.b: la aplicación almacena en caché local las rutas, paradas y barrios para permitir la orientación básica. Con total honestidad declaramos que no calcula tiempos de llegada ni trancones en vivo mientras esté desconectado."
+    }
+  ];
+
+  let currentGrillIdx = 0;
+  const grillQLabel = document.getElementById('grillQLabel');
+  const grillQText = document.getElementById('grillQText');
+  const grillABox = document.getElementById('grillABox');
+  const btnRevealGrill = document.getElementById('btnRevealGrill');
+  const btnNextGrill = document.getElementById('btnNextGrill');
+
+  btnRevealGrill.addEventListener('click', () => {
+    grillABox.classList.toggle('show');
+    btnRevealGrill.textContent = grillABox.classList.contains('show') ? '🙈 Ocultar Respuesta' : '👁️ Ver Respuesta Sugerida';
+  });
+
+  btnNextGrill.addEventListener('click', () => {
+    currentGrillIdx = (currentGrillIdx + 1) % grillQuestions.length;
+    const item = grillQuestions[currentGrillIdx];
+    grillQLabel.textContent = item.label;
+    grillQText.textContent = `"${item.question}"`;
+    grillABox.innerHTML = `<strong>Defensa recomendada:</strong><br><em>"${item.answer}"</em>`;
+    grillABox.classList.remove('show');
+    btnRevealGrill.textContent = '👁️ Ver Respuesta Sugerida';
+  });
+
+</script>
+</body>
+</html>

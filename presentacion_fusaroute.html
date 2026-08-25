@@ -1,0 +1,1635 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>FusaRoute — Presentación Comité · Ingeniería de Software I</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600;9..144,800;9..144,900&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  /* =========================================================
+     FusaRoute — Sistema de diseño
+     Inspirado en mapas de transporte regional.
+     ========================================================= */
+
+  :root {
+    --ink:        #0E2A47;
+    --paper:      #F5F0E6;
+    --paper-2:    #ECE5D3;
+    --bus:        #E8743B;
+    --route:      #2A6F4A;
+    --urban:      #3D3D3D;
+    --rail:       #B8A989;
+    --white:      #FFFFFF;
+
+    --display: 'Fraunces', Georgia, serif;
+    --body:    'Inter', system-ui, sans-serif;
+    --mono:    'JetBrains Mono', ui-monospace, monospace;
+
+    /* Escalas tipográficas con clamp — legibles para presentación */
+    --fs-hero:    clamp(3.4rem, 7vw, 6.2rem);
+    --fs-h1:      clamp(2.2rem, 4vw, 3.8rem);
+    --fs-h2:      clamp(1.5rem, 2.2vw, 2.1rem);
+    --fs-lead:    clamp(1.05rem, 1.3vw, 1.35rem);
+    --fs-body:    1.1rem;
+    --fs-small:   0.95rem;
+    --fs-mono:    0.85rem;
+
+    --slide-pad: clamp(1.6rem, 3.8vw, 3.8rem);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: var(--urban);
+    color: var(--ink);
+    font-family: var(--body);
+    font-size: var(--fs-body);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    scroll-behavior: smooth;
+  }
+
+  /* ------------------------------------------------------------
+     Stage & slide deck
+     ------------------------------------------------------------ */
+  .deck {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 1.5rem 1.25rem 4rem;
+  }
+
+  .slide {
+    position: relative;
+    width: min(1280px, 100%);
+    aspect-ratio: 16 / 9;
+    max-height: 85vh;          /* nunca más alto que la pantalla */
+    background: var(--paper);
+    color: var(--ink);
+    overflow: hidden;          /* clave: corta lo que se desborda */
+    box-shadow: 0 30px 60px -20px rgba(0,0,0,0.45);
+    border-radius: 6px;
+    isolation: isolate;
+    transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.4s ease;
+  }
+
+  .slide:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 40px 80px -20px rgba(0,0,0,0.55);
+  }
+
+  .slide-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    padding: var(--slide-pad);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;          /* previene desbordes de hijos */
+  }
+
+  /* Línea-buseta: signature */
+  .route-line {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+  }
+  .route-line svg { width: 100%; height: 100%; display: block; }
+
+  .slide-inner > * { position: relative; z-index: 1; }
+
+  /* Encabezado */
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: var(--fs-mono);
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--bus);
+    margin: 0 0 0.5rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .eyebrow .dot {
+    width: 7px; height: 7px; border-radius: 50%;
+    background: var(--bus); display: inline-block;
+    animation: pulse 2.5s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.6; transform: scale(1.3); }
+  }
+
+  .slide-title {
+    font-family: var(--display);
+    font-weight: 600;
+    font-size: var(--fs-h1);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    margin: 0;
+    max-width: 22ch;
+  }
+  .slide-title em {
+    font-style: italic;
+    font-weight: 400;
+    color: var(--bus);
+  }
+
+  .lead {
+    font-family: var(--body);
+    font-size: var(--fs-lead);
+    color: var(--urban);
+    max-width: 60ch;
+    margin: 0.4rem 0 0;
+    line-height: 1.4;
+  }
+
+  /* Footer */
+  .slide-footer {
+    position: absolute;
+    bottom: 0.9rem;
+    left: var(--slide-pad);
+    right: var(--slide-pad);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: var(--mono);
+    font-size: var(--fs-mono);
+    color: var(--ink);
+    opacity: 0.6;
+    z-index: 2;
+  }
+  .slide-footer .brand { letter-spacing: 0.18em; text-transform: uppercase; }
+  .slide-footer .num { font-weight: 700; }
+
+  /* ------------------------------------------------------------
+     SLIDE 1 — Portada
+     ------------------------------------------------------------ */
+  .cover { background: var(--ink); color: var(--paper); }
+  .cover .route-line path { stroke: var(--bus); }
+  .cover-inner {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 1.8rem;
+    align-items: center;
+    height: 100%;
+    padding: var(--slide-pad);
+    position: relative;
+    z-index: 1;
+  }
+  .cover .eyebrow { color: var(--bus); }
+  .cover h1 {
+    font-family: var(--display);
+    font-weight: 800;
+    font-size: var(--fs-hero);
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+    margin: 0;
+  }
+  .cover h1 .accent {
+    display: block;
+    font-style: italic;
+    font-weight: 300;
+    color: var(--bus);
+    font-size: 0.4em;
+    letter-spacing: 0.04em;
+    margin-top: 0.7rem;
+    line-height: 1.3;
+  }
+  .cover-meta {
+    margin-top: 1.4rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    font-family: var(--body);
+    font-size: var(--fs-small);
+  }
+  .cover-meta strong { font-weight: 600; color: var(--paper); }
+  .cover-meta span { color: rgba(245,240,230,0.7); }
+
+  .cover-card {
+    border: 1px solid rgba(245,240,230,0.18);
+    border-radius: 4px;
+    padding: 1.2rem;
+    background: rgba(255,255,255,0.04);
+    backdrop-filter: blur(4px);
+    transition: transform 0.3s ease, background 0.3s ease;
+  }
+  .cover-card:hover {
+    transform: translateY(-2px);
+    background: rgba(255,255,255,0.08);
+  }
+  .cover-card .label {
+    font-family: var(--mono);
+    font-size: var(--fs-mono);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--bus);
+    margin: 0 0 0.5rem;
+  }
+  .cover-card ul { list-style: none; padding: 0; margin: 0; }
+  .cover-card li {
+    padding: 0.3rem 0;
+    border-bottom: 1px dashed rgba(245,240,230,0.15);
+    font-size: var(--fs-small);
+    transition: padding-left 0.2s ease;
+  }
+  .cover-card li:hover { padding-left: 0.3rem; }
+  .cover-card li:last-child { border-bottom: 0; }
+  .cover-card li b { font-weight: 600; color: var(--paper); }
+  .cover-card li span { color: rgba(245,240,230,0.7); margin-left: 0.3rem; }
+
+  /* ------------------------------------------------------------
+     SLIDE 2 — Contexto y problema
+     ------------------------------------------------------------ */
+  .problem-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.8rem;
+    margin-top: 0.9rem;
+    flex: 1;
+    align-items: stretch;
+    min-height: 0;
+    overflow: hidden;
+  }
+  .stat-block {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.5rem;
+    min-height: 0;
+  }
+  .big-number {
+    font-family: var(--display);
+    font-weight: 900;
+    font-size: clamp(3rem, 5.6vw, 5.2rem);
+    line-height: 1;
+    color: var(--ink);
+    letter-spacing: -0.03em;
+  }
+  .big-number .unit {
+    font-style: italic;
+    font-weight: 300;
+    font-size: 0.5em;
+    color: var(--bus);
+  }
+  .stat-label {
+    font-family: var(--body);
+    font-size: 1rem;
+    color: var(--urban);
+    max-width: 30ch;
+    line-height: 1.4;
+    margin: 0;
+  }
+  .problem-text {
+    border-left: 3px solid var(--bus);
+    padding-left: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    justify-content: center;
+    min-height: 0;
+    overflow: hidden;
+  }
+  .problem-text p { margin: 0; font-size: var(--fs-lead); color: var(--ink); line-height: 1.4; }
+  .problem-text .quote {
+    font-family: var(--display);
+    font-style: italic;
+    font-size: clamp(1.2rem, 1.5vw, 1.5rem);
+    color: var(--urban);
+    line-height: 1.3;
+  }
+  .source-note {
+    font-family: var(--mono);
+    font-size: var(--fs-mono);
+    color: var(--urban);
+    opacity: 0.7;
+    margin: 0.3rem 0 0;
+  }
+
+  /* ------------------------------------------------------------
+     SLIDE 3 — Solución
+     ------------------------------------------------------------ */
+  .solution-grid {
+    display: grid;
+    grid-template-columns: 1.05fr 1fr;
+    gap: 1.5rem;
+    margin-top: 0.7rem;
+    flex: 1;
+    align-items: stretch;
+    min-height: 0;
+    overflow: hidden;
+  }
+  .solution-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    overflow: hidden;
+  }
+  .solution-list li {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 0.9rem;
+    align-items: baseline;
+    padding: 0.35rem 0;
+    border-bottom: 1px solid var(--rail);
+    transition: background 0.2s ease, padding-left 0.2s ease;
+    cursor: default;
+  }
+  .solution-list li:hover {
+    background: rgba(232,116,59,0.05);
+    padding-left: 0.3rem;
+  }
+  .solution-list li:last-child { border-bottom: 0; }
+  .solution-list .marker {
+    font-family: var(--mono);
+    font-size: var(--fs-mono);
+    color: var(--bus);
+    font-weight: 700;
+    letter-spacing: 0.06em;
+  }
+  .solution-list b {
+    font-weight: 600;
+    color: var(--ink);
+    font-size: 0.95rem;
+  }
+  .solution-list span {
+    color: var(--urban);
+    font-size: 0.82rem;
+    line-height: 1.35;
+  }
+
+  .map-illustration {
+    position: relative;
+    background: var(--paper-2);
+    border-radius: 4px;
+    padding: 0.7rem 0.9rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: hidden;
+    min-height: 0;
+    gap: 0.4rem;
+  }
+  .map-illustration .map-label {
+    font-family: var(--mono);
+    font-size: var(--fs-mono);
+    color: var(--urban);
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    margin: 0;
+  }
+  .map-illustration svg { width: 100%; flex: 1; min-height: 0; }
+
+  /* ------------------------------------------------------------
+     SLIDE 4 — Usuarios y alcance
+     ------------------------------------------------------------ */
+  .users-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-top: 0.6rem;
+  }
+  .user-card {
+    border: 1px solid var(--rail);
+    border-radius: 4px;
+    padding: 0.8rem 1rem;
+    background: var(--white);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .user-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px -8px rgba(14,42,71,0.2);
+  }
+  .user-card .role {
+    font-family: var(--mono);
+    font-size: var(--fs-mono);
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: var(--bus);
+    margin: 0 0 0.3rem;
+  }
+  .user-card h3 {
+    font-family: var(--display);
+    font-weight: 600;
+    font-size: clamp(1.3rem, 1.6vw, 1.6rem);
+    margin: 0 0 0.3rem;
+    color: var(--ink);
+  }
+  .user-card p {
+    margin: 0;
+    font-size: 0.85rem;
+    color: var(--urban);
+    line-height: 1.35;
+  }
+  .user-card .dotted {
+    border-top: 1px dashed var(--rail);
+    margin-top: 0.5rem;
+    padding-top: 0.5rem;
+    font-family: var(--mono);
+    font-size: var(--fs-mono);
+    color: var(--ink);
+  }
+
+  .scope {
+    margin-top: 0.7rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    flex: 1;
+    align-content: stretch;
+    min-height: 0;
+    overflow: hidden;
+  }
+  .scope-col {
+    padding: 0.85rem 1.05rem;
+    border-radius: 4px;
+    overflow: auto;
+    min-height: 0;
+  }
+  .scope-yes { background: rgba(42,111,74,0.08); border-left: 4px solid var(--route); }
+  .scope-no  { background: rgba(232,116,59,0.08); border-left: 4px solid var(--bus); }
+  .scope-col h4 {
+    font-family: var(--display);
+    font-weight: 600;
+    margin: 0 0 0.4rem;
+    font-size: clamp(1.05rem, 1.25vw, 1.2rem);
+  }
+  .scope-yes h4 { color: var(--route); }
+  .scope-no  h4 { color: var(--bus); }
+  .scope-col ul { margin: 0; padding-left: 1rem; }
+  .scope-col li { margin: 0.15rem 0; font-size: 0.82rem; line-height: 1.35; }
+
+  /* ------------------------------------------------------------
+     SLIDE 5 — Requisitos funcionales (tabla)
+     ------------------------------------------------------------ */
+  .req-table-wrap {
+    margin-top: 0.8rem;
+    flex: 1;
+    overflow: auto;
+    border: 1px solid var(--rail);
+    border-radius: 4px;
+    background: var(--white);
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+  }
+  .req-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.95rem;
+  }
+  .req-table thead th {
+    background: var(--ink);
+    color: var(--paper);
+    text-align: left;
+    padding: 0.5rem 0.7rem;
+    font-family: var(--mono);
+    font-size: var(--fs-mono);
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+  }
+  .req-table tbody tr {
+    border-top: 1px solid var(--rail);
+    transition: background 0.15s ease;
+  }
+  .req-table tbody tr:hover { background: rgba(232,116,59,0.08); }
+  .req-table tbody tr:nth-child(even) { background: var(--paper-2); }
+  .req-table tbody tr:nth-child(even):hover { background: rgba(232,116,59,0.12); }
+  .req-table td {
+    padding: 0.55rem 0.8rem;
+    vertical-align: top;
+    line-height: 1.4;
+  }
+  .req-table td.id {
+    font-family: var(--mono);
+    font-weight: 700;
+    color: var(--bus);
+    white-space: nowrap;
+  }
+  .req-table td.actor {
+    font-family: var(--mono);
+    font-size: var(--fs-mono);
+    color: var(--urban);
+    white-space: nowrap;
+  }
+  .req-table td.prio {
+    font-family: var(--mono);
+    font-size: var(--fs-mono);
+    font-weight: 700;
+  }
+  .prio-alta { color: var(--bus); }
+  .prio-media { color: var(--route); }
+
+  /* ------------------------------------------------------------
+     SLIDE 6 — Requisitos no funcionales
+     ------------------------------------------------------------ */
+  .rnf-grid {
+    margin-top: 0.8rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.7rem;
+    flex: 1;
+    align-content: start;
+    min-height: 0;
+    overflow: hidden;
+  }
+  .rnf-card {
+    border: 1px solid var(--rail);
+    border-left: 4px solid var(--bus);
+    padding: 0.85rem 1rem;
+    background: var(--white);
+    border-radius: 3px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .rnf-card:hover {
+    transform: translateX(2px);
+    box-shadow: -4px 4px 12px -4px rgba(14,42,71,0.15);
+  }
+  .rnf-card .head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.5rem;
+    margin-bottom: 0.2rem;
+  }
+  .rnf-card .id {
+    font-family: var(--mono);
+    font-weight: 700;
+    color: var(--bus);
+    font-size: var(--fs-mono);
+  }
+  .rnf-card .cat {
+    font-family: var(--mono);
+    font-size: var(--fs-mono);
+    color: var(--urban);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+  .rnf-card p {
+    margin: 0;
+    font-size: 0.95rem;
+    color: var(--ink);
+    line-height: 1.4;
+  }
+
+  /* ------------------------------------------------------------
+     SLIDE 7 — Calidad y métricas
+     ------------------------------------------------------------ */
+  .metric-table {
+    margin-top: 0.8rem;
+    border: 1px solid var(--rail);
+    border-radius: 4px;
+    overflow: auto;
+    background: var(--white);
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+  }
+  .metric-table table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.95rem;
+  }
+  .metric-table thead th {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 0.5rem 0.7rem;
+    text-align: left;
+    font-family: var(--mono);
+    font-size: var(--fs-mono);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+  }
+  .metric-table tbody tr {
+    border-top: 1px solid var(--rail);
+    transition: background 0.15s ease;
+  }
+  .metric-table tbody tr:hover { background: rgba(42,111,74,0.06); }
+  .metric-table tbody tr:nth-child(even) { background: var(--paper-2); }
+  .metric-table td {
+    padding: 0.6rem 0.8rem;
+    vertical-align: top;
+    line-height: 1.4;
+  }
+  .metric-table td.attr {
+    font-weight: 600;
+    color: var(--ink);
+  }
+  .metric-table td.metric {
+    font-family: var(--mono);
+    font-size: var(--fs-mono);
+    color: var(--bus);
+  }
+  .metric-table td.tool {
+    font-style: italic;
+    color: var(--urban);
+  }
+
+  /* ------------------------------------------------------------
+     SLIDE 8 — Arquitectura
+     ------------------------------------------------------------ */
+  .arch-grid {
+    margin-top: 0.8rem;
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 1.2rem;
+    flex: 1;
+    min-height: 0;
+    overflow: hidden;
+  }
+  .arch-list {
+    background: var(--paper-2);
+    border-radius: 4px;
+    padding: 1rem 1.1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    overflow: hidden;
+  }
+  .arch-list h4 {
+    font-family: var(--display);
+    font-weight: 600;
+    font-size: 1.1rem;
+    margin: 0;
+    color: var(--bus);
+  }
+  .arch-list p { margin: 0; font-size: 0.95rem; color: var(--ink); line-height: 1.4; }
+  .arch-diagram {
+    background: var(--white);
+    border: 1px solid var(--rail);
+    border-radius: 4px;
+    padding: 0.9rem;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    min-height: 0;
+  }
+  .arch-diagram svg { flex: 1; width: 100%; min-height: 0; }
+  .arch-diagram .legend {
+    font-family: var(--mono);
+    font-size: var(--fs-mono);
+    color: var(--urban);
+    margin: 0.3rem 0 0;
+  }
+
+  /* ------------------------------------------------------------
+     SLIDE 9 — Stack tecnológico
+     ------------------------------------------------------------ */
+  .stack-grid {
+    margin-top: 0.8rem;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.8rem;
+    flex: 1;
+    align-content: start;
+    min-height: 0;
+    overflow: hidden;
+  }
+  .stack-card {
+    background: var(--white);
+    border: 1px solid var(--rail);
+    border-top: 4px solid var(--bus);
+    padding: 0.8rem 0.9rem;
+    border-radius: 3px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    transition: transform 0.2s ease, border-top-width 0.2s ease;
+  }
+  .stack-card:hover {
+    transform: translateY(-3px);
+    border-top-width: 6px;
+  }
+  .stack-card .layer {
+    font-family: var(--mono);
+    font-size: var(--fs-mono);
+    color: var(--bus);
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+  }
+  .stack-card h4 {
+    font-family: var(--display);
+    font-weight: 600;
+    margin: 0;
+    font-size: clamp(1.05rem, 1.2vw, 1.2rem);
+    color: var(--ink);
+  }
+  .stack-card p {
+    margin: 0;
+    font-size: 0.9rem;
+    color: var(--urban);
+    line-height: 1.4;
+  }
+  .stack-card .tag {
+    font-family: var(--mono);
+    font-size: var(--fs-mono);
+    color: var(--route);
+    margin-top: auto;
+  }
+
+  .decision-strip {
+    margin-top: 0.8rem;
+    border: 1px dashed var(--rail);
+    border-radius: 4px;
+    padding: 0.85rem 1.1rem;
+    font-size: 0.95rem;
+    color: var(--ink);
+    background: var(--paper-2);
+    line-height: 1.45;
+  }
+  .decision-strip b { color: var(--bus); }
+
+  /* ------------------------------------------------------------
+     SLIDE 10 — Cierre (minimal)
+     ------------------------------------------------------------ */
+  .closing { background: var(--ink); color: var(--paper); }
+  .closing .route-line path { stroke: var(--bus); }
+  .closing-inner {
+    height: 100%;
+    padding: var(--slide-pad);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+  }
+  .closing h2 {
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: clamp(2.4rem, 5vw, 4.4rem);
+    margin: 0;
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+  }
+  .closing h2 em {
+    font-style: italic;
+    font-weight: 300;
+    color: var(--bus);
+  }
+  .closing .closing-meta {
+    margin-top: 2rem;
+    font-family: var(--mono);
+    font-size: var(--fs-mono);
+    color: rgba(245,240,230,0.6);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+  .closing .closing-meta b { color: var(--bus); }
+
+  /* ------------------------------------------------------------
+     Navegación interactiva (floating)
+     ------------------------------------------------------------ */
+  .nav-bar {
+    position: fixed;
+    bottom: 1.2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(14,42,71,0.95);
+    backdrop-filter: blur(8px);
+    border-radius: 999px;
+    padding: 0.4rem 0.6rem;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    box-shadow: 0 12px 32px -8px rgba(0,0,0,0.5);
+    z-index: 100;
+    font-family: var(--mono);
+    font-size: var(--fs-mono);
+  }
+  .nav-bar button {
+    background: transparent;
+    border: none;
+    color: var(--paper);
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: grid;
+    place-items: center;
+    transition: background 0.2s ease, transform 0.1s ease;
+    font-size: 1rem;
+  }
+  .nav-bar button:hover { background: rgba(232,116,59,0.3); }
+  .nav-bar button:active { transform: scale(0.92); }
+  .nav-bar .progress {
+    color: var(--bus);
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    padding: 0 0.5rem;
+    min-width: 64px;
+    text-align: center;
+  }
+  .nav-bar .fullscreen-btn {
+    margin-left: 0.2rem;
+    border-left: 1px solid rgba(245,240,230,0.2);
+    border-radius: 0;
+    padding-left: 0.5rem;
+  }
+
+  /* Indicadores laterales */
+  .slide-indicators {
+    position: fixed;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    z-index: 100;
+  }
+  .slide-indicators a {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(245,240,230,0.3);
+    transition: all 0.3s ease;
+    display: block;
+    text-decoration: none;
+  }
+  .slide-indicators a:hover,
+  .slide-indicators a.active {
+    background: var(--bus);
+    transform: scale(1.4);
+  }
+
+  /* Animación de entrada */
+  .slide {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: slideIn 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+  }
+  @keyframes slideIn {
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .slide:nth-child(1) { animation-delay: 0.05s; }
+  .slide:nth-child(2) { animation-delay: 0.1s; }
+  .slide:nth-child(3) { animation-delay: 0.15s; }
+  .slide:nth-child(4) { animation-delay: 0.2s; }
+  .slide:nth-child(5) { animation-delay: 0.25s; }
+  .slide:nth-child(6) { animation-delay: 0.3s; }
+  .slide:nth-child(7) { animation-delay: 0.35s; }
+  .slide:nth-child(8) { animation-delay: 0.4s; }
+  .slide:nth-child(9) { animation-delay: 0.45s; }
+  .slide:nth-child(10) { animation-delay: 0.5s; }
+
+  /* Buseta animada en el slide de portada */
+  .buseta {
+    position: absolute;
+    bottom: 5.5rem;
+    left: -80px;
+    width: 56px;
+    height: 26px;
+    background: var(--bus);
+    border-radius: 4px 12px 4px 4px;
+    z-index: 2;
+    opacity: 0.85;
+    animation: drive 18s linear infinite;
+  }
+  .buseta::before {
+    content: '';
+    position: absolute;
+    top: 4px; left: 6px; right: 6px; height: 7px;
+    background: rgba(245,240,230,0.85);
+    border-radius: 2px;
+  }
+  .buseta::after {
+    content: '';
+    position: absolute;
+    bottom: -5px; left: 8px; right: 8px; height: 5px;
+    background: var(--ink);
+    border-radius: 0 0 4px 4px;
+  }
+  .buseta .wheel {
+    position: absolute;
+    bottom: -8px; width: 10px; height: 10px;
+    background: var(--ink); border-radius: 50%;
+    border: 2px solid var(--paper);
+  }
+  .buseta .wheel.w1 { left: 8px; }
+  .buseta .wheel.w2 { right: 8px; }
+  @keyframes drive {
+    0%   { transform: translateX(0); }
+    100% { transform: translateX(1450px); }
+  }
+
+  /* ------------------------------------------------------------
+     Utilidades y responsive
+     ------------------------------------------------------------ */
+  @media (max-width: 1100px) {
+    .slide-indicators { display: none; }
+  }
+
+  @media (max-width: 900px) {
+    .cover-inner,
+    .problem-grid,
+    .solution-grid,
+    .users-row,
+    .scope,
+    .rnf-grid,
+    .arch-grid {
+      grid-template-columns: 1fr;
+    }
+    .stack-grid { grid-template-columns: 1fr 1fr; }
+    .slide {
+      aspect-ratio: auto;
+      min-height: 75vh;
+      max-height: none;
+    }
+    .buseta { display: none; }
+    .nav-bar { font-size: 0.7rem; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { animation: none !important; transition: none !important; }
+    .slide { opacity: 1; transform: none; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav-bar" aria-label="Navegación de diapositivas">
+  <button id="prev-btn" title="Anterior (←)">◀</button>
+  <span class="progress" id="progress">01 / 10</span>
+  <button id="next-btn" title="Siguiente (→)">▶</button>
+  <button id="fullscreen-btn" class="fullscreen-btn" title="Pantalla completa (F)">⛶</button>
+</nav>
+
+<aside class="slide-indicators" aria-label="Ir a diapositiva">
+  <a href="#slide-1" data-slide="1" title="Portada"></a>
+  <a href="#slide-2" data-slide="2" title="Contexto"></a>
+  <a href="#slide-3" data-slide="3" title="Solución"></a>
+  <a href="#slide-4" data-slide="4" title="Usuarios"></a>
+  <a href="#slide-5" data-slide="5" title="Requisitos funcionales"></a>
+  <a href="#slide-6" data-slide="6" title="Requisitos no funcionales"></a>
+  <a href="#slide-7" data-slide="7" title="Calidad y métricas"></a>
+  <a href="#slide-8" data-slide="8" title="Arquitectura"></a>
+  <a href="#slide-9" data-slide="9" title="Stack"></a>
+  <a href="#slide-10" data-slide="10" title="Cierre"></a>
+</aside>
+
+<main class="deck">
+
+  <!-- =====================================================
+       SLIDE 1 — PORTADA
+       ===================================================== -->
+  <section id="slide-1" class="slide cover" aria-label="Portada">
+    <div class="route-line">
+      <svg viewBox="0 0 1280 720" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M-50,520 C200,420 380,640 620,500 S980,300 1320,420"
+              fill="none" stroke-width="3" stroke-dasharray="2 14" stroke-linecap="round" opacity="0.55"/>
+        <path d="M-50,200 C260,300 540,80 820,180 S1180,260 1340,120"
+              fill="none" stroke-width="2" stroke-dasharray="2 12" stroke-linecap="round" opacity="0.35"/>
+        <circle cx="160" cy="470" r="6" fill="#E8743B"/>
+        <circle cx="540" cy="560" r="5" fill="#F5F0E6"/>
+        <circle cx="900" cy="380" r="6" fill="#E8743B"/>
+        <circle cx="1180" cy="450" r="4" fill="#F5F0E6"/>
+      </svg>
+    </div>
+    <div class="buseta" aria-hidden="true">
+      <div class="wheel w1"></div>
+      <div class="wheel w2"></div>
+    </div>
+    <div class="cover-inner">
+      <div>
+        <p class="eyebrow"><span class="dot"></span>Definición del proyecto integrador · v3</p>
+        <h1>FusaRoute
+          <span class="accent">La ruta, sin perderse.</span>
+        </h1>
+        <div class="cover-meta">
+          <div><strong>Luiferney Ortiz Parra</strong> <span>·</span> <strong>Angélica María Aranguren Rozo</strong> <span>·</span> <strong>Santiago Bermúdez Gómez</strong></div>
+          <div><span>Ingeniería de Software I — Ingeniería de Sistemas y Computación</span></div>
+          <div><span>Universidad de Cundinamarca · Fusagasugá · Agosto de 2026</span></div>
+        </div>
+      </div>
+      <aside class="cover-card" aria-label="Ficha del proyecto">
+        <p class="label">Comité · 15 min</p>
+        <ul>
+          <li><b>Problema</b><span>desorientación en rutas de busetas</span></li>
+          <li><b>Solución</b><span>web app con ruta más rápida simulada en Google Maps y aviso de trancón</span></li>
+          <li><b>Alcance</b><span>Fusagasugá, Chinauta, Pasca, Arbeláez</span></li>
+          <li><b>Stack</b><span>Spring Boot · Angular · Supabase</span></li>
+          <li><b>Calidad</b><span>ISO/IEC 25010 — métricas medibles</span></li>
+        </ul>
+      </aside>
+    </div>
+    <div class="slide-footer">
+      <span class="brand">FusaRoute</span>
+      <span class="num">01 / 10</span>
+    </div>
+  </section>
+
+  <!-- =====================================================
+       SLIDE 2 — CONTEXTO Y PROBLEMA
+       ===================================================== -->
+  <section id="slide-2" class="slide" aria-label="Contexto y problema">
+    <div class="route-line">
+      <svg viewBox="0 0 1280 720" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M0,120 C260,80 520,180 780,120 S1240,200 1280,140"
+              fill="none" stroke="#B8A989" stroke-width="1.5" stroke-dasharray="1 8"/>
+      </svg>
+    </div>
+    <div class="slide-inner">
+      <p class="eyebrow"><span class="dot"></span>Contexto · El problema real</p>
+      <h2 class="slide-title">Fusagasugá crece, <em>las rutas no</em>.</h2>
+      <p class="lead">Encuesta propia (2025) y datos del DANE: la gente se pierde porque no hay información pública, ni siquiera en Google Maps.</p>
+
+      <div class="problem-grid">
+        <div class="stat-block">
+          <div>
+            <div class="big-number">+285<span class="unit">mil hab.</span></div>
+            <p class="stat-label">Población estimada de la región del Sumapaz que necesita mejor información de transporte.</p>
+          </div>
+          <div>
+            <div class="big-number">+20<span class="unit">rutas</span></div>
+            <p class="stat-label">Rutas urbanas en Fusagasugá que hoy operan sin trazabilidad digital accesible.</p>
+          </div>
+          <p class="source-note">Fuente: DANE + encuesta equipo FusaRoute, 2025.</p>
+        </div>
+
+        <div class="problem-text">
+          <p class="quote">“Preguntar, adivinar o ensayar — y muchas veces pagar de más.”</p>
+          <p>Hoy el pasajero local o visitante depende de la experiencia de otros para moverse. Si la ruta se congestiona a esa hora, nadie le avisa antes de subir.</p>
+          <p>Las empresas de transporte le quedan debiendo un buen servicio a la región, y la tecnología se concentra en Bogotá, dejando al Sumapaz atrás.</p>
+        </div>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span class="brand">FusaRoute</span>
+      <span class="num">02 / 10</span>
+    </div>
+  </section>
+
+  <!-- =====================================================
+       SLIDE 3 — SOLUCIÓN
+       ===================================================== -->
+  <section id="slide-3" class="slide" aria-label="Solución propuesta">
+    <div class="route-line">
+      <svg viewBox="0 0 1280 720" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M0,640 C200,500 460,700 720,540 S1140,360 1280,420"
+              fill="none" stroke="#2A6F4A" stroke-width="2" stroke-dasharray="2 10" opacity="0.7"/>
+        <circle cx="120" cy="610" r="6" fill="#2A6F4A"/>
+        <circle cx="520" cy="600" r="6" fill="#E8743B"/>
+        <circle cx="940" cy="460" r="6" fill="#2A6F4A"/>
+        <circle cx="1240" cy="430" r="6" fill="#E8743B"/>
+      </svg>
+    </div>
+    <div class="slide-inner">
+      <p class="eyebrow"><span class="dot"></span>Solución · Qué hace FusaRoute</p>
+      <h2 class="slide-title">Marca origen y destino. <em>Simulamos cada ruta en Google Maps y elegimos la más rápida.</em></h2>
+      <p class="lead">Una web app para Usuario Final y Administrador. La ruta recomendada sale de simular el trayecto en Google Maps y comparar tiempos reales de cada opción.</p>
+
+      <div class="solution-grid">
+        <ul class="solution-list">
+          <li><span class="marker">A → B</span><div><b>Origen y destino.</b> <span>El usuario marca dos puntos; el backend simula cada ruta posible en Google Maps y devuelve la más rápida.</span></div></li>
+          <li><span class="marker">↳</span><div><b>Barrios y tarifa.</b> <span>Muestra por qué comunas pasa el trayecto y cuánto cuesta el pasaje.</span></div></li>
+          <li><span class="marker">!</span><div><b>Aviso de trancón.</b> <span>Suma congestión habitual a la hora de la consulta; también al destino favorito.</span></div></li>
+          <li><span class="marker">★</span><div><b>Destino favorito.</b> <span>Se pre-carga al abrir la app y vuelve a alertar a esa misma hora.</span></div></li>
+          <li><span class="marker">⏱</span><div><b>Historial reciente.</b> <span>Las últimas búsquedas del usuario, siempre a un clic.</span></div></li>
+        </ul>
+
+        <div class="map-illustration">
+          <p class="map-label">Cobertura inicial · todas las rutas simuladas pasan por Fusagasugá</p>
+          <svg viewBox="0 0 360 240" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+            <line x1="180" y1="120" x2="80" y2="40"  stroke="#E8743B" stroke-width="2.5"/>
+            <line x1="180" y1="120" x2="300" y2="40" stroke="#E8743B" stroke-width="2.5"/>
+            <line x1="180" y1="120" x2="60" y2="200" stroke="#E8743B" stroke-width="2.5"/>
+            <line x1="180" y1="120" x2="320" y2="200" stroke="#2A6F4A" stroke-width="2.5" stroke-dasharray="4 4"/>
+            <line x1="180" y1="120" x2="180" y2="220" stroke="#E8743B" stroke-width="2.5"/>
+            <circle cx="180" cy="120" r="14" fill="#0E2A47"/>
+            <circle cx="180" cy="120" r="6"  fill="#E8743B"/>
+            <circle cx="80"  cy="40"  r="7"  fill="#E8743B"/>
+            <circle cx="300" cy="40"  r="7"  fill="#E8743B"/>
+            <circle cx="60"  cy="200" r="7"  fill="#E8743B"/>
+            <circle cx="320" cy="200" r="7"  fill="#2A6F4A"/>
+            <circle cx="180" cy="220" r="7"  fill="#E8743B"/>
+            <text x="180" y="155" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" fill="#0E2A47" font-weight="700">FUSAGASUGÁ</text>
+            <text x="80"  y="32"  text-anchor="middle" font-family="Inter, sans-serif" font-size="10" fill="#0E2A47">Chinauta</text>
+            <text x="300" y="32"  text-anchor="middle" font-family="Inter, sans-serif" font-size="10" fill="#0E2A47">Norte</text>
+            <text x="60"  y="222" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" fill="#0E2A47">Pasca</text>
+            <text x="320" y="222" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" fill="#2A6F4A">Arbeláez</text>
+            <text x="180" y="236" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" fill="#0E2A47">Sur</text>
+          </svg>
+          <p class="source-note">Cada opción de ruta se simula en Google Maps; el sistema recomienda la de menor tiempo estimado.</p>
+        </div>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span class="brand">FusaRoute</span>
+      <span class="num">03 / 10</span>
+    </div>
+  </section>
+
+  <!-- =====================================================
+       SLIDE 4 — USUARIOS Y ALCANCE
+       ===================================================== -->
+  <section id="slide-4" class="slide" aria-label="Usuarios y alcance">
+    <div class="route-line">
+      <svg viewBox="0 0 1280 720" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M0,80 C300,160 600,40 900,140 S1280,80 1280,80"
+              fill="none" stroke="#B8A989" stroke-width="1.5" stroke-dasharray="1 8"/>
+      </svg>
+    </div>
+    <div class="slide-inner">
+      <p class="eyebrow"><span class="dot"></span>Usuarios · Alcance del semestre</p>
+      <h2 class="slide-title">Dos roles. <em>Un compromiso de alcance.</em></h2>
+      <p class="lead">Por ahora no añadimos un tercer perfil (no hay caso de uso claro que lo justifique en el semestre).</p>
+
+      <div class="users-row">
+        <div class="user-card">
+          <p class="role">Rol A</p>
+          <h3>Usuario Final</h3>
+          <p>Se registra, inicia sesión, busca rutas, deja comentarios y consulta su historial reciente. Configura un destino favorito.</p>
+          <p class="dotted">RF-01 · RF-02 · RF-03 · RF-04 a RF-10</p>
+        </div>
+        <div class="user-card">
+          <p class="role">Rol B</p>
+          <h3>Administrador</h3>
+          <p>Hace CRUD de rutas, suspende temporalmente (notificando a usuarios relevantes), responde comentarios y revisa métricas de uso.</p>
+          <p class="dotted">RF-11 · RF-12 · RF-13 · RF-14</p>
+        </div>
+      </div>
+
+      <div class="scope">
+        <div class="scope-col scope-yes">
+          <h4>Sí incluye</h4>
+          <ul>
+            <li>Registro / inicio de sesión del Usuario Final</li>
+            <li>Búsqueda por origen y destino</li>
+            <li>Rutas urbanas de Fusagasugá + ruta a Chinauta</li>
+            <li>Intermunicipales Fusagasugá–Pasca y Fusagasugá–Arbeláez</li>
+            <li>Barrios/comunas y costo del pasaje</li>
+            <li>Aviso de trancón + destino favorito</li>
+            <li>Historial de búsquedas recientes</li>
+            <li>Caja de comentarios (usuario) y respuesta (administrador)</li>
+            <li>CRUD de rutas, suspensión temporal y notificación</li>
+            <li>Métricas de uso (5 indicadores) para el administrador</li>
+          </ul>
+        </div>
+        <div class="scope-col scope-no">
+          <h4>No incluye (por ahora)</h4>
+          <ul>
+            <li>Pagos en línea dentro de la app</li>
+            <li>Notificaciones push</li>
+            <li>Rutas que no toquen a Fusagasugá</li>
+            <li>Resto del Sumapaz (Silvania y demás municipios)</li>
+            <li>GPS en tiempo real de las busetas</li>
+            <li>Tercer tipo de usuario (empresas / alcaldía)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span class="brand">FusaRoute</span>
+      <span class="num">04 / 10</span>
+    </div>
+  </section>
+
+  <!-- =====================================================
+       SLIDE 5 — REQUISITOS FUNCIONALES
+       ===================================================== -->
+  <section id="slide-5" class="slide" aria-label="Requisitos funcionales">
+    <div class="route-line">
+      <svg viewBox="0 0 1280 720" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M0,40 C200,140 500,40 780,140 S1240,80 1280,40"
+              fill="none" stroke="#B8A989" stroke-width="1.5" stroke-dasharray="1 8"/>
+      </svg>
+    </div>
+    <div class="slide-inner">
+      <p class="eyebrow"><span class="dot"></span>Requisitos · Funcionales</p>
+      <h2 class="slide-title">14 requisitos para <em>verificarse</em>.</h2>
+      <p class="lead">Cada requisito tiene actor, criterio de cumplimiento y prioridad. La tabla es la verdad operativa del sistema.</p>
+
+      <div class="req-table-wrap">
+        <table class="req-table">
+          <thead>
+            <tr>
+              <th style="width:8%">ID</th>
+              <th style="width:18%">Actor</th>
+              <th>Descripción</th>
+              <th style="width:12%">Prioridad</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td class="id">RF-01</td><td class="actor">Usuario Final</td><td>Registro con nombre, correo y contraseña.</td><td class="prio prio-alta">Alta</td></tr>
+            <tr><td class="id">RF-02</td><td class="actor">Usuario Final</td><td>Inicio de sesión con correo y contraseña.</td><td class="prio prio-alta">Alta</td></tr>
+            <tr><td class="id">RF-03</td><td class="actor">Usuario Final</td><td>Ver y editar datos personales.</td><td class="prio prio-media">Media</td></tr>
+            <tr><td class="id">RF-04</td><td class="actor">Usuario Final</td><td>Marca origen y destino; el sistema simula cada ruta posible en Google Maps y devuelve la de menor tiempo estimado.</td><td class="prio prio-alta">Alta</td></tr>
+            <tr><td class="id">RF-05</td><td class="actor">Usuario Final</td><td>Muestra barrios/comunas por donde pasa la ruta.</td><td class="prio prio-alta">Alta</td></tr>
+            <tr><td class="id">RF-06</td><td class="actor">Usuario Final</td><td>Muestra el costo del pasaje.</td><td class="prio prio-alta">Alta</td></tr>
+            <tr><td class="id">RF-07</td><td class="actor">Usuario Final</td><td>Guarda y muestra historial de búsquedas recientes.</td><td class="prio prio-media">Media</td></tr>
+            <tr><td class="id">RF-08</td><td class="actor">Usuario Final</td><td>Deja un comentario o sugerencia en la caja de comentarios.</td><td class="prio prio-media">Media</td></tr>
+            <tr><td class="id">RF-09</td><td class="actor">Usuario Final</td><td>Avisa si el trayecto suele estar congestionado a esa hora.</td><td class="prio prio-alta">Alta</td></tr>
+            <tr><td class="id">RF-10</td><td class="actor">Usuario Final</td><td>Marca un destino como favorito; pre-carga y muestra aviso de trancón.</td><td class="prio prio-media">Media</td></tr>
+            <tr><td class="id">RF-11</td><td class="actor">Administrador</td><td>CRUD de rutas.</td><td class="prio prio-alta">Alta</td></tr>
+            <tr><td class="id">RF-12</td><td class="actor">Administrador</td><td>Suspende temporalmente una ruta y notifica a usuarios con esa ruta como favorita.</td><td class="prio prio-alta">Alta</td></tr>
+            <tr><td class="id">RF-13</td><td class="actor">Administrador</td><td>Ve 5 métricas: usuarios registrados, búsquedas/día, top 5 rutas, comentarios y suspensiones.</td><td class="prio prio-media">Media</td></tr>
+            <tr><td class="id">RF-14</td><td class="actor">Administrador</td><td>Lee y responde comentarios de usuarios.</td><td class="prio prio-media">Media</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span class="brand">FusaRoute · Tabla 2</span>
+      <span class="num">05 / 10</span>
+    </div>
+  </section>
+
+  <!-- =====================================================
+       SLIDE 6 — REQUISITOS NO FUNCIONALES
+       ===================================================== -->
+  <section id="slide-6" class="slide" aria-label="Requisitos no funcionales">
+    <div class="route-line">
+      <svg viewBox="0 0 1280 720" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M0,660 C200,580 500,700 780,600 S1240,520 1280,560"
+              fill="none" stroke="#B8A989" stroke-width="1.5" stroke-dasharray="1 8"/>
+      </svg>
+    </div>
+    <div class="slide-inner">
+      <p class="eyebrow"><span class="dot"></span>Requisitos · No funcionales (ISO/IEC 25010)</p>
+      <h2 class="slide-title">Calidad <em>medible</em>, no buena intención.</h2>
+      <p class="lead">Siete RNF agrupados por atributo de calidad. Cada uno viene con su instrumento de medición (siguiente slide).</p>
+
+      <div class="rnf-grid">
+        <div class="rnf-card">
+          <div class="head"><span class="id">RNF-01</span><span class="cat">Eficiencia</span></div>
+          <p>p95 &lt; 8 s end-to-end en /api/routes/search sobre 4G (cliente → backend → Google Maps → render) y LCP &lt; 2.5 s en Lighthouse mobile. Caché de 5 min por par origen-destino para hits. Modo offline: solo rutas ya consultadas y servidas desde caché.</p>
+        </div>
+        <div class="rnf-card">
+          <div class="head"><span class="id">RNF-02</span><span class="cat">Fiabilidad</span></div>
+          <p>≥ 95% de disponibilidad mensual del backend en horario hábil (lun–vie 7:00–21:00). RTO &lt; 1 h lectiva, RPO &lt; 24 h.</p>
+        </div>
+        <div class="rnf-card">
+          <div class="head"><span class="id">RNF-03</span><span class="cat">Mantenibilidad</span></div>
+          <p>Arquitectura hexagonal estricta: dominio, aplicación y adaptadores separados; la lógica de negocio no depende de frameworks externos.</p>
+        </div>
+        <div class="rnf-card">
+          <div class="head"><span class="id">RNF-04</span><span class="cat">Usabilidad</span></div>
+          <p>Flujo de búsqueda ≤ 4 acciones (sin contar login). Login máximo 1 vez/semana. Tasa de éxito ≥ 80% en primer intento con ≥ 5 usuarios externos.</p>
+        </div>
+        <div class="rnf-card">
+          <div class="head"><span class="id">RNF-05</span><span class="cat">Seguridad</span></div>
+          <p>0 vulnerabilidades altas o críticas en herramientas automatizadas en CI, en cada Pull Request y al momento de cada entrega.</p>
+        </div>
+        <div class="rnf-card">
+          <div class="head"><span class="id">RNF-06</span><span class="cat">Seguridad</span></div>
+          <p>Contraseñas con hash bcrypt (factor de costo ≥ 10), nunca en texto plano. Validado con test de integración.</p>
+        </div>
+        <div class="rnf-card">
+          <div class="head"><span class="id">RNF-07</span><span class="cat">Compatibilidad</span></div>
+          <p>Chrome (Android), Safari (iOS) y al menos un navegador de escritorio (Chrome o Firefox), en dispositivo físico o emulador.</p>
+        </div>
+        <div class="rnf-card" style="border-left-color:var(--rail); background: var(--paper-2);">
+          <p style="font-family: var(--mono); font-size: var(--fs-mono); color: var(--urban); margin:0;">
+            RNF-08 eliminado en v3 — reasignado a métricas (siguiente slide).
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span class="brand">FusaRoute · Tabla 3</span>
+      <span class="num">06 / 10</span>
+    </div>
+  </section>
+
+  <!-- =====================================================
+       SLIDE 7 — CALIDAD Y MÉTRICAS
+       ===================================================== -->
+  <section id="slide-7" class="slide" aria-label="Atributos de calidad y métricas">
+    <div class="route-line">
+      <svg viewBox="0 0 1280 720" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M0,80 C260,160 520,40 780,140 S1280,80 1280,80"
+              fill="none" stroke="#B8A989" stroke-width="1.5" stroke-dasharray="1 8"/>
+      </svg>
+    </div>
+    <div class="slide-inner">
+      <p class="eyebrow"><span class="dot"></span>Calidad · Atributo + métrica + instrumento</p>
+      <h2 class="slide-title">Cinco atributos, <em>cinco formas de medirlos</em>.</h2>
+      <p class="lead">Una métrica por atributo de calidad ISO/IEC 25010. Lo que se mide en CI no se promete; lo que no se mide, se declara explícitamente.</p>
+
+      <div class="metric-table">
+        <table>
+          <thead>
+            <tr>
+              <th style="width:24%">Atributo ISO/IEC 25010</th>
+              <th style="width:34%">Métrica</th>
+              <th>Instrumento de medición</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="attr">Eficiencia de desempeño</td>
+              <td class="metric">p95 &lt; 8 s end-to-end en /api/routes/search sobre 4G + LCP &lt; 2.5 s en Lighthouse mobile</td>
+              <td class="tool">Spring Boot Actuator + Micrometer (percentil 95) y Lighthouse en CI sobre la pantalla de resultado. Caché de 5 min por par origen-destino para reducir la latencia de hits repetidos.</td>
+            </tr>
+            <tr>
+              <td class="attr">Fiabilidad (disponibilidad)</td>
+              <td class="metric">≥ 95% uptime mensual en horario hábil, RTO &lt; 1 h, RPO &lt; 24 h</td>
+              <td class="tool">UptimeRobot (latido cada 5 min) + backup diario automatizado de PostgreSQL con restore probado al cierre de sprint.</td>
+            </tr>
+            <tr>
+              <td class="attr">Mantenibilidad</td>
+              <td class="metric">0 violaciones de arquitectura hexagonal en CI + ≥ 70% cobertura en domain/</td>
+              <td class="tool">ArchUnit sobre los módulos del backend + reporte JaCoCo con umbral mínimo bloqueante.</td>
+            </tr>
+            <tr>
+              <td class="attr">Usabilidad</td>
+              <td class="metric">Flujo de búsqueda ≤ 4 acciones + tasa de éxito ≥ 80% en primer intento</td>
+              <td class="tool">Prueba con ≥ 5 usuarios externos al equipo antes de cada sustentación, registrando pasos y resultado por intento.</td>
+            </tr>
+            <tr>
+              <td class="attr">Seguridad</td>
+              <td class="metric">0 vulnerabilidades altas o críticas al momento de la entrega</td>
+              <td class="tool">OWASP Dependency-Check + analizador estático ejecutados en CI en cada Pull Request.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span class="brand">FusaRoute · Tabla 4</span>
+      <span class="num">07 / 10</span>
+    </div>
+  </section>
+
+  <!-- =====================================================
+       SLIDE 8 — ARQUITECTURA
+       ===================================================== -->
+  <section id="slide-8" class="slide" aria-label="Arquitectura del sistema">
+    <div class="route-line">
+      <svg viewBox="0 0 1280 720" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M0,120 C260,80 520,180 780,120 S1240,200 1280,140"
+              fill="none" stroke="#B8A989" stroke-width="1.5" stroke-dasharray="1 8"/>
+      </svg>
+    </div>
+    <div class="slide-inner">
+      <p class="eyebrow"><span class="dot"></span>Arquitectura · Tres capas + BD externa</p>
+      <h2 class="slide-title">Frontend · Backend · Base de datos. <em>Hexagonal por dentro.</em></h2>
+      <p class="lead">El backend aísla el dominio de frameworks y de la base de datos; el frontend nunca toca la BD directamente.</p>
+
+      <div class="arch-grid">
+        <div class="arch-list">
+          <div>
+            <h4>Frontend</h4>
+            <p>Interacción con el usuario, formularios, render de rutas, llamadas a la API del backend.</p>
+          </div>
+          <div>
+            <h4>Backend</h4>
+            <p>Lógica de negocio, autenticación propia con JWT, validaciones de seguridad, exposición de APIs.</p>
+          </div>
+          <div>
+            <h4>Base de datos</h4>
+            <p>Supabase / PostgreSQL — únicamente como motor de BD. Usuarios, barrios, tarifas, historial, comentarios.</p>
+          </div>
+          <div>
+            <h4>Hexágono interno</h4>
+            <p>Dominio, aplicación y adaptadores separados. ArchUnit lo verifica en CI (RNF-03).</p>
+          </div>
+        </div>
+
+        <div class="arch-diagram">
+          <svg viewBox="0 0 520 320" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+            <rect x="20" y="40" width="120" height="60" rx="4" fill="#F5F0E6" stroke="#0E2A47" stroke-width="2"/>
+            <text x="80" y="75" text-anchor="middle" font-family="Inter" font-size="13" font-weight="700" fill="#0E2A47">Frontend</text>
+            <text x="80" y="92" text-anchor="middle" font-family="JetBrains Mono" font-size="10" fill="#3D3D3D">Angular · TypeScript</text>
+
+            <rect x="180" y="20" width="320" height="280" rx="6" fill="none" stroke="#E8743B" stroke-width="2" stroke-dasharray="6 4"/>
+            <text x="340" y="14" text-anchor="middle" font-family="JetBrains Mono" font-size="10" fill="#E8743B" font-weight="700">BACKEND · HEXAGONAL</text>
+
+            <rect x="210" y="50" width="120" height="60" rx="4" fill="#0E2A47"/>
+            <text x="270" y="78" text-anchor="middle" font-family="Inter" font-size="13" font-weight="700" fill="#F5F0E6">Dominio</text>
+            <text x="270" y="95" text-anchor="middle" font-family="JetBrains Mono" font-size="10" fill="#F5F0E6">lógica de negocio</text>
+
+            <rect x="350" y="50" width="120" height="60" rx="4" fill="#ECE5D3" stroke="#0E2A47"/>
+            <text x="410" y="78" text-anchor="middle" font-family="Inter" font-size="13" font-weight="700" fill="#0E2A47">Aplicación</text>
+            <text x="410" y="95" text-anchor="middle" font-family="JetBrains Mono" font-size="10" fill="#3D3D3D">casos de uso</text>
+
+            <rect x="210" y="140" width="120" height="60" rx="4" fill="#ECE5D3" stroke="#0E2A47"/>
+            <text x="270" y="168" text-anchor="middle" font-family="Inter" font-size="12" font-weight="700" fill="#0E2A47">Adaptador IN</text>
+            <text x="270" y="185" text-anchor="middle" font-family="JetBrains Mono" font-size="10" fill="#3D3D3D">REST · JWT</text>
+
+            <rect x="350" y="140" width="120" height="60" rx="4" fill="#ECE5D3" stroke="#0E2A47"/>
+            <text x="410" y="168" text-anchor="middle" font-family="Inter" font-size="12" font-weight="700" fill="#0E2A47">Adaptador OUT</text>
+            <text x="410" y="185" text-anchor="middle" font-family="JetBrains Mono" font-size="10" fill="#3D3D3D">Supabase · Google Maps (simulación de rutas)</text>
+
+            <rect x="280" y="225" width="120" height="50" rx="4" fill="#2A6F4A"/>
+            <text x="340" y="247" text-anchor="middle" font-family="Inter" font-size="12" font-weight="700" fill="#F5F0E6">Spring Security</text>
+            <text x="340" y="263" text-anchor="middle" font-family="JetBrains Mono" font-size="10" fill="#F5F0E6">bcrypt · JWT</text>
+
+            <rect x="380" y="240" width="120" height="50" rx="4" fill="#F5F0E6" stroke="#2A6F4A" stroke-width="2"/>
+            <text x="440" y="262" text-anchor="middle" font-family="Inter" font-size="13" font-weight="700" fill="#0E2A47">PostgreSQL</text>
+            <text x="440" y="278" text-anchor="middle" font-family="JetBrains Mono" font-size="10" fill="#2A6F4A">Supabase</text>
+
+            <line x1="140" y1="70" x2="180" y2="170" stroke="#0E2A47" stroke-width="1.5" marker-end="url(#arr)"/>
+            <line x1="330" y1="200" x2="380" y2="260" stroke="#2A6F4A" stroke-width="1.5" marker-end="url(#arr2)"/>
+            <defs>
+              <marker id="arr" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+                <path d="M0,0 L8,4 L0,8 z" fill="#0E2A47"/>
+              </marker>
+              <marker id="arr2" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+                <path d="M0,0 L8,4 L0,8 z" fill="#2A6F4A"/>
+              </marker>
+            </defs>
+          </svg>
+          <p class="legend">El dominio no importa frameworks ni el motor de BD. La BD no es accesible desde el Frontend.</p>
+        </div>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span class="brand">FusaRoute</span>
+      <span class="num">08 / 10</span>
+    </div>
+  </section>
+
+  <!-- =====================================================
+       SLIDE 9 — STACK Y DECISIONES
+       ===================================================== -->
+  <section id="slide-9" class="slide" aria-label="Stack tecnológico y decisiones">
+    <div class="route-line">
+      <svg viewBox="0 0 1280 720" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M0,640 C200,560 500,700 780,580 S1240,520 1280,560"
+              fill="none" stroke="#B8A989" stroke-width="1.5" stroke-dasharray="1 8"/>
+      </svg>
+    </div>
+    <div class="slide-inner">
+      <p class="eyebrow"><span class="dot"></span>Stack · Decisiones técnicas</p>
+      <h2 class="slide-title">Lo que vamos a <em>construir y defender</em>.</h2>
+      <p class="lead">Tecnologías elegidas y por qué — sobre todo, qué cambió respecto a la propuesta inicial.</p>
+
+      <div class="stack-grid">
+        <div class="stack-card">
+          <p class="layer">Frontend</p>
+          <h4>Angular + TypeScript</h4>
+          <p>Framework MVC con tipado estricto, estándar de industria. Build con Angular CLI.</p>
+          <p class="tag">SPA · navegador</p>
+        </div>
+        <div class="stack-card">
+          <p class="layer">Backend</p>
+          <h4>Java + Spring Boot</h4>
+          <p>Arquitectura hexagonal estricta. Spring Security + JWT.</p>
+          <p class="tag">REST · hexágono</p>
+        </div>
+        <div class="stack-card">
+          <p class="layer">Base de datos</p>
+          <h4>Supabase / PostgreSQL</h4>
+          <p>Solo como motor de BD. Sin auth, storage ni realtime de Supabase.</p>
+          <p class="tag">PostgreSQL gestionado</p>
+        </div>
+        <div class="stack-card">
+          <p class="layer">Servicios externos</p>
+          <h4>Google Maps API</h4>
+          <p>Se usa para simular cada ruta de buseta en tiempo real y devolver la más rápida al usuario.</p>
+          <p class="tag">motor de la selección</p>
+        </div>
+      </div>
+
+      <div class="decision-strip">
+        <b>Decisión v3:</b> la ruta recomendada se calcula simulando cada trayecto en Google Maps y comparando tiempos, en lugar de elegir desde un banco de rutas estático. Esto se ajusta a la condición real del tráfico y del horario de consulta.
+        <br><br>
+        <b>Compromiso de latencia (RNF-01):</b> p95 &lt; 8 s end-to-end, sostenido con caché de 5 min por par origen-destino. El caché es parte del diseño, no un plan B: el primer hit de un par puede tardar más, y los hits repetidos responden desde caché.
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span class="brand">FusaRoute</span>
+      <span class="num">09 / 10</span>
+    </div>
+  </section>
+
+  <!-- =====================================================
+       SLIDE 10 — CIERRE (minimal)
+       ===================================================== -->
+  <section id="slide-10" class="slide closing" aria-label="Cierre y preguntas">
+    <div class="route-line">
+      <svg viewBox="0 0 1280 720" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M-50,540 C200,420 380,640 620,500 S980,300 1320,420"
+              fill="none" stroke-width="3" stroke-dasharray="2 14" stroke-linecap="round" opacity="0.5"/>
+        <path d="M-50,180 C260,300 540,80 820,180 S1180,260 1340,120"
+              fill="none" stroke-width="2" stroke-dasharray="2 12" stroke-linecap="round" opacity="0.3"/>
+        <circle cx="160" cy="470" r="6" fill="#E8743B"/>
+        <circle cx="540" cy="560" r="5" fill="#F5F0E6"/>
+        <circle cx="900" cy="380" r="6" fill="#E8743B"/>
+      </svg>
+    </div>
+    <div class="closing-inner">
+      <h2>Gracias. <em>¿Preguntas?</em></h2>
+      <div class="closing-meta">
+        <span><b>FusaRoute</b> · Universidad de Cundinamarca</span>
+        <span>10 / 10</span>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<script>
+  (function() {
+    const slides = document.querySelectorAll('.slide');
+    const totalSlides = slides.length;
+    const progressEl = document.getElementById('progress');
+    const prevBtn = document.getElementById('prev-btn');
+    const nextBtn = document.getElementById('next-btn');
+    const fullscreenBtn = document.getElementById('fullscreen-btn');
+    const indicators = document.querySelectorAll('.slide-indicators a');
+
+    let currentSlide = 1;
+
+    function formatNum(n) {
+      return String(n).padStart(2, '0');
+    }
+
+    function updateProgress() {
+      progressEl.textContent = formatNum(currentSlide) + ' / ' + formatNum(totalSlides);
+      indicators.forEach(ind => {
+        ind.classList.toggle('active', Number(ind.dataset.slide) === currentSlide);
+      });
+    }
+
+    function scrollToSlide(n) {
+      if (n < 1 || n > totalSlides) return;
+      currentSlide = n;
+      const target = document.getElementById('slide-' + n);
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      updateProgress();
+    }
+
+    indicators.forEach(ind => {
+      ind.addEventListener('click', e => {
+        e.preventDefault();
+        scrollToSlide(Number(ind.dataset.slide));
+      });
+    });
+
+    prevBtn.addEventListener('click', () => scrollToSlide(currentSlide - 1));
+    nextBtn.addEventListener('click', () => scrollToSlide(currentSlide + 1));
+
+    document.addEventListener('keydown', e => {
+      if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+      if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') {
+        e.preventDefault();
+        scrollToSlide(currentSlide + 1);
+      } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
+        e.preventDefault();
+        scrollToSlide(currentSlide - 1);
+      } else if (e.key === 'Home') {
+        e.preventDefault();
+        scrollToSlide(1);
+      } else if (e.key === 'End') {
+        e.preventDefault();
+        scrollToSlide(totalSlides);
+      } else if (e.key === 'f' || e.key === 'F') {
+        e.preventDefault();
+        toggleFullscreen();
+      }
+    });
+
+    function toggleFullscreen() {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen().catch(() => {});
+      } else {
+        document.exitFullscreen();
+      }
+    }
+    fullscreenBtn.addEventListener('click', toggleFullscreen);
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && entry.intersectionRatio > 0.5) {
+          const id = entry.target.id;
+          const n = Number(id.replace('slide-', ''));
+          if (n && n !== currentSlide) {
+            currentSlide = n;
+            updateProgress();
+          }
+        }
+      });
+    }, { threshold: [0.5, 0.75] });
+
+    slides.forEach(s => observer.observe(s));
+    updateProgress();
+  })();
+</script>
+
+</body>
+</html>
