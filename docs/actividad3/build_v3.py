@@ -22,12 +22,8 @@ import docx
 from docx.oxml.ns import qn
 from docx.shared import Pt
 
-SRC = Path(
-    r"C:\Users\Santiago\OneDrive - UNIVERSIDAD DE CUNDINAMARCA\Universidad\5 SEMESTRE\INGENIERIA SOFTWARE I\actividad 3 ing soft_APA v2.docx"
-)
-DST = Path(
-    r"C:\Users\Santiago\OneDrive - UNIVERSIDAD DE CUNDINAMARCA\Universidad\5 SEMESTRE\INGENIERIA SOFTWARE I\actividad 3 ing soft_APA v3.docx"
-)
+SRC = Path(__file__).parent / "actividad 3 ing soft_APA v2.docx"
+DST = Path(__file__).parent / "actividad 3 ing soft_APA v3.docx"
 
 shutil.copyfile(SRC, DST)
 doc = docx.Document(DST)

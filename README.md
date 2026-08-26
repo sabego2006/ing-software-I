@@ -31,21 +31,21 @@ git clone https://github.com/sabego2006/FusaRoute-FRONTEND.git
 
 | Carpeta / archivo | Qué es |
 |---|---|
-| `actividad 3 ing soft_APA*.docx` | Entregable de la Actividad 3 (FusaRoute). Se conservan todas las versiones, incluido el `.ORIGINAL-BACKUP` y los `.BACKUP-PRE-V3` por política del proyecto. |
-| `ACTIVIDAD CLASE *.pdf` | PDFs de las actividades publicadas por el docente en clase. |
-| `Clase*.pptx`, `Clase * *.pptx` | Diapositivas que proyecta el docente. |
-| `Guia Presentación Comite.pdf` | Guía del comité de desarrollo y arquitectura. |
-| `fusaroute-actividad3*.html`, `presentacion_fusaroute.html` | Versiones HTML legibles de los entregables y de la presentación del comité. |
-| `build_v3.py` | Script que reconstruye `actividad 3 ing soft_APA v3.docx`. |
+| `docs/actividad3/actividad 3 ing soft_APA*.docx` | Entregable de la Actividad 3 (FusaRoute). Se conservan todas las versiones, incluido el `.ORIGINAL-BACKUP` y los `.BACKUP-PRE-V3` por política del proyecto. |
+| `docs/actividad3/build_v3.py` | Script que reconstruye `actividad 3 ing soft_APA v3.docx` a partir de la v2, en la misma carpeta. |
+| `docs/clases/ACTIVIDAD CLASE *.pdf` | PDFs de las actividades publicadas por el docente en clase. |
+| `docs/clases/Clase*.pptx`, `docs/clases/Clase * *.pptx` | Diapositivas que proyecta el docente. |
+| `docs/clases/Guia Presentación Comite.pdf` | Guía del comité de desarrollo y arquitectura. |
+| `entregables/fusaroute-actividad3*.html`, `entregables/presentacion_fusaroute.html`, `entregables/guion_flashcards_fusaroute.html` | Versiones HTML legibles de los entregables, la presentación del comité y el guion de flashcards. |
 | `CLAUDE.md` | Instrucciones para Claude Code sobre este proyecto. |
 | `.claude/` | Configuración local de Claude Code (skills, hooks). |
 
 ## Qué NO hay aquí (y por qué)
 
 - **Código del backend y frontend.** Viven en sus propios repos (ver arriba). Aquí solo se referencian.
-- **Audios de clase** (formato `.m4a`). Pesan demasiado y no son referencia para Angélica.
+- **Audios de clase** (formato `.m4a`, en `docs/clases/`). Pesan demasiado y no son referencia para Angélica.
 - **Archivos temporales de Word/PowerPoint** (`~$*.docx`, `~$*.pptx`). Se regeneran al abrir los originales.
-- **Carpetas `extracted_v2/` y `extracted_v3/`.** Son salida temporal del script `build_v3.py`.
+- **Carpetas `docs/actividad3/extracted_v2/` y `docs/actividad3/extracted_v3/`.** Son salida temporal del script `build_v3.py`.
 
 ## Convenciones de commits
 

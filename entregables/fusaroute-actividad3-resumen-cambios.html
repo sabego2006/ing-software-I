@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>FusaRoute · Cambios v3 — Actividad 3</title>
+<title>FusaRoute · Cambios v3 → v4 — Actividad 3</title>
 <style>
   :root {
     --bg: #fafaf7;
@@ -211,8 +211,8 @@
       <div class="id">RNF-01</div>
       <div>
         <div class="before">< 2 s de respuesta. <span class="pill warn">anotación: PUEDE QUE DEMORE MÁS, REVISAR MODO ONLINE Y MODO OFFLINE</span></div>
-        <div class="after">p95 menor a 5 s, medido extremo a extremo (cliente → API → render) en 4G típica, con Spring Boot Actuator + Micrometer. Modo offline básico: muestra la ruta y barrios sin tiempo de llegada; el tiempo solo se obtiene en línea.</div>
-        <p class="small muted">Impacto: 5 s p95 es defendible en free tier con 2 estudiantes. El modo offline es nuevo RF implícito (RNF-01.b) sin cálculo de tiempo de llegada, lo que evita depender de la API externa cuando no hay red.</p>
+        <div class="after">p95 menor a 8 s end-to-end (cliente → backend → Google Maps → render) en 4G típica, con Spring Boot Actuator + Micrometer y LCP &lt; 2.5 s en Lighthouse. Caché de 5 min por par origen-destino. Modo offline por GeoJSON: la app calcula la mejor ruta por distancia geométrica sobre los trazados propios, sin tiempo de llegada ni trancones.</div>
+        <p class="small muted">Impacto v3: 5 s p95 era defendible en free tier. <strong>Impacto v4:</strong> la ruta ahora se simula en Google Maps (no sale de un banco estático), así que el p95 pasa a 8 s end-to-end para absorber N llamadas a Maps. El caché de 5 min pasa a ser parte del diseño, no plan B. El modo offline deja de ser "rutas cacheadas" y pasa a "cálculo por distancia sobre GeoJSON" — más débil como promesa pero coherente con que la ruta se calcula en línea.</p>
       </div>
     </div>
 
@@ -288,7 +288,7 @@
         <tr>
           <td><span class="verdict redesign">rediseño</span></td>
           <td>Eficiencia de desempeño (rendimiento)</td>
-          <td>p95 &lt; 5 s en /api/routes/search + LCP &lt; 2.5 s en Lighthouse mobile Slow 4G</td>
+          <td>p95 &lt; 8 s end-to-end en /api/routes/search sobre 4G + LCP &lt; 2.5 s en Lighthouse mobile Slow 4G. Caché de 5 min por par origen-destino.</td>
           <td class="small">Spring Boot Actuator + Micrometer + Lighthouse en CI</td>
         </tr>
         <tr>
@@ -339,7 +339,7 @@
           <td class="small">Cubierta por la métrica de usabilidad (tasa de éxito al primer intento).</td>
         </tr>
         <tr>
-          <td>Rendimiento en red móvil lenta (meta interna < 5 s)</td>
+          <td>Rendimiento en red móvil lenta (meta interna < 8 s end-to-end, v4)</td>
           <td><span class="verdict remove">eliminada</span></td>
           <td class="small">Redundante con la métrica de rendimiento rediseñada (incluye Slow 4G).</td>
         </tr>

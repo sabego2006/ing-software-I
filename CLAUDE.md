@@ -15,7 +15,7 @@ El curso se dicta bajo el modelo de una **empresa de desarrollo de software simu
 - **Cadencia:** sustentación quincenal (por sprint corto).
 - **Toda decisión técnica debe poder justificarse ante el comité**, incluidas las que cambien respecto a entregas previas. Cambiar de opinión con argumentos suma; cambiar sin registrar el porqué resta.
 
-**Documento de aprobación ante el comité** — estructura que el docente pide (ver `Clase 3 IS.pptx`):
+**Documento de aprobación ante el comité** — estructura que el docente pide (ver `docs/clases/Clase 3 IS.pptx`):
 
 1. Descripción del problema
 2. Alcance
@@ -36,13 +36,13 @@ Métricas de referencia (comprometidas en la v3 de la Actividad 3, 2026-08-24). 
 
 | Atributo (ISO/IEC 25010) | Métrica v3 | Instrumento |
 |---|---|---|
-| Rendimiento (eficiencia de desempeño) | p95 < 5 s en `/api/routes/search` + LCP < 2.5 s en Lighthouse mobile Slow 4G | Spring Boot Actuator + Micrometer + Lighthouse en CI |
+| Rendimiento (eficiencia de desempeño) | p95 < 8 s end-to-end en `/api/routes/search` sobre 4G (cliente → backend → Google Maps → render) + LCP < 2.5 s en Lighthouse mobile Slow 4G. Caché de 5 min por par origen-destino. | Spring Boot Actuator + Micrometer (percentil 95) + Lighthouse en CI |
 | Disponibilidad (fiabilidad) | ≥ 95 % uptime mensual del backend (lun–vie 7:00–21:00), RTO < 1 h, RPO < 24 h | UptimeRobot + backup diario de PostgreSQL |
 | Mantenibilidad | 0 violaciones hexagonales en CI + ≥ 70 % cobertura en `domain/` | ArchUnit en CI + reporte JaCoCo con umbral bloqueante |
 | Usabilidad | ≤ 4 acciones + tasa de éxito ≥ 80 % al primer intento | Prueba con ≥ 5 usuarios externos al equipo |
 | Seguridad | 0 vulns altas o críticas reportadas por herramientas en la entrega | OWASP Dependency-Check + análisis estático en CI |
 
-> **Nota:** la tabla de "métricas de referencia" original del docente (con < 2 s, 99 %, "0 críticas" sin proceso) fue adoptada como punto de partida pero se rediseñó tras el grill del 2026-08-24. Las razones están en `fusaroute-actividad3-resumen-cambios.html` y en la memoria `feedback_critica_metricas.md`. Los números nuevos son los que se defienden ante el comité.
+> **Nota:** la tabla de "métricas de referencia" original del docente (con < 2 s, 99 %, "0 críticas" sin proceso) fue adoptada como punto de partida pero se rediseñó tras el grill del 2026-08-24. Las razones están en `entregables/fusaroute-actividad3-resumen-cambios.html` y en la memoria `feedback_critica_metricas.md`. Los números nuevos son los que se defienden ante el comité.
 
 ## Proyecto Integrador: FusaRoute
 
@@ -55,17 +55,19 @@ Sistema de información de transporte público para Fusagasugá y la región del
 
 Esta carpeta madre **no** es un repositorio git; solo contiene material de clase y los dos repos clonados como subcarpetas.
 
+**Regla de commits en este repo madre:** `FusaRoute-BACKEND/` y `FusaRoute-FRONTEND/` están excluidos vía `.gitignore` — son repos propios con su historial y remoto independientes, y nunca deben aparecer en un commit de este repo madre. Cualquier cambio en ellos se commitea y pushea desde su propio repo.
+
 ### Alcance de este semestre
 
-Comprometido con el docente en la Actividad 3 (`actividad 3 ing soft_APA.docx`):
+Comprometido con el docente en la Actividad 3 (`docs/actividad3/actividad 3 ing soft_APA.docx`):
 
 - Registro e inicio de sesión de **Usuario Final** (nombre, correo, contraseña); ver y editar sus datos.
-- Búsqueda de ruta: el usuario marca origen y destino, el sistema sugiere la mejor ruta de busetas.
+- Búsqueda de ruta: el usuario marca origen y destino, el sistema simula cada ruta posible en Google Maps y devuelve la de menor tiempo estimado.
 - Visualización de **barrios/comunas por los que pasa la ruta** y **costo del pasaje**.
 - **Historial de búsquedas** recientes del usuario.
 - **Caja de comentarios**: el usuario deja sugerencias, el administrador las lee y responde.
 - **Aviso de trancón / hora pico**: avisar si el trayecto suele estar congestionado a la hora de la consulta. El usuario puede marcar un **destino favorito** (RF-10, redefinido en v3) que se pre-carga al inicio de la búsqueda.
-- **Modo offline básico** (RNF-01.b, añadido en v3): la app puede mostrar la ruta y los barrios por los que pasa sin conexión, pero **no** calcula el tiempo de llegada, que sí requiere la API externa en línea.
+- **Modo offline por GeoJSON** (RNF-01.b, redefinido en v4): la app trae el trazado GeoJSON de las rutas (dato propio del backend). Sin internet, calcula la mejor ruta por **distancia geométrica** sobre esos GeoJSON. No calcula tiempo de llegada, ni trancones, ni ruta más rápida en tiempo real — esos requieren Google Maps en línea. Con internet, hace la simulación en Google Maps de siempre.
 - **Administrador**: CRUD de rutas (altas, consultas, modificaciones, suspensiones temporales — frecuentes en días festivos o cívicos), notificación automática a los usuarios que tengan la ruta como favorita cuando se suspende (RF-12, v3) y métricas de uso de la app.
 
 **Prioridad geográfica (actualizada, Actividad 3 v2):** el modelo de datos soporta varios municipios desde el diseño. Alcance geográfico comprometido este semestre: rutas urbanas de **Fusagasugá**, la ruta a **Chinauta** (corregimiento de Fusagasugá) y las rutas intermunicipales **Fusagasugá↔Pasca** y **Fusagasugá↔Arbeláez** — Pasca y Arbeláez no tienen rutas urbanas propias registrables, solo llegan a Fusagasugá por ruta intermunicipal. Regla de frontera: **toda ruta incluida debe tocar Fusagasugá**. **Silvania queda fuera** de este semestre (se había mencionado en el borrador de la Actividad 3 junto con Arbeláez; se corrigió por ser menos realista con la primera vez del equipo integrando mapas).
@@ -94,24 +96,25 @@ Cualquier número que aparezca en un entregable — métrica de calidad, porcent
 - **Una métrica por atributo ISO 25010 nombrado por el docente.** No se multiplican métricas redundantes. Si dos miden lo mismo, se fusiona o se elimina.
 - **Toda decisión de cambio queda registrada.** Si un RF/RNF/métrica cambia entre versiones (v2 → v3), el cambio y su razón deben aparecer en el documento o en la memoria del proyecto.
 
-**Referencia del grill interno del 2026-08-24:** el equipo revisó las 8 métricas de la v2 y concluyó que 7 estaban mal o medianamente definidas y 1 era redundante. La v3 del documento de la Actividad 3 quedó con **5 métricas**, una por atributo ISO 25010, cada una con instrumento ejecutable. El resumen visual está en `fusaroute-actividad3-resumen-cambios.html`.
+**Referencia del grill interno del 2026-08-24:** el equipo revisó las 8 métricas de la v2 y concluyó que 7 estaban mal o medianamente definidas y 1 era redundante. La v3 del documento de la Actividad 3 quedó con **5 métricas**, una por atributo ISO 25010, cada una con instrumento ejecutable. El resumen visual está en `entregables/fusaroute-actividad3-resumen-cambios.html`.
 
 ## Decisiones de arquitectura vigentes
 
 | Decisión | Estado |
 |---|---|
 | Backend: Java + Spring Boot, arquitectura hexagonal | Vigente |
-| Frontend: React + TypeScript (Vite) | Vigente |
+| Frontend: Angular + TypeScript (Angular CLI) | Vigente — cambió en v4 (antes React + Vite) |
 | Base de datos: PostgreSQL alojado en Supabase | Vigente |
 | **Supabase se usa solo como PostgreSQL administrado** — no Auth, no Storage, no Realtime | Vigente |
 | **Autenticación: Spring Security + JWT, propiedad del backend** | Vigente — cambió respecto al borrador inicial |
-| Google Maps API: solo como referencia de geocodificación y tiempos de trayecto, **no** como fuente de las rutas de busetas | Vigente |
+| **Cálculo de la ruta por simulación en Google Maps** (no banco estático) + caché de 5 min por par origen-destino | Vigente — cambió en v4 (antes: comparar catálogo estático) |
+| **Modo offline por GeoJSON** (rutas pre-trazadas como polilíneas, cálculo por distancia geométrica) | Vigente — cambió en v4 (antes: rutas cacheadas de últimas consultas) |
 
 > **Cambio a sustentar ante el comité:** el borrador inicial de la Actividad 3 justificaba Supabase en parte por su módulo de login listo para usar. Se decidió programar autenticación y registro en el backend con Spring Security + JWT. Razones: el docente exige que ambos integrantes aprendan todo el stack; mantiene el dominio desacoplado de un proveedor externo (coherente con hexagonal); y da material real que defender en calidad y seguridad. El documento ya refleja esta decisión.
 
 ## Convenciones de trabajo
 
-**Idioma:** documentación del curso y comunicación con el docente en **español**. Código, comentarios, nombres de variables y mensajes de commit en **inglés** (estándar de industria y de la documentación de Spring/React).
+**Idioma:** documentación del curso y comunicación con el docente en **español**. Código, comentarios, nombres de variables y mensajes de commit en **inglés** (estándar de industria y de la documentación de Spring/Angular).
 
 **Git** (igual en ambos repos):
 
@@ -124,11 +127,11 @@ Cualquier número que aparezca en un entregable — métrica de calidad, porcent
 
 **Diagramas de arquitectura:** Mermaid versionado dentro de cada repo (`README.md` o `/docs`), nunca en una herramienta externa que se desactualice respecto al código.
 
-**Reparto de trabajo:** el docente exige que **ambos integrantes participen equitativamente en todo** (frontend, backend y base de datos). No hay especialización por persona: al explicar o implementar algo, asumir que ambos necesitan entenderlo. Es la primera vez del equipo con Spring Boot y con React.
+**Reparto de trabajo:** el docente exige que **ambos integrantes participen equitativamente en todo** (frontend, backend y base de datos). No hay especialización por persona: al explicar o implementar algo, asumir que ambos necesitan entenderlo. Es la primera vez del equipo con Spring Boot y con Angular.
 
 ## Notas para trabajar en esta carpeta
 
-- El material de clase (`Clase*.pptx`, `ACTIVIDAD*.pdf`, `actividad 3 ing soft_APA.docx`) es fuente de verdad sobre lo que pide el docente. Consultarlo antes de asumir requisitos.
+- El material de clase (`docs/clases/Clase*.pptx`, `docs/clases/ACTIVIDAD*.pdf`, `docs/actividad3/actividad 3 ing soft_APA.docx`) es fuente de verdad sobre lo que pide el docente. Consultarlo antes de asumir requisitos.
 - Los `.pptx` y `.docx` no se leen directamente: son ZIP de XML. Extraer texto con `unzip -p <archivo> 'ppt/slides/slide*.xml'` o `word/document.xml` y limpiar las etiquetas.
-- Antes de modificar un entregable ya redactado, hacer copia de respaldo (existen `actividad 3 ing soft_APA.ORIGINAL-BACKUP.docx` y `actividad 3 ing soft_APA v2.BACKUP-PRE-V3.docx`). La v3 actual es `actividad 3 ing soft_APA v3.docx`.
+- Antes de modificar un entregable ya redactado, hacer copia de respaldo (existen `docs/actividad3/actividad 3 ing soft_APA.ORIGINAL-BACKUP.docx` y `docs/actividad3/actividad 3 ing soft_APA v2.BACKUP-PRE-V3.docx`). La v3 actual es `docs/actividad3/actividad 3 ing soft_APA v3.docx`.
 - Los entregables se escriben con la voz del equipo: primera persona plural, tono claro y directo, con glosas en lenguaje sencillo cuando aparece un término técnico. No academizar ni inflar la redacción.
