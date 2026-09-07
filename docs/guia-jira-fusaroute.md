@@ -161,6 +161,39 @@ después permite mirar el informe de sprint y que signifique algo.
 Sprints **semanales**. El comité es quincenal, así que a cada sustentación
 llegamos con **dos sprints cerrados** y sus dos informes.
 
+**Horario de clases:** lunes 14:00–16:00 · martes 16:00–18:00 · jueves 11:00–13:00.
+
+**El corte es el martes.** Cada sprint va de martes a lunes y se cierra el lunes
+en la noche o el martes antes de clase, de modo que el informe llega fresco a la
+sustentación. Calendario:
+
+| Sprint | Del | Al | Qué cae ahí |
+|---|---|---|---|
+| Sprint 1 | mar 08-sep | lun 14-sep | arranque técnico: repos, scaffolding, `/health`, tablero |
+| Sprint 2 | mar 15-sep | lun 21-sep | primeras historias del backlog |
+| — | | **mar 22-sep** | **Comité** — informes de los sprints 1 y 2 |
+| Sprint 3 | mar 22-sep | lun 28-sep | |
+| Sprint 4 | mar 29-sep | lun 05-oct | |
+| — | | **mar 06-oct** | **Comité** — informes de los sprints 3 y 4 |
+
+> **Ojo: el martes es un supuesto, no un dato confirmado.** Sabemos que el comité
+> es cada 15 días y que el próximo cae aproximadamente en dos semanas, pero no
+> tenemos la fecha exacta del docente. **Hay que confirmarla antes de iniciar el
+> Sprint 1.** Si resultara ser lunes o jueves, el diseño no cambia: se corre el
+> día de corte al día anterior a la clase que corresponda. Cambiarlo ahora no
+> cuesta nada; cambiarlo con cuatro sprints andando desordena todos los informes.
+
+**Advertencia de secuencia:** el Sprint 1 empieza el **martes 08-sep**, y para
+esa fecha todavía faltan las Etapas 2, 3 y 4 del plan de arranque (clonar repos y
+scaffolding, grillar los primeros requisitos, armar el sprint). No da el tiempo
+para llenar el Sprint 1 con historias de funcionalidad ya grilladas. La salida
+honesta no es correr el grilling a las carreras: es que **el Sprint 1 sea el
+sprint de arranque técnico** —repos, scaffolding, `/health`, CI, tablero
+configurado—, que es trabajo real, demostrable y que ya está en el plan. Las
+historias de funcionalidad entran en el Sprint 2. Al comité del 22-sep se llega
+con un sprint de infraestructura y uno de funcionalidad, que es una historia
+perfectamente defendible.
+
 **Advertencia realista:** una semana es un sprint corto, y somos dos estudiantes
 con otras materias. El riesgo concreto es arrastrar tarjetas sin terminar de un
 sprint al siguiente, y un sprint que arrastra la mitad de su contenido no
@@ -386,10 +419,11 @@ completa.
       team-managed y la alternativa con etiquetas).
 - [ ] **App GitHub for Jira** instalada y los dos repos de FusaRoute vinculados
       (§9). Requiere admin de Atlassian y de GitHub.
-- [ ] **Sprints semanales** configurados. **Falta un dato para esto: el día y la
-      fecha del próximo Comité.** Los sprints se alinean para que dos de ellos
-      cierren antes de cada sustentación, así que sin esa fecha no se puede fijar
-      el día de corte.
+- [ ] **Confirmarle al docente la fecha exacta del próximo Comité.** Estamos
+      asumiendo martes 22-sep. Es el único supuesto del calendario y hay que
+      cerrarlo antes de iniciar el Sprint 1.
+- [ ] **Sprints semanales** configurados con corte los martes, según el
+      calendario de la §4. Sprint 1: mar 08-sep → lun 14-sep.
 - [ ] **Acceso de Angélica verificado**: que entre al tablero, vea el backlog y
       pueda **mover una tarjeta de columna**. Ese es el criterio de verificación
       de esta etapa — no basta con que la cuenta exista.
