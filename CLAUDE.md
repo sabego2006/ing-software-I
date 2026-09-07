@@ -11,6 +11,7 @@ Carpeta de la asignatura **Ingeniería de Software I** (Ingeniería de Sistemas 
 El curso se dicta bajo el modelo de una **empresa de desarrollo de software simulada**. No basta con que el código funcione: hay que **sustentar las decisiones técnicas** y defender el diseño.
 
 **Comité de Desarrollo y Arquitectura** — es el mecanismo central de evaluación. Funciona como espacio de revisión, toma de decisiones, aprobación de avances y análisis de riesgos, con el docente cumpliendo un rol de comité. Cada avance del proyecto se aprueba ahí antes de seguir.
+(Nota: El primer comité se llevó a cabo el martes pasado; las decisiones tomadas en este espacio son preliminares y no definitivas).
 
 - **Cadencia:** sustentación quincenal (por sprint corto).
 - **Toda decisión técnica debe poder justificarse ante el comité**, incluidas las que cambien respecto a entregas previas. Cambiar de opinión con argumentos suma; cambiar sin registrar el porqué resta.
