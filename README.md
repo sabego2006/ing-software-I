@@ -61,3 +61,7 @@ chore: ignorar archivos temporales de Word
 ## Política de respaldos
 
 Toda versión vieja de un entregable se conserva con sufijo `.BACKUP-…` o `.ORIGINAL-BACKUP.docx`. **No borrar** estos archivos — son el historial del proyecto y pueden pedir al docente verlos.
+
+## AI Agent Test
+
+Hello, world! This section was added by a coding agent from a Jira work item (SCRUM-5) to verify the Jira ↔ IDE agent workflow.
