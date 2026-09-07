@@ -158,41 +158,47 @@ después permite mirar el informe de sprint y que signifique algo.
 
 ### Nuestra cadencia
 
-Sprints **semanales**. El comité es quincenal, así que a cada sustentación
-llegamos con **dos sprints cerrados** y sus dos informes.
+Sprints **semanales**, con corte los **martes**.
 
 **Horario de clases:** lunes 14:00–16:00 · martes 16:00–18:00 · jueves 11:00–13:00.
 
-**El corte es el martes.** Cada sprint va de martes a lunes y se cierra el lunes
-en la noche o el martes antes de clase, de modo que el informe llega fresco a la
-sustentación. Calendario:
+**Por qué el martes.** Cada sprint va de martes a lunes y se cierra el lunes en la
+noche o el martes antes de clase. Así el informe queda listo el día de clase más
+tarde de la semana, que es cuando es más probable que el docente convoque comité.
 
 | Sprint | Del | Al | Qué cae ahí |
 |---|---|---|---|
 | Sprint 1 | mar 08-sep | lun 14-sep | arranque técnico: repos, scaffolding, `/health`, tablero |
 | Sprint 2 | mar 15-sep | lun 21-sep | primeras historias del backlog |
-| — | | **mar 22-sep** | **Comité** — informes de los sprints 1 y 2 |
 | Sprint 3 | mar 22-sep | lun 28-sep | |
 | Sprint 4 | mar 29-sep | lun 05-oct | |
-| — | | **mar 06-oct** | **Comité** — informes de los sprints 3 y 4 |
 
-> **Ojo: el martes es un supuesto, no un dato confirmado.** Sabemos que el comité
-> es cada 15 días y que el próximo cae aproximadamente en dos semanas, pero no
-> tenemos la fecha exacta del docente. **Hay que confirmarla antes de iniciar el
-> Sprint 1.** Si resultara ser lunes o jueves, el diseño no cambia: se corre el
-> día de corte al día anterior a la clase que corresponda. Cambiarlo ahora no
-> cuesta nada; cambiarlo con cuatro sprints andando desordena todos los informes.
+> **Los comités no aparecen en esta tabla, y es a propósito.** El primer comité
+> fue el **martes 25 de agosto de 2026**, pero **las fechas son irregulares**: no
+> siguen un patrón fijo, aunque se hable de cadencia quincenal. Cualquier
+> calendario que fije fechas de comité por adelantado se las está inventando, y
+> planear una entrega sobre una fecha inventada es justo lo que revienta el día
+> de la sustentación.
+>
+> **La regla es preguntarle al docente cuándo es el siguiente.** Mientras no haya
+> fecha confirmada, los sprints corren por su cuenta y a la sustentación se llega
+> con todos los sprints cerrados desde la anterior — sean uno, dos o tres.
 
-**Advertencia de secuencia:** el Sprint 1 empieza el **martes 08-sep**, y para
-esa fecha todavía faltan las Etapas 2, 3 y 4 del plan de arranque (clonar repos y
+**Por qué esto funciona igual.** La cadencia semanal no depende del comité: es
+nuestra. Sirve para no perder el hilo y produce un informe por semana, se
+convoque o no. Si el comité cae pronto, llevamos un sprint; si se demora,
+llevamos tres. Como cada informe queda guardado en Jira, ninguna sustentación nos
+agarra sin evidencia, y esa es justamente la razón de no atar nuestra cadencia a
+un calendario que no controlamos.
+
+**Advertencia de secuencia:** el Sprint 1 empieza el **martes 08-sep**, y para esa
+fecha todavía faltan las Etapas 2, 3 y 4 del plan de arranque (clonar repos y
 scaffolding, grillar los primeros requisitos, armar el sprint). No da el tiempo
 para llenar el Sprint 1 con historias de funcionalidad ya grilladas. La salida
 honesta no es correr el grilling a las carreras: es que **el Sprint 1 sea el
 sprint de arranque técnico** —repos, scaffolding, `/health`, CI, tablero
 configurado—, que es trabajo real, demostrable y que ya está en el plan. Las
-historias de funcionalidad entran en el Sprint 2. Al comité del 22-sep se llega
-con un sprint de infraestructura y uno de funcionalidad, que es una historia
-perfectamente defendible.
+historias de funcionalidad entran en el Sprint 2.
 
 **Advertencia realista:** una semana es un sprint corto, y somos dos estudiantes
 con otras materias. El riesgo concreto es arrastrar tarjetas sin terminar de un
@@ -419,9 +425,10 @@ completa.
       team-managed y la alternativa con etiquetas).
 - [ ] **App GitHub for Jira** instalada y los dos repos de FusaRoute vinculados
       (§9). Requiere admin de Atlassian y de GitHub.
-- [ ] **Confirmarle al docente la fecha exacta del próximo Comité.** Estamos
-      asumiendo martes 22-sep. Es el único supuesto del calendario y hay que
-      cerrarlo antes de iniciar el Sprint 1.
+- [ ] **Preguntarle al docente cuándo es el próximo Comité.** Las fechas son
+      irregulares (§4), así que esto no se deduce: se pregunta. Y se vuelve a
+      preguntar después de cada sustentación, porque tampoco sirve extrapolar
+      desde la anterior.
 - [ ] **Sprints semanales** configurados con corte los martes, según el
       calendario de la §4. Sprint 1: mar 08-sep → lun 14-sep.
 - [ ] **Acceso de Angélica verificado**: que entre al tablero, vea el backlog y
