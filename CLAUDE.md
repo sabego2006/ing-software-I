@@ -48,14 +48,17 @@ Métricas de referencia (comprometidas en la v3 de la Actividad 3, 2026-08-24). 
 
 Sistema de información de transporte público para Fusagasugá y la región del Sumapaz. Resuelve la desorientación de habitantes y turistas: hay **más de 20 rutas urbanas** de busetas sin información pública clara, y ni Google Maps las tiene registradas. Se puede llegar a un mismo destino por varias rutas, y sin información la gente pierde tiempo y dinero. Justificación respaldada por una encuesta propia del equipo (2025) y población regional estimada en ~285.000 habitantes (DANE).
 
-**Repositorios** (separados, cada uno con su propio `CLAUDE.md`):
+**Repositorios** — son **tres**, separados, cada uno con su propio `CLAUDE.md`:
 
-- Backend: [`FusaRoute-BACKEND/`](FusaRoute-BACKEND/) → https://github.com/sabego2006/FusaRoute-BACKEND
-- Frontend: [`FusaRoute-FRONTEND/`](FusaRoute-FRONTEND/) → https://github.com/sabego2006/FusaRoute-FRONTEND
+| Repo | Remoto | Ubicación local |
+|---|---|---|
+| Material del curso (esta carpeta) | `sabego2006/ing-software-I` | `.../5 SEMESTRE/INGENIERIA SOFTWARE I/` (dentro de OneDrive) |
+| Backend | `sabego2006/FusaRoute-BACKEND` | `C:/Users/Santiago/dev/FusaRoute/FusaRoute-BACKEND/` |
+| Frontend | `sabego2006/FusaRoute-FRONTEND` | `C:/Users/Santiago/dev/FusaRoute/FusaRoute-FRONTEND/` |
 
-Esta carpeta madre **no** es un repositorio git; solo contiene material de clase y los dos repos clonados como subcarpetas.
+**Esta carpeta madre sí es un repositorio git** (`sabego2006/ing-software-I`). Solo aloja documentación: material de clase y entregables. Aquí **no** se desarrolla código de FusaRoute.
 
-**Regla de commits en este repo madre:** `FusaRoute-BACKEND/` y `FusaRoute-FRONTEND/` están excluidos vía `.gitignore` — son repos propios con su historial y remoto independientes, y nunca deben aparecer en un commit de este repo madre. Cualquier cambio en ellos se commitea y pushea desde su propio repo.
+**Los repos de FusaRoute viven fuera de OneDrive**, en `C:/Users/Santiago/dev/FusaRoute/`. La razón es concreta: Angular genera decenas de miles de archivos en `node_modules` y OneDrive intenta sincronizarlos uno por uno, lo que provoca bloqueos de archivo y builds corruptos. No volver a clonarlos dentro de OneDrive.
 
 ### Alcance de este semestre
 
@@ -114,16 +117,27 @@ Cualquier número que aparezca en un entregable — métrica de calidad, porcent
 
 ## Convenciones de trabajo
 
-**Idioma:** documentación del curso y comunicación con el docente en **español**. Código, comentarios, nombres de variables y mensajes de commit en **inglés** (estándar de industria y de la documentación de Spring/Angular).
+**Idioma** (decisión del 2026-09-07; antes se había fijado "todo el código y los commits en inglés"):
 
-**Git** (igual en ambos repos):
+- En **inglés**: el código y los nombres de variables, clases, métodos, paquetes y archivos de código. Es el estándar de la industria y el de la documentación de Spring y Angular.
+- En **español**: los comentarios dentro del código, los mensajes de commit, los issues de Jira, la documentación, el README y toda la comunicación con el docente.
+
+El reparto tiene una razón: el código lo lee cualquiera del gremio y por eso va en inglés, pero todo lo que se sustenta ante el comité —commits, issues, README, informes de sprint— lo lee el docente, y va en español.
+
+**Git** (igual en los tres repos):
 
 - Trunk-based: `main` es la rama estable y protegida.
-- Ramas `feature/<descripcion-corta>` o `fix/<descripcion-corta>`.
 - **Pull Request obligatorio** antes de mergear a `main`, revisado por el otro integrante. Ninguno mergea su propio PR sin revisión.
 - Conventional Commits: `feat:`, `fix:`, `refactor:`, `test:`, `docs:`, `chore:`.
 
-**Backlog:** GitHub Projects / Issues. Cada sustentación quincenal ante el comité corresponde a un hito de Issues cerrados más demo funcional.
+**Convención de rama y commit con key de Jira** — obligatoria en los repos de FusaRoute:
+
+- Rama: `feature/SCRUM-12-nombre-corto` · `fix/SCRUM-30-nombre-corto`
+- Commit: `feat(SCRUM-12): agregar endpoint de inicio de sesión`
+
+La key de Jira (`SCRUM-12`) va **en la rama y en el commit**, no en uno solo. Es lo que hace que la app *GitHub for Jira* vincule automáticamente rama, commits y PR al issue correspondiente, sin pegar un solo link a mano. Un commit sin key queda huérfano: no aparece en el panel de desarrollo del issue ni en el informe de sprint que se presenta ante el comité.
+
+**Backlog: Jira**, proyecto único `SCRUM`, con los componentes `backend` y `frontend` para separar las capas dentro del mismo tablero (decisión del 2026-09-07; el borrador anterior preveía GitHub Projects / Issues). Los sprints son **semanales**, de modo que a cada sustentación quincenal ante el comité llegan **dos sprints cerrados** con su informe. La guía de uso del tablero está en [`docs/guia-jira-fusaroute.md`](docs/guia-jira-fusaroute.md).
 
 **Diagramas de arquitectura:** Mermaid versionado dentro de cada repo (`README.md` o `/docs`), nunca en una herramienta externa que se desactualice respecto al código.
 
