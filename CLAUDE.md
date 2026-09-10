@@ -119,6 +119,86 @@ Cualquier número que aparezca en un entregable — métrica de calidad, porcent
 
 > **Cambio a sustentar ante el comité:** el borrador inicial de la Actividad 3 justificaba Supabase en parte por su módulo de login listo para usar. Se decidió programar autenticación y registro en el backend con Spring Security + JWT. Razones: el docente exige que ambos integrantes aprendan todo el stack; mantiene el dominio desacoplado de un proveedor externo (coherente con hexagonal); y da material real que defender en calidad y seguridad. El documento ya refleja esta decisión.
 
+## Enfoque metodológico y roles
+
+Decidido en el grilling del 2026-09-09 y sustentado en `docs/metodologia/enfoque-metodologico.md`, que es el entregable calificable de `ACTIVIDAD.pdf`.
+
+**Enfoque: iterativo–incremental, con Scrum como marco de trabajo.** No son dos cosas en competencia: el enfoque dice *cómo crece el producto* (por incrementos demostrables, cada uno usable de punta a punta), y Scrum dice *cómo se organiza el equipo para producirlos*. La base tradicional es de linaje RUP —arquitectura definida temprano, que es justamente la hexagonal ya comprometida— y la evolución hacia ágil se justifica por incertidumbre real: es la primera vez del equipo con mapas, con Spring Boot y con Angular, y el modo offline y las tarifas ya se redefinieron dos veces.
+
+### Roles: dos capas, con RACI
+
+El docente exige tres cosas a la vez —roles Scrum, cinco responsables técnicos (slide 9 de `docs/clases/Clase5 IS.pptx`), y participación equitativa de ambos—, así que se declaran dos capas explícitas:
+
+| Persona | Capa de proceso (Scrum) | Capa técnica (docente) |
+|---|---|---|
+| **Angélica** | Product Owner | Responsable de Frontend · Responsable de Documentación |
+| **Santiago** | Scrum Master | Líder Técnico · Responsable de Backend |
+| **Ambos** | Development Team | Responsable de Pruebas (compartido) |
+
+**"Responsable" significa quien responde ante el comité y revisa los PR de esa área, no quien la programa solo.** Ambos programan frontend y backend en todos los sprints, que es lo que el docente exige. La capa técnica **rota cada 2 sprints** y la rotación queda registrada en el informe de sprint — sin eso, el organigrama es de mentira y el comité lo nota.
+
+### Eventos de Scrum adoptados
+
+| Cuándo | Evento | De dónde sale el espacio |
+|---|---|---|
+| **Martes 18:00** | Sprint Planning | al salir de la clase de 16–18 |
+| **Jueves 13:00** | Sesión de pareja (1 h) | al salir de la clase de 11–13 |
+| **Lunes en la noche** | Sprint Review + Retrospectiva → informe a Jira | cierre de sprint |
+| Diario | Check-in **escrito** (ayer / hoy / bloqueos) | sustituye a la Daily |
+
+La Daily formal **se descarta por escrito y con la razón dicha en voz alta**: dos personas que comparten tres clases semanales no sostienen una reunión diaria. Un evento declarado y no cumplido resta más ante el comité que uno nunca prometido.
+
+### Calendario
+
+- **09 → 14 de septiembre de 2026:** semana de preparación. No es un sprint y por tanto no genera informe.
+- **Sprint 1:** martes 15-sep → lunes 21-sep. Arranque técnico (ambiente DEV, CI, ArchUnit/JaCoCo, READMEs), sin puntos de historia: es infraestructura.
+- **Sprint 2:** martes 22-sep → lunes 28-sep. Primeras historias de funcionalidad y los ambientes PRE/PROD.
+- Sprints semanales de martes a lunes, de modo que a cada sustentación quincenal lleguen dos sprints cerrados.
+- **La fecha del próximo comité no se conoce y no se deduce: se le pregunta al docente.**
+
+### Épicas = incrementos demostrables
+
+| # | Épica / Incremento | Requisitos |
+|---|---|---|
+| 1 | Cuenta de usuario | RF-01, RF-02, RF-03 |
+| 2 | Búsqueda de ruta *(incluye offline, barrios, tarifas, congestión)* | RF-04, RF-05, RF-06, RF-09 |
+| 3 | Historial y favoritos | RF-07, RF-10 |
+| 4 | Comentarios | RF-08, RF-14 |
+| 5 | Administración | RF-11, RF-12, RF-13 |
+
+"Modo offline" **deja de ser épica propia**: no se puede demostrar sin búsqueda de ruta, y una épica no demostrable contradice el enfoque incremental que se acaba de declarar. **El orden de los incrementos lo prioriza Angélica como Product Owner.**
+
+### La contradicción del docente, y cómo se responde
+
+El `CLAUDE.md` madre exige **arquitectura hexagonal** y la guía de buenas prácticas web (§19, §20) prescribe **Controller → Service → Repository**. No se elige una: se muestra que hexagonal **contiene** a las tres, con otros nombres y con la dependencia invertida.
+
+```
+Guía del docente          FusaRoute (hexagonal)
+──────────────────────────────────────────────────────────────
+Controller           →    infrastructure/adapter/in/web/
+Service              →    application/usecase/  +  domain/model/
+Repository           →    infrastructure/adapter/out/persistence/
+                          (su interfaz vive en domain/port/out/)
+```
+
+Lo que hexagonal agrega sobre el esquema en capas: **la interfaz del repositorio pertenece al dominio**, no a la infraestructura. Por eso se puede cambiar de base de datos sin tocar lógica de negocio, y por eso los casos de uso se prueban sin levantar Spring. Este mapeo es material directo de sustentación.
+
+## Ambientes de ejecución
+
+**Concepto, en una línea:** el código nunca cambia entre ambientes; lo que cambia es cuál archivo de configuración se activa.
+
+| Ambiente | Qué es | Estado real hoy |
+|---|---|---|
+| **DEV** | PostgreSQL en el portátil de cada integrante. Cada quien rompe lo suyo. | **Se monta en la semana de preparación** |
+| **PRE** | Proyecto Supabase con datos de prueba. El ensayo general. | Sprint 2 |
+| **PROD** | Proyecto Supabase con las rutas reales. Lo que ve el comité. | Sprint 2 |
+
+Los cuatro archivos de perfil del backend y los dos `environment.ts` del frontend **existen desde ya**, para cumplir en estructura con la §22 de la guía de buenas prácticas; PRE y PROD tienen sus claves declaradas y vacías hasta el Sprint 2.
+
+**Se declara explícitamente, sin adornos: PROD no está desplegado en ningún servidor este semestre.** El backend corre desde un portátil el día de la demostración. Prometer un servidor productivo que no existe es exactamente lo que la sección de realismo de este archivo prohíbe.
+
+**Credenciales:** nunca en el repositorio. Cada repo versiona su `.env.example` con las claves vacías, y ese archivo *es* la documentación: si una variable no está ahí, no existe. Corolario de la §12 de la guía: en Angular no va ninguna clave secreta, porque todo lo que llega al navegador es inspeccionable.
+
 ## Convenciones de trabajo
 
 **Idioma** (decisión del 2026-09-07; antes se había fijado "todo el código y los commits en inglés"):
@@ -148,6 +228,22 @@ La key de Jira (`SCRUM-12`) va **en la rama y en el commit**, no en uno solo. Es
 **Reparto de trabajo:** el docente exige que **ambos integrantes participen equitativamente en todo** (frontend, backend y base de datos). No hay especialización por persona: al explicar o implementar algo, asumir que ambos necesitan entenderlo. Es la primera vez del equipo con Spring Boot y con Angular.
 
 ## Notas para trabajar en esta carpeta
+
+**Planes vigentes — leer los dos al abrir una sesión nueva.** El segundo complementa al primero, no lo reemplaza:
+
+1. **Plan maestro de arranque** (Jira + GitHub + scaffolding + grilling del backlog):
+   `C:/Users/Santiago/.claude/plans/eager-coalescing-creek.md`
+2. **Plan de Metodología y Preparación** (vigente desde 2026-09-09; metodología, roles, ambientes y la semana del 09 al 14 de septiembre):
+   `C:/Users/Santiago/.claude/plans/lee-el-estado-del-wondrous-hoare.md`
+
+```bash
+cd "C:/Users/Santiago/dev/FusaRoute"
+claude --permission-mode acceptEdits "Lee el Plan de Metodología y Preparación en C:/Users/Santiago/.claude/plans/lee-el-estado-del-wondrous-hoare.md y ejecútalo desde la sección 6."
+```
+
+Las sesiones de código se abren dentro del repo correspondiente (`dev/FusaRoute/FusaRoute-BACKEND` o `-FRONTEND`); las transversales, en `dev/FusaRoute/`, que tiene su propio `CLAUDE.md` de enrutamiento.
+
+- El backlog grillado de historias de usuario (RF-01 a RF-12, con criterios de aceptación) está en `docs/backlog/historias-rf01-rf12.md`.
 
 - El material de clase (`docs/clases/Clase*.pptx`, `docs/clases/ACTIVIDAD*.pdf`, `docs/actividad3/actividad 3 ing soft_APA.docx`) es fuente de verdad sobre lo que pide el docente. Consultarlo antes de asumir requisitos.
 - Los `.pptx` y `.docx` no se leen directamente: son ZIP de XML. Extraer texto con `unzip -p <archivo> 'ppt/slides/slide*.xml'` o `word/document.xml` y limpiar las etiquetas.
