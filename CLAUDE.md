@@ -109,7 +109,7 @@ Cualquier número que aparezca en un entregable — métrica de calidad, porcent
 
 | Decisión | Estado |
 |---|---|
-| Backend: **Java 21** + Spring Boot 3.3, arquitectura hexagonal | Vigente |
+| Backend: **Java 25** + Spring Boot 3.5, arquitectura hexagonal | Vigente |
 | Frontend: **Angular 21** + TypeScript 5.9 (Angular CLI) | Vigente — cambió en v4 (antes React + Vite) |
 | Base de datos: PostgreSQL alojado en Supabase | Vigente |
 | **Supabase se usa solo como PostgreSQL administrado** — no Auth, no Storage, no Realtime | Vigente |
@@ -119,7 +119,9 @@ Cualquier número que aparezca en un entregable — métrica de calidad, porcent
 
 ### Versiones: se arranca en la actual, no en la anterior
 
-El proyecto se monta sobre la versión vigente de cada herramienta, no sobre la que aparecía en un tutorial: **Angular 21**, **TypeScript 5.9**, **Java 21** (LTS), **Node 22** (LTS). Empezar en una versión anterior es empezar con deuda técnica que nadie pidió, y el material y la documentación oficial que consultamos es la de la versión actual.
+El proyecto se monta sobre la versión vigente de cada herramienta, no sobre la que aparecía en un tutorial: **Angular 21**, **TypeScript 5.9**, **Java 25** (el LTS vigente), **Spring Boot 3.5**, **Node 22** (LTS). Empezar en una versión anterior es empezar con deuda técnica que nadie pidió, y el material y la documentación oficial que consultamos es la de la versión actual.
+
+La única excepción, y va declarada: **Spring Boot se queda en la última 3.5 y no salta a la línea 4**, que ya existe. La razón no es comodidad — es que siendo la primera vez del equipo con Spring, el material con el que van a resolver errores (tutoriales, StackOverflow, ejemplos) es de 3.x, y la diferencia se paga en horas de depuración que compiten con las historias del sprint. El salto a 4 queda como decisión propia con su tarjeta.
 
 Dentro del semestre: las subidas de parche y menores se aplican sin ceremonia. **Un salto de versión mayor es una decisión propia, con su tarjeta y su sustentación** — no se hace a mitad de un sprint, porque un mayor rompe cosas y el costo de arreglarlo compite con las historias comprometidas. La regla es *arrancar actualizado*, no *actualizar permanentemente*, que es una promesa que un equipo de dos con otras cinco materias no sostiene.
 
