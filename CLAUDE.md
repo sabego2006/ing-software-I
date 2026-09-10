@@ -109,13 +109,21 @@ Cualquier número que aparezca en un entregable — métrica de calidad, porcent
 
 | Decisión | Estado |
 |---|---|
-| Backend: Java + Spring Boot, arquitectura hexagonal | Vigente |
-| Frontend: Angular + TypeScript (Angular CLI) | Vigente — cambió en v4 (antes React + Vite) |
+| Backend: **Java 21** + Spring Boot 3.3, arquitectura hexagonal | Vigente |
+| Frontend: **Angular 21** + TypeScript 5.9 (Angular CLI) | Vigente — cambió en v4 (antes React + Vite) |
 | Base de datos: PostgreSQL alojado en Supabase | Vigente |
 | **Supabase se usa solo como PostgreSQL administrado** — no Auth, no Storage, no Realtime | Vigente |
 | **Autenticación: Spring Security + JWT, propiedad del backend** | Vigente — cambió respecto al borrador inicial |
 | **Cálculo de la ruta por simulación en Google Maps** (no banco estático) + caché de 5 min por par origen-destino | Vigente — cambió en v4 (antes: comparar catálogo estático) |
 | **Modo offline por GeoJSON** (rutas pre-trazadas como polilíneas, cálculo por distancia geométrica) | Vigente — cambió en v4 (antes: rutas cacheadas de últimas consultas) |
+
+### Versiones: se arranca en la actual, no en la anterior
+
+El proyecto se monta sobre la versión vigente de cada herramienta, no sobre la que aparecía en un tutorial: **Angular 21**, **TypeScript 5.9**, **Java 21** (LTS), **Node 22** (LTS). Empezar en una versión anterior es empezar con deuda técnica que nadie pidió, y el material y la documentación oficial que consultamos es la de la versión actual.
+
+Dentro del semestre: las subidas de parche y menores se aplican sin ceremonia. **Un salto de versión mayor es una decisión propia, con su tarjeta y su sustentación** — no se hace a mitad de un sprint, porque un mayor rompe cosas y el costo de arreglarlo compite con las historias comprometidas. La regla es *arrancar actualizado*, no *actualizar permanentemente*, que es una promesa que un equipo de dos con otras cinco materias no sostiene.
+
+Cuando una versión cambie, el número se corrige **en los cuatro `CLAUDE.md` y en el `README` del repo afectado** en el mismo PR. Un número de versión desactualizado en la documentación es peor que no ponerlo: manda a alguien a leer la documentación equivocada.
 
 > **Cambio a sustentar ante el comité:** el borrador inicial de la Actividad 3 justificaba Supabase en parte por su módulo de login listo para usar. Se decidió programar autenticación y registro en el backend con Spring Security + JWT. Razones: el docente exige que ambos integrantes aprendan todo el stack; mantiene el dominio desacoplado de un proveedor externo (coherente con hexagonal); y da material real que defender en calidad y seguridad. El documento ya refleja esta decisión.
 
