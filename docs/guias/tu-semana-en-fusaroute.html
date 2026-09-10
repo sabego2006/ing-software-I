@@ -1,0 +1,762 @@
+<title>Tu semana en FusaRoute</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+
+<style>
+  :root {
+    --paper:        #EFF2F0;
+    --surface:      #FFFFFF;
+    --surface-2:    #E7ECE9;
+    --ink:          #101A18;
+    --ink-2:        #54635F;
+    --ink-3:        #7C8A86;
+    --rule:         #D6DDDA;
+    --accent:       #0E7C66;
+    --accent-ink:   #0B5D4C;
+    --accent-soft:  #DCEDE7;
+    --alert:        #A8481A;
+    --alert-soft:   #F7E8DD;
+    --code-bg:      #0F1A18;
+    --code-ink:     #D6E9E2;
+    --code-dim:     #7EA69B;
+
+    --display: "Archivo", "Helvetica Neue", Arial, sans-serif;
+    --body: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+    --mono: "IBM Plex Mono", "Cascadia Mono", Consolas, monospace;
+
+    --spine: 13px;
+    --measure: 66ch;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper:       #0D1312;
+      --surface:     #141C1A;
+      --surface-2:   #1B2523;
+      --ink:         #E7EEEB;
+      --ink-2:       #94A5A0;
+      --ink-3:       #6F807B;
+      --rule:        #26312E;
+      --accent:      #54C9A6;
+      --accent-ink:  #7FDCBF;
+      --accent-soft: #12312A;
+      --alert:       #E5915B;
+      --alert-soft:  #331F14;
+      --code-bg:     #070D0C;
+      --code-ink:    #CFE4DC;
+      --code-dim:    #6F958B;
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --paper:       #0D1312;
+    --surface:     #141C1A;
+    --surface-2:   #1B2523;
+    --ink:         #E7EEEB;
+    --ink-2:       #94A5A0;
+    --ink-3:       #6F807B;
+    --rule:        #26312E;
+    --accent:      #54C9A6;
+    --accent-ink:  #7FDCBF;
+    --accent-soft: #12312A;
+    --alert:       #E5915B;
+    --alert-soft:  #331F14;
+    --code-bg:     #070D0C;
+    --code-ink:    #CFE4DC;
+    --code-dim:    #6F958B;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--body);
+    font-size: 16px;
+    line-height: 1.62;
+    -webkit-font-smoothing: antialiased;
+    margin: 0;
+    padding: 0 18px 96px;
+  }
+
+  .wrap { max-width: 780px; margin: 0 auto; }
+
+  /* ---------- Cabecera ---------- */
+
+  header.masthead {
+    padding: 56px 0 40px;
+    border-bottom: 2px solid var(--ink);
+  }
+
+  .eyebrow {
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: var(--accent-ink);
+    margin: 0 0 18px;
+  }
+
+  h1 {
+    font-family: var(--display);
+    font-weight: 800;
+    font-size: clamp(2.35rem, 8.5vw, 3.6rem);
+    line-height: 1.02;
+    letter-spacing: -.025em;
+    text-wrap: balance;
+    margin: 0 0 20px;
+  }
+
+  .standfirst {
+    font-size: 1.075rem;
+    color: var(--ink-2);
+    max-width: 54ch;
+    margin: 0;
+  }
+
+  .standfirst strong { color: var(--ink); font-weight: 600; }
+
+  /* ---------- La ruta: espina + paradas ---------- */
+
+  .route {
+    position: relative;
+    padding-left: 42px;
+    margin-top: 8px;
+  }
+
+  .route::before {
+    content: "";
+    position: absolute;
+    left: var(--spine);
+    top: 46px;
+    bottom: 42px;
+    width: 3px;
+    background: var(--rule);
+    border-radius: 2px;
+  }
+
+  section.stop { padding: 46px 0 6px; }
+
+  .stop-head { position: relative; }
+
+  .stop-head::before {
+    content: "";
+    position: absolute;
+    left: -42px;
+    top: 7px;
+    width: 15px;
+    height: 15px;
+    margin-left: calc(var(--spine) - 6px);
+    border-radius: 50%;
+    background: var(--paper);
+    border: 3px solid var(--accent);
+  }
+
+  section.stop.terminal .stop-head::before { background: var(--accent); }
+
+  .when {
+    font-family: var(--mono);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    color: var(--accent-ink);
+    display: block;
+    margin-bottom: 6px;
+  }
+
+  h2 {
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: clamp(1.5rem, 4.6vw, 1.9rem);
+    line-height: 1.14;
+    letter-spacing: -.017em;
+    text-wrap: balance;
+    margin: 0 0 4px;
+  }
+
+  .h2-note {
+    color: var(--ink-3);
+    font-size: .92rem;
+    margin: 0 0 22px;
+  }
+
+  h3 {
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: 1.03rem;
+    letter-spacing: -.008em;
+    margin: 34px 0 10px;
+  }
+
+  h4 {
+    font-family: var(--body);
+    font-weight: 600;
+    font-size: .95rem;
+    margin: 24px 0 8px;
+  }
+
+  p, li { max-width: var(--measure); }
+  p { margin: 0 0 15px; }
+
+  ul, ol { padding-left: 22px; margin: 0 0 16px; }
+  li { margin-bottom: 8px; }
+  li::marker { color: var(--ink-3); }
+
+  a { color: var(--accent-ink); text-underline-offset: 3px; }
+  a:focus-visible, summary:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 3px;
+  }
+
+  code {
+    font-family: var(--mono);
+    font-size: .875em;
+    background: var(--surface-2);
+    padding: 1px 5px;
+    border-radius: 4px;
+  }
+
+  pre {
+    background: var(--code-bg);
+    color: var(--code-ink);
+    font-family: var(--mono);
+    font-size: 13px;
+    line-height: 1.72;
+    padding: 16px 18px;
+    border-radius: 8px;
+    overflow-x: auto;
+    margin: 0 0 16px;
+  }
+
+  pre code { background: none; padding: 0; font-size: inherit; }
+  pre .c { color: var(--code-dim); }
+
+  /* ---------- Piezas ---------- */
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    border-radius: 10px;
+    padding: 20px 22px;
+    margin: 0 0 16px;
+  }
+
+  .card > :last-child { margin-bottom: 0; }
+
+  .card h4 { margin-top: 0; }
+
+  .note {
+    background: var(--accent-soft);
+    border-left: 3px solid var(--accent);
+    border-radius: 0 8px 8px 0;
+    padding: 15px 18px;
+    margin: 0 0 18px;
+    font-size: .95rem;
+  }
+
+  .warn {
+    background: var(--alert-soft);
+    border-left: 3px solid var(--alert);
+    border-radius: 0 8px 8px 0;
+    padding: 15px 18px;
+    margin: 0 0 18px;
+    font-size: .95rem;
+  }
+
+  .note > :last-child, .warn > :last-child { margin-bottom: 0; }
+  .note p, .warn p { max-width: 60ch; }
+
+  .label {
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: 10.5px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 5px;
+  }
+
+  .note .label { color: var(--accent-ink); }
+  .warn .label { color: var(--alert); }
+
+  .table-scroll { overflow-x: auto; margin: 0 0 18px; }
+
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    min-width: 460px;
+    font-size: .93rem;
+  }
+
+  th, td {
+    text-align: left;
+    padding: 10px 14px 10px 0;
+    border-bottom: 1px solid var(--rule);
+    vertical-align: top;
+  }
+
+  th {
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--ink-2);
+    border-bottom: 2px solid var(--ink);
+  }
+
+  /* Lista de chequeo numerada, para pasos que van en orden */
+  ol.steps { list-style: none; padding: 0; counter-reset: step; }
+
+  ol.steps > li {
+    counter-increment: step;
+    position: relative;
+    padding-left: 40px;
+    margin-bottom: 26px;
+    max-width: none;
+  }
+
+  ol.steps > li::before {
+    content: counter(step);
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 27px;
+    height: 27px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    background: var(--ink);
+    color: var(--paper);
+    font-family: var(--mono);
+    font-size: 12.5px;
+    font-weight: 500;
+  }
+
+  ol.steps > li > :last-child { margin-bottom: 0; }
+  ol.steps p, ol.steps ul { max-width: var(--measure); }
+
+  .qa { border-top: 1px solid var(--rule); padding-top: 18px; margin-top: 18px; }
+  .qa:first-of-type { border-top: none; padding-top: 0; margin-top: 0; }
+
+  .q {
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: 1.06rem;
+    letter-spacing: -.008em;
+    margin: 0 0 8px;
+    display: flex;
+    gap: 11px;
+    align-items: baseline;
+  }
+
+  .q .num {
+    font-family: var(--mono);
+    font-size: .8em;
+    font-weight: 500;
+    color: var(--accent);
+    flex: none;
+  }
+
+  details {
+    border: 1px solid var(--rule);
+    border-radius: 8px;
+    background: var(--surface);
+    padding: 0 18px;
+    margin-bottom: 10px;
+  }
+
+  summary {
+    cursor: pointer;
+    padding: 14px 0;
+    font-weight: 600;
+    font-size: .96rem;
+    list-style-position: outside;
+  }
+
+  details[open] summary { border-bottom: 1px solid var(--rule); margin-bottom: 14px; }
+  details > :last-child { margin-bottom: 16px; }
+
+  footer.colophon {
+    margin-top: 64px;
+    padding-top: 26px;
+    border-top: 2px solid var(--ink);
+    color: var(--ink-2);
+    font-size: .9rem;
+  }
+
+  footer.colophon p { max-width: 62ch; }
+
+  @media (max-width: 620px) {
+    body { padding: 0 15px 72px; font-size: 15.5px; }
+    :root { --spine: 8px; }
+    .route { padding-left: 30px; }
+    .stop-head::before {
+      left: -30px;
+      width: 13px;
+      height: 13px;
+      margin-left: calc(var(--spine) - 5px);
+      border-width: 3px;
+    }
+    header.masthead { padding: 40px 0 30px; }
+    pre { font-size: 12.2px; padding: 14px 15px; }
+    ol.steps > li { padding-left: 34px; }
+    ol.steps > li::before { width: 24px; height: 24px; font-size: 11.5px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { animation: none !important; transition: none !important; }
+  }
+</style>
+
+<div class="wrap">
+
+  <header class="masthead">
+    <p class="eyebrow">FusaRoute · Guía operativa · Angélica</p>
+    <h1>Tu semana en FusaRoute</h1>
+    <p class="standfirst">Lo que haces, en el orden en que te va a tocar hacerlo. <strong>El criterio de esta guía fue uno solo: si no te sirve el lunes a las 8 de la mañana, no entró.</strong> Lo demás —por qué existen las ramas, qué es hexagonal, por qué tres ambientes— está en la otra guía, «Por qué trabajamos así».</p>
+  </header>
+
+  <div class="route">
+
+    <!-- ============ PARADA 0 ============ -->
+    <section class="stop">
+      <div class="stop-head">
+        <span class="when">Una sola vez · antes del martes 15</span>
+        <h2>Montar tu ambiente</h2>
+      </div>
+      <p class="h2-note">Tarda una tarde. Hazlo antes del Sprint 1, no el día que necesites programar.</p>
+
+      <p>«Ambiente» aquí significa: <strong>todo lo que tiene que estar instalado y prendido en tu portátil para que el proyecto corra</strong>. El nuestro se llama <strong>DEV</strong> y es tuyo: la base de datos vive en tu máquina, con tus datos de prueba. Si la rompes, no rompes nada de nadie. Esa es exactamente la gracia.</p>
+
+      <h3>Lo que hay que instalar</h3>
+
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr><th>Programa</th><th>Versión</th><th>Para qué</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Git</strong></td><td>la última</td><td>bajar y subir código</td></tr>
+            <tr><td><strong>JDK Temurin</strong></td><td><strong>25</strong></td><td>correr el backend (Java)</td></tr>
+            <tr><td><strong>Apache Maven</strong></td><td>3.9+</td><td>compilar el backend</td></tr>
+            <tr><td><strong>PostgreSQL</strong></td><td>16 o 17</td><td>la base de datos</td></tr>
+            <tr><td><strong>Node.js</strong></td><td>22 LTS</td><td>correr el frontend (Angular)</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>La forma más corta en Windows es con <code>winget</code>, que ya viene instalado. Abre <strong>PowerShell</strong> y pega esto línea por línea:</p>
+
+<pre><code>winget install --id Git.Git
+winget install --id EclipseAdoptium.Temurin.25.JDK
+winget install --id Apache.Maven
+winget install --id PostgreSQL.PostgreSQL.17
+winget install --id OpenJS.NodeJS.LTS</code></pre>
+
+      <div class="warn">
+        <span class="label">Ojo con esto</span>
+        <p><strong>Cierra PowerShell y ábrelo de nuevo</strong> cuando termine de instalar. Si no, tu terminal no se entera de los programas nuevos y todo lo de abajo te va a decir «no se reconoce el comando». Es la causa número uno de que este paso «no funcione».</p>
+      </div>
+
+      <p>Cuando el instalador de PostgreSQL te pida una contraseña para el usuario <code>postgres</code>, <strong>anótala</strong>. La vas a necesitar en el paso 4 y no hay forma fácil de recuperarla.</p>
+
+      <p>Para comprobar que todo quedó, pega esto. Deben salir cinco versiones y ningún error:</p>
+
+<pre><code>git --version
+java -version      <span class="c"># tiene que decir 25</span>
+mvn -version
+node --version
+psql --version</code></pre>
+
+      <h3>Los pasos</h3>
+
+      <ol class="steps">
+        <li>
+          <h4>Crea la carpeta de trabajo y clona los tres repos</h4>
+          <p>Los dos repos de código son hermanos dentro de la misma carpeta, y el de la asignatura va aparte porque es donde viven los entregables.</p>
+<pre><code>mkdir C:\dev\FusaRoute
+cd C:\dev\FusaRoute
+git clone https://github.com/sabego2006/FusaRoute-BACKEND.git
+git clone https://github.com/sabego2006/FusaRoute-FRONTEND.git
+git clone https://github.com/sabego2006/ing-software-I.git</code></pre>
+          <p>Si Git te pide usuario y contraseña, dile que sí a abrir el navegador e inicia sesión con tu cuenta de GitHub. Con eso queda guardado y no vuelve a preguntar.</p>
+        </li>
+
+        <li>
+          <h4>Crea la base de datos</h4>
+          <p>Te va a pedir la contraseña de <code>postgres</code> que anotaste.</p>
+<pre><code>psql -U postgres -c "CREATE DATABASE fusaroute_dev;"</code></pre>
+          <p>Si te responde <code>psql: command not found</code>, es que el instalador no lo dejó en el PATH. Usa la ruta completa:</p>
+<pre><code>&amp; "C:\Program Files\PostgreSQL\17\bin\psql.exe" -U postgres -c "CREATE DATABASE fusaroute_dev;"</code></pre>
+        </li>
+
+        <li>
+          <h4>Crea tu <code>.env</code> del backend</h4>
+          <p>Cada repo trae un <code>.env.example</code>: es la lista de las variables que existen, con los valores vacíos. Tú haces tu copia y la llenas. <strong>Tu <code>.env</code> nunca se sube a GitHub</strong> — ya está bloqueado en <code>.gitignore</code>, no tienes que hacer nada para que eso pase.</p>
+<pre><code>cd C:\dev\FusaRoute\FusaRoute-BACKEND
+Copy-Item .env.example .env
+notepad .env</code></pre>
+          <p>Llénalo así, con <strong>tu</strong> contraseña de postgres:</p>
+<pre><code>SPRING_PROFILE=dev
+PORT=8080
+DB_URL=jdbc:postgresql://localhost:5432/fusaroute_dev
+DB_USERNAME=postgres
+DB_PASSWORD=<span class="c">la que anotaste</span>
+GOOGLE_MAPS_API_KEY=
+JWT_SECRET=<span class="c">cualquier texto largo por ahora</span></code></pre>
+          <p>Las dos últimas pueden quedar vacías hasta que existan las historias que las usan.</p>
+        </li>
+
+        <li>
+          <h4>Arranca el backend</h4>
+          <p>Windows no lee el <code>.env</code> solo, hay que cargárselo. Esta línea larga hace eso; pégala completa:</p>
+<pre><code>cd C:\dev\FusaRoute\FusaRoute-BACKEND
+Get-Content .env | ForEach-Object { if ($_ -match '^\s*([^#][^=]*)=(.*)$') { [Environment]::SetEnvironmentVariable($matches[1].Trim(), $matches[2].Trim()) } }
+mvn spring-boot:run</code></pre>
+          <div class="note">
+            <span class="label">Se carga por ventana</span>
+            <p>Esa línea vale solo para la ventana de PowerShell en la que la pegaste. Si cierras la terminal, hay que volver a pegarla antes de arrancar. No es un error tuyo: es cómo funciona.</p>
+          </div>
+          <p>La primera vez se demora, porque Maven baja medio internet. Cuando veas <code>Started FusaRouteApplication</code>, abre otra ventana de PowerShell y comprueba:</p>
+<pre><code>curl http://localhost:8080/health</code></pre>
+          <p>Tiene que responder <code>{"status":"UP"}</code>. <strong>Ese es el momento en que tu ambiente DEV existe.</strong></p>
+        </li>
+
+        <li>
+          <h4>Arranca el frontend</h4>
+          <p>En una tercera ventana, dejando el backend corriendo:</p>
+<pre><code>cd C:\dev\FusaRoute\FusaRoute-FRONTEND
+Copy-Item .env.example .env
+npm ci
+npm start</code></pre>
+          <p>Abre <a href="http://localhost:4200">http://localhost:4200</a>. Debe cargar la página de Angular.</p>
+          <p><code>npm ci</code> es el que instala las dependencias. Se demora varios minutos la primera vez y no hay que volver a correrlo salvo que alguien cambie <code>package.json</code>.</p>
+        </li>
+      </ol>
+
+      <div class="warn">
+        <span class="label">Nunca, en ningún caso</span>
+        <p>No subas el archivo <code>.env</code>, ni pegues una contraseña o una llave dentro de un archivo <code>.properties</code> o <code>.ts</code>. Si una credencial entra a GitHub, queda en el historial <strong>para siempre</strong> aunque después la borres, y toca cambiarla en el proveedor. Ante la duda, pregunta antes de subir.</p>
+      </div>
+    </section>
+
+    <!-- ============ PARADA 1 ============ -->
+    <section class="stop">
+      <div class="stop-head">
+        <span class="when">Martes · 18:00, saliendo de clase</span>
+        <h2>Planning</h2>
+      </div>
+      <p class="h2-note">Una hora. Abre el sprint de la semana. Tú lo diriges: eres la Product Owner.</p>
+
+      <p>Ser PO no es «la que reparte tareas». Es <strong>la que decide qué se construye primero y qué significa que esté bien hecho</strong>. Santiago decide el cómo técnico; tú decides el qué y el para quién. Cuando el comité pregunte por qué se hizo primero el login y no el mapa, la que responde eres tú.</p>
+
+      <h3>Las tres cosas que dices</h3>
+
+      <div class="qa">
+        <p class="q"><span class="num">01</span> «Este sprint vamos por esto, y va primero porque…»</p>
+        <p>Escoges del backlog de Jira lo que entra a la semana, en orden. La razón importa más que el orden: <em>sin cuenta de usuario no hay historial ni comentarios, así que la épica 1 va primera</em> es una razón. <em>Me parece más fácil</em> no lo es.</p>
+      </div>
+
+      <div class="qa">
+        <p class="q"><span class="num">02</span> «Esta historia está terminada cuando…»</p>
+        <p>Lees en voz alta los criterios de aceptación de cada tarjeta que entra. Si al leerlos en voz alta suenan ambiguos, se arreglan ahí mismo, en el Planning — no cuando ya esté programado. Un criterio ambiguo se convierte siempre en trabajo repetido.</p>
+      </div>
+
+      <div class="qa">
+        <p class="q"><span class="num">03</span> «Esto no entra este sprint.»</p>
+        <p>Es la parte más incómoda y la más importante. Un sprint de una semana entre dos personas que además tienen otras cinco materias no aguanta cinco historias. Si dudas, saca una. <strong>Cerrar tres tarjetas prometidas vale más ante el comité que dejar cinco a medias.</strong></p>
+      </div>
+
+      <h3>Antes de cerrar la reunión</h3>
+      <ul>
+        <li>El sprint en Jira tiene fechas (<strong>martes → lunes</strong>) y está iniciado.</li>
+        <li>Toda tarjeta que entró tiene épica, componente (<code>backend</code> o <code>frontend</code>) y criterios de aceptación.</li>
+        <li>Quedó claro quién arranca cuál. <strong>Ambos programan backend y frontend</strong> — el docente lo exige y el reparto rota.</li>
+      </ul>
+    </section>
+
+    <!-- ============ PARADA 2 ============ -->
+    <section class="stop">
+      <div class="stop-head">
+        <span class="when">Miércoles a domingo</span>
+        <h2>Sacar una tarjeta</h2>
+      </div>
+      <p class="h2-note">El mismo circuito siempre, sin excepciones. Cinco pasos.</p>
+
+      <p>Todo se identifica por la <strong>key</strong> de la tarjeta de Jira: <code>SCRUM-12</code>, <code>SCRUM-13</code>. Esa key va <strong>en el nombre de la rama y también en cada commit</strong>. No es burocracia: es lo que hace que Jira muestre solo la rama, los commits y el PR pegados al issue, sin que nadie copie un link a mano. Un commit sin key queda huérfano y no aparece en el informe de sprint que se presenta al comité.</p>
+
+      <ol class="steps">
+        <li>
+          <h4>Mueve la tarjeta a «In Progress» en Jira y copia su key</h4>
+          <p>Primero eso. Si no está en In Progress, para Santiago esa tarjeta está libre.</p>
+        </li>
+        <li>
+          <h4>Crea la rama, partiendo de <code>main</code> actualizado</h4>
+<pre><code>git switch main
+git pull
+git switch -c feature/SCRUM-12-registro-usuario</code></pre>
+          <p>El <code>git pull</code> no es opcional: si partes de un <code>main</code> viejo, después te toca resolver conflictos que no eran tuyos.</p>
+        </li>
+        <li>
+          <h4>Trabaja y commitea con la key</h4>
+<pre><code>git add .
+git commit -m "feat(SCRUM-12): agregar formulario de registro"</code></pre>
+          <p>En español y empezando por el tipo: <code>feat</code> algo nuevo · <code>fix</code> un arreglo · <code>docs</code> documentación · <code>test</code> pruebas · <code>refactor</code> reacomodar sin cambiar comportamiento · <code>chore</code> el resto.</p>
+          <p>Varios commits pequeños se leen mejor que uno gigante. Commitea cada vez que algo funcione.</p>
+        </li>
+        <li>
+          <h4>Sube la rama</h4>
+<pre><code>git push -u origin feature/SCRUM-12-registro-usuario</code></pre>
+          <p>El <code>-u</code> solo la primera vez de cada rama. Después basta <code>git push</code>.</p>
+        </li>
+        <li>
+          <h4>Abre el Pull Request en GitHub</h4>
+          <p>GitHub te muestra un botón amarillo «Compare &amp; pull request» apenas subes. En el PR:</p>
+          <ul>
+            <li><strong>Título:</strong> la key y qué hace. <code>SCRUM-12: registro de usuario</code></li>
+            <li><strong>Descripción:</strong> qué cambia y cómo se prueba, en dos o tres líneas.</li>
+            <li><strong>Reviewer:</strong> Santiago. Siempre.</li>
+          </ul>
+          <p>Y mueve la tarjeta a «In Review» en Jira.</p>
+        </li>
+      </ol>
+
+      <div class="warn">
+        <span class="label">La regla que no se rompe</span>
+        <p><strong>Nadie mergea su propio PR.</strong> Ni tú el tuyo, ni Santiago el suyo. GitHub está configurado para rechazarlo, así que no depende de que a alguien se le olvide. Si un PR tuyo lleva días esperando, la solución es escribirle, no mergearlo.</p>
+      </div>
+    </section>
+
+    <!-- ============ PARADA 3 ============ -->
+    <section class="stop">
+      <div class="stop-head">
+        <span class="when">Cuando te llegue un PR</span>
+        <h2>Revisar backend sin saber Java</h2>
+      </div>
+      <p class="h2-note">Tres preguntas que sí puedes responder sin leer el código línea por línea.</p>
+
+      <p>Vas a tener que aprobar PRs de Java antes de sentirte cómoda con Java. Eso está bien: <strong>una revisión útil no consiste en entender cada línea</strong>. Estas tres preguntas atrapan la mayoría de los problemas que importan, y las tres se contestan mirando la pestaña «Files changed» del PR.</p>
+
+      <div class="qa">
+        <p class="q"><span class="num">01</span> ¿Está hecho lo que la tarjeta prometió?</p>
+        <p>Abre la tarjeta de Jira al lado y lee sus criterios de aceptación uno por uno. ¿Se ve en el diff algo que corresponda a cada uno? Si un criterio decía «la contraseña exige mínimo 8 caracteres, 1 mayúscula y 1 número» y no aparece nada parecido a una validación por ningún lado, esa es una observación perfectamente válida, aunque no sepas Java.</p>
+        <p><strong>Esta pregunta es literalmente tu trabajo como PO.</strong> Nadie está mejor puesta que tú para hacerla.</p>
+      </div>
+
+      <div class="qa">
+        <p class="q"><span class="num">02</span> ¿Se le coló una credencial?</p>
+        <p>En «Files changed» usa el buscador del navegador (<code>Ctrl+F</code>) sobre el diff y busca: <code>password=</code>, <code>secret</code>, <code>api_key</code>, <code>apiKey</code>, <code>Bearer</code>. Cualquier texto largo que parezca aleatorio es sospechoso.</p>
+        <p>Lo correcto se ve así, con la variable entre <code>${…}</code>:</p>
+<pre><code>spring.datasource.password=${DB_PASSWORD}   <span class="c">bien</span>
+spring.datasource.password=Fusa2026*        <span class="c">bloquea el PR</span></code></pre>
+        <p>Y si aparece un archivo llamado <code>.env</code> en la lista de archivos cambiados, ese solo hecho ya es motivo para no aprobar.</p>
+      </div>
+
+      <div class="qa">
+        <p class="q"><span class="num">03</span> ¿Se contaminó <code>domain/</code>?</p>
+        <p>Es la única regla de arquitectura que tienes que vigilar, y se revisa mirando <em>en qué carpeta</em> está cada archivo, no qué dice.</p>
+        <p>Si un archivo del PR está dentro de <code>src/main/java/com/fusaroute/<strong>domain/</strong></code> y en sus primeras líneas aparece <code>import org.springframework…</code>, <code>import jakarta.persistence…</code> o <code>@Entity</code>, <strong>eso rompe la arquitectura hexagonal que le prometimos al docente</strong>. Coméntalo y no apruebes.</p>
+        <div class="note">
+          <span class="label">Por qué importa</span>
+          <p><code>domain/</code> son las reglas del negocio de FusaRoute —cómo se escoge la mejor ruta, cómo se calcula la tarifa— y tienen que poder existir sin Spring, sin base de datos y sin internet. Es lo que nos permite probarlas rápido y cambiar de base de datos sin reescribir nada. La explicación larga está en «Por qué trabajamos así».</p>
+        </div>
+      </div>
+
+      <h3>Y de paso</h3>
+      <ul>
+        <li>¿Los commits traen la key <code>SCRUM-N</code>?</li>
+        <li>¿Aparecen carpetas que no deberían estar, tipo <code>node_modules/</code>, <code>target/</code> o <code>dist/</code>?</li>
+      </ul>
+
+      <p>Para aprobar: botón <strong>Review changes</strong> → <em>Approve</em>. Para pedir cambios, <em>Request changes</em> con un comentario concreto. <strong>Preguntar «¿esto qué hace?» es una revisión válida y útil</strong> — es exactamente el aprendizaje cruzado que el docente quiere ver.</p>
+    </section>
+
+    <!-- ============ PARADA 4 ============ -->
+    <section class="stop terminal">
+      <div class="stop-head">
+        <span class="when">Lunes · en la noche</span>
+        <h2>Review, Retro e informe</h2>
+      </div>
+      <p class="h2-note">Cierra el sprint. Es el documento que llega al comité, así que se escribe aunque la semana haya salido mal.</p>
+
+      <p>Primero <strong>Review</strong>: mostrar lo que quedó funcionando, corriéndolo de verdad, no contándolo. Después <strong>Retro</strong>: qué estorbó y qué se cambia la semana entrante. Y el informe se pega como comentario en el sprint cerrado de Jira.</p>
+
+      <h3>Plantilla del informe</h3>
+
+      <div class="card">
+        <h4>Sprint N · martes DD-mes → lunes DD-mes</h4>
+        <p><strong>Terminado.</strong> Las tarjetas que llegaron a Done, con su key. Solo las que están realmente en Done.</p>
+        <p><strong>No terminado, y por qué.</strong> Lo que quedó abierto y la razón real. «Nos tomó más de lo estimado» es una razón; dejarlo en blanco no lo es.</p>
+        <p><strong>Roles técnicos de este sprint.</strong> Quién respondió por frontend, por backend, por pruebas y por documentación. <strong>Rota cada dos sprints y hay que dejarlo escrito</strong> — es la evidencia de que ambos trabajamos todo el stack.</p>
+        <p><strong>Participación.</strong> Commits y PRs revisados por cada uno. Sale de GitHub y el docente lo puede ver: <code>git shortlog -sn</code> tiene que devolver <strong>dos nombres</strong>.</p>
+        <p><strong>Qué cambia la próxima semana.</strong> Una sola cosa concreta salida de la Retro. Una que se pueda cumplir, no cinco propósitos.</p>
+      </div>
+
+      <div class="note">
+        <span class="label">Cómo se escribe</span>
+        <p>Con los números reales. Un sprint donde se cerraron dos de cuatro tarjetas, contado tal cual y con la razón, se sustenta bien. Uno inflado se cae con una sola pregunta del docente, y ahí se pierde mucho más que las dos tarjetas.</p>
+      </div>
+    </section>
+
+    <!-- ============ PARADA 5 ============ -->
+    <section class="stop terminal">
+      <div class="stop-head">
+        <span class="when">Cuando se rompa</span>
+        <h2>Se va a romper</h2>
+      </div>
+      <p class="h2-note">Lo de abajo pasa siempre, y ninguna es culpa tuya.</p>
+
+      <details>
+        <summary>«No se reconoce el comando» — <code>mvn</code>, <code>java</code>, <code>psql</code>, <code>node</code></summary>
+        <p>Cierra PowerShell y ábrelo otra vez. Windows solo se entera de los programas nuevos al abrir una terminal nueva. Si tras reabrir sigue igual, el instalador no lo dejó en el PATH: usa la ruta completa del programa, como en el paso 2.</p>
+      </details>
+
+      <details>
+        <summary>El backend arranca y se cae de una, hablando de <code>DataSource</code> o <code>Connection refused</code></summary>
+        <p>No está encontrando PostgreSQL. Tres cosas en orden: que el servicio <em>postgresql</em> esté corriendo (búscalo en «Servicios» de Windows), que la base <code>fusaroute_dev</code> exista, y que hayas pegado la línea larga que carga el <code>.env</code> <strong>en esa misma ventana</strong> antes de <code>mvn spring-boot:run</code>.</p>
+      </details>
+
+      <details>
+        <summary><code>Port 8080 already in use</code></summary>
+        <p>Ya tienes un backend corriendo en otra ventana. Búscala y ciérrala con <code>Ctrl+C</code>.</p>
+      </details>
+
+      <details>
+        <summary>El frontend no levanta o da errores raros de módulos</summary>
+        <p>Borra e instala de nuevo. Es normal y no pierdes nada:</p>
+<pre><code>cd C:\dev\FusaRoute\FusaRoute-FRONTEND
+Remove-Item -Recurse -Force node_modules
+npm ci</code></pre>
+      </details>
+
+      <details>
+        <summary>Git dice <code>rejected</code> o <code>non-fast-forward</code> al hacer push</summary>
+        <p>Alguien subió algo a esa rama después de que tú bajaste. Trae lo de arriba y vuelve a subir:</p>
+<pre><code>git pull --rebase
+git push</code></pre>
+        <p>Si aparecen conflictos, <strong>páralo ahí y escríbele a Santiago</strong>. Resolver un conflicto mal borra trabajo, y es de las poquísimas cosas en Git que sí duelen.</p>
+      </details>
+
+      <details>
+        <summary>Metí la pata y quiero deshacer lo último</summary>
+        <p>Mientras <strong>no hayas hecho push</strong>, casi todo es recuperable:</p>
+<pre><code>git status                  <span class="c"># siempre empieza por aquí</span>
+git restore &lt;archivo&gt;       <span class="c"># botar cambios de un archivo</span>
+git reset --soft HEAD~1     <span class="c"># deshacer el último commit, conservando el trabajo</span></code></pre>
+        <p>Si ya hiciste push, no borres ni fuerces nada: avisa. Se arregla con otro commit, tranquilamente.</p>
+      </details>
+    </section>
+
+  </div>
+
+  <footer class="colophon">
+    <p><strong>Tu semana en FusaRoute</strong> — guía operativa del equipo (Santiago Bermúdez · Angélica Aranguren). Proyecto Integrador de Ingeniería de Software I, Universidad de Cundinamarca.</p>
+    <p>Escrita el 10 de septiembre de 2026, para el Sprint 1 que arranca el martes 15. Si un comando de aquí no funciona, es un error de la guía y hay que corregirlo — dilo.</p>
+  </footer>
+
+</div>

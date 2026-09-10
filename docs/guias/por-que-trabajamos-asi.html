@@ -1,0 +1,652 @@
+<title>Por qué trabajamos así</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+
+<style>
+  :root {
+    --paper:        #EFF2F0;
+    --surface:      #FFFFFF;
+    --surface-2:    #E7ECE9;
+    --ink:          #101A18;
+    --ink-2:        #54635F;
+    --ink-3:        #7C8A86;
+    --rule:         #D6DDDA;
+    --accent:       #0E7C66;
+    --accent-ink:   #0B5D4C;
+    --accent-soft:  #DCEDE7;
+    --alert:        #A8481A;
+    --alert-soft:   #F7E8DD;
+    --code-bg:      #0F1A18;
+    --code-ink:     #D6E9E2;
+    --code-dim:     #7EA69B;
+    /* El bloque de comité es siempre oscuro: es la firma visual de esta página */
+    --comite-bg:    #101A18;
+    --comite-ink:   #E9F1EE;
+    --comite-dim:   #93AEA6;
+    --comite-accent:#54C9A6;
+
+    --display: "Archivo", "Helvetica Neue", Arial, sans-serif;
+    --body: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+    --mono: "IBM Plex Mono", "Cascadia Mono", Consolas, monospace;
+
+    --measure: 66ch;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper:       #0D1312;
+      --surface:     #141C1A;
+      --surface-2:   #1B2523;
+      --ink:         #E7EEEB;
+      --ink-2:       #94A5A0;
+      --ink-3:       #6F807B;
+      --rule:        #26312E;
+      --accent:      #54C9A6;
+      --accent-ink:  #7FDCBF;
+      --accent-soft: #12312A;
+      --alert:       #E5915B;
+      --alert-soft:  #331F14;
+      --code-bg:     #070D0C;
+      --code-ink:    #CFE4DC;
+      --code-dim:    #6F958B;
+      --comite-bg:   #05201B;
+      --comite-ink:  #E4F2ED;
+      --comite-dim:  #86AFA4;
+      --comite-accent:#6FDCBB;
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --paper:       #0D1312;
+    --surface:     #141C1A;
+    --surface-2:   #1B2523;
+    --ink:         #E7EEEB;
+    --ink-2:       #94A5A0;
+    --ink-3:       #6F807B;
+    --rule:        #26312E;
+    --accent:      #54C9A6;
+    --accent-ink:  #7FDCBF;
+    --accent-soft: #12312A;
+    --alert:       #E5915B;
+    --alert-soft:  #331F14;
+    --code-bg:     #070D0C;
+    --code-ink:    #CFE4DC;
+    --code-dim:    #6F958B;
+    --comite-bg:   #05201B;
+    --comite-ink:  #E4F2ED;
+    --comite-dim:  #86AFA4;
+    --comite-accent:#6FDCBB;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--body);
+    font-size: 16px;
+    line-height: 1.62;
+    -webkit-font-smoothing: antialiased;
+    margin: 0;
+    padding: 0 18px 96px;
+  }
+
+  .wrap { max-width: 900px; margin: 0 auto; }
+
+  header.masthead {
+    padding: 56px 0 38px;
+    border-bottom: 2px solid var(--ink);
+    max-width: 780px;
+  }
+
+  .eyebrow {
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: var(--accent-ink);
+    margin: 0 0 18px;
+  }
+
+  h1 {
+    font-family: var(--display);
+    font-weight: 800;
+    font-size: clamp(2.35rem, 8.5vw, 3.6rem);
+    line-height: 1.02;
+    letter-spacing: -.025em;
+    text-wrap: balance;
+    margin: 0 0 20px;
+  }
+
+  .standfirst {
+    font-size: 1.075rem;
+    color: var(--ink-2);
+    max-width: 56ch;
+    margin: 0;
+  }
+
+  .standfirst strong { color: var(--ink); font-weight: 600; }
+
+  /* ---------- Conceptos en dos columnas ---------- */
+
+  article.concept {
+    display: grid;
+    grid-template-columns: 128px minmax(0, 1fr);
+    gap: 0 32px;
+    padding: 44px 0;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .rail { position: relative; }
+
+  .rail-inner { position: sticky; top: 28px; }
+
+  .kicker {
+    font-family: var(--mono);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--accent-ink);
+    display: block;
+    margin-bottom: 6px;
+  }
+
+  .rail-tag {
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    display: block;
+  }
+
+  h2 {
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: clamp(1.5rem, 4.6vw, 1.95rem);
+    line-height: 1.12;
+    letter-spacing: -.018em;
+    text-wrap: balance;
+    margin: 0 0 16px;
+  }
+
+  h3 {
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: 1.02rem;
+    letter-spacing: -.006em;
+    margin: 28px 0 10px;
+  }
+
+  p, li { max-width: var(--measure); }
+  p { margin: 0 0 15px; }
+  ul, ol { padding-left: 22px; margin: 0 0 16px; }
+  li { margin-bottom: 8px; }
+  li::marker { color: var(--ink-3); }
+
+  .lede { font-size: 1.06rem; color: var(--ink-2); }
+  .lede strong { color: var(--ink); font-weight: 600; }
+
+  a { color: var(--accent-ink); text-underline-offset: 3px; }
+  a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 3px; }
+
+  code {
+    font-family: var(--mono);
+    font-size: .875em;
+    background: var(--surface-2);
+    padding: 1px 5px;
+    border-radius: 4px;
+  }
+
+  pre {
+    background: var(--code-bg);
+    color: var(--code-ink);
+    font-family: var(--mono);
+    font-size: 13px;
+    line-height: 1.72;
+    padding: 16px 18px;
+    border-radius: 8px;
+    overflow-x: auto;
+    margin: 0 0 16px;
+  }
+
+  pre code { background: none; padding: 0; font-size: inherit; }
+  pre .c { color: var(--code-dim); }
+
+  /* ---------- Bloque "ante el comité" ---------- */
+
+  .comite {
+    background: var(--comite-bg);
+    color: var(--comite-ink);
+    border-radius: 10px;
+    padding: 22px 24px;
+    margin: 26px 0 6px;
+    max-width: var(--measure);
+  }
+
+  .comite .label {
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: 10.5px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--comite-accent);
+    display: block;
+    margin-bottom: 10px;
+  }
+
+  .comite p {
+    color: var(--comite-ink);
+    font-size: 1.02rem;
+    margin: 0 0 12px;
+    max-width: none;
+  }
+
+  .comite p:last-child { margin-bottom: 0; }
+  .comite em { color: var(--comite-dim); font-style: normal; }
+  .comite code { background: rgba(255,255,255,.09); color: var(--comite-ink); }
+
+  .aside {
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    border-radius: 10px;
+    padding: 18px 20px;
+    margin: 0 0 16px;
+    font-size: .95rem;
+    max-width: var(--measure);
+  }
+
+  .aside > :last-child { margin-bottom: 0; }
+
+  .aside .label, .warn .label {
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: 10.5px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 6px;
+    color: var(--accent-ink);
+  }
+
+  .warn {
+    background: var(--alert-soft);
+    border-left: 3px solid var(--alert);
+    border-radius: 0 8px 8px 0;
+    padding: 15px 18px;
+    margin: 0 0 18px;
+    font-size: .95rem;
+    max-width: var(--measure);
+  }
+
+  .warn .label { color: var(--alert); }
+  .warn > :last-child { margin-bottom: 0; }
+
+  .table-scroll { overflow-x: auto; margin: 0 0 18px; max-width: 100%; }
+
+  table { border-collapse: collapse; width: 100%; min-width: 480px; font-size: .93rem; }
+
+  th, td {
+    text-align: left;
+    padding: 10px 14px 10px 0;
+    border-bottom: 1px solid var(--rule);
+    vertical-align: top;
+  }
+
+  th {
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--ink-2);
+    border-bottom: 2px solid var(--ink);
+  }
+
+  /* ---------- Diagrama del hexágono ---------- */
+
+  .hex {
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    border-radius: 12px;
+    padding: 22px;
+    margin: 0 0 18px;
+    max-width: var(--measure);
+  }
+
+  .ring {
+    border: 2px solid var(--rule);
+    border-radius: 10px;
+    padding: 16px;
+  }
+
+  .ring + .ring { margin-top: 0; }
+
+  .ring-name {
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--ink-2);
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  .ring-what { font-size: .88rem; color: var(--ink-2); margin: 0 0 14px; max-width: none; }
+
+  .ring.core {
+    border-color: var(--accent);
+    background: var(--accent-soft);
+  }
+
+  .ring.core .ring-name { color: var(--accent-ink); }
+  .ring.core .ring-what { margin-bottom: 0; color: var(--ink); }
+
+  .arrow {
+    font-family: var(--mono);
+    font-size: 11.5px;
+    color: var(--accent-ink);
+    text-align: center;
+    padding: 10px 0 2px;
+    letter-spacing: .04em;
+  }
+
+  footer.colophon {
+    margin-top: 56px;
+    padding-top: 26px;
+    border-top: 2px solid var(--ink);
+    color: var(--ink-2);
+    font-size: .9rem;
+    max-width: 780px;
+  }
+
+  footer.colophon p { max-width: 62ch; }
+
+  @media (max-width: 720px) {
+    body { padding: 0 15px 72px; font-size: 15.5px; }
+    header.masthead { padding: 40px 0 30px; }
+    article.concept {
+      grid-template-columns: 1fr;
+      gap: 0;
+      padding: 36px 0;
+    }
+    .rail-inner { position: static; margin-bottom: 12px; }
+    .rail-tag { display: inline; }
+    pre { font-size: 12.2px; padding: 14px 15px; }
+    .comite { padding: 18px 19px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { animation: none !important; transition: none !important; }
+  }
+</style>
+
+<div class="wrap">
+
+  <header class="masthead">
+    <p class="eyebrow">FusaRoute · Guía formativa · Angélica</p>
+    <h1>Por qué trabajamos así</h1>
+    <p class="standfirst">Cada regla del equipo existe porque evita un problema concreto. Esta guía cuenta cuál. <strong>Y cada sección termina con lo que le dirías al comité si te preguntan</strong> — porque te van a preguntar, y ahí no responde Santiago por ti.</p>
+  </header>
+
+  <!-- ============ 01 ============ -->
+  <article class="concept">
+    <div class="rail"><div class="rail-inner">
+      <span class="kicker">01</span>
+      <span class="rail-tag">Git · ramas</span>
+    </div></div>
+    <div>
+      <h2>Por qué nadie escribe directamente en <code>main</code></h2>
+      <p class="lede"><strong>El problema que evita:</strong> que la única copia del proyecto quede rota, y que dos personas se pisen los cambios sin darse cuenta.</p>
+
+      <p>Git guarda el proyecto como una línea de fotos: cada commit es una foto del estado completo del código, con quién la tomó y por qué. <code>main</code> es la línea buena, la que siempre debería compilar y correr.</p>
+
+      <p>Una <strong>rama</strong> es una línea paralela que sale de <code>main</code>. Trabajas ahí, rompes lo que quieras, y <code>main</code> ni se entera. Cuando lo tuyo funciona, se vuelve a unir. Dos ramas a la vez significa que tú y Santiago pueden estar tocando cosas distintas sin bloquearse.</p>
+
+      <p>Por eso el nombre de la rama lleva la key de Jira: <code>feature/SCRUM-12-registro-usuario</code>. La rama contesta sola qué se está haciendo y a cuál tarjeta pertenece, sin preguntarle a nadie.</p>
+
+      <div class="aside">
+        <span class="label">La regla del <code>git pull</code></span>
+        <p>Siempre se saca la rama de un <code>main</code> recién actualizado. Salir de un <code>main</code> viejo es la causa número uno de conflictos, y un conflicto es tener que decidir a mano cuál de dos versiones del mismo archivo sobrevive. Se evita gratis con un comando.</p>
+      </div>
+
+      <div class="comite">
+        <span class="label">Ante el comité</span>
+        <p>«Usamos <em>trunk-based development</em>: <code>main</code> es la rama estable y protegida, y todo cambio entra por una rama de vida corta identificada con la key del issue de Jira. Eso nos da trazabilidad de requisito a código y evita que la rama principal quede en un estado no ejecutable.»</p>
+      </div>
+    </div>
+  </article>
+
+  <!-- ============ 02 ============ -->
+  <article class="concept">
+    <div class="rail"><div class="rail-inner">
+      <span class="kicker">02</span>
+      <span class="rail-tag">Pull Request</span>
+    </div></div>
+    <div>
+      <h2>Por qué no puedes mergear tu propio Pull Request</h2>
+      <p class="lede"><strong>El problema que evita:</strong> que cada uno termine sabiendo solo su mitad del proyecto — que es exactamente lo que el docente evalúa que no pase.</p>
+
+      <p>Un Pull Request es una propuesta: «quiero meter esta rama a <code>main</code>, revísala». Muestra el <em>diff</em>, línea por línea, de lo que cambia. La otra persona lee, pregunta, aprueba o pide cambios.</p>
+
+      <p>La regla de que nadie aprueba lo suyo tiene dos razones, y la segunda pesa más:</p>
+      <ul>
+        <li><strong>Atrapa errores.</strong> Una credencial pegada por accidente, una carpeta que no debía subir, un criterio de aceptación que quedó a medias.</li>
+        <li><strong>Obliga al aprendizaje cruzado.</strong> Es el único momento garantizado en que tú lees código de backend y Santiago lee código de frontend. El docente exige que ambos manejemos todo el stack, y el PR es la evidencia de que ocurrió.</li>
+      </ul>
+
+      <div class="warn">
+        <span class="label">Configuración, no confianza</span>
+        <p>La regla está puesta en GitHub como <em>branch protection</em>: un merge sin aprobación lo <strong>rechaza el servidor</strong>. No depende de que alguien se acuerde a las 2 de la mañana. Una regla que depende de la buena voluntad no es una regla, es un deseo.</p>
+      </div>
+
+      <div class="comite">
+        <span class="label">Ante el comité</span>
+        <p>«Toda integración a <code>main</code> pasa por Pull Request con aprobación obligatoria del otro integrante, forzada por configuración de rama protegida en GitHub. Es nuestro control de calidad y, a la vez, el mecanismo que garantiza participación equitativa en todas las capas: queda registrado quién revisó qué.»</p>
+      </div>
+    </div>
+  </article>
+
+  <!-- ============ 03 ============ -->
+  <article class="concept">
+    <div class="rail"><div class="rail-inner">
+      <span class="kicker">03</span>
+      <span class="rail-tag">Metodología</span>
+    </div></div>
+    <div>
+      <h2>Iterativo–incremental, y qué tiene que ver Scrum</h2>
+      <p class="lede"><strong>El problema que evita:</strong> llegar al final del semestre con muchas partes construidas y nada que se pueda mostrar funcionando.</p>
+
+      <p>No son dos cosas que compitan, y esa confusión es la pregunta trampa del comité. <strong>El enfoque dice cómo crece el producto. El marco de trabajo dice cómo se organiza el equipo para producirlo.</strong></p>
+
+      <p><strong>Incremental</strong> es que cada entrega agrega una pieza que ya sirve por sí sola. <strong>Iterativo</strong> es que se vuelve sobre lo entregado para mejorarlo con lo que se aprendió. FusaRoute usa las dos: cada épica es un incremento demostrable de punta a punta.</p>
+
+      <div class="aside">
+        <span class="label">Qué significa «demostrable»</span>
+        <p>Por eso «modo offline» dejó de ser una épica propia: no se puede mostrar sin la búsqueda de ruta. Una épica que no se puede demostrar contradice el enfoque que acabamos de declarar, así que se absorbió dentro de «Búsqueda de ruta». Las cinco épicas quedaron: cuenta de usuario · búsqueda de ruta · historial y favoritos · comentarios · administración.</p>
+      </div>
+
+      <p><strong>Scrum</strong> es el marco: sprints de una semana, un backlog priorizado, y eventos fijos. La priorización del backlog es tuya, como Product Owner.</p>
+
+      <h3>Por qué no hacemos Daily</h3>
+      <p>Scrum de manual pide una reunión diaria. Nosotros la descartamos <strong>por escrito y con la razón dicha en voz alta</strong>: dos personas que comparten tres clases a la semana y tienen otras cinco materias no sostienen una reunión diaria. La reemplazamos por un check-in escrito de ayer / hoy / bloqueos.</p>
+      <p>Esto es una decisión, no un incumplimiento: <strong>un evento declarado y no cumplido resta más ante el comité que uno que nunca se prometió.</strong></p>
+
+      <div class="comite">
+        <span class="label">Ante el comité</span>
+        <p>«Partimos de un modelo iterativo–incremental de linaje RUP, que define la arquitectura temprano — de ahí viene nuestra decisión de hexagonal desde el primer sprint. Evolucionamos hacia ágil por incertidumbre real: es la primera vez del equipo con mapas, Spring Boot y Angular, y tanto el modo offline como el esquema de tarifas ya se redefinieron dos veces.»</p>
+        <p>«Adoptamos Scrum como marco, adaptado a un equipo de dos: sprints semanales de martes a lunes, y sin Daily formal. Esa omisión es deliberada y está documentada, con el check-in escrito como sustituto.»</p>
+      </div>
+    </div>
+  </article>
+
+  <!-- ============ 04 ============ -->
+  <article class="concept">
+    <div class="rail"><div class="rail-inner">
+      <span class="kicker">04</span>
+      <span class="rail-tag">Roles</span>
+    </div></div>
+    <div>
+      <h2>Por qué tienes dos roles a la vez</h2>
+      <p class="lede"><strong>El problema que evita:</strong> un organigrama de mentira, que el comité detecta en una pregunta.</p>
+
+      <p>El docente pide tres cosas que no encajan solas: roles de Scrum, cinco responsables técnicos, y participación equitativa de ambos. Se resuelve declarando <strong>dos capas</strong>:</p>
+
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr><th></th><th>Capa de proceso</th><th>Capa técnica</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Angélica</strong></td><td>Product Owner</td><td>Frontend · Documentación</td></tr>
+            <tr><td><strong>Santiago</strong></td><td>Scrum Master</td><td>Líder Técnico · Backend</td></tr>
+            <tr><td><strong>Ambos</strong></td><td>Development Team</td><td>Pruebas (compartido)</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>Y una regla que hace que las dos capas no se contradigan: <strong>«responsable» significa quien responde ante el comité y revisa los PR de esa área, no quien la programa sola.</strong> Tú programas backend y Santiago programa frontend, todos los sprints. La capa técnica <strong>rota cada dos sprints</strong> y la rotación queda escrita en el informe.</p>
+
+      <div class="comite">
+        <span class="label">Ante el comité</span>
+        <p>«Separamos rol de proceso y responsabilidad técnica. La responsabilidad técnica es de rendición de cuentas y revisión, no de ejecución exclusiva: ambos desarrollamos en todas las capas y la asignación rota cada dos sprints, con registro en el informe de sprint. La evidencia está en GitHub — <code>git shortlog</code> y el historial de revisiones muestran dos nombres en ambos repositorios.»</p>
+      </div>
+    </div>
+  </article>
+
+  <!-- ============ 05 ============ -->
+  <article class="concept">
+    <div class="rail"><div class="rail-inner">
+      <span class="kicker">05</span>
+      <span class="rail-tag">Arquitectura</span>
+    </div></div>
+    <div>
+      <h2>Hexagonal, en una idea</h2>
+      <p class="lede"><strong>El problema que evita:</strong> que cambiar de base de datos, o de proveedor de mapas, obligue a reescribir las reglas del negocio.</p>
+
+      <p>La idea cabe en una frase: <strong>las dependencias apuntan siempre hacia adentro.</strong> Lo de afuera conoce a lo de adentro; lo de adentro no sabe que lo de afuera existe.</p>
+
+      <div class="hex">
+        <div class="ring">
+          <span class="ring-name">Infrastructure</span>
+          <p class="ring-what">Todo lo que toca el mundo: los controladores HTTP, las tablas de PostgreSQL, el cliente de Google Maps. <strong>Reemplazable.</strong></p>
+          <div class="ring">
+            <span class="ring-name">Application</span>
+            <p class="ring-what">Los casos de uso. Orquestan: «busca las rutas candidatas, pídele el tiempo a quien sepa, devuelve la mejor».</p>
+            <div class="ring core">
+              <span class="ring-name">Domain</span>
+              <p class="ring-what">Las reglas de FusaRoute. Qué es una ruta, cómo se calcula una tarifa intermunicipal, cuándo se avisa de congestión. <strong>No conoce Spring, ni la base de datos, ni internet.</strong></p>
+            </div>
+          </div>
+        </div>
+        <p class="arrow">infrastructure ──▶ application ──▶ domain &nbsp;&nbsp;·&nbsp;&nbsp; nunca al revés</p>
+      </div>
+
+      <p>La consecuencia práctica: si mañana Google Maps sube de precio y hay que cambiarlo por otro proveedor, se reescribe <em>un</em> archivo de <code>infrastructure/adapter/out/maps/</code>. El dominio no se toca, y las pruebas del dominio siguen pasando sin levantar Spring — corren en milisegundos.</p>
+
+      <p>Por eso la revisión de PR mira si algo dentro de <code>domain/</code> importa Spring o JPA. Ese import es la señal de que la separación se rompió.</p>
+
+      <h3>La contradicción del docente</h3>
+      <p>El docente exige hexagonal en un documento y prescribe <strong>Controller → Service → Repository</strong> en otro. Parecen incompatibles. No hay que escoger: <strong>hexagonal contiene esas tres capas, con otros nombres y con una dependencia invertida.</strong></p>
+
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr><th>Guía del docente</th><th>FusaRoute (hexagonal)</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Controller</td><td><code>infrastructure/adapter/in/web/</code></td></tr>
+            <tr><td>Service</td><td><code>application/usecase/</code> + <code>domain/model/</code></td></tr>
+            <tr><td>Repository</td><td><code>infrastructure/adapter/out/persistence/</code><br><span style="color:var(--ink-2)">…pero su interfaz vive en <code>domain/port/out/</code></span></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>Esa última línea es toda la diferencia. En capas, el servicio depende del repositorio. En hexagonal, el dominio <em>declara</em> qué necesita y la infraestructura obedece. Por eso se puede cambiar la base de datos sin tocar la lógica.</p>
+
+      <div class="comite">
+        <span class="label">Ante el comité</span>
+        <p>«Hexagonal no contradice el esquema Controller–Service–Repository: lo contiene e invierte una dependencia. La interfaz del repositorio pertenece al dominio, no a la infraestructura. Eso nos permite sustituir el proveedor de persistencia o el de mapas sin tocar la lógica de negocio, y probar los casos de uso sin levantar el framework.»</p>
+        <p>«La regla no la vigilamos a ojo: la verifica <strong>ArchUnit</strong> dentro del build, así que una violación rompe la compilación en lugar de depender del revisor.»</p>
+      </div>
+    </div>
+  </article>
+
+  <!-- ============ 06 ============ -->
+  <article class="concept">
+    <div class="rail"><div class="rail-inner">
+      <span class="kicker">06</span>
+      <span class="rail-tag">Ambientes</span>
+    </div></div>
+    <div>
+      <h2>Por qué existen tres ambientes</h2>
+      <p class="lede"><strong>El problema que evita:</strong> probar sobre los datos de verdad, y quedarse sin nada que mostrar el día de la sustentación.</p>
+
+      <p>La idea, otra vez en una frase: <strong>el código nunca cambia entre ambientes; lo que cambia es cuál archivo de configuración se activa.</strong></p>
+
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr><th>Ambiente</th><th>Qué es</th><th>Estado real</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>DEV</strong></td><td>PostgreSQL en tu portátil. Tus datos, tus experimentos.</td><td>activo</td></tr>
+            <tr><td><strong>PRE</strong></td><td>Supabase con datos de prueba. El ensayo general.</td><td>Sprint 2</td></tr>
+            <tr><td><strong>PROD</strong></td><td>Supabase con las rutas reales. Lo que ve el comité.</td><td>Sprint 2</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>El mismo <code>RouteSearchUseCase</code> corre en los tres. Lo único distinto es cuál <code>application-<em>perfil</em>.properties</code> se activa, y ese archivo no contiene valores: contiene los <em>nombres</em> de las variables.</p>
+
+<pre><code>spring.datasource.url=${DB_URL}          <span class="c">no la URL, el nombre de la variable</span>
+spring.datasource.password=${DB_PASSWORD}</code></pre>
+
+      <p>Los valores viven en tu <code>.env</code>, que no se sube nunca. Lo que sí se versiona es <code>.env.example</code>, con las claves y los valores vacíos: <strong>ese archivo es la documentación ejecutable del proyecto — si una variable no está ahí, no existe.</strong></p>
+
+      <div class="warn">
+        <span class="label">En Angular no va ningún secreto</span>
+        <p>Todo lo que se compila en el frontend viaja al navegador del usuario y se puede leer con F12. Un «secreto» en Angular no es un secreto. La llave de Google Maps que sí vive ahí es <strong>la del frontend</strong>, pública por diseño, y lo que la protege es la restricción por dominio en Google Cloud. La llave del backend es otra y no sale del servidor jamás.</p>
+      </div>
+
+      <div class="comite">
+        <span class="label">Ante el comité — y esta parte se dice tal cual</span>
+        <p>«Tenemos los tres perfiles creados desde la semana de preparación, con PRE y PROD declarados y sin valores hasta el Sprint 2. <strong>PROD no está desplegado en ningún servidor este semestre:</strong> el backend corre desde un portátil el día de la demostración.»</p>
+        <p><em>Se dice así, sin adornos. Prometer un servidor productivo que no existe es peor que declarar la limitación: la limitación declarada se sustenta; la promesa incumplida no.</em></p>
+      </div>
+    </div>
+  </article>
+
+  <!-- ============ 07 ============ -->
+  <article class="concept">
+    <div class="rail"><div class="rail-inner">
+      <span class="kicker">07</span>
+      <span class="rail-tag">Criterio</span>
+    </div></div>
+    <div>
+      <h2>La regla que está detrás de todas las demás</h2>
+
+      <p class="lede">Cualquier número que escribamos en un entregable —cobertura, tiempo de respuesta, disponibilidad— tiene que venir con la herramienta que lo mide. <strong>Si no hay comando, test o instrumento que produzca ese número, la métrica no se escribe.</strong></p>
+
+      <p>De ahí salen decisiones que a primera vista parecen bajar la vara: el p95 de la búsqueda quedó en 8 segundos y no en 5; la Daily se descartó en vez de prometerse; PROD se declara no desplegado. En todos los casos la alternativa era escribir un número más bonito que no íbamos a poder sostener.</p>
+
+      <p>Ante el comité, la diferencia se nota rápido. <strong>Un compromiso modesto que se cumple y se puede demostrar vale más que uno ambicioso que se cae con una sola pregunta</strong> — y cambiar de opinión con argumentos suma, mientras que cambiar sin registrar el porqué resta.</p>
+
+      <div class="comite">
+        <span class="label">Ante el comité</span>
+        <p>«Cada atributo de calidad tiene una única métrica y una tercera columna con el instrumento que la mide: Actuator y Micrometer para el percentil 95, ArchUnit y JaCoCo para mantenibilidad, Lighthouse en CI para el frontend. Donde el instrumento no existía, ajustamos la métrica en lugar de dejarla declarada sin forma de comprobarla.»</p>
+      </div>
+    </div>
+  </article>
+
+  <footer class="colophon">
+    <p><strong>Por qué trabajamos así</strong> — guía formativa del equipo (Santiago Bermúdez · Angélica Aranguren). Proyecto Integrador de Ingeniería de Software I, Universidad de Cundinamarca.</p>
+    <p>La guía hermana, <em>Tu semana en FusaRoute</em>, tiene los comandos y el paso a paso. Esta tiene las razones. Escrita el 10 de septiembre de 2026.</p>
+  </footer>
+
+</div>
