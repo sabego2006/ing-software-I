@@ -488,11 +488,22 @@ git clone https://github.com/sabego2006/ing-software-I.git</code></pre>
         </li>
 
         <li>
-          <h4>Crea la base de datos</h4>
-          <p>Te va a pedir la contraseña de <code>postgres</code> que anotaste.</p>
-<pre><code>psql -U postgres -c "CREATE DATABASE fusaroute_dev;"</code></pre>
+          <h4>Crea la base de datos y tu propio usuario</h4>
+          <p>Entra a <code>psql</code> con el superusuario que acabas de crear. Te va a pedir la contraseña de <code>postgres</code> que anotaste, de forma interactiva — escríbela ahí, nunca la pegues en un comando ni se la muestres a nadie por chat.</p>
+<pre><code>psql -U postgres</code></pre>
           <p>Si te responde <code>psql: command not found</code>, es que el instalador no lo dejó en el PATH. Usa la ruta completa:</p>
-<pre><code>&amp; "C:\Program Files\PostgreSQL\17\bin\psql.exe" -U postgres -c "CREATE DATABASE fusaroute_dev;"</code></pre>
+<pre><code>&amp; "C:\Program Files\PostgreSQL\17\bin\psql.exe" -U postgres</code></pre>
+          <div class="warn">
+            <span class="label">Regla fija: la app nunca usa <code>postgres</code></span>
+            <p><code>postgres</code> es el superusuario — puede borrar cualquier base del servidor. La aplicación se conecta siempre con un usuario propio, dueño solo de <em>su</em> base. Si ese usuario dedicado se filtra algún día, el daño se queda en una base vacía de pruebas; si se filtra el superusuario, se pierde todo el servidor. Ya adentro de <code>psql</code>, pega esto completo — cambia <code>TU_CONTRASEÑA_AQUI</code> por una que uses solo para esto:</p>
+          </div>
+<pre><code>CREATE DATABASE fusaroute_dev;
+CREATE USER fusaroute_dev WITH PASSWORD 'TU_CONTRASEÑA_AQUI';
+GRANT ALL PRIVILEGES ON DATABASE fusaroute_dev TO fusaroute_dev;
+\c fusaroute_dev
+GRANT ALL ON SCHEMA public TO fusaroute_dev;
+\q</code></pre>
+          <p>Anota esa contraseña nueva — es la que va en tu <code>.env</code> en el paso siguiente, no la de <code>postgres</code>.</p>
         </li>
 
         <li>
@@ -501,12 +512,12 @@ git clone https://github.com/sabego2006/ing-software-I.git</code></pre>
 <pre><code>cd C:\dev\FusaRoute\FusaRoute-BACKEND
 Copy-Item .env.example .env
 notepad .env</code></pre>
-          <p>Llénalo así, con <strong>tu</strong> contraseña de postgres:</p>
+          <p>Llénalo así, con el usuario y la contraseña de <code>fusaroute_dev</code> que creaste en el paso anterior — <strong>no</strong> con <code>postgres</code>:</p>
 <pre><code>SPRING_PROFILE=dev
 PORT=8080
 DB_URL=jdbc:postgresql://localhost:5432/fusaroute_dev
-DB_USERNAME=postgres
-DB_PASSWORD=<span class="c">la que anotaste</span>
+DB_USERNAME=fusaroute_dev
+DB_PASSWORD=<span class="c">la contraseña que le pusiste a fusaroute_dev</span>
 GOOGLE_MAPS_API_KEY=
 JWT_SECRET=<span class="c">cualquier texto largo por ahora</span></code></pre>
           <p>Las dos últimas pueden quedar vacías hasta que existan las historias que las usan.</p>
