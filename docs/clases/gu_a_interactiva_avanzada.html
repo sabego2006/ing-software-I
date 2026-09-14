@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guía Interactiva: Ingeniería de Software Pro</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- React & ReactDOM -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <!-- Babel para JSX -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <!-- FontAwesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#1e3a8a',
+                        secondary: '#0ea5e9',
+                        accent: '#f59e0b',
+                        dark: '#0f172a',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background-color: #f8fafc; }
+        .fade-in { animation: fadeIn 0.5s ease-in-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        
+        /* CSS para Diagrama Hexagonal */
+        .hex-container { position: relative; width: 100%; max-width: 400px; margin: 0 auto; aspect-ratio: 1; display: flex; align-items: center; justify-content: center;}
+        .hex-layer-1 { position: absolute; width: 100%; height: 100%; border: 4px dashed #94a3b8; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+        .hex-layer-2 { position: absolute; width: 70%; height: 70%; border: 4px solid #3b82f6; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: #eff6ff;}
+        .hex-layer-3 { position: absolute; width: 40%; height: 40%; background: #1e3a8a; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; text-align: center; padding: 10px;}
+        .hex-label-adapter { position: absolute; top: -10px; background: white; padding: 2px 10px; font-weight: bold; color: #64748b; font-size: 0.8rem; border-radius: 12px; border: 1px solid #cbd5e1;}
+        .hex-label-port { position: absolute; top: -15px; background: white; padding: 2px 10px; font-weight: bold; color: #2563eb; font-size: 0.8rem; border-radius: 12px; border: 1px solid #93c5fd;}
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+
+        // --- Componentes Reutilizables ---
+
+        const TeenExplanation = ({ text }) => (
+            <div className="bg-yellow-50 border-l-4 border-yellow-400 p-4 my-4 rounded-r-lg shadow-sm">
+                <div className="flex items-center mb-2">
+                    <span className="text-2xl mr-2">🛹</span>
+                    <h4 className="font-bold text-yellow-800 text-lg">Teen-Explanation (En palabras simples)</h4>
+                </div>
+                <p className="text-yellow-900 italic">{text}</p>
+            </div>
+        );
+
+        const ProTip = ({ text }) => (
+            <div className="bg-blue-50 border border-blue-200 p-4 my-4 rounded-lg shadow-sm flex items-start">
+                <i className="fas fa-lightbulb text-blue-500 text-xl mt-1 mr-3"></i>
+                <div>
+                    <h4 className="font-bold text-blue-900">Estándar Profesional (ISO / DevOps)</h4>
+                    <p className="text-blue-800 text-sm mt-1">{text}</p>
+                </div>
+            </div>
+        );
+
+        // --- Módulos de Contenido ---
+
+        const Module1 = () => (
+            <div className="fade-in">
+                <h2 className="text-3xl font-extrabold text-dark border-b-2 border-secondary pb-2 mb-6">📁 Módulo 1: Arquitectura del Repositorio y Dominio</h2>
+                
+                <p className="text-lg text-gray-700 mb-4">
+                    Según la <strong>"GUÍA DE BUENAS PRÁCTICAS EN GITHUB.pdf"</strong>, un repositorio bien organizado es fundamental. En la asignatura <strong>"Software Engineering I"</strong>, llevamos esto al siguiente nivel integrando la <strong className="text-primary">Arquitectura Hexagonal</strong>. El repositorio no es solo donde "guardas código", es el mapa arquitectónico de tu sistema.
+                </p>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 my-8">
+                    <div className="bg-white p-6 rounded-xl shadow-md border border-gray-100">
+                        <h3 className="text-xl font-bold text-primary mb-4"><i className="fas fa-folder-tree mr-2"></i>Estructura Estándar</h3>
+                        <ul className="space-y-3 font-mono text-sm">
+                            <li className="flex items-start"><i className="fas fa-folder text-blue-400 mt-1 mr-2"></i> <div><strong>.github/workflows/</strong><br/><span className="text-gray-500 text-xs font-sans">Automatización CI/CD (DevOps). Despliegues automáticos.</span></div></li>
+                            <li className="flex items-start"><i className="fas fa-folder text-blue-400 mt-1 mr-2"></i> <div><strong>docs/</strong><br/><span className="text-gray-500 text-xs font-sans">Documentación ISO 29148 y diagramas UML.</span></div></li>
+                            <li className="flex items-start"><i className="fas fa-folder text-blue-400 mt-1 mr-2"></i> <div><strong>src/</strong><br/><span className="text-gray-500 text-xs font-sans">Código fuente (Spring Boot backend o React SPA).</span></div></li>
+                            <li className="flex items-start"><i className="fas fa-folder text-blue-400 mt-1 mr-2"></i> <div><strong>tests/</strong><br/><span className="text-gray-500 text-xs font-sans">Pruebas automatizadas (Aseguramiento de Calidad).</span></div></li>
+                            <li className="flex items-start"><i className="fab fa-markdown text-blue-400 mt-1 mr-2"></i> <div><strong>README.md</strong><br/><span className="text-gray-500 text-xs font-sans">El documento principal. Define el objetivo, stack y uso.</span></div></li>
+                            <li className="flex items-start"><i className="fas fa-file-code text-blue-400 mt-1 mr-2"></i> <div><strong>.gitignore</strong><br/><span className="text-gray-500 text-xs font-sans">Bloquea archivos basura y secretos (.env).</span></div></li>
+                        </ul>
+                    </div>
+                    
+                    <div className="bg-white p-6 rounded-xl shadow-md border border-gray-100 flex flex-col items-center justify-center">
+                        <h3 className="text-xl font-bold text-primary mb-4 w-full text-left">Visión Hexagonal en <span className="font-mono text-sm bg-gray-100 px-1">src/</span></h3>
+                        <div className="hex-container">
+                            <div className="hex-layer-1">
+                                <span className="hex-label-adapter">Adaptadores (BD, UI Web)</span>
+                                <div className="hex-layer-2">
+                                    <span className="hex-label-port">Puertos (Interfaces)</span>
+                                    <div className="hex-layer-3">
+                                        Dominio<br/><span className="text-xs font-normal">(Lógica Pura)</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <ProTip text="Al alinear tus carpetas con Arquitectura Hexagonal (separando Dominio de Infraestructura), cumples directamente con el atributo de 'Mantenibilidad' de la norma ISO/IEC 25010. Si cambias de PostgreSQL a MongoDB, tu Dominio ni se entera." />
+                
+                <TeenExplanation text="Imagina que tu código es un restaurante. El Dominio (centro) es el Chef: él solo sabe cocinar la receta perfecta (las reglas de tu app). Los Puertos son los meseros: toman las órdenes y entregan la comida. Los Adaptadores son el menú en papel, la app de UberEats o el drive-thru. Al Chef no le importa si el cliente pidió por UberEats o en la mesa; él solo recibe la orden del mesero, cocina y entrega." />
+
+                <div className="mt-8 bg-gray-800 text-white p-6 rounded-lg shadow-lg">
+                    <h3 className="text-xl font-bold mb-3 text-secondary"><i className="fas fa-terminal mr-2"></i>El README.md de Excelencia</h3>
+                    <p className="text-sm mb-4 text-gray-300">Según la guía oficial, si tu proyecto no tiene un buen README, es como si no existiera. Debe contener al menos:</p>
+                    <ul className="list-disc list-inside space-y-1 text-sm text-gray-400">
+                        <li><strong className="text-white">Descripción y Objetivo:</strong> ¿Qué problema real soluciona?</li>
+                        <li><strong className="text-white">Tecnologías:</strong> Ej. Spring Boot (Backend), PostgreSQL, React (Frontend).</li>
+                        <li><strong className="text-white">Instalación y Uso:</strong> Comandos exactos para que otro desarrollador lo corra en 5 minutos.</li>
+                    </ul>
+                </div>
+            </div>
+        );
+
+        const Module2 = () => (
+            <div className="fade-in">
+                <h2 className="text-3xl font-extrabold text-dark border-b-2 border-secondary pb-2 mb-6">🌿 Módulo 2: GitFlow, Commits Semánticos y CI/CD</h2>
+                
+                <p className="text-lg text-gray-700 mb-6">
+                    Operar directamente sobre la rama principal es una violación a las normas de <strong>Software Engineering I</strong>. La gestión del ciclo de vida exige estrategias de ramificación y un historial semántico, bases esenciales para las métricas DORA (Deployment Frequency, Lead Time for Changes).
+                </p>
+
+                <div className="bg-white rounded-xl shadow-md border border-gray-100 overflow-hidden mb-8">
+                    <div className="bg-primary text-white p-4">
+                        <h3 className="text-xl font-bold">Estrategia de Ramas (GitFlow Simplificado)</h3>
+                    </div>
+                    <div className="p-6">
+                        <div className="relative border-l-4 border-gray-200 ml-3 md:ml-6 space-y-8">
+                            <div className="relative">
+                                <div className="absolute -left-[23px] bg-red-500 h-10 w-10 rounded-full border-4 border-white flex items-center justify-center text-white font-bold"><i className="fas fa-crown"></i></div>
+                                <div className="ml-10">
+                                    <h4 className="text-lg font-bold text-red-600 font-mono">main</h4>
+                                    <p className="text-gray-600 text-sm">Versión estable de producción. Protegida. Solo recibe código que ya pasó pruebas rigurosas.</p>
+                                </div>
+                            </div>
+                            <div className="relative">
+                                <div className="absolute -left-[23px] bg-blue-500 h-10 w-10 rounded-full border-4 border-white flex items-center justify-center text-white font-bold"><i className="fas fa-code-branch"></i></div>
+                                <div className="ml-10">
+                                    <h4 className="text-lg font-bold text-blue-600 font-mono">develop</h4>
+                                    <p className="text-gray-600 text-sm">El área de integración. Donde el equipo une sus trabajos individuales para pruebas de conjunto.</p>
+                                </div>
+                            </div>
+                            <div className="relative">
+                                <div className="absolute -left-[23px] bg-green-500 h-10 w-10 rounded-full border-4 border-white flex items-center justify-center text-white font-bold"><i className="fas fa-leaf"></i></div>
+                                <div className="ml-10">
+                                    <h4 className="text-lg font-bold text-green-600 font-mono">feature/* (ej. feature/login-auth)</h4>
+                                    <p className="text-gray-600 text-sm">Nacen de <span className="font-mono text-xs">develop</span>. Aquí construyes una nueva funcionalidad de manera aislada.</p>
+                                </div>
+                            </div>
+                            <div className="relative">
+                                <div className="absolute -left-[23px] bg-yellow-500 h-10 w-10 rounded-full border-4 border-white flex items-center justify-center text-white font-bold"><i className="fas fa-bug"></i></div>
+                                <div className="ml-10">
+                                    <h4 className="text-lg font-bold text-yellow-600 font-mono">fix/* (ej. fix/calculo-tarifa)</h4>
+                                    <p className="text-gray-600 text-sm">Nacen de <span className="font-mono text-xs">develop</span> o <span className="font-mono text-xs">main</span>. Ramas de emergencia para corregir errores puntuales.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <TeenExplanation text="Imagina que tú y tus amigos están escribiendo un libro de superhéroes juntos. La rama 'main' es el libro publicado en Amazon. No pueden borrar ni tachar directamente sobre el libro vendido. Si quieren crear un nuevo superpoder, hacen copias del borrador oficial ('feature/*'). Escriben en su casa, y cuando está perfecto, lo juntan todo en el cuarto de edición ('develop') antes de mandarlo a la imprenta ('main')." />
+
+                <div className="mt-8 flex flex-col md:flex-row gap-6">
+                    <div className="flex-1 bg-white p-6 rounded-xl shadow-md border border-gray-100">
+                        <h3 className="text-xl font-bold text-primary mb-4"><i className="fas fa-comment-dots mr-2"></i>Commits Semánticos</h3>
+                        <p className="text-sm text-gray-600 mb-4">Un commit representa un cambio específico y atómico. Evita mensajes como "cambios" o "final". Usa la convención oficial de la <strong>"GUÍA DE BUENAS PRÁCTICAS EN GITHUB.pdf"</strong>:</p>
+                        <ul className="space-y-2 text-sm font-mono">
+                            <li className="bg-gray-50 p-2 rounded"><span className="text-green-600 font-bold">feat:</span> agregar pasarela de pagos</li>
+                            <li className="bg-gray-50 p-2 rounded"><span className="text-red-600 font-bold">fix:</span> corregir cálculo de impuesto en carrito</li>
+                            <li className="bg-gray-50 p-2 rounded"><span className="text-blue-600 font-bold">docs:</span> actualizar diagrama UML en README</li>
+                            <li className="bg-gray-50 p-2 rounded"><span className="text-purple-600 font-bold">refactor:</span> extraer lógica de BD al Adapter</li>
+                            <li className="bg-gray-50 p-2 rounded"><span className="text-yellow-600 font-bold">test:</span> agregar pruebas unitarias al Dominio</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <ProTip text="Al usar commits atómicos y semánticos, facilitas la automatización DevOps. Un pipeline de CI/CD puede leer 'feat:' y automáticamente generar las notas de la versión (Release Notes) sin intervención humana." />
+            </div>
+        );
+
+        const Module3 = () => (
+            <div className="fade-in">
+                <h2 className="text-3xl font-extrabold text-dark border-b-2 border-secondary pb-2 mb-6">🛡️ Módulo 3: Pull Requests y DevSecOps</h2>
+                
+                <p className="text-lg text-gray-700 mb-6">
+                    El código no llega a producción mágicamente. El <strong>Pull Request (PR)</strong> es el punto de control humano y automático. Aquí se aplica la revisión por pares (Peer Review) y se valida la calidad del software (Atributos ISO 25010: Fiabilidad, Seguridad).
+                </p>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div className="bg-gradient-to-br from-gray-900 to-gray-800 p-6 rounded-xl shadow-lg text-white">
+                        <h3 className="text-xl font-bold mb-4 text-green-400"><i className="fas fa-check-circle mr-2"></i>Estructura de un PR de Excelencia</h3>
+                        <p className="text-sm text-gray-300 mb-4">Según la <strong>"GUÍA DE BUENAS PRÁCTICAS EN GITHUB.pdf"</strong>, un PR debe incluir obligatoriamente:</p>
+                        <div className="bg-gray-700 p-4 rounded font-mono text-sm space-y-3 shadow-inner">
+                            <div><span className="text-blue-300 font-bold">Descripción:</span> Se integró la API de Google Maps al Adapter de Rutas.</div>
+                            <div><span className="text-blue-300 font-bold">Motivo:</span> Reemplazar el cálculo estático para dar tiempos en vivo.</div>
+                            <div><span className="text-blue-300 font-bold">Cómo probar:</span><br/>1. Clonar rama feature/maps<br/>2. Levantar Spring Boot<br/>3. Enviar POST a /api/rutas</div>
+                            <div><span className="text-blue-300 font-bold">Evidencia:</span> [Adjuntar screenshot de Postman 200 OK]</div>
+                        </div>
+                    </div>
+
+                    <div className="bg-red-50 border-l-4 border-red-500 p-6 rounded-r-xl shadow-md">
+                        <h3 className="text-xl font-bold text-red-700 mb-2"><i className="fas fa-shield-alt mr-2"></i>La Regla de Oro (Seguridad)</h3>
+                        <p className="text-gray-800 mb-4">La seguridad es responsabilidad de todos (DevSecOps). La vulneración de la confidencialidad (ISO 25010) ocurre principalmente por errores humanos.</p>
+                        <div className="bg-white p-4 border border-red-200 rounded font-bold text-center shadow-sm">
+                            <i className="fas fa-ban text-red-500 text-3xl mb-2"></i><br/>
+                            NUNCA SUBIR AL REPOSITORIO:
+                            <ul className="font-normal text-red-900 mt-2 text-sm">
+                                <li>Contraseñas de Base de Datos</li>
+                                <li>Tokens de APIs (AWS, Google, Stripe)</li>
+                                <li>Llaves Privadas (.pem)</li>
+                                <li>Archivos <strong>.env</strong></li>
+                            </ul>
+                        </div>
+                        <p className="text-xs text-red-600 mt-3 text-center">Usa siempre <strong>.gitignore</strong> para excluir variables sensibles.</p>
+                    </div>
+                </div>
+
+                <TeenExplanation text="Un Pull Request es como el control de aduanas en el aeropuerto. Llegas con tu maleta (tu código) y quieres subir al avión ('main'). Los guardias (tus compañeros) abren la maleta. Revisan tu pasaporte (la descripción del PR). Si traes contraseñas expuestas (explosivos) o código sucio (ropa sucia), te rechazan el vuelo. Si todo está limpio y documentado, aprueban tu ingreso." />
+                
+                <ProTip text="La ética profesional ('Software Engineering I') exige que las revisiones de PR sean constructivas. En lugar de decir 'Tu código es terrible y lento', comenta: 'Noté que esta consulta a la BD dentro del bucle afecta el rendimiento (O(n²)). ¿Qué te parece si extraemos la consulta antes del bucle para optimizarlo?'" />
+            </div>
+        );
+
+        const Module4 = () => {
+            const [currentQuestion, setCurrentQuestion] = useState(0);
+            const [score, setScore] = useState(0);
+            const [showResult, setShowResult] = useState(false);
+            const [feedback, setFeedback] = useState(null);
+
+            const questions = [
+                {
+                    title: "Situación de Seguridad",
+                    question: "Estás configurando el proyecto FusaRoute. Al revisar el estado con 'git status', notas que el archivo '.env' que contiene las contraseñas de la base de datos PostgreSQL está listo para subirse. ¿Qué debes hacer inmediatamente según la guía oficial?",
+                    options: [
+                        "Hacer un commit con el mensaje 'feat: agregar credenciales' para que el equipo lo vea.",
+                        "Agregar '.env' al archivo '.gitignore' para ocultarlo de Git y no subirlo nunca.",
+                        "Subirlo temporalmente y luego crear un PR para borrarlo más tarde."
+                    ],
+                    correct: 1,
+                    explanation: "Correcto. El archivo .gitignore previene que Git rastree archivos sensibles. Subir credenciales es la violación de seguridad más crítica en Ingeniería de Software."
+                },
+                {
+                    title: "Mensajería Semántica",
+                    question: "Acabas de resolver un error crítico en el backend de Spring Boot donde el cálculo de tarifas daba resultados negativos. ¿Cuál es la forma profesional de redactar el commit?",
+                    options: [
+                        "fix: corregir error de valores negativos en el cálculo de tarifas",
+                        "arreglos finales backend tarifas",
+                        "feat: nueva corrección de la tarifa del viaje"
+                    ],
+                    correct: 0,
+                    explanation: "Correcto. Usa el prefijo 'fix:' (corrección de errores) seguido de una descripción clara y atómica del problema resuelto."
+                },
+                {
+                    title: "Arquitectura Hexagonal",
+                    question: "En tu proyecto, tienes una regla estricta: 'Los menores de edad no pueden reservar canchas pasadas las 10:00 PM'. Según la Arquitectura Hexagonal, ¿en qué capa debes programar esta regla de negocio?",
+                    options: [
+                        "En el Frontend (React/Angular) para que salte una alerta.",
+                        "En el Adaptador de Base de Datos, usando un Trigger SQL.",
+                        "En el centro del Hexágono (Dominio), aislada de la UI y la Base de Datos."
+                    ],
+                    correct: 2,
+                    explanation: "Exacto. El Dominio contiene la Lógica de Negocio pura. Al ponerla en el centro, aseguras que la regla se cumpla sin importar si cambias el frontend web por una App Móvil, o PostgreSQL por MongoDB."
+                }
+            ];
+
+            const handleAnswer = (index) => {
+                if (index === questions[currentQuestion].correct) {
+                    setScore(score + 1);
+                    setFeedback({ type: 'success', text: questions[currentQuestion].explanation });
+                } else {
+                    setFeedback({ type: 'error', text: `Incorrecto. ${questions[currentQuestion].explanation}` });
+                }
+
+                setTimeout(() => {
+                    setFeedback(null);
+                    if (currentQuestion < questions.length - 1) {
+                        setCurrentQuestion(currentQuestion + 1);
+                    } else {
+                        setShowResult(true);
+                    }
+                }, 4000);
+            };
+
+            return (
+                <div className="fade-in">
+                    <h2 className="text-3xl font-extrabold text-dark border-b-2 border-secondary pb-2 mb-6">🧠 Módulo 4: Simulador Interactivo</h2>
+                    <p className="text-lg text-gray-700 mb-6">Demuestra que estás listo para aplicar los estándares de la industria y la <strong>"GUÍA DE BUENAS PRÁCTICAS EN GITHUB.pdf"</strong> en un entorno real.</p>
+
+                    {!showResult ? (
+                        <div className="bg-white p-6 md:p-8 rounded-xl shadow-lg border-t-4 border-primary">
+                            <div className="flex justify-between items-center mb-6">
+                                <span className="text-sm font-bold text-gray-500 uppercase tracking-wider">{questions[currentQuestion].title}</span>
+                                <span className="bg-blue-100 text-blue-800 text-xs font-bold px-3 py-1 rounded-full">Pregunta {currentQuestion + 1} de {questions.length}</span>
+                            </div>
+                            
+                            <h3 className="text-xl font-medium text-gray-900 mb-6">{questions[currentQuestion].question}</h3>
+                            
+                            <div className="space-y-3">
+                                {questions[currentQuestion].options.map((opt, idx) => (
+                                    <button 
+                                        key={idx} 
+                                        disabled={feedback !== null}
+                                        onClick={() => handleAnswer(idx)}
+                                        className={`w-full text-left p-4 rounded-lg border-2 transition-all duration-200 
+                                            ${feedback ? 'cursor-not-allowed opacity-50' : 'hover:border-primary hover:bg-blue-50 border-gray-200'}
+                                            ${feedback && idx === questions[currentQuestion].correct ? 'border-green-500 bg-green-50 opacity-100' : ''}
+                                            ${feedback && idx !== questions[currentQuestion].correct ? 'border-red-500 bg-red-50' : ''}
+                                        `}
+                                    >
+                                        <div className="flex items-center">
+                                            <span className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center mr-4 font-bold text-gray-600">{['A', 'B', 'C'][idx]}</span>
+                                            <span className="text-gray-700 font-medium">{opt}</span>
+                                        </div>
+                                    </button>
+                                ))}
+                            </div>
+
+                            {feedback && (
+                                <div className={`mt-6 p-4 rounded-lg ${feedback.type === 'success' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'} fade-in flex items-start`}>
+                                    <i className={`fas ${feedback.type === 'success' ? 'fa-check-circle' : 'fa-times-circle'} text-xl mr-3 mt-1`}></i>
+                                    <p className="font-medium">{feedback.text}</p>
+                                </div>
+                            )}
+                        </div>
+                    ) : (
+                        <div className="bg-white p-10 rounded-xl shadow-lg text-center border-t-4 border-accent">
+                            <i className="fas fa-award text-6xl text-accent mb-4"></i>
+                            <h3 className="text-3xl font-bold text-gray-900 mb-2">¡Simulación Completada!</h3>
+                            <p className="text-lg text-gray-600 mb-6">Tu puntuación: <strong className="text-2xl text-primary">{score} / {questions.length}</strong></p>
+                            
+                            {score === questions.length ? (
+                                <p className="text-green-600 font-bold bg-green-50 p-4 rounded-lg">¡Excelente! Tienes el criterio de un Ingeniero de Software Pro. Estás listo para liderar repositorios empresariales.</p>
+                            ) : (
+                                <p className="text-yellow-600 font-bold bg-yellow-50 p-4 rounded-lg">Buen intento. Revisa la guía una vez más para afianzar los conceptos críticos de DevSecOps y Arquitectura.</p>
+                            )}
+                            
+                            <button 
+                                onClick={() => { setCurrentQuestion(0); setScore(0); setShowResult(false); }}
+                                className="mt-8 bg-primary text-white px-8 py-3 rounded-full font-bold hover:bg-blue-900 transition-colors shadow-md"
+                            >
+                                Intentar de Nuevo
+                            </button>
+                        </div>
+                    )}
+                </div>
+            );
+        };
+
+        // --- Aplicación Principal ---
+
+        const App = () => {
+            const [activeModule, setActiveModule] = useState(1);
+
+            const modules = [
+                { id: 1, icon: 'fa-folder-tree', title: 'Arquitectura' },
+                { id: 2, icon: 'fa-code-branch', title: 'GitFlow & CI/CD' },
+                { id: 3, icon: 'fa-shield-halved', title: 'PRs & DevSecOps' },
+                { id: 4, icon: 'fa-gamepad', title: 'Retos Interactivos' }
+            ];
+
+            return (
+                <div className="min-h-screen flex flex-col md:flex-row">
+                    {/* Sidebar Navigation */}
+                    <aside className="bg-dark text-white w-full md:w-72 flex-shrink-0 flex flex-col">
+                        <div className="p-6 border-b border-gray-700 text-center md:text-left">
+                            <i className="fab fa-github text-4xl mb-3 text-secondary"></i>
+                            <h1 className="text-xl font-black leading-tight">De Junior a<br/><span className="text-secondary">Ingeniero Pro</span></h1>
+                            <p className="text-xs text-gray-400 mt-2 font-mono">Basado en: "GUÍA DE BUENAS PRÁCTICAS EN GITHUB.pdf" y "Software Engineering I"</p>
+                        </div>
+                        <nav className="flex-1 p-4">
+                            <ul className="space-y-2">
+                                {modules.map(mod => (
+                                    <li key={mod.id}>
+                                        <button 
+                                            onClick={() => setActiveModule(mod.id)}
+                                            className={`w-full flex items-center p-3 rounded-lg transition-colors text-left font-medium
+                                                ${activeModule === mod.id ? 'bg-primary text-white shadow-md' : 'text-gray-400 hover:bg-gray-800 hover:text-white'}`}
+                                        >
+                                            <i className={`fas ${mod.icon} w-6 text-center mr-3`}></i>
+                                            {mod.title}
+                                        </button>
+                                    </li>
+                                ))}
+                            </ul>
+                        </nav>
+                        <div className="p-4 bg-gray-900 text-xs text-gray-500 text-center border-t border-gray-800">
+                            Curso: Software Engineering I<br/>Nivel: Intermedio-Alto
+                        </div>
+                    </aside>
+
+                    {/* Main Content Area */}
+                    <main className="flex-1 p-6 md:p-10 lg:p-16 overflow-y-auto">
+                        <div className="max-w-4xl mx-auto">
+                            {activeModule === 1 && <Module1 />}
+                            {activeModule === 2 && <Module2 />}
+                            {activeModule === 3 && <Module3 />}
+                            {activeModule === 4 && <Module4 />}
+                        </div>
+                    </main>
+                </div>
+            );
+        };
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+Taller en Equipos: Dependencias, Configuraciones y Acoplamientos - FusaRoute
+
+1. Dependencias
+--------------------------------------------------------------------------------
+- Google Maps API (Directions/Distance Matrix): Externa, de pago. Crítica para el cálculo de rutas online.
+- Supabase (Postgres administrado): Infraestructura. Hosting de la base de datos.
+- Datos de rutas de transporte de Fusagasugá: Datos. Información de rutas (trazado manual).
+- Spring Boot / Spring Security + JWT: Framework. Base del backend y autenticación.
+- Angular CLI / ecosistema npm: Framework. Base del frontend.
+- UptimeRobot: Externa. Instrumento de medición de disponibilidad (95%).
+- Herramientas de CI (ArchUnit, JaCoCo, OWASP Dependency-Check, Lighthouse): Instrumentos para métricas ISO 25010.
+
+2. Elementos de Configuración
+--------------------------------------------------------------------------------
+- URL del backend: Dirección del servidor API.
+- Credenciales de base de datos: Host, puerto, usuario y password de Postgres.
+- Clave de API de Google Maps: Token de acceso al servicio de mapas.
+- Configuración del servidor: Puertos, memoria y entorno de ejecución.
+- JWT Secret: Clave de firma para tokens de autenticación (propiedad del backend).
+- CORS: Configuración de orígenes permitidos para comunicación Angular <-> Spring Boot.
+- TTL de caché: Tiempo de vida (5 min) para pares origen-destino.
+- Umbrales de CI: Parámetros de cobertura (>=70%) y seguridad (0 vulns críticas).
+- Secretos de GitHub Actions: Credenciales para despliegue y testing automatizado.
+
+3. Acoplamientos Tempranos Detectados
+--------------------------------------------------------------------------------
+- Acoplamiento al SDK de Google Maps: Riesgo de atar la lógica de negocio directamente al proveedor. Solución: Usar puertos (Arquitectura Hexagonal).
+- Acoplamiento a Features de Supabase: Riesgo de usar el SDK de Supabase en lugar de SQL/JPA estándar. Solución: Mantener Supabase solo como Postgres administrado.
+- Acoplamiento de Seguridad en el Dominio: Riesgo de filtrar validaciones de JWT dentro de los casos de uso. Solución: Manejar autorización en la capa de infraestructura/seguridad.
+- Acoplamiento de Contrato API: Riesgo de romper el frontend por cambios en el backend sin versionado. Solución: Definir DTOs y contratos claros.
+- Acoplamiento a Fuente de Datos Manual: Riesgo de diseñar el modelo de rutas solo para trazado manual. Solución: Diseño flexible para futura importación de datos oficiales.
+- Acoplamiento de Seguridad de API Key: Riesgo de exponer la API Key de Maps en el frontend. Solución: Mediante proxy en el backend.
