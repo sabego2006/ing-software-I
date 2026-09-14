@@ -1,0 +1,615 @@
+<title>Jira Sin Rodeos</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800&family=Archivo:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --canvas: #b08d62;
+    --canvas-dark: #8c6c46;
+    --canvas-speck: #6f5333;
+    --card: #fbf6ea;
+    --card-line: rgba(33, 38, 46, 0.08);
+    --card-shadow: rgba(30, 20, 10, 0.4);
+    --ink: #21262e;
+    --ink-soft: #565f6b;
+    --accent: #2a5fd9;
+    --todo: #6b7280;
+    --progress: #2a5fd9;
+    --review: #c98a22;
+    --done: #2f8f5b;
+    --stamp: #c23b22;
+    --pin: #b23a2f;
+    --pin-dark: #7a2620;
+  }
+
+  * { box-sizing: border-box; }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background: var(--canvas);
+    color: var(--ink);
+    font-family: "Archivo", ui-sans-serif, system-ui, sans-serif;
+  }
+
+  body {
+    background-image:
+      radial-gradient(circle at 12% 20%, rgba(0,0,0,0.10) 0, transparent 2.6%),
+      radial-gradient(circle at 78% 8%, rgba(0,0,0,0.08) 0, transparent 2.2%),
+      radial-gradient(circle at 34% 62%, rgba(0,0,0,0.09) 0, transparent 2.4%),
+      radial-gradient(circle at 88% 54%, rgba(0,0,0,0.07) 0, transparent 2%),
+      radial-gradient(circle at 55% 88%, rgba(0,0,0,0.09) 0, transparent 2.3%),
+      radial-gradient(circle at 6% 82%, rgba(0,0,0,0.08) 0, transparent 2.1%),
+      radial-gradient(circle at 95% 90%, rgba(0,0,0,0.07) 0, transparent 2%),
+      radial-gradient(ellipse at center, transparent 55%, rgba(0,0,0,0.22) 100%),
+      linear-gradient(160deg, var(--canvas) 0%, var(--canvas-dark) 100%);
+    background-size: 140px 140px, 160px 160px, 130px 130px, 150px 150px,
+      145px 145px, 155px 155px, 135px 135px, 100% 100%, 100% 100%;
+  }
+
+  .board {
+    height: 100dvh;
+    overflow-y: scroll;
+    scroll-snap-type: y mandatory;
+    scrollbar-width: none;
+  }
+  .board::-webkit-scrollbar { display: none; }
+
+  .slide {
+    height: 100dvh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+    padding: clamp(1rem, 4vw, 3rem);
+    position: relative;
+  }
+
+  .card {
+    background: var(--card);
+    width: min(880px, 92vw);
+    max-height: min(640px, 86dvh);
+    border-radius: 6px;
+    padding: clamp(1.6rem, 3.4vw, 3rem) clamp(1.8rem, 4vw, 3.6rem);
+    box-shadow: 0 18px 0 -6px var(--card-shadow), 0 26px 40px -12px var(--card-shadow);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: clamp(0.8rem, 1.6vw, 1.4rem);
+    background-image: repeating-linear-gradient(
+      var(--card),
+      var(--card) 2.05em,
+      var(--card-line) 2.05em,
+      var(--card-line) calc(2.05em + 1px)
+    );
+    background-position: 0 5.2em;
+  }
+  .slide:nth-child(odd) .card { transform: rotate(-0.5deg); }
+  .slide:nth-child(even) .card { transform: rotate(0.45deg); }
+
+  .card::before {
+    content: "";
+    position: absolute;
+    top: -14px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 34% 30%, #ff8f7a, var(--pin) 55%, var(--pin-dark) 100%);
+    box-shadow: 0 5px 6px rgba(0,0,0,0.45), inset 0 -2px 3px rgba(0,0,0,0.35);
+  }
+
+  .card-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .ticket-key {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    font-size: clamp(0.75rem, 1.1vw, 0.95rem);
+    color: var(--ink-soft);
+    text-transform: uppercase;
+  }
+
+  .chip {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: clamp(0.65rem, 1vw, 0.8rem);
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.28em 0.7em;
+    border-radius: 999px;
+    color: #fff;
+    white-space: nowrap;
+  }
+  .chip[data-tone="todo"] { background: var(--todo); }
+  .chip[data-tone="progress"] { background: var(--progress); }
+  .chip[data-tone="review"] { background: var(--review); }
+  .chip[data-tone="done"] { background: var(--done); }
+
+  h1 {
+    font-family: "Big Shoulders Display", ui-sans-serif, sans-serif;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.005em;
+    line-height: 0.94;
+    font-size: clamp(1.9rem, 4.6vw, 3.4rem);
+    margin: 0;
+    color: var(--ink);
+    text-wrap: balance;
+  }
+
+  .dek {
+    font-size: clamp(1rem, 1.6vw, 1.25rem);
+    color: var(--ink-soft);
+    font-weight: 500;
+    margin: -0.4rem 0 0;
+    max-width: 62ch;
+  }
+
+  ul.bullets {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6em;
+  }
+  ul.bullets li {
+    font-size: clamp(1rem, 1.7vw, 1.28rem);
+    line-height: 1.36;
+    padding-left: 1.5em;
+    position: relative;
+  }
+  ul.bullets li::before {
+    content: "—";
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-weight: 700;
+  }
+  ul.bullets li strong { color: var(--ink); }
+  ul.bullets li code {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    background: rgba(42, 95, 217, 0.1);
+    padding: 0.05em 0.35em;
+    border-radius: 4px;
+    font-size: 0.88em;
+  }
+
+  .stamp {
+    align-self: flex-start;
+    border: 3px solid var(--stamp);
+    color: var(--stamp);
+    font-family: "Big Shoulders Display", sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    font-size: clamp(0.85rem, 1.5vw, 1.15rem);
+    padding: 0.3em 0.8em;
+    border-radius: 4px;
+    transform: rotate(-3.5deg);
+    opacity: 0.9;
+    max-width: 90%;
+  }
+
+  .code-block {
+    background: var(--ink);
+    color: var(--card);
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: clamp(0.82rem, 1.4vw, 1.05rem);
+    padding: 0.9em 1.1em;
+    border-radius: 6px;
+    overflow-x: auto;
+    line-height: 1.6;
+    white-space: pre;
+  }
+  .code-block .comment { color: #9aa4b2; }
+  .code-block .key { color: #ffcf7a; }
+
+  ol.steps {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    counter-reset: step;
+    display: flex;
+    flex-direction: column;
+    gap: 0.36em;
+  }
+  ol.steps li {
+    counter-increment: step;
+    display: flex;
+    align-items: baseline;
+    gap: 0.7em;
+    font-size: clamp(0.95rem, 1.55vw, 1.15rem);
+    line-height: 1.3;
+  }
+  ol.steps li::before {
+    content: counter(step);
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-weight: 600;
+    color: #fff;
+    background: var(--done);
+    min-width: 1.5em;
+    height: 1.5em;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75em;
+    flex: none;
+  }
+  ol.steps li code {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    background: rgba(47, 143, 91, 0.12);
+    padding: 0.05em 0.35em;
+    border-radius: 4px;
+    font-size: 0.88em;
+  }
+
+  .demo-cue {
+    align-self: flex-start;
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+    background: rgba(201, 138, 34, 0.14);
+    border: 1.5px dashed var(--review);
+    color: #8a5c14;
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-weight: 600;
+    font-size: clamp(0.78rem, 1.25vw, 0.95rem);
+    padding: 0.5em 0.9em;
+    border-radius: 6px;
+    text-transform: none;
+  }
+
+  .signoff {
+    margin-top: auto;
+    padding-top: 0.3em;
+    border-top: 1px solid var(--card-line);
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1em;
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: clamp(0.68rem, 1vw, 0.82rem);
+    color: var(--ink-soft);
+    letter-spacing: 0.03em;
+  }
+
+  .closing-line {
+    font-family: "Big Shoulders Display", sans-serif;
+    font-weight: 700;
+    font-size: clamp(1.1rem, 2vw, 1.5rem);
+    color: var(--stamp);
+    text-transform: uppercase;
+    margin: 0;
+  }
+
+  /* HUD */
+  .hud {
+    position: fixed;
+    inset: auto 0 0 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.9rem;
+    padding: 0.9rem 1rem calc(0.9rem + env(safe-area-inset-bottom));
+    pointer-events: none;
+  }
+  .hud > * { pointer-events: auto; }
+
+  .counter {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-variant-numeric: tabular-nums;
+    color: var(--card);
+    background: rgba(33, 38, 46, 0.55);
+    padding: 0.35em 0.7em;
+    border-radius: 999px;
+    font-size: 0.85rem;
+    letter-spacing: 0.04em;
+  }
+  .counter .of { opacity: 0.6; margin-left: 0.15em; }
+
+  .dots {
+    display: flex;
+    gap: 0.45rem;
+    background: rgba(33, 38, 46, 0.4);
+    padding: 0.4em 0.6em;
+    border-radius: 999px;
+  }
+  .dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    background: var(--todo);
+    opacity: 0.6;
+    transition: transform 0.15s ease, opacity 0.15s ease;
+  }
+  .dot[data-tone="progress"] { background: var(--progress); }
+  .dot[data-tone="review"] { background: var(--review); }
+  .dot[data-tone="done"] { background: var(--done); }
+  .dot.active { opacity: 1; transform: scale(1.4); }
+  .dot:focus-visible { outline: 2px solid var(--card); outline-offset: 2px; }
+
+  .navbtn {
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    border: none;
+    background: rgba(33, 38, 46, 0.5);
+    color: var(--card);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    font-size: 1.3rem;
+    line-height: 1;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .navbtn:focus-visible { outline: 2px solid var(--card); outline-offset: 2px; }
+  .navbtn.prev { left: clamp(0.5rem, 2vw, 1.5rem); }
+  .navbtn.next { right: clamp(0.5rem, 2vw, 1.5rem); }
+
+  @media (prefers-reduced-motion: reduce) {
+    .board { scroll-behavior: auto; }
+    .dot { transition: none; }
+  }
+
+  @media (max-width: 560px) {
+    .navbtn { display: none; }
+  }
+</style>
+
+<div class="board" id="board">
+
+  <section class="slide" data-status="todo">
+    <div class="card">
+      <div class="card-head">
+        <span class="ticket-key">TALK-01</span>
+        <span class="chip" data-tone="todo">To do</span>
+      </div>
+      <h1>Antes de Jira, todos vivíamos en el chat de WhatsApp</h1>
+      <p class="dek">Y todos sabemos exactamente cómo termina eso.</p>
+      <ul class="bullets">
+        <li>Alguien dice "yo hago el backend" y nadie sabe hasta cuándo.</li>
+        <li>Alguien pregunta "¿en qué vamos?" y la respuesta es un audio de cuatro minutos.</li>
+        <li>Jira no arregla la pereza de nadie, pero sí deja registrado quién prometió qué. Eso ya es ganancia.</li>
+      </ul>
+      <div class="stamp">Sin Jira: culpas repartidas para todos</div>
+      <div class="signoff">
+        <span>Angélica Aranguren · Santiago Bermúdez</span>
+        <span>FusaRoute — Ingeniería de Software I</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide" data-status="todo">
+    <div class="card">
+      <div class="card-head">
+        <span class="ticket-key">TALK-02</span>
+        <span class="chip" data-tone="todo">To do</span>
+      </div>
+      <h1>Un solo tablero, aunque sean dos capas</h1>
+      <p class="dek">Backend y frontend no son dos empresas distintas.</p>
+      <ul class="bullets">
+        <li>Un proyecto solo, <code>SCRUM</code>, con componentes <code>backend</code> y <code>frontend</code>.</li>
+        <li>Casi ninguna historia vive en una sola capa: "el usuario inicia sesión" necesita las dos.</li>
+        <li>Con dos tableros tocaría partir cada historia en dos, y ahí se pierde de vista si la funcionalidad completa quedó lista.</li>
+      </ul>
+      <div class="stamp">Separar backend y frontend en dos tableros es como separar el arroz del pollo: te los vas a comer juntos igual</div>
+    </div>
+  </section>
+
+  <section class="slide" data-status="progress">
+    <div class="card">
+      <div class="card-head">
+        <span class="ticket-key">TALK-03</span>
+        <span class="chip" data-tone="progress">In progress</span>
+      </div>
+      <h1>Épica, historia, subtarea: así se ve en Jira</h1>
+      <p class="dek">No la teoría del tablero — el menú real de "tipo de issue".</p>
+      <ul class="bullets">
+        <li><strong>Épica:</strong> el bloque grande, dura varios sprints, agrupa historias.</li>
+        <li><strong>Historia:</strong> la unidad que sí cabe en una semana. Si no cabe, se parte.</li>
+        <li><strong>Subtarea:</strong> el paso técnico de adentro. No se estima aparte — los puntos van en la historia.</li>
+      </ul>
+      <div class="stamp">Si tu historia mide más que el parcial final, no es una historia: es una épica con delirios de grandeza</div>
+    </div>
+  </section>
+
+  <section class="slide" data-status="progress">
+    <div class="card">
+      <div class="card-head">
+        <span class="ticket-key">TALK-04</span>
+        <span class="chip" data-tone="progress">In progress</span>
+      </div>
+      <h1>Sin criterios de aceptación, "terminado" es una opinión</h1>
+      <p class="dek">Van directo en la descripción del issue, formato Dado / Cuando / Entonces.</p>
+      <ul class="bullets">
+        <li>Ejemplo real: <em>"Dado un correo ya registrado, cuando intento crear la cuenta, entonces recibo un error 409."</em></li>
+        <li>Sin esto, dos personas discuten si algo quedó listo. Con esto, se lee y ya está.</li>
+      </ul>
+      <div class="stamp">"Ya casi" no es un criterio de aceptación: es una mentira piadosa de trabajo en grupo</div>
+    </div>
+  </section>
+
+  <section class="slide" data-status="progress">
+    <div class="card">
+      <div class="card-head">
+        <span class="ticket-key">TALK-05</span>
+        <span class="chip" data-tone="progress">In progress</span>
+      </div>
+      <h1>El backlog guarda ideas. El sprint guarda promesas.</h1>
+      <p class="dek">Son dos vistas distintas en Jira, y se tratan distinto.</p>
+      <ul class="bullets">
+        <li>El backlog puede tener 60 tarjetas sin culpa: es depósito.</li>
+        <li>El sprint activo no. Si algo nuevo aparece a mitad de semana, entra al backlog — no al sprint que ya empezó.</li>
+        <li>Meter una tarea de último momento al sprint es como meter un tercer parcial la semana del final.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="slide" data-status="progress">
+    <div class="card">
+      <div class="card-head">
+        <span class="ticket-key">TALK-06</span>
+        <span class="chip" data-tone="progress">In progress</span>
+      </div>
+      <h1>Puntos de historia, no horas</h1>
+      <p class="dek">Escala 1, 2, 3, 5, 8, 13. Si te sale 13, esa historia está disfrazada de épica.</p>
+      <ul class="bullets">
+        <li>Cada quien dice su número al mismo tiempo, sin ver el del otro.</li>
+        <li>¿Coinciden? Listo. ¿Uno dice 2 y el otro 8? No se promedia: se conversa, porque ahí alguien vio algo que el otro no vio.</li>
+      </ul>
+      <div class="stamp">Promediar en vez de conversar es como resolver un examen a moneda: rápido, pero no aprende nadie</div>
+    </div>
+  </section>
+
+  <section class="slide" data-status="progress">
+    <div class="card">
+      <div class="card-head">
+        <span class="ticket-key">TALK-07</span>
+        <span class="chip" data-tone="progress">In progress</span>
+      </div>
+      <h1>Cuatro columnas, dos reglas que sí importan</h1>
+      <p class="dek">To Do → In Progress → In Review → Done.</p>
+      <ul class="bullets">
+        <li><strong>Regla 1:</strong> la tarjeta se mueve cuando se empieza, no cuando se termina.</li>
+        <li><strong>Regla 2:</strong> In Review no es Done. Nadie mergea su propio PR.</li>
+        <li>Máximo dos tarjetas en progreso por persona. Si hay más, en realidad no se está avanzando en ninguna.</li>
+      </ul>
+      <div class="stamp">El tablero que salta de To Do a Done la noche antes de la entrega no es Scrum: es puro susto disfrazado de metodología</div>
+    </div>
+  </section>
+
+  <section class="slide" data-status="review">
+    <div class="card">
+      <div class="card-head">
+        <span class="ticket-key">TALK-08</span>
+        <span class="chip" data-tone="review">In review</span>
+      </div>
+      <h1>La key va en la rama Y en el commit</h1>
+      <p class="dek">Con esto, Jira se actualiza solo. Sin pegar un link a mano.</p>
+      <div class="code-block">feature/<span class="key">SCRUM-12</span>-registro-usuario
+<span class="comment"># y en el commit:</span>
+feat(<span class="key">SCRUM-12</span>): agregar endpoint de registro</div>
+      <ul class="bullets">
+        <li>La app <em>GitHub for Jira</em> conecta rama, commits y PR al issue, sola.</li>
+        <li>Un commit sin key queda huérfano: no aparece en el issue ni en el informe de sprint. Para el comité, ese trabajo no existió.</li>
+      </ul>
+      <div class="demo-cue">→ cambiamos a fusaroute.atlassian.net y mostramos un issue de verdad</div>
+    </div>
+  </section>
+
+  <section class="slide" data-status="done">
+    <div class="card">
+      <div class="card-head">
+        <span class="ticket-key">TALK-09</span>
+        <span class="chip" data-tone="done">Done</span>
+      </div>
+      <h1>La rutina completa, en seis pasos</h1>
+      <ol class="steps">
+        <li>Tomar la tarjeta del sprint, mover a In Progress.</li>
+        <li>Crear la rama desde <code>main</code>: <code>git switch -c feature/SCRUM-12-...</code></li>
+        <li>Commitear con la key: <code>feat(SCRUM-12): ...</code></li>
+        <li>Abrir el PR, mover a In Review.</li>
+        <li>El compañero revisa. Nadie mergea lo propio.</li>
+        <li>Mergear a <code>main</code> y mover a Done.</li>
+      </ol>
+      <div class="demo-cue">→ tablero real: recorremos un issue completo de principio a fin</div>
+      <p class="closing-line">Ya no tienen excusa para el próximo trabajo en grupo</p>
+      <div class="signoff">
+        <span>Angélica Aranguren · Santiago Bermúdez</span>
+        <span>Gracias — esa es toda la vaina</span>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<div class="hud">
+  <button class="navbtn prev" id="prevBtn" aria-label="Diapositiva anterior">‹</button>
+  <span class="counter"><span id="counterNum">1</span><span class="of">/ 9</span></span>
+  <div class="dots" id="dots"></div>
+  <button class="navbtn next" id="nextBtn" aria-label="Siguiente diapositiva">›</button>
+</div>
+
+<script>
+  (function () {
+    var board = document.getElementById('board');
+    var slides = Array.prototype.slice.call(document.querySelectorAll('.slide'));
+    var dotsContainer = document.getElementById('dots');
+    var counterNum = document.getElementById('counterNum');
+    var toneMap = { todo: 'todo', progress: 'progress', review: 'review', done: 'done' };
+
+    slides.forEach(function (slide, i) {
+      var dot = document.createElement('button');
+      dot.className = 'dot';
+      dot.type = 'button';
+      dot.setAttribute('aria-label', 'Ir a la diapositiva ' + (i + 1));
+      var tone = toneMap[slide.getAttribute('data-status')] || 'todo';
+      if (tone !== 'todo') dot.setAttribute('data-tone', tone);
+      dot.addEventListener('click', function () {
+        slides[i].scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+      dotsContainer.appendChild(dot);
+    });
+
+    var dots = Array.prototype.slice.call(dotsContainer.children);
+    var current = 0;
+
+    function setActive(index) {
+      current = index;
+      dots.forEach(function (d, i) { d.classList.toggle('active', i === index); });
+      counterNum.textContent = index + 1;
+    }
+
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting && entry.intersectionRatio > 0.6) {
+          setActive(slides.indexOf(entry.target));
+        }
+      });
+    }, { root: board, threshold: [0.6] });
+    slides.forEach(function (s) { observer.observe(s); });
+
+    function go(delta) {
+      var next = Math.min(slides.length - 1, Math.max(0, current + delta));
+      slides[next].scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    document.getElementById('prevBtn').addEventListener('click', function () { go(-1); });
+    document.getElementById('nextBtn').addEventListener('click', function () { go(1); });
+
+    window.addEventListener('keydown', function (e) {
+      if (['ArrowRight', 'ArrowDown', 'PageDown', ' '].indexOf(e.key) !== -1) {
+        e.preventDefault(); go(1);
+      } else if (['ArrowLeft', 'ArrowUp', 'PageUp'].indexOf(e.key) !== -1) {
+        e.preventDefault(); go(-1);
+      } else if (e.key === 'Home') {
+        e.preventDefault(); slides[0].scrollIntoView({ behavior: 'smooth' });
+      } else if (e.key === 'End') {
+        e.preventDefault(); slides[slides.length - 1].scrollIntoView({ behavior: 'smooth' });
+      } else if (/^[1-9]$/.test(e.key)) {
+        var idx = parseInt(e.key, 10) - 1;
+        if (slides[idx]) slides[idx].scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+
+    setActive(0);
+  })();
+</script>
