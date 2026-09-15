@@ -1,10 +1,14 @@
-# Historias de usuario — RF-01 a RF-12
+# Historias de usuario — RF-01 a RF-14
 
 > RF-01..09 grilladas y cerradas el 2026-09-09 (Etapa 3 del plan, tres lotes de 3: RF-01..03 en
 > sesión de chat previa recuperada de historial, RF-04..09 en esa misma fecha con Angélica y
 > Santiago respondiendo por turnos). RF-10..12 grilladas el 2026-09-09 (Etapa 5), mismo método
-> de turnos. Listas para cargar a Jira con su épica y componente. Formato: historia + criterios
-> de aceptación. **Todavía no cargadas a Jira** — falta ese paso.
+> de turnos. RF-13..14 grilladas el 2026-09-14 (Etapas 5-10, cierre del backlog), con Santiago
+> respondiendo solo — pendiente de que Angélica revise el resumen en
+> `entregables/fusaroute-grilling-rf13-14-rnf-resumen.html` antes de darlas por definitivas.
+> Formato: historia + criterios de aceptación. **Todavía no cargadas a Jira** — falta ese paso.
+> Los requisitos no funcionales (RNF-01 a RNF-07) viven en un documento aparte, por no ser
+> historias de usuario: `docs/backlog/requisitos-no-funcionales.md`.
 
 ---
 
@@ -245,9 +249,55 @@ para que no se vean sorprendidos por una ruta fuera de servicio en días festivo
 
 ---
 
-## Pendiente para la siguiente sesión de grilling
+## RF-13 — Panel de métricas de uso (Administrador)
+**Épica:** Administración/CRUD · **Componente:** backend + frontend
 
-RF-13 (panel de 5 métricas de uso del administrador) y RF-14 (administrador lee y responde
-comentarios — falta este lado; RF-08 solo cubrió la escritura del usuario). Después siguen los
-RNF-01 a RNF-07. Mismo método: grillar en pareja, decidir, redactar con criterios de
-aceptación, cargar a Jira.
+Como Administrador, quiero ver un panel con las métricas de uso de la app, para saber si de
+verdad está sirviendo y dónde enfocar el trabajo.
+
+**Criterios de aceptación:**
+- El panel muestra exactamente 5 métricas: (1) total de usuarios registrados, (2) número de
+  búsquedas del día actual, (3) las 5 rutas más consultadas, (4) cantidad de comentarios
+  pendientes de respuesta (mismo estado "pendiente" que usa RF-08/RF-14) y (5) suspensiones
+  activas en este momento (RF-12).
+- "Búsquedas del día" es el **día calendario actual en hora Colombia**, sin selector de rango:
+  arrancar más simple y ampliar a un rango de fechas queda para una fase posterior si hace
+  falta.
+- El panel **no se actualiza en vivo**: muestra el estado del momento en que el administrador
+  abre o recarga la pantalla, igual que cualquier otra vista del sistema. Sin polling ni
+  WebSockets.
+- Solo un usuario con rol Administrador accede a este panel (validado con Spring Security,
+  igual que RF-11).
+- Las 5 rutas más consultadas se calculan sobre el historial de búsquedas (RF-07) acumulado, no
+  solo del día actual.
+
+---
+
+## RF-14 — Responder comentarios (Administrador)
+**Épica:** Comentarios · **Componente:** backend + frontend
+
+Como Administrador, quiero leer y responder los comentarios que dejan los usuarios, para
+mantener un contacto directo con ellos y cerrar el ciclo que abre RF-08.
+
+**Criterios de aceptación:**
+- El administrador ve el listado de comentarios con su estado (pendiente / respondido), filtrable
+  por pendientes primero — coherente con la métrica (4) de RF-13.
+- Al responder, el comentario pasa a estado "respondido" y queda bloqueado para
+  edición/borrado por parte del usuario (esto ya lo fija RF-08; aquí es la acción que dispara
+  ese cambio de estado).
+- Como las notificaciones push están fuera de alcance este semestre, el usuario **no recibe un
+  aviso proactivo** cuando le responden. En su lugar, al iniciar sesión el sistema calcula si
+  tiene respuestas nuevas desde su último ingreso y muestra un indicador visual (por ejemplo,
+  un contador en el ícono de comentarios) — es un chequeo del propio backend al cargar la
+  sesión, no una notificación push real.
+- Una respuesta por comentario (no hilo de conversación); si el administrador necesita corregir
+  su respuesta, la edita, no crea una segunda.
+- Solo un usuario con rol Administrador puede responder (validado con Spring Security).
+
+---
+
+## Pendiente
+
+Cargar RF-01 a RF-14 a Jira con su épica y componente — no se hizo en esta sesión ni en las
+anteriores. Los requisitos no funcionales están grillados en
+`docs/backlog/requisitos-no-funcionales.md`.
