@@ -41,12 +41,12 @@ Métricas de referencia (comprometidas en la v3 de la Actividad 3, 2026-08-24). 
 | Atributo (ISO/IEC 25010) | Métrica v3 | Instrumento |
 |---|---|---|
 | Rendimiento (eficiencia de desempeño) | p95 < 8 s end-to-end en `/api/routes/search` sobre 4G (cliente → backend → Google Maps → render) + LCP < 2.5 s en Lighthouse mobile Slow 4G. Caché de 5 min por par origen-destino. | Spring Boot Actuator + Micrometer (percentil 95) + Lighthouse en CI |
-| Disponibilidad (fiabilidad) | ≥ 95 % uptime mensual del backend (lun–vie 7:00–21:00), RTO < 1 h, RPO < 24 h | UptimeRobot + backup diario de PostgreSQL |
+| Disponibilidad (fiabilidad) | ≥ 95 % de los latidos de monitoreo responden en horario hábil (lun–vie 7:00–21:00), incluyendo el cold start del tier gratis de Render (hasta 60 s tras 15 min de inactividad); RPO < 24 h | UptimeRobot (backend en Render) + backup diario de PostgreSQL (Supabase) |
 | Mantenibilidad | 0 violaciones hexagonales en CI + ≥ 70 % cobertura en `domain/` | ArchUnit en CI + reporte JaCoCo con umbral bloqueante |
 | Usabilidad | ≤ 4 acciones + tasa de éxito ≥ 80 % al primer intento | Prueba con ≥ 5 usuarios externos al equipo |
 | Seguridad | 0 vulns altas o críticas reportadas por herramientas en la entrega | OWASP Dependency-Check + análisis estático en CI |
 
-> **Nota:** la tabla de "métricas de referencia" original del docente (con < 2 s, 99 %, "0 críticas" sin proceso) fue adoptada como punto de partida pero se rediseñó tras el grill del 2026-08-24. Las razones están en `entregables/fusaroute-actividad3-resumen-cambios.html` y en la memoria `feedback_critica_metricas.md`. Los números nuevos son los que se defienden ante el comité.
+> **Nota:** la tabla de "métricas de referencia" original del docente (con < 2 s, 99 %, "0 críticas" sin proceso) fue adoptada como punto de partida pero se rediseñó tras el grill del 2026-08-24. Las razones están en `entregables/fusaroute-actividad3-resumen-cambios.html` y en la memoria `feedback_critica_metricas.md`. Los números nuevos son los que se defienden ante el comité. **La fila de disponibilidad se ajustó de nuevo el 2026-09-14** al decidir el despliegue real (Vercel + Render, ver la sección "Ambientes de ejecución"): ya no se compromete un RTO de servidor 24/7 porque el tier gratis de Render no lo sostiene — ver el detalle completo en `docs/backlog/requisitos-no-funcionales.md` (RNF-02).
 
 ## Proyecto Integrador: FusaRoute
 
@@ -116,6 +116,7 @@ Cualquier número que aparezca en un entregable — métrica de calidad, porcent
 | **Autenticación: Spring Security + JWT, propiedad del backend** | Vigente — cambió respecto al borrador inicial |
 | **Cálculo de la ruta por simulación en Google Maps** (no banco estático) + caché de 5 min por par origen-destino | Vigente — cambió en v4 (antes: comparar catálogo estático) |
 | **Modo offline por GeoJSON** (rutas pre-trazadas como polilíneas, cálculo por distancia geométrica) | Vigente — cambió en v4 (antes: rutas cacheadas de últimas consultas) |
+| **Despliegue: frontend en Vercel, backend en Render (tier gratis)** | Vigente — decidido el 2026-09-14, por desplegar en el Sprint 2. Ver "Ambientes de ejecución" y RNF-02 |
 
 ### Versiones: se arranca en la actual, no en la anterior
 
@@ -201,11 +202,11 @@ Lo que hexagonal agrega sobre el esquema en capas: **la interfaz del repositorio
 |---|---|---|
 | **DEV** | PostgreSQL en el portátil de cada integrante. Cada quien rompe lo suyo. | **Se monta en la semana de preparación** |
 | **PRE** | Proyecto Supabase con datos de prueba. El ensayo general. | Sprint 2 |
-| **PROD** | Proyecto Supabase con las rutas reales. Lo que ve el comité. | Sprint 2 |
+| **PROD** | Proyecto Supabase con las rutas reales + frontend en **Vercel** + backend en **Render** (tier gratis). Lo que ve el comité. | Decidido el 2026-09-14, **por desplegar en el Sprint 2** |
 
 Los cuatro archivos de perfil del backend y los dos `environment.ts` del frontend **existen desde ya**, para cumplir en estructura con la §22 de la guía de buenas prácticas; PRE y PROD tienen sus claves declaradas y vacías hasta el Sprint 2.
 
-**Se declara explícitamente, sin adornos: PROD no está desplegado en ningún servidor este semestre.** El backend corre desde un portátil el día de la demostración. Prometer un servidor productivo que no existe es exactamente lo que la sección de realismo de este archivo prohíbe.
+**Se declara explícitamente, sin adornos: a la fecha de esta nota (2026-09-14) PROD no está desplegado todavía** — el backend sigue corriendo desde un portátil. Lo que sí está decidido y comprometido para el Sprint 2 es dónde: **frontend Angular en Vercel** (su caso de uso estándar) y **backend Spring Boot en Render, tier gratis**. Se descartó desplegar también el backend en Vercel: desde julio de 2026 Vercel permite desplegar cualquier `Dockerfile` (Spring Boot incluido), pero ese modelo es serverless — escala a cero a los 5 minutos de inactividad, sin almacenamiento durable, y no está pensado para un proceso persistente con conexión abierta a PostgreSQL, que es justo la arquitectura de este backend. Render sí sostiene ese tipo de proceso; a cambio, su tier gratis se duerme tras 15 minutos sin tráfico y tarda 30-60 s en reactivarse (cold start) — ese comportamiento ya quedó reflejado en RNF-02 (`docs/backlog/requisitos-no-funcionales.md`) en vez de prometer un servidor 24/7 que el tier gratis no puede dar. Prometer un servidor productivo que no existe, o que se comporta distinto de como realmente se comporta, es exactamente lo que la sección de realismo de este archivo prohíbe.
 
 **Credenciales:** nunca en el repositorio. Cada repo versiona su `.env.example` con las claves vacías, y ese archivo *es* la documentación: si una variable no está ahí, no existe. Corolario de la §12 de la guía: en Angular no va ninguna clave secreta, porque todo lo que llega al navegador es inspeccionable.
 
@@ -253,7 +254,7 @@ claude --permission-mode acceptEdits "Lee el Plan de Metodología y Preparación
 
 Las sesiones de código se abren dentro del repo correspondiente (`dev/FusaRoute/FusaRoute-BACKEND` o `-FRONTEND`); las transversales, en `dev/FusaRoute/`, que tiene su propio `CLAUDE.md` de enrutamiento.
 
-- El backlog grillado de historias de usuario (RF-01 a RF-12, con criterios de aceptación) está en `docs/backlog/historias-rf01-rf12.md`.
+- El backlog grillado de historias de usuario (RF-01 a RF-14, con criterios de aceptación) está en `docs/backlog/historias-rf01-rf14.md`. Los requisitos no funcionales (RNF-01 a RNF-07) están en `docs/backlog/requisitos-no-funcionales.md`. Ninguno de los dos está cargado a Jira todavía.
 
 - El material de clase (`docs/clases/Clase*.pptx`, `docs/clases/ACTIVIDAD*.pdf`, `docs/actividad3/actividad 3 ing soft_APA.docx`) es fuente de verdad sobre lo que pide el docente. Consultarlo antes de asumir requisitos.
 - Los `.pptx` y `.docx` no se leen directamente: son ZIP de XML. Extraer texto con `unzip -p <archivo> 'ppt/slides/slide*.xml'` o `word/document.xml` y limpiar las etiquetas.

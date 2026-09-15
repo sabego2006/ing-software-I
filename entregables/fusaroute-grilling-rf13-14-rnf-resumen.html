@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FusaRoute · Cierre del backlog — RF-13, RF-14 y RNF-01..07</title>
+<style>
+  :root {
+    --bg: #fafaf7;
+    --panel: #ffffff;
+    --ink: #1a1a1a;
+    --muted: #5a5a5a;
+    --line: #e3e1d8;
+    --accent: #b1432a;   /* terracota — busetas */
+    --accent-soft: #f4d8cf;
+    --good: #2f6f4a;
+    --good-soft: #d8ebde;
+    --warn: #a06a00;
+    --warn-soft: #f3e3bf;
+    --bad: #8a2222;
+    --bad-soft: #f1d3d3;
+    --info: #1a3d63;
+    --info-soft: #d2deec;
+    --code: #1f1f1f;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #161513;
+      --panel: #1f1d1a;
+      --ink: #f1ede4;
+      --muted: #aaa497;
+      --line: #36322c;
+      --accent: #e07a5f;
+      --accent-soft: #3a241d;
+      --good: #7fc59a;
+      --good-soft: #1f3a2a;
+      --warn: #f0c878;
+      --warn-soft: #3a2e15;
+      --bad: #e89696;
+      --bad-soft: #3a1f1f;
+      --info: #9bbfe2;
+      --info-soft: #1c2a3a;
+    }
+  }
+  [data-theme="dark"] {
+    --bg: #161513; --panel: #1f1d1a; --ink: #f1ede4; --muted: #aaa497; --line: #36322c;
+    --accent: #e07a5f; --accent-soft: #3a241d; --good: #7fc59a; --good-soft: #1f3a2a;
+    --warn: #f0c878; --warn-soft: #3a2e15; --bad: #e89696; --bad-soft: #3a1f1f;
+    --info: #9bbfe2; --info-soft: #1c2a3a;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    line-height: 1.55;
+    font-size: 15px;
+  }
+  .wrap { max-width: 960px; margin: 0 auto; padding: 32px 24px 80px; }
+
+  header {
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 20px;
+    margin-bottom: 32px;
+  }
+  .eyebrow {
+    color: var(--accent);
+    font-weight: 600;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  h1 { font-size: 28px; margin: 0 0 8px; letter-spacing: -0.01em; }
+  h2 { font-size: 20px; margin: 40px 0 12px; letter-spacing: -0.005em; }
+  h3 { font-size: 16px; margin: 18px 0 8px; }
+  p { margin: 0 0 12px; }
+  .muted { color: var(--muted); }
+  .small { font-size: 13px; }
+  .pill {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 600;
+    border: 1px solid transparent;
+  }
+  .pill.good   { background: var(--good-soft); color: var(--good); }
+  .pill.warn   { background: var(--warn-soft); color: var(--warn); }
+  .pill.bad    { background: var(--bad-soft);  color: var(--bad); }
+  .pill.info   { background: var(--info-soft); color: var(--info); }
+
+  .panel {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 18px 20px;
+    margin-bottom: 14px;
+  }
+  .panel.alt { background: transparent; }
+
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  @media (max-width: 700px) { .grid-2 { grid-template-columns: 1fr; } }
+
+  .change { display: grid; grid-template-columns: 64px 1fr; gap: 12px; align-items: start; }
+  .change .id { font-weight: 700; color: var(--accent); }
+  .change .before { color: var(--muted); }
+  .change .before::before { content: "antes: "; font-variant: small-caps; color: var(--muted); }
+  .change .after::before  { content: "después: "; font-variant: small-caps; color: var(--good); }
+
+  table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  th, td {
+    text-align: left; padding: 10px 12px;
+    border-bottom: 1px solid var(--line);
+    vertical-align: top;
+  }
+  th { font-weight: 600; color: var(--muted); font-size: 12px; text-transform: uppercase; letter-spacing: 0.04em; }
+  tr:last-child td { border-bottom: none; }
+  .verdict {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-weight: 600;
+  }
+  .verdict::before {
+    content: ""; display: inline-block; width: 8px; height: 8px; border-radius: 50%;
+  }
+  .verdict.keep::before     { background: var(--good); }
+  .verdict.redesign::before { background: var(--warn); }
+  .verdict.remove::before   { background: var(--bad); }
+  .verdict.keep     { color: var(--good); }
+  .verdict.redesign { color: var(--warn); }
+  .verdict.remove   { color: var(--bad); }
+
+  footer {
+    margin-top: 48px; padding-top: 20px; border-top: 1px solid var(--line);
+    color: var(--muted); font-size: 13px;
+  }
+  .theme-toggle {
+    position: fixed; top: 14px; right: 14px;
+    background: var(--panel); border: 1px solid var(--line);
+    color: var(--ink); border-radius: 999px; padding: 6px 12px;
+    cursor: pointer; font-size: 12px;
+  }
+  .theme-toggle:hover { background: var(--accent-soft); }
+</style>
+</head>
+<body>
+<button class="theme-toggle" id="themeToggle" aria-label="Cambiar tema">◐ Tema</button>
+<div class="wrap">
+
+  <header>
+    <div class="eyebrow">FusaRoute · Ingeniería de Software I</div>
+    <h1>Cierre del backlog: RF-13, RF-14 y los 7 RNF</h1>
+    <p class="muted">Resumen de la sesión del 2026-09-14. Santiago grilló solo (siguiendo el mismo método de RF-01..12: leer el requisito comprometido, revisar si está bien definido/verificable/coherente con hexagonal, decidir). Angélica: esto es para que revisés qué se decidió sin vos — si algo no te cuadra, se discute y se ajusta antes de cargarlo a Jira, nada quedó "cerrado" solo porque está escrito.</p>
+    <p>
+      <span class="pill info">21 de 21 requisitos grillados</span>
+      <span class="pill good">2 historias nuevas (RF-13, RF-14)</span>
+      <span class="pill warn">3 RNF con corrección real</span>
+    </p>
+  </header>
+
+  <section>
+    <h2>1. Con qué llegamos y qué faltaba</h2>
+    <div class="panel">
+      <p>RF-01 a RF-12 ya estaban grillados desde el 2026-09-09. Quedaban sueltos <strong>RF-13</strong> (panel de métricas del admin), <strong>RF-14</strong> (el admin responde comentarios) y los <strong>7 requisitos no funcionales</strong> (RNF-01 a RNF-07 — el RNF-08 ya se había eliminado por redundante en el grill de métricas del 24-ago).</p>
+      <p class="muted">Al revisar el texto comprometido de cada uno contra lo que ya dice el <code>CLAUDE.md</code> del proyecto, aparecieron <strong>tres contradicciones reales</strong> entre el <code>.docx</code> de la Actividad 3 y el resto de la documentación — no eran solo huecos de diseño, eran datos que ya no coincidían entre sí. Se resolvieron todas antes de cerrar el backlog.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>2. Historias nuevas: RF-13 y RF-14</h2>
+
+    <div class="panel change">
+      <div class="id">RF-13</div>
+      <div>
+        <div class="before">"El administrador puede ver cinco métricas de uso" <span class="pill warn">sin decir si el rango de fechas es fijo o seleccionable, ni si se actualiza en vivo</span></div>
+        <div class="after">Panel fijo al <strong>día calendario actual</strong> (hora Colombia), sin selector de rango. Se recarga al abrir la pantalla — <strong>sin tiempo real</strong> (sin polling ni WebSockets). Las 5 métricas: usuarios registrados, búsquedas de hoy, top 5 rutas más consultadas (histórico), comentarios pendientes, suspensiones activas.</div>
+        <p class="small muted">Se eligió lo más simple de implementar y de probar. Un selector de rango o actualización en vivo quedan como mejora futura si hace falta, no como parte de este semestre.</p>
+      </div>
+    </div>
+
+    <div class="panel change">
+      <div class="id">RF-14</div>
+      <div>
+        <div class="before">"El administrador puede leer y responder los comentarios" <span class="pill warn">sin decir cómo se entera el usuario de que le respondieron, dado que push está fuera de alcance</span></div>
+        <div class="after">Sin notificación push (coherente con lo que ya está fuera de alcance). Al <strong>iniciar sesión</strong>, el backend calcula si hay respuestas nuevas desde el último ingreso y muestra un <strong>indicador visual</strong> (contador/badge) — no es push real, es un chequeo del propio backend al cargar la sesión.</div>
+        <p class="small muted">Una respuesta por comentario, no un hilo. Si el admin se equivoca, edita su respuesta en vez de crear una segunda.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>3. Los tres RNF que tenían un dato real desalineado</h2>
+    <div class="panel">
+      <p class="small muted">Estos tres no eran huecos de diseño — eran casos donde el <code>.docx</code> de la Actividad 3 decía una cosa y el <code>CLAUDE.md</code> (o la realidad del despliegue) decía otra. Se corrigieron los dos documentos para que digan lo mismo.</p>
+    </div>
+
+    <div class="panel change">
+      <div class="id">RNF-01</div>
+      <div>
+        <div class="before">El <code>.docx</code> seguía en <strong>p95 &lt; 5 s</strong>. <span class="pill bad">el CLAUDE.md ya decía 8 s desde el 26-ago — nunca se corrigió el .docx pese a lo que decía la memoria del proyecto</span></div>
+        <div class="after">Los dos documentos ahora dicen <strong>p95 &lt; 8 s</strong> (cliente → backend → Google Maps → render), verificado con Actuator + Micrometer. Corregido en la tabla de RNF y en la tabla de métricas del <code>.docx</code>.</div>
+      </div>
+    </div>
+
+    <div class="panel change">
+      <div class="id">RNF-02</div>
+      <div>
+        <div class="before">≥95% de disponibilidad mensual, RTO &lt; 1h, RPO &lt; 24h — <span class="pill bad">medido contra un servidor que el propio CLAUDE.md declara que no existe este semestre</span></div>
+        <div class="after">Se decidió el despliegue real: <strong>frontend en Vercel, backend en Render (tier gratis)</strong>. RNF-02 ahora describe la disponibilidad de <em>ese</em> despliegue: ≥95% de los latidos de UptimeRobot responden en horario hábil, <strong>incluyendo el cold start de Render</strong> (hasta 60 s tras 15 min sin tráfico) — no un servidor 24/7 clásico. RPO &lt; 24h se mantiene (backup diario de Supabase).</div>
+        <p class="small muted">Se descartó poner también el backend en Vercel: desde julio-2026 Vercel despliega cualquier Dockerfile, pero es un modelo serverless que escala a cero a los 5 min y no está pensado para un proceso JVM con conexión abierta a PostgreSQL — justo la arquitectura de este backend. Render sí sostiene ese tipo de proceso.</p>
+        <p class="small"><span class="pill warn">Riesgo abierto</span> si el cold start empuja el p95 de RNF-01 por encima de 8 s justo después de que el backend se duerma, hay que decidir si se acepta como caso aparte o si se paga Render Starter (US$7/mes) antes de la sustentación. No se resolvió hoy — queda para el equipo.</p>
+      </div>
+    </div>
+
+    <div class="panel change">
+      <div class="id">RNF-03</div>
+      <div>
+        <div class="before">"Separación estricta entre capas del hexágono" <span class="pill bad">sin ningún número ni instrumento — violaba la propia regla del curso</span></div>
+        <div class="after">Se le puso el número que el CLAUDE.md ya usaba en su tabla de métricas: <strong>0 violaciones hexagonales detectadas por ArchUnit en CI + ≥70% de cobertura en <code>domain/</code> (JaCoCo)</strong>.</div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>4. Los otros cuatro RNF: revisados, sin cambios</h2>
+    <div class="panel">
+      <table>
+        <tr><th>RNF</th><th>Atributo</th><th>Veredicto</th></tr>
+        <tr><td>RNF-04</td><td>Usabilidad</td><td><span class="verdict keep">Se queda igual</span> — ya tenía número, umbral e instrumento (5 usuarios externos, ≥80% éxito).</td></tr>
+        <tr><td>RNF-05</td><td>Seguridad (vulns)</td><td><span class="verdict keep">Se queda igual</span> — OWASP Dependency-Check + análisis estático en CI, ya coincidía con el CLAUDE.md.</td></tr>
+        <tr><td>RNF-06</td><td>Seguridad (contraseñas)</td><td><span class="verdict keep">Se queda igual</span> — bcrypt ≥10, ya referenciado en RF-01.</td></tr>
+        <tr><td>RNF-07</td><td>Compatibilidad</td><td><span class="verdict redesign">Un ajuste chico</span> — se fijó que la prueba de navegadores se repite antes de cada sustentación, no solo una vez.</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <h2>5. Qué archivos cambiaron</h2>
+    <div class="panel">
+      <ul>
+        <li><code>docs/backlog/historias-rf01-rf12.md</code> → renombrado a <code>docs/backlog/historias-rf01-rf14.md</code>, con RF-13 y RF-14 agregadas.</li>
+        <li><code>docs/backlog/requisitos-no-funcionales.md</code> → nuevo, los 7 RNF con criterio + instrumento.</li>
+        <li><code>docs/actividad3/actividad 3 ing soft_APA v3.docx</code> → corregido (RNF-01, RNF-02, RNF-03 en la tabla de RNF y en la tabla de métricas), con respaldo previo en <code>actividad 3 ing soft_APA v3.BACKUP-PRE-RNF-FIX.docx</code>.</li>
+        <li><code>CLAUDE.md</code> del curso → tabla de métricas de referencia, sección "Ambientes de ejecución" y tabla de decisiones de arquitectura, todas actualizadas con Vercel + Render.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <h2>6. Próximos pasos</h2>
+    <div class="panel">
+      <ol>
+        <li><strong>Angélica revisa este resumen</strong> y objeta lo que no le parezca, sobre todo RF-13/RF-14 (decisiones de diseño que se tomaron sin ella) y el riesgo abierto del cold start en RNF-02.</li>
+        <li>Cargar RF-01 a RF-14 y los 7 RNF a Jira (sigue pendiente desde RF-01..12, no se hizo tampoco hoy).</li>
+        <li>Decidir si el riesgo de cold start en RNF-02 se acepta tal cual o si se sube a Render Starter antes de la sustentación.</li>
+        <li>Configurar el proyecto real en Vercel y en Render cuando arranque el Sprint 2.</li>
+      </ol>
+    </div>
+  </section>
+
+  <footer>
+    FusaRoute — Ingeniería de Software I · Universidad de Cundinamarca · 2026-2<br>
+    Documento generado el 2026-09-14 a partir del grill de continuación del backlog (RF-13, RF-14, RNF-01..07).
+  </footer>
+</div>
+
+<script>
+  const btn = document.getElementById('themeToggle');
+  const root = document.documentElement;
+  const stored = localStorage.getItem('fusaroute-theme');
+  if (stored === 'dark' || stored === 'light') root.setAttribute('data-theme', stored);
+  btn.addEventListener('click', () => {
+    const cur = root.getAttribute('data-theme');
+    const next = cur === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
+    try { localStorage.setItem('fusaroute-theme', next); } catch (_) {}
+  });
+</script>
+</body>
+</html>
