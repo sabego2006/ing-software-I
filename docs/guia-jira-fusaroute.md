@@ -76,16 +76,21 @@ sprints. No se «termina» en una semana y nadie trabaja «en una épica»: se
 trabaja en las historias que cuelgan de ella.
 
 Sirve para agrupar y para responder en el comité la pregunta «¿en qué van?» sin
-leer 40 tarjetas. Nuestras épicas previstas:
+leer 40 tarjetas. Nuestras 5 épicas (= los 5 "módulos funcionales" `MF01..MF05`
+del esquema de identificación de historias, ver `CLAUDE.md`):
 
 | Épica | Qué agrupa |
 |---|---|
-| Autenticación | registro, inicio de sesión, ver y editar datos del usuario |
-| Búsqueda de ruta | origen–destino, simulación en Google Maps, barrios y costo |
-| Historial | búsquedas recientes, destino favorito |
-| Comentarios | caja de sugerencias y respuesta del administrador |
-| Administración | CRUD de rutas, suspensiones, notificaciones, métricas de uso |
-| Modo offline | cálculo por distancia geométrica sobre los GeoJSON |
+| MF01 — Autenticación y Perfil | registro, inicio de sesión, ver y editar datos del usuario |
+| MF02 — Búsqueda de ruta | origen–destino, simulación en Google Maps, barrios, costo, congestión, última milla, catálogo público, modo offline |
+| MF03 — Historial y favoritos | búsquedas recientes, destino favorito |
+| MF04 — Comentarios | caja de sugerencias y respuesta del administrador |
+| MF05 — Administración | CRUD de rutas, suspensiones, notificaciones, métricas de uso |
+
+> **Corregido el 2026-09-15:** esta tabla tenía "Modo offline" como épica propia. Se plegó
+> dentro de MF02 (Búsqueda de ruta) desde el grilling de metodología del 2026-09-09 — no se
+> puede demostrar sin búsqueda de ruta, y una épica no demostrable contradice el enfoque
+> incremental. El `CLAUDE.md` ya tenía las 5 correctas; esta guía se había quedado atrás.
 
 ### Historia (Story)
 

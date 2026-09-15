@@ -40,7 +40,7 @@ Métricas de referencia (comprometidas en la v3 de la Actividad 3, 2026-08-24). 
 
 | Atributo (ISO/IEC 25010) | Métrica v3 | Instrumento |
 |---|---|---|
-| Rendimiento (eficiencia de desempeño) | p95 < 8 s end-to-end en `/api/routes/search` sobre 4G (cliente → backend → Google Maps → render) + LCP < 2.5 s en Lighthouse mobile Slow 4G. Caché de 5 min por par origen-destino. | Spring Boot Actuator + Micrometer (percentil 95) + Lighthouse en CI |
+| Rendimiento (eficiencia de desempeño) | p95 < 8 s end-to-end en `/api/routes/search` sobre 4G (cliente → backend → Google Maps → render) + LCP < 2.5 s en Lighthouse mobile Slow 4G. Caché de 5 min por par origen-destino. **Bundle GeoJSON de la red completa ≤ 1 MB gzip** (barrios se listan por nombre, no por polígono — decidido el 2026-09-15). | Spring Boot Actuator + Micrometer (percentil 95) + Lighthouse en CI + tamaño del bundle verificado en build |
 | Disponibilidad (fiabilidad) | ≥ 95 % de los latidos de monitoreo responden en horario hábil (lun–vie 7:00–21:00), incluyendo el cold start del tier gratis de Render (hasta 60 s tras 15 min de inactividad); RPO < 24 h | UptimeRobot (backend en Render) + backup diario de PostgreSQL (Supabase) |
 | Mantenibilidad | 0 violaciones hexagonales en CI + ≥ 70 % cobertura en `domain/` | ArchUnit en CI + reporte JaCoCo con umbral bloqueante |
 | Usabilidad | ≤ 4 acciones + tasa de éxito ≥ 80 % al primer intento | Prueba con ≥ 5 usuarios externos al equipo |
@@ -69,7 +69,8 @@ Sistema de información de transporte público para Fusagasugá y la región del
 Comprometido con el docente en la Actividad 3 (`docs/actividad3/actividad 3 ing soft_APA.docx`):
 
 - Registro e inicio de sesión de **Usuario Final** (nombre, correo, contraseña); ver y editar sus datos.
-- Búsqueda de ruta: el usuario marca origen y destino, el sistema simula cada ruta posible en Google Maps y devuelve la de menor tiempo estimado.
+- Búsqueda de ruta: el usuario marca origen y destino, el sistema simula cada ruta posible en Google Maps y devuelve la de menor tiempo estimado. La ruta sugerida indica además el **punto de abordaje/bajada más cercano sobre el trazado y la distancia aproximada a pie** hasta/desde ese punto (RF-04, criterio añadido el 2026-09-15) — en Fusagasugá no hay paradas fijas, así que prometer "puerta a puerta" sería falso. Ver "Última milla" en la tabla de decisiones de arquitectura.
+- **Catálogo público de rutas** (RF-15, nuevo el 2026-09-15): cualquier visitante, **sin necesidad de iniciar sesión**, puede explorar el listado completo de rutas activas y ver el detalle de cada una (barrios, tarifa, trazado) — no solo la que devuelve una búsqueda puntual. Refuerza la justificación de "información pública clara" que motiva el proyecto.
 - Visualización de **barrios/comunas por los que pasa la ruta** y **costo del pasaje**.
 - **Historial de búsquedas** recientes del usuario.
 - **Caja de comentarios**: el usuario deja sugerencias, el administrador las lee y responde.
@@ -117,6 +118,8 @@ Cualquier número que aparezca en un entregable — métrica de calidad, porcent
 | **Cálculo de la ruta por simulación en Google Maps** (no banco estático) + caché de 5 min por par origen-destino | Vigente — cambió en v4 (antes: comparar catálogo estático) |
 | **Modo offline por GeoJSON** (rutas pre-trazadas como polilíneas, cálculo por distancia geométrica) | Vigente — cambió en v4 (antes: rutas cacheadas de últimas consultas) |
 | **Despliegue: frontend en Vercel, backend en Render (tier gratis)** | Vigente — decidido el 2026-09-14, por desplegar en el Sprint 2. Ver "Ambientes de ejecución" y RNF-02 |
+| **Última milla: punto más cercano sobre el trazado + distancia a pie aproximada, sin ruteo peatonal de Google** | Vigente — decidido el 2026-09-15, enriquece RF-04. Google Directions en modo caminata queda descartado este semestre por riesgo de alcance (primera vez del equipo con mapas) |
+| **Geometría de rutas: cálculo geométrico en `domain/`, geometrías cargadas en memoria una sola vez al arrancar, sin PostGIS** | Vigente — decidido el 2026-09-15. Mismo cálculo online y offline (el modo offline ya obliga a tener la geometría en el dispositivo); evita partir la lógica entre PostGIS-online y JS-offline |
 
 ### Versiones: se arranca en la actual, no en la anterior
 
@@ -172,12 +175,16 @@ La Daily formal **se descarta por escrito y con la razón dicha en voz alta**: d
 | # | Épica / Incremento | Requisitos |
 |---|---|---|
 | 1 | Cuenta de usuario | RF-01, RF-02, RF-03 |
-| 2 | Búsqueda de ruta *(incluye offline, barrios, tarifas, congestión)* | RF-04, RF-05, RF-06, RF-09 |
+| 2 | Búsqueda de ruta *(incluye offline, barrios, tarifas, congestión, última milla, catálogo público)* | RF-04, RF-05, RF-06, RF-09, RF-15 |
 | 3 | Historial y favoritos | RF-07, RF-10 |
 | 4 | Comentarios | RF-08, RF-14 |
 | 5 | Administración | RF-11, RF-12, RF-13 |
 
 "Modo offline" **deja de ser épica propia**: no se puede demostrar sin búsqueda de ruta, y una épica no demostrable contradice el enfoque incremental que se acaba de declarar. **El orden de los incrementos lo prioriza Angélica como Product Owner.**
+
+**Estas 5 épicas son también los 5 "módulos funcionales" (MF01..MF05) del esquema de identificación de historias** — ver la nota de identificadores en "Notas para trabajar en esta carpeta". `docs/guia-jira-fusaroute.md` §3 debe leer estas mismas 5 épicas; si en algún momento vuelve a listar 6 (con "Modo offline" separado), está desactualizada y hay que corregirla.
+
+**Backlog aprobado el 2026-09-15, sesión conjunta Santiago + Angélica:** 15 historias (RF-01..15, incluye RF-15 nuevo de esta sesión) + 7 RNF ratificados. Detalle completo en `docs/backlog/`.
 
 ### La contradicción del docente, y cómo se responde
 
@@ -232,6 +239,16 @@ El reparto tiene una razón: el código lo lee cualquiera del gremio y por eso v
 
 La key de Jira (`SCRUM-12`) va **en la rama y en el commit**, no en uno solo. Es lo que hace que la app *GitHub for Jira* vincule automáticamente rama, commits y PR al issue correspondiente, sin pegar un solo link a mano. Un commit sin key queda huérfano: no aparece en el panel de desarrollo del issue ni en el informe de sprint que se presenta ante el comité.
 
+**Tres identificadores conviven para la misma historia — no confundirlos (decidido el 2026-09-15):**
+
+| Identificador | Qué es | Dónde vive |
+|---|---|---|
+| `RF-XX` | Número del requisito en la Actividad 3 (el entregable ya presentado al docente) | `docs/backlog/`, trazabilidad entre criterios |
+| `HU_MFxx_xxx` | Código de la plantilla de Historia de Usuario del docente (`MF` = Módulo Funcional = épica; numeración por módulo) | Título del documento HU y del issue de Jira |
+| `SCRUM-N` | Key que **Jira asigna automáticamente** al crear el issue — no se elige | Rama de git y mensaje de commit (única que usa la convención de arriba) |
+
+El commit **nunca** lleva `HU_MFxx_xxx` ni `RF-XX` — solo `SCRUM-N`, porque es lo único que *GitHub for Jira* reconoce. `HU_MFxx_xxx` y `RF-XX` van en el título/descripción del issue para trazabilidad visual, no en git.
+
 **Backlog: Jira**, proyecto único `SCRUM`, con los componentes `backend` y `frontend` para separar las capas dentro del mismo tablero (decisión del 2026-09-07; el borrador anterior preveía GitHub Projects / Issues). Los sprints son **semanales**, de modo que a cada sustentación quincenal ante el comité llegan **dos sprints cerrados** con su informe. La guía de uso del tablero está en [`docs/guia-jira-fusaroute.md`](docs/guia-jira-fusaroute.md).
 
 **Diagramas de arquitectura:** Mermaid versionado dentro de cada repo (`README.md` o `/docs`), nunca en una herramienta externa que se desactualice respecto al código.
@@ -254,7 +271,8 @@ claude --permission-mode acceptEdits "Lee el Plan de Metodología y Preparación
 
 Las sesiones de código se abren dentro del repo correspondiente (`dev/FusaRoute/FusaRoute-BACKEND` o `-FRONTEND`); las transversales, en `dev/FusaRoute/`, que tiene su propio `CLAUDE.md` de enrutamiento.
 
-- El backlog grillado de historias de usuario (RF-01 a RF-14, con criterios de aceptación) está en `docs/backlog/historias-rf01-rf14.md`. Los requisitos no funcionales (RNF-01 a RNF-07) están en `docs/backlog/requisitos-no-funcionales.md`. Ninguno de los dos está cargado a Jira todavía.
+- El backlog de historias de usuario (RF-01 a RF-15, con criterios de aceptación) está en `docs/backlog/historias-rf01-rf15.md`. Los requisitos no funcionales (RNF-01 a RNF-07) están en `docs/backlog/requisitos-no-funcionales.md`. **Las 15 HU + 7 RNF quedaron aprobados por Santiago y Angélica el 2026-09-15** (backlog completo, incluye RF-15 nuevo y el criterio de última milla en RF-04). Ninguno está cargado a Jira todavía — ver `~/.claude/plans/eager-coalescing-creek.md`.
+- Existe también una plantilla del docente de **Caso de Uso** (`docs/clases/HU y caso de uso/_CU-001...docx`). Decisión del 2026-09-15: en Jira el flujo de cada historia se representa con **Subtasks** (no con un documento enlazado ni un tipo de issue nuevo — Jira team-managed no tiene tipo "Caso de Uso"); el documento Word formal del CU (con sus dos diagramas y tabla de datos de entrada/salida) se llena en una pasada aparte, posterior a la carga de Jira — no decide el alcance de esa pasada todavía.
 
 - El material de clase (`docs/clases/Clase*.pptx`, `docs/clases/ACTIVIDAD*.pdf`, `docs/actividad3/actividad 3 ing soft_APA.docx`) es fuente de verdad sobre lo que pide el docente. Consultarlo antes de asumir requisitos.
 - Los `.pptx` y `.docx` no se leen directamente: son ZIP de XML. Extraer texto con `unzip -p <archivo> 'ppt/slides/slide*.xml'` o `word/document.xml` y limpiar las etiquetas.

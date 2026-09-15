@@ -1,9 +1,12 @@
 # Requisitos no funcionales — RNF-01 a RNF-07
 
 > Grillados el 2026-09-14 (Etapas 5-10 del plan maestro, cierre del backlog junto con RF-13 y
-> RF-14 en `docs/backlog/historias-rf01-rf14.md`), con Santiago respondiendo solo — pendiente
-> de que Angélica revise el resumen en
-> `entregables/fusaroute-grilling-rf13-14-rnf-resumen.html` antes de darlos por definitivos.
+> RF-14 en `docs/backlog/historias-rf01-rf15.md`), con Santiago respondiendo solo.
+>
+> **Ratificados el 2026-09-15 por Angélica**, en la misma sesión conjunta que aprobó las 15 HU
+> (ver `docs/backlog/historias-rf01-rf15.md`). Los 7 quedan aprobados por el equipo completo.
+> RNF-01 recibió un sub-criterio nuevo ese día (tamaño del bundle GeoJSON) — ver su sección.
+>
 > No son historias de usuario (no tienen actor que las "quiera"), por eso viven en un documento
 > aparte con el formato de la Tabla 3 de la Actividad 3: atributo ISO/IEC 25010 + criterio +
 > instrumento. RNF-08 no aparece: se eliminó por redundante en el grill de métricas del
@@ -32,7 +35,17 @@ sobre el trazado GeoJSON), sin incluir el cálculo de tiempo de llegada, el cual
 en línea vía Google Maps.
 
 **Instrumento:** Spring Boot Actuator + Micrometer (percentil 95 por endpoint) + Lighthouse en
-CI (LCP < 2.5 s, throttling "Slow 4G").
+CI (LCP < 2.5 s, throttling "Slow 4G") + tamaño del bundle GeoJSON verificado en build.
+
+**Sub-criterio añadido el 2026-09-15 (guardarraíl de tamaño):** el bundle GeoJSON de la red
+completa de rutas debe pesar **≤ 1 MB gzip**. Análisis que lo respalda: una ruta urbana de ~10 km
+con un vértice cada 20 m son ~500 vértices (~10 KB con coordenadas a 5-6 decimales, que ya dan
+~1.1 m de precisión — más que suficiente para una buseta); con 25 rutas urbanas+intermunicipales,
+la red completa pesa entre 250 KB y 1 MB en el peor caso realista. Los barrios (RF-05) se
+almacenan como **lista de nombres**, no como polígonos — evita el GeoJSON más pesado que existe
+(fronteras de barrio) sin perder nada, porque RF-05 solo necesita mostrar una secuencia de
+nombres. Si el bundle real supera el límite, es señal de datos sin limpiar (coordenadas de GPS
+crudo a 13-15 decimales), no de que el límite esté mal puesto.
 
 **Qué cambió en este grilling:** el `.docx` de la Actividad 3 v3 seguía en "p95 < 5 s" pese a
 que el `CLAUDE.md` del proyecto ya declaraba 8 s como "comprometido en la v3" desde el
@@ -133,7 +146,7 @@ original.
 funcional).
 
 **Qué se revisó en este grilling:** bien definida y ya referenciada explícitamente en el
-criterio de aceptación de RF-01 (`docs/backlog/historias-rf01-rf14.md`). Aprobada tal cual por
+criterio de aceptación de RF-01 (`docs/backlog/historias-rf01-rf15.md`). Aprobada tal cual por
 Santiago el 2026-09-14, sin cambios.
 
 ---
