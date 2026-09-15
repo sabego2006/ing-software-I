@@ -1,18 +1,28 @@
-# Historias de usuario — RF-01 a RF-14
+# Historias de usuario — RF-01 a RF-15
 
 > RF-01..09 grilladas y cerradas el 2026-09-09 (Etapa 3 del plan, tres lotes de 3: RF-01..03 en
 > sesión de chat previa recuperada de historial, RF-04..09 en esa misma fecha con Angélica y
 > Santiago respondiendo por turnos). RF-10..12 grilladas el 2026-09-09 (Etapa 5), mismo método
 > de turnos. RF-13..14 grilladas el 2026-09-14 (Etapas 5-10, cierre del backlog), con Santiago
-> respondiendo solo — pendiente de que Angélica revise el resumen en
-> `entregables/fusaroute-grilling-rf13-14-rnf-resumen.html` antes de darlas por definitivas.
-> Formato: historia + criterios de aceptación. **Todavía no cargadas a Jira** — falta ese paso.
+> respondiendo solo.
+>
+> **Aprobación final — 2026-09-15, sesión conjunta Santiago + Angélica.** Las 14 historias
+> grilladas hasta el 2026-09-14 (incluidas RF-13/RF-14, que estaban pendientes de que Angélica
+> las revisara) quedaron aprobadas historia por historia. En esa misma sesión se detectó un
+> vacío real — el catálogo completo de rutas solo era visible para el Administrador, no para el
+> Usuario Final, lo que contradice la justificación del proyecto ("información pública clara")
+> — y se agregó **RF-15**, y se enriqueció **RF-04** con el criterio de "última milla" (ver
+> abajo). Cada historia lleva ahora su código `HU_MFxx_xxx` según la plantilla del docente
+> (`MF` = Módulo Funcional = épica; ver tabla de identificadores en el `CLAUDE.md` del repo).
+> **Todavía no cargadas a Jira** — es el siguiente paso (Paso D/E de
+> `~/.claude/plans/dreamy-exploring-unicorn.md`).
+>
 > Los requisitos no funcionales (RNF-01 a RNF-07) viven en un documento aparte, por no ser
 > historias de usuario: `docs/backlog/requisitos-no-funcionales.md`.
 
 ---
 
-## RF-01 — Registro de usuarios
+## HU_MF01_001 — Registro de usuarios (RF-01)
 **Épica:** Autenticación y Perfil · **Componente:** Frontend + Backend
 
 Como Usuario Final, quiero crear una cuenta en la plataforma, para poder acceder a las
@@ -27,7 +37,7 @@ funciones personalizadas del sistema.
 
 ---
 
-## RF-02 — Inicio de sesión
+## HU_MF01_002 — Inicio de sesión (RF-02)
 **Épica:** Autenticación y Perfil · **Componente:** Frontend + Backend
 
 Como Usuario Final, quiero iniciar sesión con mis credenciales, para acceder a mi cuenta y
@@ -45,7 +55,7 @@ guardar mis búsquedas.
 
 ---
 
-## RF-03 — Ver y editar datos personales
+## HU_MF01_003 — Ver y editar datos personales (RF-03)
 **Épica:** Autenticación y Perfil · **Componente:** Frontend + Backend
 
 Como Usuario Final, quiero ver y editar mi información personal, para mantener mis datos
@@ -59,7 +69,7 @@ actualizados.
 
 ---
 
-## RF-04 — Sugerencia de la mejor ruta por tiempo
+## HU_MF02_001 — Sugerencia de la mejor ruta por tiempo (RF-04)
 **Épica:** Búsqueda de ruta · **Componente:** backend
 
 Como Usuario Final, quiero que el sistema me sugiera la ruta de buseta más rápida entre mi
@@ -82,10 +92,17 @@ origen y mi destino, para no perder tiempo adivinando cuál tomar.
 - El tiempo de respuesta extremo a extremo (p95) no debe superar 8 segundos (RNF-01, ajustado
   por el equipo el 2026-09-09); los tiempos de viaje se cachean por par de puntos con TTL
   corto para no exceder ese límite.
+- **Última milla (criterio añadido el 2026-09-15):** en Fusagasugá no hay paradas fijas, así que
+  el resultado indica el **punto del trazado más cercano** al origen para abordar y al destino
+  para bajarse, con la **distancia aproximada a pie** hasta/desde cada uno (calculada a ~5 km/h,
+  sin ruteo peatonal de Google — geometría pura sobre el GeoJSON). Si el punto más cercano queda
+  a más de **800 m**, la ruta se descarta como candidata para ese origen/destino (no sirve
+  realmente, aunque exista geométricamente). El cálculo vive en `domain/` (proyección
+  punto-polilínea), funciona igual online y offline, y no consume la API de Google.
 
 ---
 
-## RF-05 — Barrios de la ruta sugerida
+## HU_MF02_002 — Barrios de la ruta sugerida (RF-05)
 **Épica:** Búsqueda de ruta · **Componente:** backend + frontend
 
 Como Usuario Final, quiero ver los barrios por los que pasa la ruta sugerida como una
@@ -106,7 +123,7 @@ secuencia de pasos, para entender el recorrido de un vistazo.
 
 ---
 
-## RF-06 — Costo del pasaje
+## HU_MF02_003 — Costo del pasaje (RF-06)
 **Épica:** Búsqueda de ruta · **Componente:** backend
 
 Como Usuario Final, quiero ver cuánto cuesta el pasaje de la ruta sugerida, para saber cuánto
@@ -126,7 +143,7 @@ dinero llevar.
 
 ---
 
-## RF-07 — Historial de búsquedas
+## HU_MF03_001 — Historial de búsquedas (RF-07)
 **Épica:** Historial · **Componente:** backend
 
 Como Usuario Final, quiero ver mis últimas búsquedas al iniciar sesión en cualquier
@@ -143,7 +160,7 @@ dispositivo, para no repetir la misma consulta.
 
 ---
 
-## RF-08 — Caja de comentarios
+## HU_MF04_001 — Caja de comentarios (RF-08)
 **Épica:** Comentarios · **Componente:** backend + frontend
 
 Como Usuario Final, quiero dejar un comentario visible con mi nombre de usuario y poder
@@ -162,7 +179,7 @@ editarlo o borrarlo mientras no haya sido respondido, para dar sugerencias de fo
 
 ---
 
-## RF-09 — Aviso de congestión histórica
+## HU_MF02_004 — Aviso de congestión histórica (RF-09)
 **Épica:** Búsqueda de ruta · **Componente:** backend
 
 Como Usuario Final, quiero recibir un aviso de posible congestión en el tramo que voy a
@@ -185,7 +202,7 @@ tomar, para anticipar demoras.
 
 ---
 
-## RF-10 — Destino favorito
+## HU_MF03_002 — Destino favorito (RF-10)
 **Épica:** Búsqueda de ruta · **Componente:** backend + frontend
 
 Como Usuario Final, quiero marcar un destino como favorito, para que la app lo pre-cargue al
@@ -205,7 +222,7 @@ abrir la búsqueda y me muestre de una vez el aviso de tranco habitual, sin escr
 
 ---
 
-## RF-11 — CRUD de rutas (Administrador)
+## HU_MF05_001 — CRUD de rutas (Administrador) (RF-11)
 **Épica:** Administración/CRUD · **Componente:** backend + frontend
 
 Como Administrador, quiero crear, consultar, modificar y eliminar rutas, para mantener
@@ -228,7 +245,7 @@ actualizada la oferta de transporte que el sistema ofrece a los usuarios.
 
 ---
 
-## RF-12 — Suspensión temporal y notificación
+## HU_MF05_002 — Suspensión temporal y notificación (RF-12)
 **Épica:** Administración/CRUD · **Componente:** backend + frontend
 
 Como Administrador, quiero suspender temporalmente una ruta y avisar a quienes la usan seguido,
@@ -249,7 +266,7 @@ para que no se vean sorprendidos por una ruta fuera de servicio en días festivo
 
 ---
 
-## RF-13 — Panel de métricas de uso (Administrador)
+## HU_MF05_003 — Panel de métricas de uso (Administrador) (RF-13)
 **Épica:** Administración/CRUD · **Componente:** backend + frontend
 
 Como Administrador, quiero ver un panel con las métricas de uso de la app, para saber si de
@@ -273,7 +290,7 @@ verdad está sirviendo y dónde enfocar el trabajo.
 
 ---
 
-## RF-14 — Responder comentarios (Administrador)
+## HU_MF04_002 — Responder comentarios (Administrador) (RF-14)
 **Épica:** Comentarios · **Componente:** backend + frontend
 
 Como Administrador, quiero leer y responder los comentarios que dejan los usuarios, para
@@ -296,8 +313,36 @@ mantener un contacto directo con ellos y cerrar el ciclo que abre RF-08.
 
 ---
 
+## HU_MF02_005 — Catálogo público de rutas (RF-15)
+**Épica:** Búsqueda de ruta · **Componente:** backend + frontend
+
+> Historia nueva, agregada el 2026-09-15 durante la sesión de aprobación conjunta. Origen: al
+> revisar RF-11 (CRUD de rutas), Santiago notó que el catálogo completo de rutas solo era
+> visible para el Administrador — el Usuario Final solo veía la ruta que le devolvía una
+> búsqueda puntual. Eso contradice la justificación del proyecto: el problema declarado es que
+> "hay más de 20 rutas urbanas sin información pública clara", y sin esta historia esa
+> información pública seguía sin existir para el usuario final.
+
+Como **visitante** (no requiere cuenta), **quiero** explorar el listado completo de rutas
+disponibles y ver la información de cada una, **para** conocer la oferta de transporte completa
+sin depender de una búsqueda origen-destino.
+
+**Criterios de aceptación:**
+- El listado muestra todas las rutas en estado **activo** (las suspendidas por RF-12 o
+  eliminadas por soft delete en RF-11 no aparecen).
+- **No requiere iniciar sesión** — es información pública, coherente con la justificación del
+  proyecto. (Historial y favoritos, en cambio, sí siguen requiriendo cuenta.)
+- El detalle de cada ruta muestra: barrios por los que pasa (regla de 7 máximo de RF-05), tarifa
+  vigente (RF-06) y el trazado sobre el mapa.
+- Si la hora actual cae dentro de una ventana de congestión de algún tramo de la ruta (RF-09), el
+  detalle muestra el mismo aviso que vería un usuario al buscarla.
+- El listado es de solo lectura — crear, modificar o suspender rutas sigue siendo exclusivo del
+  Administrador (RF-11, RF-12).
+
+---
+
 ## Pendiente
 
-Cargar RF-01 a RF-14 a Jira con su épica y componente — no se hizo en esta sesión ni en las
-anteriores. Los requisitos no funcionales están grillados en
-`docs/backlog/requisitos-no-funcionales.md`.
+Cargar RF-01 a RF-15 a Jira con su épica y componente — no se hizo en esta sesión ni en las
+anteriores; es el siguiente paso (`~/.claude/plans/dreamy-exploring-unicorn.md`). Los
+requisitos no funcionales están grillados en `docs/backlog/requisitos-no-funcionales.md`.
