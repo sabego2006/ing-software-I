@@ -233,14 +233,13 @@ Reglas de uso:
 - Una historia que atraviesa las dos capas lleva **los dos**. No se parte la
   historia solo para separar capas; se parte cuando es demasiado grande.
 
-> **Nota de implementación:** en proyectos *team-managed* la administración de
-> componentes está en **Configuración del proyecto → Componentes** (o, según la
-> versión, en la sección de campos del proyecto). Si en nuestro proyecto la
-> opción no apareciera, la alternativa equivalente y siempre disponible es usar
-> **etiquetas** (`labels`) con los mismos dos valores, `backend` y `frontend`.
-> Funciona igual para filtrar; lo único que se pierde son los informes por
-> componente, que no usamos. Hay que verificarlo al configurarlo — no está
-> confirmado todavía en nuestro tablero.
+> **Confirmado el 2026-09-16, al cargar el backlog:** el campo `components` **no existe**
+> en el tipo de issue `Story` de nuestro proyecto (se verificó el field-metadata real vía
+> API — 21 campos disponibles, ninguno es `components`). No es cuestión de dónde buscar el
+> menú: este proyecto team-managed simplemente no lo expone. Se usa la alternativa de
+> **etiquetas** (`labels`) con los valores `backend` y `frontend`, aplicada a las 15
+> historias y a los 7 RNF cargados. Funciona igual para filtrar; lo único que se pierde son
+> los informes por componente, que no usamos.
 
 ---
 
@@ -426,8 +425,8 @@ Así se ve una historia completa en la práctica:
 Checklist de lo que falta hacer sobre el Jira real. Marcar aquí a medida que se
 completa.
 
-- [ ] **Componentes `backend` y `frontend`** creados (ver la nota de la §5 sobre
-      team-managed y la alternativa con etiquetas).
+- [x] **Componentes `backend` y `frontend`** — resuelto como `labels` (ver §5); en uso
+      desde el 2026-09-16 en las 15 historias y los 7 RNF.
 - [ ] **App GitHub for Jira** instalada y los dos repos de FusaRoute vinculados
       (§9). Requiere admin de Atlassian y de GitHub.
 - [ ] **Preguntarle al docente cuándo es el próximo Comité.** Las fechas son
@@ -440,8 +439,8 @@ completa.
       pueda **mover una tarjeta de columna**. Ese es el criterio de verificación
       de esta etapa — no basta con que la cuenta exista.
 - [ ] **Issues de onboarding SCRUM-1..5** resueltos (§12).
-- [ ] **Épicas** creadas (las seis de la §3). Se crean en la Etapa 3, junto con
-      las primeras historias.
+- [x] **Épicas** creadas (las cinco de la §3): SCRUM-7 a SCRUM-11, cargadas el
+      2026-09-16 junto con las 15 historias.
 
 ---
 
