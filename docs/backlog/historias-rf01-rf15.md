@@ -367,6 +367,7 @@ para el porqué). Story points sin estimar — se estiman en Sprint Planning.
 | HU_MF01_002 — Inicio de sesión | SCRUM-13 |
 | HU_MF01_003 — Ver y editar datos personales | SCRUM-14 |
 | HU_MF02_001 — Sugerencia de la mejor ruta por tiempo | SCRUM-15 |
+| HU_MF02_001b — Última milla y modo offline *(partida de HU_MF02_001, ver nota abajo)* | SCRUM-153 |
 | HU_MF02_002 — Barrios de la ruta sugerida | SCRUM-16 |
 | HU_MF02_003 — Costo del pasaje | SCRUM-17 |
 | HU_MF02_004 — Aviso de congestión histórica | SCRUM-18 |
@@ -382,3 +383,16 @@ para el porqué). Story points sin estimar — se estiman en Sprint Planning.
 Cada historia tiene sus Subtasks de flujo colgando en el rango SCRUM-27 a SCRUM-126 (en el
 mismo orden que la tabla de arriba). Los RNF y sus Subtasks de configuración van de SCRUM-127
 a SCRUM-152.
+
+## Sprint Planning — 2026-09-17
+
+Al hacer el Sprint Planning de las 9 sprints se detectó que **HU_MF02_001 (8 pts) más su
+criterio de última milla resultaba sobredimensionada para un solo issue**. Se partió en dos:
+`SCRUM-15` conserva la sugerencia de mejor ruta por tiempo (simulación online), y la nueva
+`SCRUM-153 — HU_MF02_001b: Última milla y modo offline` se queda con la proyección punto-
+polilínea, el descarte a más de 800 m y el ordenamiento por distancia geométrica del modo
+offline (Sprint 4). Las 16 historias/RNF quedaron con Sprint + Story Points + responsable
+asignado, y las ~110 subtasks de flujo con descripción + responsable, siguiendo la rotación de
+capa técnica del `CLAUDE.md` de la raíz. Detalle completo del reparto por sprint y del rebalance
+de carga (pedido explícito de Santiago tras ver el Sprint 1 desbalanceado) en el adendo del
+2026-09-17 de `~/.claude/plans/dreamy-exploring-unicorn.md`.
