@@ -144,7 +144,7 @@ dinero llevar.
 ---
 
 ## HU_MF03_001 — Historial de búsquedas (RF-07)
-**Épica:** Historial · **Componente:** backend
+**Épica:** Historial y favoritos · **Componente:** backend
 
 Como Usuario Final, quiero ver mis últimas búsquedas al iniciar sesión en cualquier
 dispositivo, para no repetir la misma consulta.
@@ -203,7 +203,7 @@ tomar, para anticipar demoras.
 ---
 
 ## HU_MF03_002 — Destino favorito (RF-10)
-**Épica:** Búsqueda de ruta · **Componente:** backend + frontend
+**Épica:** Historial y favoritos · **Componente:** backend + frontend
 
 Como Usuario Final, quiero marcar un destino como favorito, para que la app lo pre-cargue al
 abrir la búsqueda y me muestre de una vez el aviso de tranco habitual, sin escribirlo cada vez.
@@ -223,7 +223,7 @@ abrir la búsqueda y me muestre de una vez el aviso de tranco habitual, sin escr
 ---
 
 ## HU_MF05_001 — CRUD de rutas (Administrador) (RF-11)
-**Épica:** Administración/CRUD · **Componente:** backend + frontend
+**Épica:** Administración · **Componente:** backend + frontend
 
 Como Administrador, quiero crear, consultar, modificar y eliminar rutas, para mantener
 actualizada la oferta de transporte que el sistema ofrece a los usuarios.
@@ -246,7 +246,7 @@ actualizada la oferta de transporte que el sistema ofrece a los usuarios.
 ---
 
 ## HU_MF05_002 — Suspensión temporal y notificación (RF-12)
-**Épica:** Administración/CRUD · **Componente:** backend + frontend
+**Épica:** Administración · **Componente:** backend + frontend
 
 Como Administrador, quiero suspender temporalmente una ruta y avisar a quienes la usan seguido,
 para que no se vean sorprendidos por una ruta fuera de servicio en días festivos o cívicos.
@@ -267,7 +267,7 @@ para que no se vean sorprendidos por una ruta fuera de servicio en días festivo
 ---
 
 ## HU_MF05_003 — Panel de métricas de uso (Administrador) (RF-13)
-**Épica:** Administración/CRUD · **Componente:** backend + frontend
+**Épica:** Administración · **Componente:** backend + frontend
 
 Como Administrador, quiero ver un panel con las métricas de uso de la app, para saber si de
 verdad está sirviendo y dónde enfocar el trabajo.
@@ -341,8 +341,44 @@ sin depender de una búsqueda origen-destino.
 
 ---
 
-## Pendiente
+## Cargado a Jira — 2026-09-16
 
-Cargar RF-01 a RF-15 a Jira con su épica y componente — no se hizo en esta sesión ni en las
-anteriores; es el siguiente paso (`~/.claude/plans/dreamy-exploring-unicorn.md`). Los
-requisitos no funcionales están grillados en `docs/backlog/requisitos-no-funcionales.md`.
+Las 15 historias quedaron cargadas en `https://fusaroute.atlassian.net` (proyecto `SCRUM`)
+como issues tipo Story, colgadas de sus 5 épicas y con Subtasks de flujo bajo cada una. Los
+requisitos no funcionales están grillados en `docs/backlog/requisitos-no-funcionales.md` y
+cargados como Task (SCRUM-127 a SCRUM-133), sin épica padre (ver `docs/guia-jira-fusaroute.md`
+para el porqué). Story points sin estimar — se estiman en Sprint Planning.
+
+**Épicas:**
+
+| Épica | Key |
+|---|---|
+| MF01 — Autenticación y Perfil | SCRUM-7 |
+| MF02 — Búsqueda de ruta | SCRUM-8 |
+| MF03 — Historial y favoritos | SCRUM-9 |
+| MF04 — Comentarios | SCRUM-10 |
+| MF05 — Administración | SCRUM-11 |
+
+**Historias:**
+
+| Historia | Key |
+|---|---|
+| HU_MF01_001 — Registro de usuarios | SCRUM-12 |
+| HU_MF01_002 — Inicio de sesión | SCRUM-13 |
+| HU_MF01_003 — Ver y editar datos personales | SCRUM-14 |
+| HU_MF02_001 — Sugerencia de la mejor ruta por tiempo | SCRUM-15 |
+| HU_MF02_002 — Barrios de la ruta sugerida | SCRUM-16 |
+| HU_MF02_003 — Costo del pasaje | SCRUM-17 |
+| HU_MF02_004 — Aviso de congestión histórica | SCRUM-18 |
+| HU_MF02_005 — Catálogo público de rutas | SCRUM-19 |
+| HU_MF03_001 — Historial de búsquedas | SCRUM-20 |
+| HU_MF03_002 — Destino favorito | SCRUM-21 |
+| HU_MF04_001 — Caja de comentarios | SCRUM-22 |
+| HU_MF04_002 — Responder comentarios (Administrador) | SCRUM-23 |
+| HU_MF05_001 — CRUD de rutas (Administrador) | SCRUM-24 |
+| HU_MF05_002 — Suspensión temporal y notificación | SCRUM-25 |
+| HU_MF05_003 — Panel de métricas de uso (Administrador) | SCRUM-26 |
+
+Cada historia tiene sus Subtasks de flujo colgando en el rango SCRUM-27 a SCRUM-126 (en el
+mismo orden que la tabla de arriba). Los RNF y sus Subtasks de configuración van de SCRUM-127
+a SCRUM-152.
