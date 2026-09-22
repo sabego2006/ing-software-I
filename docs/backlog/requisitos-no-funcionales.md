@@ -177,3 +177,37 @@ atributo", sin duplicar. Compatibilidad no es uno de esos cinco atributos con no
 esa tabla, así que RNF-07 sigue existiendo como requisito comprometido (en el `.docx` de la
 Actividad 3) sin tener fila espejo en esa tabla resumen. No es una omisión, es la misma regla de
 "no multiplicar métricas redundantes" aplicada de forma consistente.
+
+---
+
+## Reprogramación del 2026-09-21 (preparación del comité del 28-sep)
+
+Ningún **criterio** de los siete RNF cambió. Lo que cambió es **cuándo** se trabaja cada uno, al
+rearmar el Sprint 2 para responder a lo que pidió el docente para el comité del lunes 28 de
+septiembre. El detalle completo está en `historias-rf01-rf15.md` y en
+`~/.claude/plans/pregunta-si-tienes-alguna-fuzzy-hopcroft.md`.
+
+| RNF | Key | Estaba en | Pasó a | Razón |
+|---|---|---|---|---|
+| RNF-01 Rendimiento | `SCRUM-127` | Sprint 2 | **Sprint 4** | Su métrica es el p95 de `/api/routes/search`, y ese endpoint no existe hasta el Sprint 3/4. Lighthouse necesita un frontend con páginas reales que medir. **Hoy no hay nada que medir** — dejarlo en el Sprint 2 sería comprometer una medición imposible, justo lo que prohíbe la sección de realismo del `CLAUDE.md`. |
+| RNF-03 Mantenibilidad | `SCRUM-129` | Sprint 10 | **Sprint 2** | Jira la empujó al Sprint 10 al cerrar el Sprint 1 sin completarla. Vuelve porque *es* lo que el docente pidió: arquitectura hexagonal verificada (ArchUnit) y cobertura medida (JaCoCo). |
+| RNF-05 Seguridad | `SCRUM-131` | Sprint 10 | **Sprint 2** | Mismo empujón automático. Vuelve porque es el punto "dependencias al día": OWASP Dependency-Check + analizador estático. |
+| RNF-02 Fiabilidad | `SCRUM-128` | Sprint 3 | Sprint 3 *(sin cambio)* | **Es el despliegue.** Queda confirmado en el Sprint 3 (29-sep → 5-oct). La línea del `CLAUDE.md` que decía "PRE/PROD en el Sprint 2" quedó desactualizada frente al Sprint Planning del 17-sep y se corrigió. |
+
+**Riesgo abierto en RNF-03.** El umbral de JaCoCo (≥70 % en `domain/` y `application/`) **hoy hace
+fallar el propio build**: los únicos habitantes de esos paquetes son dos clases `Empty.java` sin
+tests, así que la cobertura es 0 % y el CI lleva 6 de 6 ejecuciones en rojo. **El umbral no se
+baja** — es un número ya comprometido ante el comité, y bajarlo para que pase el CI es exactamente
+lo que la sección de realismo prohíbe. Se arregla borrando las clases `Empty` y escribiendo los
+tests reales (`SCRUM-163`).
+
+**Riesgo abierto en RNF-05.** OWASP Dependency-Check falla al descargar la base de datos de la NVD
+(`the NVD returned a 403 or 404 error`) por falta de `NVD_API_KEY`. La clave es gratuita pero el
+correo de validación puede tardar horas: hay que solicitarla el martes 22, no el fin de semana.
+
+**Cambio de infraestructura que toca a RNF-02.** Se decidió el 2026-09-21 que los **tres ambientes
+corren sobre Supabase** (antes DEV era PostgreSQL local por portátil), y que el esquema se versiona
+con **Flyway** en vez de `ddl-auto`. Sin migraciones habría que crear el esquema a mano tres veces y
+mantenerlo sincronizado; con Flyway queda en un `.sql` revisable en el PR. Esto no altera el
+criterio de RNF-02 (≥95 % de latidos, RPO < 24 h), pero sí simplifica el backup y el restore que ese
+RNF exige probar al cierre de cada sprint.
