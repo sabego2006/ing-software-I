@@ -396,3 +396,96 @@ asignado, y las ~110 subtasks de flujo con descripción + responsable, siguiendo
 capa técnica del `CLAUDE.md` de la raíz. Detalle completo del reparto por sprint y del rebalance
 de carga (pedido explícito de Santiago tras ver el Sprint 1 desbalanceado) en el adendo del
 2026-09-17 de `~/.claude/plans/dreamy-exploring-unicorn.md`.
+
+## Reestructuración del Sprint 2 — 2026-09-21
+
+El docente pidió, para el **Comité de Desarrollo y Arquitectura del lunes 28 de septiembre, 2:00 pm**:
+3 funcionalidades de la app (las más fáciles), conexión a base de datos, conexión HTTP del frontend
+a las APIs internas del backend, arquitectura hexagonal + principios SOLID + dependencias al día, y
+—opcional— un planteamiento de uso de DBeaver.
+
+Al revisar el estado real se encontró que **no existía ninguna funcionalidad implementada**: `main`
+del backend tenía 1 commit (Spring Boot 3.3.3 / Java 17, sin estructura hexagonal) y `main` del
+frontend era el scaffolding de `ng new`. Todo el trabajo del Sprint 1 estaba en ramas sin mergear.
+El Sprint 1 cerró con **velocidad 0**.
+
+**Las 3 funcionalidades comprometidas** son `SCRUM-12` (Registro), `SCRUM-13` (Login) y `SCRUM-19`
+(Catálogo público de rutas). Se eligió el catálogo como tercera —en vez de RF-03, que sería más
+barato por reusar la tabla `users`— porque es **público y no depende de JWT**: si Spring Security se
+atasca, sigue habiendo algo demostrable, y el comité ve el producto real en vez de una app de login
+genérica. Además es el camino más corto a "base de datos conectada + HTTP funcionando", que son dos
+de los cinco puntos pedidos.
+
+### Historias movidas entre sprints
+
+| Historia | Estaba en | Pasó a | Razón |
+|---|---|---|---|
+| `SCRUM-19` — Catálogo público de rutas | Sprint 6 | **Sprint 2** | Es la 3.ª funcionalidad del comité |
+| `SCRUM-129` — RNF-03 Mantenibilidad | Sprint 10 | **Sprint 2** | Es "hexagonal + ArchUnit + JaCoCo", literal lo pedido |
+| `SCRUM-131` — RNF-05 Seguridad | Sprint 10 | **Sprint 2** | Es "dependencias al día" (OWASP Dependency-Check) |
+| `SCRUM-127` — RNF-01 Rendimiento | Sprint 2 | **Sprint 4** | Mide el p95 de `/api/routes/search`, endpoint que no existe hasta el Sprint 3/4, y Lighthouse necesita un frontend con contenido. Hoy no hay nada que medir |
+
+`SCRUM-129` y `SCRUM-131` habían sido empujadas al Sprint 10 automáticamente por Jira al cerrarse el
+Sprint 1 sin completarlas.
+
+### Historias partidas
+
+Misma técnica que se usó con `SCRUM-15`/`SCRUM-153` en el Sprint Planning del 2026-09-17.
+
+| Original | Se queda con | Nueva historia | Va a |
+|---|---|---|---|
+| `SCRUM-19` (3 SP) | Lista de rutas activas + detalle con barrios y tarifa | **`SCRUM-154` — HU_MF02_005b: Mapa y aviso de congestión en el catálogo** (reparentada `SCRUM-76`) | Sprint 6 |
+| `SCRUM-13` (5 SP → **3 SP**) | Login por credenciales + emisión del JWT de una semana | **`SCRUM-155` — HU_MF01_002b: Bloqueo por intentos fallidos** (reparentadas `SCRUM-36` y `SCRUM-37`) | Sprint 3 |
+
+El corte de `SCRUM-19` era inevitable: el trazado sobre el mapa depende de la integración con Google
+Maps (inexistente) y el aviso de congestión depende de RF-09 (`SCRUM-18`, Sprint 6). Dejarlos dentro
+habría hecho que la historia no se pudiera cerrar nunca.
+
+El corte de `SCRUM-13` es una decisión de riesgo: el contador de intentos y el bloqueo temporal son
+la parte que menos aporta a la demostración y la que más tiempo consume encima de Spring Security,
+que es la primera vez del equipo. Se difieren para proteger el entregable del comité.
+
+Se creó además la subtarea `SCRUM-156` (pantalla de detalle sin mapa) para reponer la que se llevó
+`SCRUM-154`.
+
+### Tareas de infraestructura creadas
+
+El `CLAUDE.md` decía que el Sprint 1 era "ambiente DEV, CI, ArchUnit/JaCoCo, READMEs", pero en Jira
+solo existían los dos RNF. **Ese hueco es la razón por la que el sprint cerró vacío sin que nadie lo
+notara.** Se cierra con 9 Task de 0 puntos en el Sprint 2:
+
+| Key | Tarea | Responsable |
+|---|---|---|
+| `SCRUM-157` | Sanear `main` del backend: mergear el Sprint 1 huérfano | Santiago |
+| `SCRUM-158` | Sanear `main` del frontend: recuperar la rama de preparación | Angélica |
+| `SCRUM-159` | Cerrar los PR #5 y #6 rotos del backend | Angélica |
+| `SCRUM-160` | Provisionar Supabase DEV y conectar el datasource | Santiago |
+| `SCRUM-161` | Esquema versionado con Flyway + semilla de rutas reales | Santiago |
+| `SCRUM-162` | Cablear Angular con el backend: HttpClient, environment y CORS | Angélica |
+| `SCRUM-163` | Arreglar el gate de JaCoCo que bloquea el CI | Santiago |
+| `SCRUM-164` | DBeaver: instalar, conectar a Supabase y exportar el diagrama ER | Angélica |
+| `SCRUM-165` | Preparar la sustentación del 28 de septiembre | Ambos |
+
+### Estados corregidos
+
+Cuatro subtareas figuraban como terminadas sin estarlo. Se devolvieron a `To Do`:
+
+| Key | Figuraba como | Realidad |
+|---|---|---|
+| `SCRUM-141` — ArchUnit en CI | Done | El código existe, pero en rama sin mergear y con el CI en rojo |
+| `SCRUM-142` — JaCoCo ≥70 % | Done | Igual, y además su umbral se bloquea a sí mismo (0 % de cobertura en `domain/`) |
+| `SCRUM-146` — OWASP Dependency-Check | Done | PR abierto con un `pom.xml` que no parsea; el frontend no tiene CI de ningún tipo |
+| `SCRUM-147` — Analizador estático | In Review | El PR revierte el proyecto a Java 17 / Boot 3.3.3 |
+
+### Carga resultante y advertencia
+
+`SCRUM-19` (3) + `SCRUM-12` (3) + `SCRUM-13` (3) + `SCRUM-129` (3) + `SCRUM-131` (3) + `SCRUM-132`
+(2) = **17 story points**, más 9 tareas de infraestructura.
+
+**Sobre una velocidad medida de 0 SP, 17 puntos no son un pronóstico: son una apuesta.** Lo que lo
+hace posible —solo posible, no seguro— es que buena parte de la infraestructura ya está escrita y
+solo falta mergearla. Si el equipo se atrasa, el orden de corte es: (1) `main` sano + Supabase +
+`GET /api/routes` + Angular consumiéndolo, que es innegociable porque cubre "base de datos" y
+"HTTP"; (2) Registro; (3) Login; (4) RNF-03; (5) RNF-05.
+
+Plan completo en `~/.claude/plans/pregunta-si-tienes-alguna-fuzzy-hopcroft.md`.
