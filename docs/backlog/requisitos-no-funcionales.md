@@ -123,15 +123,44 @@ cual por Santiago el 2026-09-14, sin cambios.
 
 ## RNF-05 — Seguridad
 
-El sistema no debe tener vulnerabilidades altas o críticas reportadas por las herramientas
-automatizadas de análisis en el momento de cada entrega. Las herramientas son OWASP
-Dependency-Check y un analizador estático ejecutados en CI en cada Pull Request, y la métrica se
-reporta como "0 vulnerabilidades altas o críticas detectadas en la fecha X".
+El sistema no debe tener vulnerabilidades altas o críticas (CVSS ≥ 7) **sin suprimir**
+reportadas por las herramientas automatizadas de análisis en el momento de cada entrega. Las
+herramientas son OWASP Dependency-Check y un analizador estático ejecutados en CI en cada Pull
+Request, con el umbral `failBuildOnCVSS=7` bloqueando el merge. La métrica se reporta como
+"0 vulnerabilidades altas o críticas sin suprimir en la fecha X, con N supresiones vigentes".
 
-**Instrumento:** OWASP Dependency-Check + analizador estático en CI, en cada Pull Request.
+**Toda supresión es parte de la métrica, no una excepción a ella.** Cada CVE suprimida vive en
+`config/owasp/suppression.xml` del repositorio del backend y debe llevar, en el mismo archivo:
+(a) por qué el mecanismo vulnerable **no es alcanzable** en este código, verificado contra el
+código y el árbol de dependencias, no citado de un tercero; (b) por qué no se actualizó —
+normalmente porque no hay versión corregida publicada en Maven Central para esa línea; y (c) una
+fecha `until` que fuerza la revisión. Si existe un fix publicado, **se sube la versión en vez de
+suprimir**. Bajar `failBuildOnCVSS` no es una opción.
+
+**Instrumento:** OWASP Dependency-Check + analizador estático en CI, en cada Pull Request. El
+archivo de supresiones se valida como XML antes del escaneo, en su propio paso del workflow.
 
 **Qué se revisó en este grilling:** bien definida, con instrumento ejecutable y coincide con el
 `CLAUDE.md`. Aprobada tal cual por Santiago el 2026-09-14, sin cambios.
+
+**Corrección del 2026-09-27 (`SCRUM-160`).** La redacción original decía "0 vulnerabilidades
+altas o críticas detectadas" a secas. Al poner el escaneo a funcionar de verdad quedó claro que
+esa cifra es inalcanzable y que prometerla sería mentir ante el comité: el lote de 91 CVEs de
+Spring divulgado en agosto de 2026 dejó 14 hallazgos de CVSS ≥ 7 en spring-framework 6.2.19 y
+spring-security 6.5.11 **sin versión corregida publicada en abierto** — la 6.5.12 de Spring
+Security existe pero es *"Enterprise Support Only"*, y el fix libre exige Spring Boot 4. Con la
+redacción vieja, un "0 detectadas" solo podía significar que nadie estaba mirando. La nueva dice
+lo que el equipo sí puede sostener y auditar: cero sin suprimir, y cada supresión justificada,
+fechada y revisable. Es la misma regla de realismo del `CLAUDE.md` — bajar la vara antes que
+prometer de más.
+
+**Episodio que motivó la corrección, registrado a propósito.** Entre el 2026-09-23 y el
+2026-09-27 el archivo de supresiones tuvo un error de sintaxis XML (dos guiones seguidos dentro
+de un comentario, que XML 1.0 prohíbe). OWASP Dependency-Check descartó el archivo completo y
+solo lo avisó con un `WARNING`, así que el job de seguridad estuvo rojo en `main` durante cuatro
+días sin que la causa fuera evidente. De ahí el paso de validación del XML que ahora corre antes
+del escaneo. Vale la pena contarlo ante el comité: una métrica de calidad también puede fallar
+por su instrumento, no solo por el sistema medido.
 
 ---
 
