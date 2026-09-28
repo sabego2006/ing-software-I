@@ -40,8 +40,8 @@ En `entregables/comite-2/`: presentación de 15 slides con cronómetro, guion de
 Notas de lo que difiere del plan original:
 
 - El diagrama de arquitectura no es un `.drawio` editable: se dibujó con código y se entrega como PNG.
-- El Documento V1 (16-sep) vive fuera del repo (`Entregable_Documento_V1_Final.docx`); el V2 lo corrige y su registro de cambios lista las 13 diferencias V1 → V2.
-- `docs/historial-sprints.md` no existe; su función la cumple `informe-sprint-2.md`.
+- El Documento V1 (16-sep) está en `entregables/FusaRoute_Entregable_V1.docx`; el V2 lo corrige y su registro de cambios lista las 13 diferencias V1 → V2.
+- `docs/historial-sprints.md` ya existe en `main` (lo agregó el equipo); `informe-sprint-2.md` lo complementa con el detalle del Sprint 1 y 2.
 - El diagrama de flujo de los CU y los PDF se generaron con LibreOffice; un salto de página parte alguna tabla.
 
 ## Bloque 5 — Jira
