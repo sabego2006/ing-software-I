@@ -40,7 +40,7 @@ En `entregables/comite-2/`: presentación de 15 slides con cronómetro, guion de
 Notas de lo que difiere del plan original:
 
 - El diagrama de arquitectura no es un `.drawio` editable: se dibujó con código y se entrega como PNG.
-- El "Documento V1" no existe como archivo del equipo en el repo; el V2 se construyó sobre la estructura del docente y la Actividad 3 v3, y así lo declara su registro de cambios.
+- El Documento V1 (16-sep) vive fuera del repo (`Entregable_Documento_V1_Final.docx`); el V2 lo corrige y su registro de cambios lista las 13 diferencias V1 → V2.
 - `docs/historial-sprints.md` no existe; su función la cumple `informe-sprint-2.md`.
 - El diagrama de flujo de los CU y los PDF se generaron con LibreOffice; un salto de página parte alguna tabla.
 
