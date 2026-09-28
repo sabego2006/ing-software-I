@@ -171,7 +171,7 @@ La Daily formal **se descarta por escrito y con la razón dicha en voz alta**: d
 - **09 → 14 de septiembre de 2026:** semana de preparación. No es un sprint y por tanto no genera informe.
 - **Sprint 1:** martes 15-sep → lunes 21-sep. Arranque técnico (ambiente DEV, CI, ArchUnit/JaCoCo, READMEs), sin puntos de historia: es infraestructura.
   **Cerrado con velocidad 0.** Solo contenía dos issues en Jira (RNF-03 y RNF-05) y ninguno se completó. El trabajo técnico sí se hizo, pero quedó en ramas sin mergear —los PR se cerraron sin merge— y la infraestructura (ambiente DEV, CI, READMEs) nunca se registró como issues, así que nadie vio el sprint vaciarse. Va tal cual en el informe de sprint: registrarlo suma ante el comité, maquillarlo resta mucho más.
-- **Sprint 2:** martes 22-sep → lunes 28-sep. **Es el sprint del comité** (lunes 28, 2:00 pm). Entrega las 3 funcionalidades pedidas por el docente —Registro (`SCRUM-12`), Login (`SCRUM-13`) y Catálogo público de rutas (`SCRUM-19`)— más la conexión a base de datos, la conexión HTTP front-back, y RNF-03/RNF-05/RNF-06. Incluye 9 tareas de infraestructura (`SCRUM-157`..`SCRUM-165`) que antes no existían en el tablero. **Los ambientes PRE/PROD se corrieron al Sprint 3.** Como el sprint cierra el mismo día del comité, el código se congela el domingo 27 en la noche.
+- **Sprint 2:** martes 22-sep → lunes 28-sep. **Es el sprint del comité** (lunes 28, 2:00 pm). Entrega las 3 funcionalidades pedidas por el docente —Registro (`SCRUM-12`), Login (`SCRUM-13`) y Catálogo público de rutas (`SCRUM-19`)— más la conexión a base de datos, la conexión HTTP front-back, y RNF-03/RNF-05/RNF-06. Incluye 9 tareas de infraestructura (`SCRUM-157`..`SCRUM-165`) que antes no existían en el tablero. **Los ambientes PRE/PROD se corrieron al Sprint 3.** Como el sprint cierra el mismo día del comité, el código se congela el domingo 27 en la noche. **Estado al 2026-09-28:** según Jira, 17 de 17 SP en Done y las 8 tareas de infraestructura `SCRUM-157`..`SCRUM-164` cerradas (`SCRUM-165` sigue abierta hasta completar sus entregables). `SCRUM-14` (Perfil, RF-03, 3 SP) se **adelantó del Sprint 4 al Sprint 2**: está implementado en la rama `claude/gracious-clarke-2fqs2v` de backend y frontend, **sin mergear**, así que no cuenta como Done ni suma a la velocidad. La documentación del comité (HU, CU, Documento V2, diagramas y evidencias, incluido el informe de sprint) está en `docs/comite-2/`.
 - **Sprint 3:** martes 29-sep → lunes 5-oct. Despliegue real (RNF-02 / `SCRUM-128`): frontend en Vercel, backend en Render, y los proyectos Supabase de PRE y PROD.
 - Sprints semanales de martes a lunes, de modo que a cada sustentación quincenal lleguen dos sprints cerrados.
 - **La fecha del próximo comité no se conoce y no se deduce: se le pregunta al docente.**
@@ -213,7 +213,7 @@ Lo que hexagonal agrega sobre el esquema en capas: **la interfaz del repositorio
 
 | Ambiente | Qué es | Estado real hoy |
 |---|---|---|
-| **DEV** | Proyecto Supabase compartido por los dos integrantes, con datos de prueba. | **Se provisiona en el Sprint 2** (`SCRUM-160`) |
+| **DEV** | Proyecto Supabase compartido por los dos integrantes, con datos de prueba. | **Activo** (`SCRUM-160`, Done en el Sprint 2) |
 | **PRE** | Proyecto Supabase con datos de prueba. El ensayo general. | Sprint 3 |
 | **PROD** | Proyecto Supabase (en una segunda cuenta) con las rutas reales + frontend en **Vercel** + backend en **Render** (tier gratis). Lo que ve el comité. | Decidido el 2026-09-14, **por desplegar en el Sprint 3** |
 
