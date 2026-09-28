@@ -39,7 +39,7 @@ En `entregables/comite-2/`: presentación de 15 slides con cronómetro, guion de
 
 Notas de lo que difiere del plan original:
 
-- El diagrama de arquitectura no es un `.drawio` editable: se dibujó con código y se entrega como PNG.
+- El diagrama de arquitectura es editable en draw.io (`evidencias/diagrama-arquitectura.drawio.html` y `.drawio`), hecho sobre la plantilla del curso; además hay un PNG de apoyo.
 - El Documento V1 (16-sep) está en `entregables/FusaRoute_Entregable_V1.docx`; el V2 lo corrige y su registro de cambios lista las 13 diferencias V1 → V2.
 - `docs/historial-sprints.md` ya existe en `main` (lo agregó el equipo); `informe-sprint-2.md` lo complementa con el detalle del Sprint 1 y 2.
 - El diagrama de flujo de los CU y los PDF se generaron con LibreOffice; un salto de página parte alguna tabla.
@@ -47,7 +47,7 @@ Notas de lo que difiere del plan original:
 ## Bloque 5 — Jira
 
 - `SCRUM-14` movida del Sprint 4 al Sprint 2, con comentario de cambio de alcance; en In Progress porque no está mergeada.
-- `SCRUM-41`, `42`, `43`, `44` y `46` en In Progress. **`SCRUM-45` (pantalla de perfil en Angular) sigue en To Do:** la transición fue denegada por el clasificador de permisos y queda para hacerla a mano.
+- `SCRUM-41` a `SCRUM-46` (las 6 subtareas del perfil) en In Progress.
 - `SCRUM-165` en In Progress, con comentario y enlaces a los entregables.
 - Ninguna se marcó Done: la regla es cerrar solo con PR mergeado y CI en verde.
 
