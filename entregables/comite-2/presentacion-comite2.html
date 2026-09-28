@@ -1,817 +1,382 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>FusaRoute — Comité 2 · Review Técnica</title>
+<meta charset="utf-8">
+<title>FusaRoute · Review Técnica · Comité 2</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600;9..144,800;9..144,900&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
 <style>
-:root {
-  --ink:     #0E2A47;
-  --paper:   #F5F0E6;
-  --paper-2: #ECE5D3;
-  --bus:     #E8743B;
-  --route:   #2A6F4A;
-  --urban:   #3D3D3D;
-  --rail:    #B8A989;
-  --white:   #FFFFFF;
-  --red:     #C0392B;
-  --blue:    #2980B9;
-  --pink:    #D63384;
-
-  --display: 'Fraunces', Georgia, serif;
-  --body:    'Inter', system-ui, sans-serif;
-  --mono:    'JetBrains Mono', ui-monospace, monospace;
-
-  --fs-hero:  clamp(2.8rem, 5.5vw, 5rem);
-  --fs-h1:    clamp(1.8rem, 3.5vw, 3rem);
-  --fs-h2:    clamp(1.3rem, 2vw, 1.8rem);
-  --fs-lead:  clamp(1rem, 1.3vw, 1.25rem);
-  --fs-body:  1rem;
-  --fs-small: 0.85rem;
-  --fs-mono:  0.8rem;
-  --slide-pad: clamp(1.4rem, 3.5vw, 3.2rem);
+:root{
+  --fondo:#FDFCFB; --tinta:#000; --suave:#4B5563;
+  --indigo:#4F46E5; --indigo-suave:#EEF2FF; --lima:#D9F99D; --amarillo:#FFD600; --rojo:#EF4444; --rojo-suave:#FEE2E2;
+  --pasca:#0D9488; --arbelaez:#EA580C; --silvania:#2563EB; --granada:#16A34A; --tibacuy:#C026D3;
+  --sd:8px 8px 0 #000; --sd-sm:4px 4px 0 #000; --sd-lg:12px 12px 0 #000;
+  --display:"Space Grotesk","Segoe UI",system-ui,sans-serif; --sans:"Plus Jakarta Sans","Segoe UI",system-ui,sans-serif; --mono:"JetBrains Mono",ui-monospace,Consolas,monospace;
 }
-
-*, *::before, *::after { box-sizing: border-box; }
-
-html, body {
-  margin: 0; padding: 0;
-  background: var(--urban);
-  color: var(--ink);
-  font-family: var(--body);
-  font-size: var(--fs-body);
-  line-height: 1.5;
-  -webkit-font-smoothing: antialiased;
-}
-
-/* ---- Modo presentación (fullscreen) ---- */
-.deck { display: flex; flex-direction: column; align-items: center; gap: 1.5rem; padding: 1.5rem 1rem 4rem; }
-.deck.presenting { gap: 0; padding: 0; background: #000; }
-.deck.presenting .slide { border-radius: 0; box-shadow: none; max-height: 100vh; }
-.deck.presenting .slide { display: none; }
-.deck.presenting .slide.active { display: block; }
-
-.slide {
-  position: relative;
-  width: min(1280px, 100%);
-  aspect-ratio: 16 / 9;
-  max-height: 85vh;
-  background: var(--paper);
-  overflow: hidden;
-  box-shadow: 0 20px 50px -15px rgba(0,0,0,.4);
-  border-radius: 6px;
-}
-.slide-inner {
-  position: relative;
-  width: 100%; height: 100%;
-  padding: var(--slide-pad);
-  display: flex; flex-direction: column;
-  overflow: hidden;
-}
-
-/* ---- Elementos de slide ---- */
-h1 { font-family: var(--display); font-size: var(--fs-h1); font-weight: 800; margin: 0 0 .4em; line-height: 1.15; }
-h2 { font-family: var(--display); font-size: var(--fs-h2); font-weight: 600; margin: 0 0 .5em; color: var(--bus); }
-p, li { font-size: var(--fs-lead); margin: 0 0 .5em; }
-ul { padding-left: 1.4em; margin: 0; }
-li { margin-bottom: .35em; }
-code { font-family: var(--mono); font-size: var(--fs-mono); background: var(--paper-2); padding: 2px 6px; border-radius: 3px; }
-pre { font-family: var(--mono); font-size: var(--fs-mono); background: var(--ink); color: var(--paper); padding: 1em; border-radius: 6px; overflow-x: auto; margin: .5em 0; line-height: 1.4; }
-.muted { color: #666; font-size: var(--fs-small); }
-.tag { display: inline-block; font-family: var(--mono); font-size: var(--fs-small); background: var(--route); color: var(--white); padding: 2px 10px; border-radius: 20px; }
-.tag-bus { background: var(--bus); }
-.tag-red { background: var(--red); }
-.tag-blue { background: var(--blue); }
-
-.hero-title { font-family: var(--display); font-size: var(--fs-hero); font-weight: 900; margin: 0; line-height: 1.05; }
-.wordmark { font-family: var(--display); font-size: 1.6rem; font-weight: 300; color: var(--bus); }
-.wordmark b { font-weight: 800; color: var(--ink); }
-
-/* Insignias de orador */
-.badge { display: inline-block; font-family: var(--mono); font-size: var(--fs-small); padding: 2px 12px; border-radius: 20px; font-weight: 600; }
-.badge-santiago { background: var(--blue); color: var(--white); }
-.badge-angelica { background: var(--pink); color: var(--white); }
-
-/* Línea de ruta decorativa */
-.route-line { position: absolute; top: 0; left: 48px; width: 4px; height: 100%; background: var(--route); opacity: .15; }
-.route-dot { position: absolute; left: 42px; width: 16px; height: 16px; border-radius: 50%; border: 3px solid var(--route); background: var(--paper); z-index: 2; }
-
-/* Portal (slide de demo) */
-.portal { background: var(--ink); color: var(--white); }
-.portal h1, .portal h2 { color: var(--bus); }
-.portal .route-line { background: var(--bus); opacity: .2; }
-.portal code { background: rgba(255,255,255,.1); color: var(--bus); }
-
-/* Tabla */
-table { width: 100%; border-collapse: collapse; font-size: var(--fs-small); margin: .5em 0; }
-th { background: var(--ink); color: var(--white); text-align: left; padding: 6px 10px; font-weight: 600; }
-td { padding: 5px 10px; border-bottom: 1px solid var(--rail); }
-tr:nth-child(even) td { background: var(--paper-2); }
-
-/* Dos columnas */
-.cols { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; flex: 1; }
-.col { display: flex; flex-direction: column; }
-
-/* Footer del slide */
-.slide-footer { margin-top: auto; display: flex; justify-content: space-between; align-items: center; font-size: var(--fs-small); color: var(--rail); padding-top: .5em; border-top: 1px solid var(--rail); }
-
-/* Cronómetro y controles */
-.controls {
-  position: fixed; bottom: 0; left: 0; right: 0;
-  background: rgba(14,42,71,.95); color: var(--white);
-  padding: 8px 16px; display: flex; align-items: center; gap: 16px;
-  font-family: var(--mono); font-size: 14px; z-index: 100;
-  backdrop-filter: blur(8px);
-}
-.controls button { background: var(--bus); color: var(--white); border: none; padding: 4px 14px; border-radius: 4px; cursor: pointer; font-family: var(--mono); font-size: 13px; }
-.controls button:hover { opacity: .85; }
-.controls .timer { font-size: 18px; font-weight: 700; min-width: 70px; }
-.controls .slide-timer { color: var(--bus); }
-.controls .total-timer { color: var(--route); }
-
-/* Notas del orador */
-.speaker-notes {
-  position: fixed; top: 0; right: 0; width: 360px; height: 100%;
-  background: rgba(14,42,71,.95); color: var(--paper);
-  padding: 1rem; font-size: 14px; overflow-y: auto;
-  transform: translateX(100%); transition: transform .3s;
-  z-index: 99; font-family: var(--body);
-}
-.speaker-notes.visible { transform: translateX(0); }
-.speaker-notes h3 { color: var(--bus); margin: 0 0 .5em; font-size: 16px; }
-
-/* Responsive */
-@media (max-width: 768px) {
-  .cols { grid-template-columns: 1fr; }
-  .slide { aspect-ratio: auto; min-height: 70vh; }
-}
-
-/* Backup slides */
-.backup-section { border-top: 4px dashed var(--bus); margin-top: 2rem; padding-top: 1rem; }
-.backup-label { font-family: var(--mono); color: var(--bus); font-size: var(--fs-small); text-transform: uppercase; letter-spacing: 2px; margin-bottom: .5rem; }
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;background:#0b0b0b;overflow:hidden;font-family:var(--sans);color:var(--tinta)}
+#stage{position:absolute;left:50%;top:50%;width:1920px;height:1080px;transform-origin:center center;background:var(--fondo);
+  background-image:radial-gradient(#0000001a 2px,transparent 2px);background-size:40px 40px;overflow:hidden}
+/* ---------- slides ---------- */
+.slide{position:absolute;inset:0;padding:120px 120px 150px;opacity:0;visibility:hidden;display:flex;flex-direction:column}
+.slide.active{opacity:1;visibility:visible;animation:slideIn .55s cubic-bezier(.2,.9,.2,1) both}
+@keyframes slideIn{from{clip-path:inset(0 0 0 100%);transform:translateX(60px)}to{clip-path:inset(0 0 0 0);transform:none}}
+.a{opacity:0}
+.slide.active .a{animation:pop .65s cubic-bezier(.34,1.56,.64,1) both;animation-delay:calc(var(--i,0)*90ms + 250ms)}
+.slide.active .up{animation-name:up}
+.slide.active .wipe{animation-name:wipe;animation-duration:.8s;animation-timing-function:cubic-bezier(.7,0,.2,1)}
+@keyframes pop{from{opacity:0;transform:scale(.6) rotate(-4deg)}to{opacity:1;transform:none}}
+@keyframes up{from{opacity:0;transform:translateY(60px)}to{opacity:1;transform:none}}
+@keyframes wipe{from{opacity:1;clip-path:inset(0 100% 0 0)}to{opacity:1;clip-path:inset(0 0 0 0)}}
+@keyframes wob{0%,100%{transform:rotate(var(--r,-3deg))}50%{transform:rotate(calc(var(--r,-3deg) + 2.5deg)) translateY(-6px)}}
+@keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-10px) rotate(-1deg)}40%{transform:translateX(10px) rotate(1deg)}60%{transform:translateX(-6px)}80%{transform:translateX(6px)}}
+@keyframes pulse{0%,100%{transform:scale(1);box-shadow:var(--sd-sm)}50%{transform:scale(1.07);box-shadow:8px 8px 0 #000}}
+@keyframes blink{50%{opacity:.25}}
+@keyframes dash{to{stroke-dashoffset:-60}}
+@keyframes marquee{to{transform:translateX(-50%)}}
+@keyframes drive{0%{left:-140px}100%{left:100%}}
+@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+@keyframes flow{0%{background-position:0 0}100%{background-position:60px 0}}
+/* ---------- chrome ---------- */
+.brand{position:absolute;left:120px;top:48px;font:700 34px/1 var(--display);letter-spacing:-.02em;z-index:5}
+.brand b{color:var(--indigo)}
+.num{position:absolute;right:120px;top:40px;font:700 26px/1 var(--mono);background:var(--amarillo);border:3px solid #000;border-radius:999px;padding:10px 22px;box-shadow:var(--sd-sm);z-index:5}
+.who{position:absolute;right:120px;bottom:70px;z-index:5}
+.progress{position:absolute;left:120px;right:340px;bottom:78px;height:16px;z-index:5}
+.progress .line{position:absolute;left:0;right:0;top:5px;height:6px;background:#000;border-radius:3px}
+.progress .stop{position:absolute;top:0;width:16px;height:16px;border:3px solid #000;border-radius:50%;background:var(--fondo);transform:translateX(-8px)}
+.progress .stop.done{background:var(--indigo)}
+.progress .bus{position:absolute;top:-22px;font-size:34px;transition:left .6s cubic-bezier(.5,0,.2,1);transform:translateX(-17px)}
+/* ---------- primitives ---------- */
+h1,h2{font-family:var(--display);letter-spacing:-.03em;line-height:.95}
+h2{font-size:104px;font-weight:700}
+.tag{display:inline-block;font:700 24px/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;background:var(--lima);border:3px solid #000;border-radius:999px;padding:12px 26px;box-shadow:var(--sd-sm)}
+.tag.ind{background:var(--indigo);color:#fff}.tag.yel{background:var(--amarillo)}.tag.red{background:var(--rojo);color:#000}
+.card{background:#fff;border:4px solid #000;border-radius:24px;box-shadow:var(--sd);padding:32px 36px}
+.card.ind{background:var(--indigo);color:#fff}.card.lima{background:var(--lima)}.card.yel{background:var(--amarillo)}.card.soft{background:var(--indigo-suave)}
+.chip{display:inline-flex;align-items:center;gap:12px;font:700 28px/1 var(--sans);background:#fff;border:3px solid #000;border-radius:999px;padding:12px 26px 12px 16px;box-shadow:var(--sd-sm)}
+.chip::before{content:"";width:22px;height:22px;border-radius:50%;background:var(--m,var(--indigo));border:3px solid #000}
+.sticker{position:absolute;font:700 34px/1.1 var(--display);border:4px solid #000;border-radius:18px;padding:18px 28px;box-shadow:var(--sd);animation:wob 4s ease-in-out infinite;transform:rotate(var(--r,-3deg))}
+.big{font:700 200px/.85 var(--display);letter-spacing:-.05em}
+.mono{font-family:var(--mono);font-weight:700}
+.lbl{font:700 24px/1.1 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--suave)}
+.arrow{font:700 90px/1 var(--display)}
+.live{display:inline-flex;align-items:center;gap:14px;font:800 28px/1 var(--sans);letter-spacing:.14em;background:var(--rojo);border:3px solid #000;border-radius:999px;padding:14px 28px;box-shadow:var(--sd-sm);animation:pulse 1.4s ease-in-out infinite}
+.live i{width:18px;height:18px;border-radius:50%;background:#000;animation:blink 1s infinite}
+.row{display:flex;gap:28px;align-items:stretch}
+.col{display:flex;flex-direction:column;gap:22px}
+.g{flex:1}
+/* ---------- slide-specific ---------- */
+.s1 h1{font-size:330px;font-weight:700;letter-spacing:-.06em;line-height:.85}
+.s1 h1 span{display:inline-block;background:var(--indigo);color:#fff;border:6px solid #000;border-radius:28px;padding:0 34px 18px;box-shadow:var(--sd-lg);transform:rotate(-2deg);margin-left:10px}
+.marquee{position:absolute;left:0;right:0;bottom:150px;height:70px;background:#000;color:var(--lima);overflow:hidden;transform:rotate(-1.2deg)}
+.marquee div{display:flex;white-space:nowrap;width:max-content;animation:marquee 22s linear infinite;font:700 38px/70px var(--display);letter-spacing:.06em}
+.marquee span{padding:0 28px}
+.road{position:absolute;left:0;right:0;bottom:250px;height:30px}
+.road::before{content:"";position:absolute;left:0;right:0;top:12px;border-top:6px dashed #000}
+.road .bus{position:absolute;top:-52px;font-size:82px;animation:drive 9s linear infinite}
+.s2 .stats{display:flex;gap:40px;margin-top:70px}
+.s2 .stat{flex:1}
+.s2 .stat .big{font-size:170px}
+.s2 .stat p{font:700 34px/1.15 var(--display);margin-top:14px}
+.speech{position:absolute;right:120px;top:730px;width:640px;background:var(--lima);border:4px solid #000;border-radius:30px 30px 30px 0;box-shadow:var(--sd);padding:30px 36px;font:700 36px/1.2 var(--display);animation:bounce 3s ease-in-out infinite}
+.s3 ul{list-style:none;display:flex;flex-direction:column;gap:22px;margin-top:26px}
+.s3 li{font:700 48px/1.1 var(--display);display:flex;gap:16px;align-items:center}
+.s3 li::before{content:"✔";font-size:34px;background:#000;color:var(--lima);border-radius:8px;width:46px;height:46px;display:grid;place-items:center;flex:none}
+.s3 .pend li::before{content:"…";background:#fff;color:#000;border:3px solid #000}
+.s3 .card.pend{border-style:dashed}
+.vel{display:flex;gap:26px;align-items:center;margin-top:50px}
+.vel .box{font:700 56px/1 var(--display);border:4px solid #000;border-radius:18px;padding:18px 30px;box-shadow:var(--sd-sm)}
+.s4 .flow{display:flex;align-items:stretch;gap:22px;margin-top:80px}
+.s4 .node{flex:1;text-align:center;font:700 48px/1.05 var(--display);padding:60px 20px;display:flex;flex-direction:column;justify-content:center;min-height:380px}
+.s4 .node small{display:block;font:600 24px/1.3 var(--sans);margin-top:14px;opacity:.85}
+.s4 .node:nth-child(1){--r:-2deg}
+.s4 .link{align-self:center;width:70px;height:16px;background:repeating-linear-gradient(90deg,#000 0 20px,transparent 20px 30px);animation:flow 1s linear infinite;flex:none;position:relative}
+.s4 .link::after{content:"▶";position:absolute;right:-22px;top:-20px;font-size:44px}
+.s5 .cta{margin:60px auto 0;display:flex;flex-direction:column;align-items:center;gap:36px}
+.btn{display:inline-flex;align-items:center;gap:20px;font:700 64px/1 var(--display);background:var(--indigo);color:#fff;border:5px solid #000;border-radius:28px;padding:36px 64px;box-shadow:var(--sd-lg);text-decoration:none;transition:transform .2s,box-shadow .2s;animation:pulse 1.8s ease-in-out infinite}
+.btn:hover{transform:translate(-4px,-4px);box-shadow:16px 16px 0 #000}
+.s5 svg{width:1100px;height:330px}
+.s6 .map{display:flex;flex-direction:column;gap:22px;margin-top:50px;width:1000px}
+.s6 .bar{display:flex;align-items:center;font:700 44px/1 var(--display)}
+.s6 .bar .l{flex:none;width:340px;padding:26px 30px;border:4px solid #000;border-radius:20px 0 0 20px;background:#fff}
+.s6 .bar .m{flex:none;width:90px;text-align:center;font-size:60px}
+.s6 .bar .r{flex:1;padding:26px 30px;border:4px solid #000;border-left:0;border-radius:0 20px 20px 0;background:var(--lima);font-family:var(--mono);font-size:36px}
+.hex{position:absolute;right:150px;top:230px;width:500px;height:500px}
+.hex div{position:absolute;inset:0;margin:auto;clip-path:polygon(25% 5%,75% 5%,100% 50%,75% 95%,25% 95%,0 50%);display:grid;place-items:center;font:700 34px/1 var(--display);text-align:center}
+.hex .h1{width:100%;height:100%;background:#000}.hex .h2{width:92%;height:92%;background:var(--amarillo)}
+.hex .h3{width:70%;height:70%;background:#000}.hex .h4{width:64%;height:64%;background:var(--indigo);color:#fff;font-size:44px}
+.hex .lab{position:absolute;font:700 26px/1 var(--display);background:#fff;border:3px solid #000;border-radius:10px;padding:8px 14px;clip-path:none;width:auto;height:auto;inset:auto}
+.s7 .steps{display:flex;gap:26px;margin-top:70px;position:relative}
+.s7 .steps::before{content:"";position:absolute;left:60px;right:60px;top:52px;height:8px;background:#000;border-radius:4px}
+.s7 .step{flex:1;position:relative;padding-top:0}
+.s7 .n{width:104px;height:104px;border-radius:50%;background:var(--amarillo);border:5px solid #000;box-shadow:var(--sd-sm);display:grid;place-items:center;font:700 56px/1 var(--display);position:relative;z-index:2;margin-bottom:26px}
+.s7 .step h3{font:700 36px/1.05 var(--display);margin-bottom:12px}
+.s7 .step p{font:600 26px/1.25 var(--sans);color:var(--suave)}
+.s7 .step code{font:700 24px var(--mono);background:var(--lima);border:2px solid #000;border-radius:8px;padding:3px 8px;display:inline-block;margin-bottom:10px}
+.s7 .two{position:absolute;left:120px;right:120px;bottom:170px;display:flex;justify-content:center;align-items:center;gap:28px;font:700 44px/1 var(--display)}
+.s8 .row{margin-top:50px}
+.s8 .code{background:#000;color:#e5e7eb;border-radius:24px;border:4px solid #000;box-shadow:var(--sd);padding:32px 40px;font:600 28px/1.55 var(--mono);flex:1.3}
+.s8 .code .c{color:#9ca3af}.s8 .code .k{color:var(--lima)}.s8 .code .s{color:var(--amarillo)}
+.s8 .routes{display:flex;flex-direction:column;gap:16px}
+.s8 .routes .chip{font-size:30px;justify-content:space-between;width:100%}
+.s8 .routes .chip em{font:700 22px var(--sans);font-style:normal;background:var(--lima);border:2px solid #000;border-radius:8px;padding:4px 10px}
+.s8 .routes .chip em.lock{background:var(--amarillo)}
+.portal{align-items:center;justify-content:center;text-align:center}
+.portal h2{font-size:250px;margin:36px 0 10px}
+.portal .chips{display:flex;gap:22px;justify-content:center;flex-wrap:wrap;margin-top:34px}
+.portal .stamp{position:absolute;right:170px;bottom:250px;font:700 120px/1 var(--display);background:var(--lima);border:6px solid #000;border-radius:24px;padding:20px 40px;box-shadow:var(--sd-lg);transform:rotate(6deg)}
+.s12 .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:34px;margin-top:50px}
+.s12 .stat{text-align:left}
+.s12 .stat .big{font-size:150px}
+.s12 .stat p{font:700 30px/1.15 var(--display);margin-top:10px}
+.s13 .notes{display:flex;flex-wrap:wrap;gap:34px;margin-top:60px}
+.s13 .note{width:520px;padding:30px 32px;font:700 34px/1.1 var(--display);border:4px solid #000;box-shadow:var(--sd);border-radius:6px;transform:rotate(var(--r,-2deg));background:var(--c,var(--amarillo))}
+.s13 .note small{display:block;margin-top:16px;font:800 20px var(--sans);letter-spacing:.12em;text-transform:uppercase}
+.s14 .road2{position:relative;margin-top:110px;height:12px;background:#000;border-radius:6px}
+.s14 .stops{display:flex;justify-content:space-between;margin-top:-70px;position:relative}
+.s14 .stopc{width:430px}
+.s14 .dot{width:110px;height:110px;border-radius:50%;background:var(--c);border:6px solid #000;box-shadow:var(--sd-sm);display:grid;place-items:center;font:700 44px/1 var(--display);margin-bottom:30px}
+.s14 .stopc h3{font:700 46px/1 var(--display);margin-bottom:12px}
+.s14 .stopc p{font:600 30px/1.3 var(--sans)}
+.s15{align-items:center;justify-content:center;text-align:center}
+.s15 h2{font-size:290px;line-height:.85}
+.s15 h2 span{background:var(--amarillo);border:6px solid #000;border-radius:28px;padding:0 30px 14px;box-shadow:var(--sd-lg);display:inline-block;transform:rotate(-2deg)}
+/* ---------- toolbar / notes ---------- */
+#bar{position:fixed;left:50%;bottom:14px;transform:translateX(-50%);display:flex;gap:10px;align-items:center;z-index:50;background:#000;color:#fff;border-radius:14px;padding:8px 12px;font:700 15px var(--mono);opacity:.25;transition:opacity .2s}
+#bar:hover{opacity:1}
+#bar button{font:700 14px var(--sans);background:var(--lima);border:2px solid #fff;border-radius:8px;padding:6px 12px;cursor:pointer}
+#notes{position:fixed;left:0;right:0;bottom:0;max-height:34vh;background:var(--amarillo);border-top:4px solid #000;padding:18px 32px;font:600 20px/1.4 var(--sans);z-index:60;transform:translateY(100%);transition:transform .25s;overflow:auto}
+#notes.on{transform:none}
+@media print{#bar,#notes{display:none}}
 </style>
 </head>
 <body>
+<div id="stage">
+<div class="brand">Fusa<b>Route</b></div>
+<div class="num" id="num">01/15</div>
+<div class="progress" id="prog"><div class="line"></div><div class="bus" id="bus">🚌</div></div>
 
-<div class="deck" id="deck">
+<!-- 1 PORTADA -->
+<section class="slide s1" data-notes="Santiago abre. Presentar equipo, materia y docente. 30 segundos.">
+  <div class="a" style="--i:0;margin-top:40px"><span class="tag ind">Review técnica · Comité 2</span></div>
+  <h1 class="a up" style="--i:1;margin-top:30px">Fusa<span>Route</span></h1>
+  <div class="row a" style="--i:3;margin-top:50px"><span class="chip" style="--m:var(--indigo)">Santiago Bermúdez</span><span class="chip" style="--m:var(--tibacuy)">Angélica Aranguren</span></div>
+  <p class="a" style="--i:4;margin-top:34px;font:600 30px var(--sans);color:var(--suave)">Ingeniería de Software I · Universidad de Cundinamarca · 28 sep 2026 · Sprint 2</p>
+  <div class="road"><div class="bus">🚌</div></div>
+  <div class="marquee"><div><span>FUSAGASUGÁ ★</span><span>PASCA ★</span><span>ARBELÁEZ ★</span><span>CHINAUTA ★</span><span>+20 RUTAS ★</span><span>FUSAGASUGÁ ★</span><span>PASCA ★</span><span>ARBELÁEZ ★</span><span>CHINAUTA ★</span><span>+20 RUTAS ★</span></div></div>
+</section>
 
-<!-- ============================================================
-     SLIDE 1 — Portada
-     ============================================================ -->
-<div class="slide" data-notes="Santiago abre. Presentar equipo, materia, docente. 30 segundos.">
-  <div class="route-line"></div>
-  <div class="slide-inner" style="justify-content: center; align-items: center; text-align: center;">
-    <p class="wordmark" style="font-size: 2.2rem; margin-bottom: .5em;">Fusa<b>Route</b></p>
-    <h1 class="hero-title" style="font-size: clamp(2rem, 4vw, 3.5rem);">Review Técnica<br><span style="color: var(--bus);">Comité 2</span></h1>
-    <p style="margin-top: 1em; font-size: var(--fs-lead); color: var(--urban);">
-      Ingeniería de Software I · Universidad de Cundinamarca
-    </p>
-    <p style="margin-top: 1.5em;">
-      <span class="badge badge-santiago">Santiago Bermúdez</span>
-      <span style="margin: 0 .5em;">·</span>
-      <span class="badge badge-angelica">Angélica Aranguren</span>
-    </p>
-    <p class="muted" style="margin-top: 1em;">28 de septiembre de 2026 · Sprint 2</p>
+<!-- 2 PROBLEMA -->
+<section class="slide s2" data-notes="Angélica. ¿Por qué existe FusaRoute? Más de 20 rutas y ni Google Maps las tiene. Encuesta propia 2025. Doña Gladys quiere ir a Chinauta.">
+  <span class="tag a" style="width:fit-content">El problema</span>
+  <h2 class="a up" style="--i:1;margin-top:26px">Nadie sabe qué buseta tomar</h2>
+  <div class="stats">
+    <div class="stat card a" style="--i:2"><div class="big" style="color:var(--indigo)"><span data-count="20">0</span>+</div><p>rutas urbanas de buseta</p></div>
+    <div class="stat card yel a" style="--i:3"><div class="big"><span data-count="0">0</span></div><p>registradas en Google Maps</p></div>
+    <div class="stat card lima a" style="--i:4"><div class="big"><span data-count="285000">0</span></div><p>habitantes en la región (DANE)</p></div>
   </div>
-</div>
+  <div class="speech a" style="--i:6">Doña Gladys quiere ir a Chinauta… ¿cuál buseta? ¿cuánto vale? ¿por dónde pasa?</div>
+</section>
 
-<!-- ============================================================
-     SLIDE 2 — Problema y usuario
-     ============================================================ -->
-<div class="slide" data-notes="Angélica. ¿Por qué existe FusaRoute? Más de 20 rutas, ni Google Maps las tiene. Encuesta propia. Doña Gladys.">
-  <div class="route-line"></div>
-  <div class="route-dot" style="top: 15%;"></div>
-  <div class="slide-inner">
-    <h2><span class="badge badge-angelica">Angélica</span></h2>
-    <h1>El problema</h1>
-    <div class="cols">
-      <div class="col">
-        <p><strong>Fusagasugá tiene más de 20 rutas de buseta</strong> sin información pública clara.</p>
-        <ul>
-          <li>Ni Google Maps las registra</li>
-          <li>Se puede llegar al mismo destino por varias rutas</li>
-          <li>Sin información, la gente pierde tiempo y dinero</li>
-          <li>~285.000 habitantes en la región (DANE)</li>
-        </ul>
-        <p style="margin-top: 1em;"><span class="tag tag-bus">Encuesta propia 2025</span> respaldando la necesidad</p>
-      </div>
-      <div class="col" style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
-        <div style="background: var(--ink); color: var(--white); padding: 1.5em; border-radius: 8px; text-align: center; max-width: 300px;">
-          <p style="font-size: 3rem; margin: 0;">🚌</p>
-          <p style="font-family: var(--display); font-size: 1.4rem; font-weight: 600; margin: .5em 0 .2em;">Doña Gladys</p>
-          <p style="font-size: var(--fs-small); color: var(--rail);">Quiere ir a Chinauta.<br>No sabe cuál buseta tomar,<br>ni cuánto vale, ni por dónde pasa.</p>
-        </div>
-        <p class="muted" style="margin-top: .8em; font-style: italic;">"Ni Google Maps sabe cómo llegar<br>a La Pampa en buseta"</p>
-      </div>
-    </div>
-    <div class="slide-footer">
-      <span>Comité 2 · FusaRoute</span>
-      <span>2 / 15</span>
-    </div>
+<!-- 3 ALCANCE -->
+<section class="slide s3" data-notes="Angélica. Sprint 1 = velocidad 0 (aprendimos que un PR sin merge es un diario íntimo). Sprint 2 = lo que el comité ve hoy. No maquillar el Sprint 1.">
+  <span class="tag a" style="width:fit-content">Alcance</span>
+  <div class="row" style="margin-top:34px">
+    <div class="card lima g a" style="--i:1"><div class="lbl" style="color:#000">Hecho hoy</div><ul>
+      <li>Registro</li><li>Login con JWT</li><li>Perfil</li><li>Catálogo público</li><li>8 rutas · 23 tarifas</li></ul></div>
+    <div class="card pend g a" style="--i:2;border-style:dashed;background:#fff"><div class="lbl">Sprint 3+</div><ul class="pend">
+      <li>Búsqueda con Maps</li><li>Modo offline</li><li>Historial y favoritos</li><li>Comentarios y admin</li><li>Despliegue</li></ul></div>
   </div>
-</div>
+  <div class="vel a" style="--i:4"><div class="box" style="background:var(--rojo);animation:shake 2.2s infinite">Sprint 1 · velocidad 0</div><div class="arrow">→</div><div class="box" style="background:var(--indigo);color:#fff">Sprint 2 · 17 / 17 SP</div></div>
+</section>
 
-<!-- ============================================================
-     SLIDE 3 — Alcance: hecho vs. pendiente
-     ============================================================ -->
-<div class="slide" data-notes="Angélica. Sprint 1 = velocidad 0 (aprendimos que un PR sin merge es un diario íntimo). Sprint 2 = lo que el comité ve hoy. No maquillar el Sprint 1.">
-  <div class="route-line"></div>
-  <div class="slide-inner">
-    <h2><span class="badge badge-angelica">Angélica</span></h2>
-    <h1>Alcance: Sprint 1 → Sprint 2</h1>
-    <div class="cols">
-      <div class="col">
-        <h2 style="color: var(--route);">✅ Implementado hoy</h2>
-        <ul>
-          <li><strong>RF-01</strong> Registro de usuario</li>
-          <li><strong>RF-02</strong> Inicio de sesión (JWT, 7 días)</li>
-          <li><strong>RF-03</strong> Perfil de usuario (ver, editar, cambiar contraseña)</li>
-          <li><strong>RF-15</strong> Catálogo público de rutas</li>
-          <li>Detalle de ruta con barrios y tarifas</li>
-          <li>8 rutas y 23 tarifas en la BD</li>
-          <li>CI: ArchUnit + JaCoCo + Checkstyle</li>
-        </ul>
-      </div>
-      <div class="col">
-        <h2 style="color: var(--rail);">⏳ Pendiente (Sprint 3+)</h2>
-        <ul>
-          <li>Búsqueda de ruta (Google Maps)</li>
-          <li>Modo offline (GeoJSON)</li>
-          <li>Historial y favoritos</li>
-          <li>Comentarios</li>
-          <li>Administración</li>
-          <li>Despliegue en Vercel + Render</li>
-        </ul>
-        <div style="margin-top: 1em; padding: .8em; background: var(--paper-2); border-radius: 6px;">
-          <p style="margin: 0; font-size: var(--fs-small);"><strong>Sprint 1:</strong> velocidad <strong style="color: var(--red);">0</strong></p>
-          <p style="margin: .3em 0 0; font-size: var(--fs-small); color: var(--urban);">Aprendimos que un PR sin merge es un diario íntimo.</p>
-        </div>
-      </div>
-    </div>
-    <div class="slide-footer">
-      <span>Comité 2 · FusaRoute</span>
-      <span>3 / 15</span>
-    </div>
+<!-- 4 ARQUITECTURA -->
+<section class="slide s4" data-notes="Santiago. Diagrama de contexto: Usuario → Angular → Spring Boot → PostgreSQL. Supabase es SOLO PostgreSQL — no Auth, no Storage, no Realtime.">
+  <span class="tag a" style="width:fit-content">Arquitectura</span>
+  <div class="flow">
+    <div class="node card a" style="--i:1">👤<br>Usuario</div><div class="link a" style="--i:2"></div>
+    <div class="node card ind a" style="--i:3">Angular 21<small>Signals · Zoneless · PWA</small></div><div class="link a" style="--i:4"></div>
+    <div class="node card yel a" style="--i:5">Spring Boot 3.5<small>Java 25 · Hexagonal · JWT</small></div><div class="link a" style="--i:6"></div>
+    <div class="node card lima a" style="--i:7">PostgreSQL 17<small>Supabase · Flyway V1–V4</small></div>
   </div>
-</div>
+  <div class="sticker a" style="--i:9;--r:-3deg;left:120px;bottom:250px;background:var(--lima)">Supabase = solo Postgres</div>
+  <div class="sticker a" style="--i:10;--r:3deg;right:150px;bottom:250px;background:#fff;border-style:dashed">Google Maps · Sprint 4</div>
+</section>
 
-<!-- ============================================================
-     SLIDE 4 — Arquitectura general
-     ============================================================ -->
-<div class="slide" data-notes="Santiago. Diagrama de contexto: Usuario → Angular → Spring Boot → PostgreSQL. Supabase es SOLO PostgreSQL — no Auth, no Storage.">
-  <div class="route-line"></div>
-  <div class="slide-inner">
-    <h2><span class="badge badge-santiago">Santiago</span></h2>
-    <h1>Arquitectura general</h1>
-    <div style="display: flex; justify-content: center; align-items: center; flex: 1; gap: 1rem; flex-wrap: wrap;">
-      <div style="text-align: center; padding: 1em;">
-        <div style="font-size: 2.5rem;">👤</div>
-        <p><strong>Usuario</strong></p>
-      </div>
-      <div style="font-size: 2rem; color: var(--bus);">→</div>
-      <div style="background: var(--bus); color: var(--white); padding: 1em 1.5em; border-radius: 8px; text-align: center;">
-        <p style="font-weight: 700; margin: 0;">Angular 21</p>
-        <p style="font-size: var(--fs-small); margin: .3em 0 0; opacity: .8;">Signals · Zoneless · PWA</p>
-      </div>
-      <div style="font-size: 2rem; color: var(--bus);">→</div>
-      <div style="background: var(--route); color: var(--white); padding: 1em 1.5em; border-radius: 8px; text-align: center;">
-        <p style="font-weight: 700; margin: 0;">Spring Boot 3.5</p>
-        <p style="font-size: var(--fs-small); margin: .3em 0 0; opacity: .8;">Java 25 · Hexagonal · JWT</p>
-      </div>
-      <div style="font-size: 2rem; color: var(--bus);">→</div>
-      <div style="background: var(--ink); color: var(--white); padding: 1em 1.5em; border-radius: 8px; text-align: center;">
-        <p style="font-weight: 700; margin: 0;">PostgreSQL 17</p>
-        <p style="font-size: var(--fs-small); margin: .3em 0 0; opacity: .8;">Supabase (solo BD)<br>Flyway · 4 migraciones</p>
-      </div>
-    </div>
-    <p class="muted" style="text-align: center;">Supabase se usa <strong>solo</strong> como PostgreSQL administrado — no Auth, no Storage, no Realtime</p>
-    <div class="slide-footer">
-      <span>Comité 2 · FusaRoute</span>
-      <span>4 / 15</span>
-    </div>
+<!-- 5 DIAGRAMA -->
+<section class="slide s5" data-notes="Santiago. Clic en el botón: abre el diagrama draw.io en otra pestaña (necesita internet). Señalar Angular a la izquierda, la API en el medio y PostgreSQL a la derecha. Son los módulos reales del sistema, no los genéricos de la plantilla.">
+  <span class="tag a" style="width:fit-content">Diagrama de componentes</span>
+  <div class="cta">
+    <svg class="a" style="--i:1" viewBox="0 0 1100 330"><g fill="none" stroke="#000" stroke-width="6">
+      <rect x="10" y="90" width="260" height="150" rx="22" fill="#4F46E5"/><rect x="420" y="40" width="260" height="250" rx="22" fill="#FFD600"/><rect x="830" y="90" width="260" height="150" rx="22" fill="#D9F99D"/>
+      <path d="M270 165H420M680 165H830" stroke-dasharray="14 14" style="animation:dash 1s linear infinite"/></g>
+      <g font-family="Space Grotesk,sans-serif" font-weight="700" font-size="34" text-anchor="middle"><text x="140" y="175" fill="#fff">Angular</text><text x="550" y="150">API</text><text x="550" y="195" font-size="26">hexágono</text><text x="960" y="175">PostgreSQL</text></g></svg>
+    <a class="btn a" style="--i:3" href="diagrama-arquitectura.drawio.html" target="_blank" rel="noopener">Abrir diagrama ↗</a>
+    <span class="lbl a" style="--i:4">draw.io · plantilla del curso · 10 componentes reales</span>
   </div>
-</div>
+</section>
 
-<!-- ============================================================
-     SLIDE 5 — Diagrama de arquitectura (drawio)
-     ============================================================ -->
-<div class="slide" data-notes="Santiago. Aquí se abre el drawio en otra ventana. Señalar: Angular a la izquierda, API en el medio, PostgreSQL a la derecha. Los módulos reales, no los genéricos de la plantilla.">
-  <div class="route-line"></div>
-  <div class="slide-inner">
-    <h2><span class="badge badge-santiago">Santiago</span></h2>
-    <h1>Diagrama de arquitectura</h1>
-    <div style="flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center;">
-      <div style="background: var(--paper-2); border: 2px dashed var(--rail); border-radius: 8px; padding: 2em; text-align: center; max-width: 600px;">
-        <p style="font-size: 1.4rem;"><a href="diagrama-arquitectura.drawio.html" target="_blank" rel="noopener">📊 Abrir el diagrama de arquitectura (draw.io)</a></p>
-        <p class="muted">Plantilla del docente con el sistema real:<br>
-        PostgreSQL/Supabase · Angular 21 · Spring Boot 3.5<br>
-        Hexágono con sus 10 componentes reales<br>
-        Google Maps punteado (Sprint 4). Requiere internet.</p>
-      </div>
-    </div>
-    <div class="slide-footer">
-      <span>Comité 2 · FusaRoute</span>
-      <span>5 / 15</span>
-    </div>
+<!-- 6 HEXAGONAL -->
+<section class="slide s6" data-notes="Santiago. El mapeo Controller→Service→Repository es lo que el docente pide; hexagonal lo contiene con otros nombres y la dependencia invertida. La interfaz del repositorio pertenece al dominio.">
+  <span class="tag a" style="width:fit-content">Backend hexagonal</span>
+  <div class="map">
+    <div class="bar a" style="--i:1"><div class="l">Controller</div><div class="m">→</div><div class="r">adapter/in/web</div></div>
+    <div class="bar a" style="--i:2"><div class="l">Service</div><div class="m">→</div><div class="r">application/usecase</div></div>
+    <div class="bar a" style="--i:3"><div class="l">Repository</div><div class="m">→</div><div class="r">adapter/out/persistence</div></div>
   </div>
-</div>
+  <div class="hex a" style="--i:4"><div class="h1"></div><div class="h2"></div><div class="h3"></div><div class="h4">domain</div></div>
+  <div class="sticker a" style="--i:6;--r:-4deg;left:120px;bottom:215px;background:var(--amarillo);font-size:40px">La interfaz del repositorio vive en el dominio</div>
+  <div class="sticker a" style="--i:7;--r:4deg;right:150px;bottom:215px;background:var(--lima);font-size:40px">ArchUnit · 0 violaciones</div>
+</section>
 
-<!-- ============================================================
-     SLIDE 6 — Capas del backend (hexagonal)
-     ============================================================ -->
-<div class="slide" data-notes="Santiago. El mapeo Controller→Service→Repository es lo que el docente pide; hexagonal lo contiene con los nombres cambiados y la dependencia invertida. El repositorio pertenece al dominio como interfaz.">
-  <div class="route-line"></div>
-  <div class="slide-inner">
-    <h2><span class="badge badge-santiago">Santiago</span></h2>
-    <h1>Backend: arquitectura hexagonal</h1>
-    <div class="cols">
-      <div class="col">
-        <h2 style="color: var(--ink); font-size: 1.1rem;">Guía del docente → FusaRoute</h2>
-        <table>
-          <tr><th>Guía</th><th>Hexagonal</th></tr>
-          <tr><td>Controller</td><td><code>adapter/in/web/</code></td></tr>
-          <tr><td>Service</td><td><code>application/usecase/</code></td></tr>
-          <tr><td>Repository</td><td><code>adapter/out/persistence/</code></td></tr>
-        </table>
-        <p style="margin-top: .8em; font-size: var(--fs-small);">
-          La <strong>interfaz</strong> del repositorio pertenece al <strong>dominio</strong>
-          (<code>port/out/</code>), no a la infraestructura. Por eso se puede cambiar de BD
-          sin tocar lógica de negocio.
-        </p>
-      </div>
-      <div class="col">
-        <pre style="font-size: .7rem;">com.fusaroute
-├── domain
-│   ├── model/          Route, User, Fare...
-│   ├── exception/      FieldViolation...
-│   └── port
-│       ├── in/         RegisterUserUseCase...
-│       └── out/        UserRepositoryPort...
-├── application
-│   └── usecase/        RegisterUserService...
-└── infrastructure
-    ├── config/         SecurityConfig, UseCaseConfig
-    └── adapter
-        ├── in/web/     AuthController, UserController
-        └── out/
-            ├── persistence/  JPA entities, repos
-            └── security/     BCryptPasswordHasher</pre>
-        <p><span class="tag">ArchUnit</span> <span class="muted">0 violaciones en CI</span></p>
-      </div>
-    </div>
-    <div class="slide-footer">
-      <span>Comité 2 · FusaRoute</span>
-      <span>6 / 15</span>
-    </div>
+<!-- 7 FLUJO PUT -->
+<section class="slide s7" data-notes="Angélica explica el recorrido del PUT /api/users/me dentro del backend, capa por capa. Demostrar que entiende el código que no escribió.">
+  <div class="row" style="align-items:center;gap:30px"><span class="tag ind a">PUT</span><h2 class="a up" style="--i:1;font-size:84px">/api/users/me</h2></div>
+  <div class="steps">
+    <div class="step a" style="--i:2"><div class="n">1</div><h3>Controller</h3><code>UserController</code><p>Saca el <b>sub</b> del JWT</p></div>
+    <div class="step a" style="--i:3"><div class="n">2</div><h3>Caso de uso</h3><code>UpdateProfileService</code><p>Valida nombre, correo y teléfono</p></div>
+    <div class="step a" style="--i:4"><div class="n">3</div><h3>Dominio</h3><code>User</code><p>Crea un User nuevo, inmutable</p></div>
+    <div class="step a" style="--i:5"><div class="n">4</div><h3>Puerto</h3><code>UserRepositoryPort</code><p>Interfaz en el dominio</p></div>
+    <div class="step a" style="--i:6"><div class="n">5</div><h3>Adaptador</h3><code>UserPersistenceAdapter</code><p>Mapea a JPA y persiste</p></div>
   </div>
-</div>
+  <div class="two a" style="--i:8"><span class="card lima" style="padding:18px 30px">User</span><span style="font-size:60px">≠</span><span class="card yel" style="padding:18px 30px">UserJpaEntity</span><span class="lbl" style="font-size:28px">dos modelos, un mapper</span></div>
+</section>
 
-<!-- ============================================================
-     SLIDE 7 — Flujo del PUT (Angélica)
-     ============================================================ -->
-<div class="slide" data-notes="Angélica explica el recorrido del PUT /api/users/me dentro del backend. Señalar cada capa. Demostrar que entiende el código que no escribió.">
-  <div class="route-line"></div>
-  <div class="slide-inner">
-    <h2><span class="badge badge-angelica">Angélica</span></h2>
-    <h1>Flujo: PUT <code>/api/users/me</code></h1>
-    <div style="display: flex; flex-direction: column; gap: .6em; flex: 1; justify-content: center;">
-      <div style="display: flex; align-items: center; gap: .8em;">
-        <span class="tag tag-bus" style="min-width: 120px; text-align: center;">Controller</span>
-        <span>→ <code>UserController.updateProfile()</code> extrae el <code>sub</code> del JWT</span>
-      </div>
-      <div style="display: flex; align-items: center; gap: .8em;">
-        <span class="tag" style="min-width: 120px; text-align: center;">Use Case</span>
-        <span>→ <code>UpdateProfileService</code> valida nombre, email, teléfono</span>
-      </div>
-      <div style="display: flex; align-items: center; gap: .8em;">
-        <span class="tag" style="min-width: 120px; text-align: center; background: var(--ink);">Domain</span>
-        <span>→ <code>User.updateProfile()</code> crea un User nuevo (inmutable)</span>
-      </div>
-      <div style="display: flex; align-items: center; gap: .8em;">
-        <span class="tag" style="min-width: 120px; text-align: center; background: var(--rail);">Port out</span>
-        <span>→ <code>UserRepositoryPort.save()</code> — interfaz en el dominio</span>
-      </div>
-      <div style="display: flex; align-items: center; gap: .8em;">
-        <span class="tag tag-blue" style="min-width: 120px; text-align: center;">Adapter</span>
-        <span>→ <code>UserPersistenceAdapter</code> convierte a JPA entity y persiste</span>
-      </div>
+<!-- 8 FRONTEND -->
+<section class="slide s8" data-notes="Santiago explica el interceptor. Angular 21 es zoneless (sin zone.js): por eso signals; si usas una variable normal Angular no se entera del cambio. El interceptor NO adjunta token en /api/auth/** (evita un 401 espurio con token vencido).">
+  <span class="tag a" style="width:fit-content">Frontend · Angular 21</span>
+  <div class="row">
+    <div class="routes col g a" style="--i:1;max-width:560px">
+      <span class="chip" style="--m:var(--pasca)">/rutas <em>público</em></span>
+      <span class="chip" style="--m:var(--arbelaez)">/rutas/:id <em>público</em></span>
+      <span class="chip" style="--m:var(--silvania)">/registro <em>público</em></span>
+      <span class="chip" style="--m:var(--granada)">/login <em>público</em></span>
+      <span class="chip" style="--m:var(--tibacuy)">/perfil <em class="lock">🔒 guard</em></span>
+      <div class="card yel" style="margin-top:18px;font:700 34px/1.15 var(--display)">Zoneless → <u>signals</u></div>
     </div>
-    <div style="margin-top: auto; padding: .6em; background: var(--paper-2); border-radius: 6px;">
-      <p style="margin: 0; font-size: var(--fs-small);">
-        <strong>¿Por qué dos modelos?</strong> <code>User</code> (dominio, puro) ≠ <code>UserJpaEntity</code> (tabla).
-        Un mapper los traduce. Se puede cambiar de BD sin tocar lógica de negocio.
-      </p>
-    </div>
-    <div class="slide-footer">
-      <span>Comité 2 · FusaRoute</span>
-      <span>7 / 15</span>
-    </div>
+    <div class="code a" style="--i:3"><span class="c">// authInterceptor</span><br><span class="k">if</span> (req.url.<span class="k">includes</span>(<span class="s">'/api/auth/'</span>))<br>&nbsp;&nbsp;<span class="k">return</span> next(req); <span class="c">// sin Bearer</span><br><br><span class="k">const</span> token = auth.token();<br><span class="k">if</span> (token) req = req.clone({<br>&nbsp;&nbsp;setHeaders: { Authorization: <span class="s">`Bearer ${token}`</span> }<br>});<br><br><span class="c">// 401 fuera de /auth → login<br>// 401 en /auth → error, sin redirigir</span></div>
   </div>
-</div>
+</section>
 
-<!-- ============================================================
-     SLIDE 8 — Frontend: componentes y servicios
-     ============================================================ -->
-<div class="slide" data-notes="Santiago explica el interceptor. Angular 21 es zoneless — sin zone.js. Por eso signals: si usas una variable normal, Angular no se entera de que cambió. El interceptor NO adjunta token en /api/auth/** (evita 401 espurio con token vencido).">
-  <div class="route-line"></div>
-  <div class="slide-inner">
-    <h2><span class="badge badge-santiago">Santiago</span> en el interceptor</h2>
-    <h1>Frontend: Angular 21</h1>
-    <div class="cols">
-      <div class="col">
-        <h2 style="color: var(--ink); font-size: 1rem;">Pantallas</h2>
-        <table>
-          <tr><th>Ruta</th><th>Auth</th></tr>
-          <tr><td><code>/rutas</code></td><td>No</td></tr>
-          <tr><td><code>/rutas/:id</code></td><td>No</td></tr>
-          <tr><td><code>/registro</code></td><td>No</td></tr>
-          <tr><td><code>/login</code></td><td>No</td></tr>
-          <tr><td><code>/perfil</code></td><td>Sí (guard)</td></tr>
-        </table>
-        <p style="font-size: var(--fs-small); margin-top: .5em;">
-          <span class="tag tag-bus">Zoneless</span> = sin zone.js → <strong>signals</strong> obligatorios
-        </p>
-      </div>
-      <div class="col">
-        <h2 style="color: var(--ink); font-size: 1rem;">Interceptor de auth</h2>
-        <pre style="font-size: .65rem;">// NO adjunta token en /api/auth/**
-if (req.url.includes('/api/auth/')) {
-  return next(req);  // pasa sin Bearer
-}
-
-// Adjunta JWT
-const token = auth.token();
-if (token) {
-  req = req.clone({
-    setHeaders: { Authorization: `Bearer ${token}` }
-  });
-}
-
-// 401 fuera de auth → redirige al login
-// 401 EN auth → muestra error, NO redirige</pre>
-        <p style="font-size: var(--fs-small);">
-          Evita que un token vencido en localStorage rompa el registro.
-        </p>
-      </div>
-    </div>
-    <div class="slide-footer">
-      <span>Comité 2 · FusaRoute</span>
-      <span>8 / 15</span>
-    </div>
+<!-- 9 DEMO POSTMAN -->
+<section class="slide portal s9" data-notes="Santiago. Abrir Postman (colección FusaRoute API, entorno FusaRoute DEV). Mostrar las 6 carpetas y el pre-request del registro (gladys.<timestamp>). Run Collection → todo en verde: el token se guarda solo. Plan B: docs/http/fusaroute.http en VS Code.">
+  <span class="live a"><i></i>EN VIVO</span>
+  <h2 class="a up" style="--i:1">Postman</h2>
+  <div class="chips">
+    <span class="chip a" style="--i:2;--m:var(--pasca)">0 Salud</span><span class="chip a" style="--i:3;--m:var(--arbelaez)">1 Catálogo</span><span class="chip a" style="--i:4;--m:var(--silvania)">2 Registro</span>
+    <span class="chip a" style="--i:5;--m:var(--granada)">3 Login</span><span class="chip a" style="--i:6;--m:var(--tibacuy)">4 Perfil</span><span class="chip a" style="--i:7;--m:var(--rojo)">5 Errores</span>
   </div>
-</div>
+  <div class="stamp a" style="--i:9"><span data-count="36">0</span>/36 ✓</div>
+</section>
 
-<!-- ============================================================
-     SLIDE 9 — PORTAL: Postman
-     ============================================================ -->
-<div class="slide portal" data-notes="Santiago. Abrir Postman. Importar la colección. Run Collection, todo en verde. Mostrar el pre-request que genera el correo de Gladys y el test que guarda el token.">
-  <div class="route-line"></div>
-  <div class="slide-inner" style="justify-content: center; align-items: center; text-align: center;">
-    <p style="font-size: 4rem; margin: 0;">🧪</p>
-    <h1>Demo: Postman</h1>
-    <p style="color: var(--rail); font-size: var(--fs-lead);">Abrir Postman → importar colección → <strong>Run Collection</strong></p>
-    <div style="display: flex; gap: 1em; margin-top: 1.5em; flex-wrap: wrap; justify-content: center;">
-      <span class="tag">0-Salud</span>
-      <span class="tag">1-Catálogo</span>
-      <span class="tag">2-Registro</span>
-      <span class="tag">3-Login</span>
-      <span class="tag tag-bus">4-Perfil (PUT)</span>
-      <span class="tag tag-red">5-Errores</span>
-    </div>
-    <p class="muted" style="margin-top: 1.5em;">Pre-request genera <code>gladys.{timestamp}@fusaroute.co</code><br>Login guarda <code>{{token}}</code> automáticamente</p>
-    <div class="slide-footer" style="border-top-color: rgba(255,255,255,.2);">
-      <span style="color: var(--rail);">▶ Portal — ventana externa</span>
-      <span style="color: var(--rail);">9 / 15</span>
-    </div>
+<!-- 10 DEMO APP -->
+<section class="slide portal s10" data-notes="Angélica. App en vivo: /rutas sin cuenta → ruta intermunicipal con su tabla de tarifas → /registro (mostrar el 409 con un correo ya existente, luego registrar bien) → /login (contraseña mala y luego buena) → /perfil (actualizar teléfono). Si el backend cae: video de respaldo.">
+  <span class="live a"><i></i>EN VIVO</span>
+  <h2 class="a up" style="--i:1">La app</h2>
+  <div class="chips">
+    <span class="chip a" style="--i:2;--m:var(--pasca)">/rutas</span><span class="chip a" style="--i:3;--m:var(--arbelaez)">tarifas de Chinauta</span><span class="chip a" style="--i:4;--m:var(--silvania)">/registro · 409</span>
+    <span class="chip a" style="--i:5;--m:var(--granada)">/login</span><span class="chip a" style="--i:6;--m:var(--tibacuy)">/perfil</span>
   </div>
-</div>
+  <div class="sticker a" style="--i:8;--r:-4deg;right:170px;bottom:250px;background:var(--lima)">La historia de Doña Gladys</div>
+</section>
 
-<!-- ============================================================
-     SLIDE 10 — PORTAL: App en vivo
-     ============================================================ -->
-<div class="slide portal" data-notes="Angélica maneja la app. Guion de Doña Gladys: 1) Ve el catálogo sin cuenta, 2) Ve la tabla de tarifas, 3) Se registra (mostrar el 409 de correo duplicado; el 400 ya se mostró en Postman), 4) Inicia sesión, 5) Actualiza su teléfono (PUT).">
-  <div class="route-line"></div>
-  <div class="slide-inner" style="justify-content: center; align-items: center; text-align: center;">
-    <p style="font-size: 4rem; margin: 0;">🚌</p>
-    <h1>Demo: App en vivo</h1>
-    <p style="color: var(--rail); font-size: var(--fs-lead);">La historia de <strong>Doña Gladys</strong></p>
-    <div style="text-align: left; max-width: 500px; margin: 1em auto;">
-      <ol style="font-size: var(--fs-lead); color: var(--white);">
-        <li>Consulta el catálogo <strong>sin cuenta</strong></li>
-        <li>Ve la tabla de tarifas de Chinauta</li>
-        <li>Se registra <span class="muted">(mostrar el 409 de correo duplicado; el 400 ya se mostró en Postman)</span></li>
-        <li>Inicia sesión</li>
-        <li>Actualiza su teléfono <span class="tag tag-bus" style="font-size: .7rem;">PUT</span></li>
-      </ol>
-    </div>
-    <p class="muted" style="margin-top: .5em;"><span class="badge badge-angelica">Angélica</span> maneja la app · <span class="badge badge-santiago">Santiago</span> abre DevTools</p>
-    <div class="slide-footer" style="border-top-color: rgba(255,255,255,.2);">
-      <span style="color: var(--rail);">▶ Portal — ventana externa</span>
-      <span style="color: var(--rail);">10 / 15</span>
-    </div>
+<!-- 11 DEMO SUPABASE -->
+<section class="slide portal s11" data-notes="Santiago. Abrir Supabase → proyecto fusaroute-dev → Table Editor, esquema fusaroute (no public). Mostrar users con el hash $2a$12$…, routes, fares y flyway_schema_history. Cuidado con datos personales visibles en pantalla.">
+  <span class="live a"><i></i>EN VIVO</span>
+  <h2 class="a up" style="--i:1">Supabase</h2>
+  <div class="chips">
+    <span class="chip a" style="--i:2;--m:var(--indigo)">esquema fusaroute</span><span class="chip a" style="--i:3;--m:var(--granada)">users · BCrypt $2a$12$</span><span class="chip a" style="--i:4;--m:var(--arbelaez)">8 rutas · 23 tarifas</span><span class="chip a" style="--i:5;--m:var(--tibacuy)">Flyway V1–V4</span>
   </div>
-</div>
+  <div class="sticker a" style="--i:7;--r:4deg;right:170px;bottom:250px;background:var(--amarillo)">Nunca texto plano</div>
+</section>
 
-<!-- ============================================================
-     SLIDE 11 — PORTAL: DBeaver
-     ============================================================ -->
-<div class="slide portal" data-notes="Santiago. Abrir DBeaver → esquema fusaroute → SELECT * FROM users WHERE email LIKE 'gladys%'. Señalar que la contraseña es un hash BCrypt $2a$12$..., no el texto plano. La fila confirma persistencia real.">
-  <div class="route-line"></div>
-  <div class="slide-inner" style="justify-content: center; align-items: center; text-align: center;">
-    <p style="font-size: 4rem; margin: 0;">🗄️</p>
-    <h1>Demo: DBeaver</h1>
-    <p style="color: var(--rail); font-size: var(--fs-lead);">Verificar persistencia en la BD</p>
-    <pre style="max-width: 600px; text-align: left; margin: 1em auto;">
-SELECT id, name, email, phone, password_hash
-FROM fusaroute.users
-WHERE email LIKE 'gladys%';
-
--- Resultado esperado:
--- password_hash = $2a$12$...  (BCrypt, no texto plano)
--- phone = 3101234567          (el PUT funcionó)</pre>
-    <p class="muted" style="margin-top: 1em;">El comité ve la misma fila que Doña Gladys actualizó</p>
-    <div class="slide-footer" style="border-top-color: rgba(255,255,255,.2);">
-      <span style="color: var(--rail);">▶ Portal — ventana externa</span>
-      <span style="color: var(--rail);">11 / 15</span>
-    </div>
+<!-- 12 CALIDAD -->
+<section class="slide s12" data-notes="Santiago. Mostrar la evidencia: CI verde en GitHub Actions, ArchUnit 0 violaciones, JaCoCo ≥ 70 %, OWASP sin vulnerabilidades altas o críticas sin suprimir. Cifras verificadas hoy: 119 pruebas de backend y 40 de frontend.">
+  <span class="tag a" style="width:fit-content">Calidad medible · ISO 25010</span>
+  <div class="grid">
+    <div class="stat card ind a" style="--i:1"><div class="big"><span data-count="119">0</span></div><p>pruebas backend</p></div>
+    <div class="stat card lima a" style="--i:2"><div class="big"><span data-count="40">0</span></div><p>pruebas frontend</p></div>
+    <div class="stat card yel a" style="--i:3"><div class="big"><span data-count="0">0</span></div><p>violaciones hexagonales (ArchUnit)</p></div>
+    <div class="stat card a" style="--i:4"><div class="big">≥<span data-count="70">0</span>%</div><p>cobertura domain + application (JaCoCo)</p></div>
+    <div class="stat card a" style="--i:5"><div class="big" style="font-size:112px;padding-top:26px">$2a$12</div><p>contraseñas con BCrypt</p></div>
+    <div class="stat card a" style="--i:6"><div class="big"><span data-count="0">0</span></div><p>vulnerabilidades altas sin suprimir (OWASP)</p></div>
   </div>
-</div>
+</section>
 
-<!-- ============================================================
-     SLIDE 12 — Calidad
-     ============================================================ -->
-<div class="slide" data-notes="Santiago. Mostrar la evidencia: captura del CI verde, ArchUnit 0 violaciones, JaCoCo ≥70%, OWASP 0 críticas sin suprimir.">
-  <div class="route-line"></div>
-  <div class="slide-inner">
-    <h2><span class="badge badge-santiago">Santiago</span></h2>
-    <h1>Calidad medible (ISO 25010)</h1>
-    <table>
-      <tr><th>Atributo</th><th>Métrica</th><th>Estado</th></tr>
-      <tr>
-        <td><strong>Mantenibilidad</strong></td>
-        <td>0 violaciones hexagonales</td>
-        <td><span class="tag">✅ ArchUnit</span></td>
-      </tr>
-      <tr>
-        <td><strong>Mantenibilidad</strong></td>
-        <td>≥ 70% cobertura domain + application</td>
-        <td><span class="tag">✅ JaCoCo</span></td>
-      </tr>
-      <tr>
-        <td><strong>Seguridad</strong></td>
-        <td>0 vulns altas/críticas sin suprimir</td>
-        <td><span class="tag">✅ OWASP DC</span></td>
-      </tr>
-      <tr>
-        <td><strong>Seguridad</strong></td>
-        <td>Contraseñas: BCrypt ($2a$12$)</td>
-        <td><span class="tag">✅ PasswordHasher</span></td>
-      </tr>
-      <tr>
-        <td><strong>Fiabilidad</strong></td>
-        <td>ProblemDetail (RFC 9457) en errores</td>
-        <td><span class="tag">✅ GlobalExceptionHandler</span></td>
-      </tr>
-    </table>
-    <div style="margin-top: auto; display: flex; gap: 1em; flex-wrap: wrap;">
-      <div style="background: var(--route); color: var(--white); padding: .5em 1em; border-radius: 6px; font-size: var(--fs-small);">
-        <strong>Backend CI:</strong> 119 tests · BUILD SUCCESS
-      </div>
-      <div style="background: var(--bus); color: var(--white); padding: .5em 1em; border-radius: 6px; font-size: var(--fs-small);">
-        <strong>Frontend:</strong> 40 tests · 10 suites
-      </div>
-      <div style="background: var(--ink); color: var(--white); padding: .5em 1em; border-radius: 6px; font-size: var(--fs-small);">
-        <strong>Checkstyle:</strong> 0 warnings
-      </div>
-    </div>
-    <div class="slide-footer">
-      <span>Comité 2 · FusaRoute</span>
-      <span>12 / 15</span>
-    </div>
+<!-- 13 PROBLEMAS -->
+<section class="slide s13" data-notes="Santiago. Honestidad ante el comité: estos son problemas reales, no inventados ni escondidos.">
+  <span class="tag red a" style="width:fit-content">Problemas reales</span>
+  <div class="notes">
+    <div class="note a" style="--i:1;--r:-2deg;--c:var(--rojo)">Sprint 1 cerró con velocidad 0<small>Lección aprendida</small></div>
+    <div class="note a" style="--i:2;--r:1.5deg;--c:var(--amarillo)">Conflicto de peer-deps en Angular<small>Mitigado · .npmrc</small></div>
+    <div class="note a" style="--i:3;--r:-1deg;--c:var(--lima)">Zoneless: errores invisibles sin signals<small>Corregido</small></div>
+    <div class="note a" style="--i:4;--r:2deg;--c:var(--indigo-suave)">Token vencido daba 401 en el catálogo<small>Corregido</small></div>
+    <div class="note a" style="--i:5;--r:-1.5deg;--c:#fff">CVE de Spring sin fix abierto<small>Suprimida, justificada y con fecha</small></div>
   </div>
-</div>
+</section>
 
-<!-- ============================================================
-     SLIDE 13 — Problemas encontrados
-     ============================================================ -->
-<div class="slide" data-notes="Santiago. Honestidad ante el comité. Estos son problemas reales, no inventados ni escondidos.">
-  <div class="route-line"></div>
-  <div class="slide-inner">
-    <h2><span class="badge badge-santiago">Santiago</span></h2>
-    <h1>Problemas encontrados</h1>
-    <div style="flex: 1;">
-      <table>
-        <tr><th>#</th><th>Problema</th><th>Estado</th></tr>
-        <tr>
-          <td>1</td>
-          <td>Sprint 1 cerró con velocidad <strong>0</strong> — PRs sin merge, issues sin registrar</td>
-          <td><span class="tag tag-bus">Lección aprendida</span></td>
-        </tr>
-        <tr>
-          <td>2</td>
-          <td>Conflicto <code>@angular/service-worker</code> 21.2.24 vs <code>core</code> 21.2.22</td>
-          <td><span class="tag">Mitigado (.npmrc)</span></td>
-        </tr>
-        <tr>
-          <td>3</td>
-          <td>Angular 21 zoneless: mensajes de error invisibles sin signals</td>
-          <td><span class="tag">Corregido</span></td>
-        </tr>
-        <tr>
-          <td>4</td>
-          <td>Token vencido bloqueaba endpoints públicos (401 en catálogo)</td>
-          <td><span class="tag">Corregido</span></td>
-        </tr>
-        <tr>
-          <td>5</td>
-          <td>CVE-2026-41707 (spring-security-oauth2) — suprimida con justificación</td>
-          <td><span class="tag">Verificada</span></td>
-        </tr>
-      </table>
-    </div>
-    <p class="muted" style="margin-top: auto;">
-      <em>"El lockfile que exigía un acto de fe"</em> — la resolución de Angular solo funciona con <code>legacy-peer-deps</code>
-    </p>
-    <div class="slide-footer">
-      <span>Comité 2 · FusaRoute</span>
-      <span>13 / 15</span>
-    </div>
+<!-- 14 PRÓXIMOS PASOS -->
+<section class="slide s14" data-notes="Angélica. Próximo sprint: despliegue real. Luego: búsqueda de ruta con Google Maps.">
+  <span class="tag a" style="width:fit-content">Próximos pasos</span>
+  <div class="road2 a wipe" style="--i:1"></div>
+  <div class="stops">
+    <div class="stopc a" style="--i:2"><div class="dot" style="--c:var(--lima)">3</div><h3>Sprint 3</h3><p>Despliegue: Vercel + Render · bloqueo por intentos</p></div>
+    <div class="stopc a" style="--i:3"><div class="dot" style="--c:var(--amarillo)">4</div><h3>Sprint 4–5</h3><p>Búsqueda con Google Maps · trazado GeoJSON · congestión</p></div>
+    <div class="stopc a" style="--i:4"><div class="dot" style="--c:var(--indigo);color:#fff">9</div><h3>Sprint 6–9</h3><p>Offline · historial · favoritos · admin · prueba de usabilidad</p></div>
   </div>
+</section>
+
+<!-- 15 CIERRE -->
+<section class="slide s15" data-notes="Ambos. Pregúntenle a cualquiera de los dos: ambos sabemos explicar todo el sistema.">
+  <h2 class="a up">¿<span>Preguntas</span>?</h2>
+  <p class="a" style="--i:3;margin-top:60px;font:700 46px var(--display)">Pregúntenle a cualquiera de los dos</p>
+  <div class="row a" style="--i:4;margin-top:40px;justify-content:center"><span class="chip" style="--m:var(--indigo)">Santiago</span><span class="chip" style="--m:var(--tibacuy)">Angélica</span></div>
+</section>
 </div>
 
-<!-- ============================================================
-     SLIDE 14 — Próximos pasos
-     ============================================================ -->
-<div class="slide" data-notes="Angélica. Próximo sprint: despliegue real. Luego: búsqueda de ruta con Google Maps.">
-  <div class="route-line"></div>
-  <div class="slide-inner">
-    <h2><span class="badge badge-angelica">Angélica</span></h2>
-    <h1>Próximos pasos</h1>
-    <div class="cols">
-      <div class="col">
-        <h2 style="font-size: 1rem;">Sprint 3 (29 sep → 5 oct)</h2>
-        <ul>
-          <li>Despliegue real: frontend en <strong>Vercel</strong>, backend en <strong>Render</strong></li>
-          <li>Ambientes PRE y PROD en Supabase</li>
-          <li>Bloqueo por intentos fallidos (RF-02)</li>
-          <li>Monitoreo con UptimeRobot</li>
-        </ul>
-      </div>
-      <div class="col">
-        <h2 style="font-size: 1rem;">Sprint 4–5</h2>
-        <ul>
-          <li>Búsqueda de ruta (Google Maps)</li>
-          <li>Visualización de trazado GeoJSON</li>
-          <li>Aviso de congestión</li>
-          <li>Punto de abordaje más cercano</li>
-        </ul>
-        <h2 style="font-size: 1rem; margin-top: 1em;">Sprint 6–9</h2>
-        <ul>
-          <li>Modo offline, historial, favoritos</li>
-          <li>Comentarios y administración</li>
-          <li>Prueba de usabilidad (≥ 5 usuarios)</li>
-        </ul>
-      </div>
-    </div>
-    <div class="slide-footer">
-      <span>Comité 2 · FusaRoute</span>
-      <span>14 / 15</span>
-    </div>
-  </div>
-</div>
-
-<!-- ============================================================
-     SLIDE 15 — Cierre
-     ============================================================ -->
-<div class="slide" data-notes="Ambos. Pregúntenle a cualquiera de los dos. Ambos sabemos todo el sistema.">
-  <div class="route-line"></div>
-  <div class="slide-inner" style="justify-content: center; align-items: center; text-align: center;">
-    <p class="wordmark" style="font-size: 2.2rem; margin-bottom: .5em;">Fusa<b>Route</b></p>
-    <h1 style="color: var(--bus);">Pregúntenle a<br>cualquiera de los dos</h1>
-    <p style="margin-top: 1.5em; font-size: var(--fs-lead); color: var(--urban);">
-      <span class="badge badge-santiago">Santiago</span>
-      <span style="margin: 0 .5em;">·</span>
-      <span class="badge badge-angelica">Angélica</span>
-    </p>
-    <p class="muted" style="margin-top: 2em;">
-      Ambos programamos frontend y backend.<br>
-      Ambos sabemos explicar cualquier archivo del proyecto.
-    </p>
-    <div class="slide-footer">
-      <span>Comité 2 · FusaRoute</span>
-      <span>15 / 15</span>
-    </div>
-  </div>
-</div>
-
-</div><!-- /deck -->
-
-<!-- ============================================================
-     Notas del orador (panel lateral, toggle con N)
-     ============================================================ -->
-<div class="speaker-notes" id="speakerNotes">
-  <h3>📝 Notas del orador</h3>
-  <div id="notesContent"></div>
-</div>
-
-<!-- ============================================================
-     Barra de controles
-     ============================================================ -->
-<div class="controls" id="controls" style="display: none;">
-  <button onclick="prevSlide()">← Prev</button>
-  <button onclick="nextSlide()">Next →</button>
-  <span style="margin-left: auto;">Slide <span id="slideNum">1</span>/15</span>
-  <span class="timer slide-timer" id="slideTimer">0:00</span>
-  <span class="timer total-timer" id="totalTimer">0:00</span>
-  <button onclick="toggleNotes()" style="background: var(--ink);">N</button>
-  <button onclick="togglePresent()" style="background: var(--route);">▶ Presentar</button>
-</div>
+<div id="notes"></div>
+<div id="bar"><button id="prev">←</button><span id="pos">1/15</span><button id="next">→</button><span id="clock">0:00</span><button id="nb">Notas (N)</button><button id="fs">Pantalla completa (F)</button></div>
 
 <script>
-const deck = document.getElementById('deck');
-const slides = Array.from(deck.querySelectorAll('.slide'));
-const controls = document.getElementById('controls');
-const slideNumEl = document.getElementById('slideNum');
-const slideTimerEl = document.getElementById('slideTimer');
-const totalTimerEl = document.getElementById('totalTimer');
-const notesPanel = document.getElementById('speakerNotes');
-const notesContent = document.getElementById('notesContent');
-
-let current = 0;
-let presenting = false;
-let totalStart = null;
-let slideStart = null;
-let timerInterval = null;
-
-function formatTime(ms) {
-  const s = Math.floor(ms / 1000);
-  const m = Math.floor(s / 60);
-  return `${m}:${String(s % 60).padStart(2, '0')}`;
+const stage=document.getElementById('stage'), slides=[...document.querySelectorAll('.slide')];
+const N=slides.length; let cur=0, t0=null;
+function fit(){const s=Math.min(innerWidth/1920,innerHeight/1080);stage.style.transform=`translate(-50%,-50%) scale(${s})`}
+addEventListener('resize',fit); fit();
+// paradas de la barra de progreso
+const prog=document.getElementById('prog'), bus=document.getElementById('bus');
+const width=1920-120-340; const stops=[];
+for(let i=0;i<N;i++){const d=document.createElement('div');d.className='stop';d.style.left=(i/(N-1)*100)+'%';prog.appendChild(d);stops.push(d)}
+function count(el){const to=+el.dataset.count;const dur=1100;const st=performance.now();
+  (function f(now){const p=Math.min(1,(now-st)/dur);const v=Math.round(to*(1-Math.pow(1-p,3)));el.textContent=v.toLocaleString('es-CO');if(p<1)requestAnimationFrame(f)})(st)}
+function show(i){
+  cur=Math.max(0,Math.min(N-1,i));
+  slides.forEach((s,k)=>s.classList.toggle('active',k===cur));
+  slides[cur].querySelectorAll('[data-count]').forEach(el=>{el.textContent='0';setTimeout(()=>count(el),500)});
+  document.getElementById('num').textContent=String(cur+1).padStart(2,'0')+'/'+N;
+  document.getElementById('pos').textContent=(cur+1)+'/'+N;
+  bus.style.left=(cur/(N-1)*100)+'%';
+  stops.forEach((d,k)=>d.classList.toggle('done',k<=cur));
+  document.getElementById('notes').innerHTML='<b>Slide '+(cur+1)+':</b> '+(slides[cur].dataset.notes||'(sin notas)');
+  if(!t0)t0=Date.now();
+  history.replaceState(null,'','#'+(cur+1));
 }
-
-function updateTimers() {
-  if (!totalStart) return;
-  const now = Date.now();
-  totalTimerEl.textContent = formatTime(now - totalStart);
-  slideTimerEl.textContent = formatTime(now - slideStart);
-}
-
-function showSlide(i) {
-  current = Math.max(0, Math.min(i, slides.length - 1));
-  if (presenting) {
-    slides.forEach((s, idx) => s.classList.toggle('active', idx === current));
-  } else {
-    slides[current].scrollIntoView({ behavior: 'smooth', block: 'center' });
-  }
-  slideNumEl.textContent = current + 1;
-  slideStart = Date.now();
-  // Notas
-  const note = slides[current].dataset.notes || '(sin notas)';
-  notesContent.innerHTML = `<p><strong>Slide ${current + 1}:</strong></p><p>${note}</p>`;
-}
-
-function nextSlide() { showSlide(current + 1); }
-function prevSlide() { showSlide(current - 1); }
-
-function toggleNotes() {
-  notesPanel.classList.toggle('visible');
-}
-
-function togglePresent() {
-  presenting = !presenting;
-  deck.classList.toggle('presenting', presenting);
-  controls.style.display = 'flex';
-  if (presenting) {
-    totalStart = totalStart || Date.now();
-    slideStart = Date.now();
-    if (!timerInterval) timerInterval = setInterval(updateTimers, 1000);
-    showSlide(current);
-    document.documentElement.requestFullscreen?.();
-  } else {
-    document.exitFullscreen?.();
-  }
-}
-
-document.addEventListener('keydown', (e) => {
-  if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); nextSlide(); }
-  if (e.key === 'ArrowLeft') { e.preventDefault(); prevSlide(); }
-  if (e.key === 'n' || e.key === 'N') toggleNotes();
-  if (e.key === 'p' || e.key === 'P') togglePresent();
-  if (e.key === 'Escape' && presenting) togglePresent();
+const next=()=>show(cur+1), prev=()=>show(cur-1);
+document.getElementById('next').onclick=next; document.getElementById('prev').onclick=prev;
+const toggleNotes=()=>document.getElementById('notes').classList.toggle('on');
+const toggleFs=()=>document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen();
+document.getElementById('nb').onclick=toggleNotes; document.getElementById('fs').onclick=toggleFs;
+addEventListener('keydown',e=>{
+  if(['ArrowRight','PageDown',' ','Enter'].includes(e.key)){e.preventDefault();next()}
+  else if(['ArrowLeft','PageUp','Backspace'].includes(e.key)){e.preventDefault();prev()}
+  else if(e.key==='Home')show(0); else if(e.key==='End')show(N-1);
+  else if(e.key==='n'||e.key==='N')toggleNotes(); else if(e.key==='f'||e.key==='F')toggleFs();
 });
-
-// Mostrar controles al mover el mouse abajo
-document.addEventListener('mousemove', (e) => {
-  if (e.clientY > window.innerHeight - 60) {
-    controls.style.display = 'flex';
-  }
-});
-
-// Mostrar controles siempre
-controls.style.display = 'flex';
+stage.addEventListener('click',e=>{if(e.target.closest('a'))return;(e.clientX>innerWidth/2)?next():prev()});
+setInterval(()=>{if(t0){const s=Math.floor((Date.now()-t0)/1000);document.getElementById('clock').textContent=Math.floor(s/60)+':'+String(s%60).padStart(2,'0')}},500);
+show((parseInt(location.hash.slice(1))||1)-1);
 </script>
 </body>
 </html>

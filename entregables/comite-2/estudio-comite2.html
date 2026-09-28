@@ -249,7 +249,7 @@ Click en la pregunta para ver/ocultar la respuesta. Click en la categoría para 
 
 <div class="qa"><div class="q" onclick="toggle(this)">¿Por qué la contraseña se guarda como hash y no encriptada?</div>
 <div class="a">Un hash (BCrypt) es irreversible: ni nosotros, ni un atacante que acceda a la BD puede obtener la contraseña original. Encriptación sería reversible con la clave, lo cual es más débil. BCrypt además es resistente a fuerza bruta por su costo computacional.</div>
-<div class="file">📄 DBeaver: la columna <code>password_hash</code> muestra <code>$2a$12$...</code></div></div>
+<div class="file">📄 Supabase: la columna <code>password_hash</code> muestra <code>$2a$12$...</code></div></div>
 
 <div class="qa trap"><div class="q" onclick="toggle(this)">⚠️ ¿Por qué no se conectan con el usuario postgres?</div>
 <div class="a">Regla fija: nunca el superusuario. Si ese usuario se filtra, se pierde el servidor entero. Con un rol dedicado (fusaroute_dev), el daño se limita al esquema fusaroute. En Supabase la base siempre se llama postgres, así que la regla se cumple con rol + esquema propio.</div>

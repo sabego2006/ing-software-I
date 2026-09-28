@@ -38,7 +38,7 @@ tr:nth-child(even) td { background: #ece5d3; }
   <li>Backend corriendo: <code>mvn spring-boot:run -Dspring-boot.run.profiles=dev</code></li>
   <li>Frontend corriendo: <code>npm start</code> en <code>http://localhost:4200</code></li>
   <li><code>GET http://localhost:8080/health</code> → <code>{"status":"UP"}</code></li>
-  <li>DBeaver conectado al esquema <code>fusaroute</code></li>
+  <li>Supabase abierto (Table Editor, esquema <code>fusaroute</code>)</li>
   <li>Postman con la colección importada</li>
   <li>localStorage limpio: <code>localStorage.clear()</code> en la consola del navegador</li>
   <li>Zoom al 125%, notificaciones en silencio</li>
@@ -131,7 +131,7 @@ tr:nth-child(even) td { background: #ece5d3; }
 <tr>
   <td><span class="timer">10:00</span></td>
   <td><span class="badge badge-s">Santiago</span></td>
-  <td>Slide 11 (portal). Abrir DBeaver.<br>
+  <td>Slide 11 (portal). Abrir Supabase (Table Editor o SQL Editor, esquema fusaroute).<br>
     <code>SELECT id, name, email, phone, password_hash FROM fusaroute.users WHERE email LIKE 'gladys%';</code><br>
     Señalar: el hash BCrypt <code>$2a$12$...</code>, no el texto plano. El teléfono actualizado.
   </td>
@@ -175,7 +175,7 @@ tr:nth-child(even) td { background: #ece5d3; }
 <tr><td>Supabase pausado</td><td>Dashboard → Restore project (~30s)</td></tr>
 <tr><td>Red de la universidad bloqueada</td><td>Hotspot del celular de Santiago</td></tr>
 <tr><td>Postman falla</td><td><code>docs/http/fusaroute.http</code> en VS Code (REST Client)</td></tr>
-<tr><td>Frontend no compila</td><td>Demo solo con Postman + DBeaver + video</td></tr>
+<tr><td>Frontend no compila</td><td>Demo solo con Postman + Supabase + video</td></tr>
 <tr><td>Pregunta que no sabemos</td><td>"No lo sé todavía, pero lo investigamos y lo traemos para el siguiente comité."</td></tr>
 </table>
 

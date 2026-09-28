@@ -38,7 +38,7 @@ tr:nth-child(even) td { background: rgba(0,0,0,.03); }
 
 <h1>🗂️ Plan de Santiago <span class="role-badge">Líder Técnico · Scrum Master</span></h1>
 <p>Comité 2 — lunes 28 de septiembre de 2026, 2:00 pm.<br>
-<strong>Rol en la demo:</strong> presenta arquitectura, backend, Postman, DBeaver y el interceptor de Angular.</p>
+<strong>Rol en la demo:</strong> presenta arquitectura, backend, Postman, Supabase y el interceptor de Angular.</p>
 
 <h2>Fase 1 · Mientras Claude programa <span class="time-label">00:35 → 01:40</span></h2>
 
@@ -55,7 +55,7 @@ tr:nth-child(even) td { background: rgba(0,0,0,.03); }
 </div>
 
 <div class="time-block">
-<h3>2. DBeaver</h3>
+<h3>2. Supabase</h3>
 <ul class="task-list">
   <li>Conectar al esquema <code>fusaroute</code> del proyecto Supabase <code>fusaroute-dev</code></li>
   <li>Guardar estas dos consultas como favoritas:
@@ -147,7 +147,7 @@ tr:nth-child(even) td { background: rgba(0,0,0,.03); }
   <li>Registrar con datos buenos → toast verde → redirige a login con correo</li>
   <li>Ir a <code>/login</code> → contraseña mala → error visible, luego bien → header cambia</li>
   <li>Ir a <code>/perfil</code> → actualizar teléfono → toast verde</li>
-  <li>Verificar en DBeaver: <code>SELECT ... FROM fusaroute.users WHERE email LIKE 'gladys%';</code></li>
+  <li>Verificar en Supabase: <code>SELECT ... FROM fusaroute.users WHERE email LIKE 'gladys%';</code></li>
   <li>Confirmar que el <code>password_hash</code> empieza por <code>$2a$12$</code></li>
 </ul>
 </div>
@@ -156,7 +156,7 @@ tr:nth-child(even) td { background: rgba(0,0,0,.03); }
 <h3>7. Grabar el video de respaldo</h3>
 <ul class="task-list">
   <li><strong>Win+Alt+R</strong> para grabar (Xbox Game Bar)</li>
-  <li>Hacer el recorrido completo (~4 min): catálogo → registro → login → perfil → DBeaver</li>
+  <li>Hacer el recorrido completo (~4 min): catálogo → registro → login → perfil → Supabase</li>
   <li>Parar la grabación</li>
   <li>Verificar que se reproduzca bien</li>
 </ul>
@@ -208,7 +208,7 @@ tr:nth-child(even) td { background: rgba(0,0,0,.03); }
   <li>Recorrer las 15 slides con cronómetro</li>
   <li>Abrir Postman, correr la colección, verificar todo verde</li>
   <li>Hacer el recorrido de la app (Doña Gladys)</li>
-  <li>Abrir DBeaver, correr la consulta de Gladys</li>
+  <li>Abrir Supabase (Table Editor o SQL Editor, esquema fusaroute), correr la consulta de Gladys</li>
 </ul>
 </div>
 
@@ -228,7 +228,7 @@ tr:nth-child(even) td { background: rgba(0,0,0,.03); }
   <li>Deck (<code>presentacion-comite2.html</code>) en Chromium, en la slide 1</li>
   <li>Postman con la colección importada, Collection Runner listo</li>
   <li>Navegador en <code>http://localhost:4200/rutas</code> con DevTools abierto (pestaña Network)</li>
-  <li>DBeaver conectado, con las 2 consultas guardadas</li>
+  <li>Supabase conectado, con las 2 consultas guardadas</li>
   <li>VS Code con el proyecto backend abierto</li>
 </ol>
 <ul class="task-list">
@@ -247,7 +247,7 @@ tr:nth-child(even) td { background: rgba(0,0,0,.03); }
 <tr><td>4–6</td><td>Arquitectura general, drawio, capas hexagonales</td><td>1:30</td></tr>
 <tr><td>8</td><td>Frontend: interceptor y signals</td><td>1:00</td></tr>
 <tr><td>9</td><td>▶ Postman — Collection Runner</td><td>1:30</td></tr>
-<tr><td>11</td><td>▶ DBeaver — fila de Gladys, hash BCrypt</td><td>1:00</td></tr>
+<tr><td>11</td><td>▶ Supabase — fila de Gladys, hash BCrypt</td><td>1:00</td></tr>
 <tr><td>12</td><td>Calidad: CI, ArchUnit, JaCoCo, OWASP</td><td>0:45</td></tr>
 <tr><td>13</td><td>Problemas encontrados — ser honesto</td><td>0:45</td></tr>
 <tr><td>15</td><td>Cierre — "Pregúntenle a cualquiera de los dos"</td><td>0:15</td></tr>

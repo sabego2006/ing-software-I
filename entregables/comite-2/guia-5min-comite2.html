@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Guía de 5 minutos · Comité 2 · FusaRoute</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@700&display=swap" rel="stylesheet">
+<style>
+:root{--ind:#4F46E5;--lima:#D9F99D;--yel:#FFD600;--red:#EF4444;--d:"Space Grotesk","Segoe UI",sans-serif;--s:"Plus Jakarta Sans","Segoe UI",sans-serif;--m:"JetBrains Mono",ui-monospace,monospace}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#FDFCFB;background-image:radial-gradient(#0000001a 2px,transparent 2px);background-size:32px 32px;font-family:var(--s);color:#000;padding:36px 44px 60px;max-width:1500px;margin:auto}
+header{display:flex;align-items:center;gap:22px;flex-wrap:wrap;margin-bottom:26px}
+h1{font:700 60px/1 var(--d);letter-spacing:-.03em}
+h1 b{color:var(--ind)}
+.tag{font:800 15px/1 var(--s);letter-spacing:.14em;text-transform:uppercase;background:var(--lima);border:3px solid #000;border-radius:999px;padding:10px 18px;box-shadow:4px 4px 0 #000}
+.tag.y{background:var(--yel)}.tag.i{background:var(--ind);color:#fff}
+h2{font:700 30px/1 var(--d);letter-spacing:-.02em;margin-bottom:14px;display:flex;align-items:center;gap:12px}
+h2 i{font:800 18px var(--m);font-style:normal;background:#000;color:var(--lima);border-radius:8px;padding:6px 10px}
+.card{background:#fff;border:4px solid #000;border-radius:20px;box-shadow:8px 8px 0 #000;padding:22px 26px;margin-bottom:26px}
+.card.i{background:var(--ind);color:#fff}.card.y{background:var(--yel)}.card.l{background:var(--lima)}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:26px}
+.g3{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.n{border:3px solid #000;border-radius:14px;padding:14px 16px;background:#fff;box-shadow:4px 4px 0 #000}
+.n b{display:block;font:700 40px/1 var(--d);letter-spacing:-.03em}
+.n span{display:block;font:700 13px/1.25 var(--s);margin-top:6px;color:#4B5563}
+.big{font:700 30px/1.15 var(--d)}
+ol,ul{padding-left:0;list-style:none}
+.five li{font:700 22px/1.25 var(--d);padding:10px 0;border-bottom:3px dashed #0003;display:flex;gap:14px}
+.five li:last-child{border:0}
+.five li i{flex:none;width:34px;height:34px;border-radius:50%;background:var(--yel);border:3px solid #000;display:grid;place-items:center;font:800 17px var(--m);font-style:normal}
+.five li span{font:500 17px/1.3 var(--s);display:block;color:#374151}
+.q{border:3px solid #000;border-radius:14px;background:#fff;margin-bottom:14px;box-shadow:4px 4px 0 #000;overflow:hidden}
+.q h3{font:700 19px/1.2 var(--d);background:#000;color:var(--lima);padding:10px 16px}
+.q p{font:600 16px/1.4 var(--s);padding:12px 16px}
+.q p b{background:var(--lima);padding:0 4px;border-radius:4px}
+.dont{display:grid;grid-template-columns:1fr 1fr;gap:26px}
+.dont li{font:700 18px/1.3 var(--s);padding:6px 0 6px 34px;position:relative}
+.dont .no li::before{content:"✘";position:absolute;left:0;color:var(--red);font-size:22px}
+.dont .si li::before{content:"✔";position:absolute;left:0;color:#16A34A;font-size:22px}
+footer{margin-top:10px;font:700 18px/1.4 var(--d);text-align:center}
+@media(max-width:1000px){.g2,.dont{grid-template-columns:1fr}.g3{grid-template-columns:repeat(2,1fr)}}
+@media print{body{padding:10px}.card,.q,.n{box-shadow:none}}
+</style>
+</head>
+<body>
+<header><h1>Fusa<b>Route</b> · guía de 5 min</h1><span class="tag i">Comité 2</span><span class="tag y">Léela una vez, en voz alta</span></header>
+
+<div class="card i"><h2 style="color:#fff"><i>1</i> La frase (30 segundos)</h2>
+<p class="big">FusaRoute reúne en un solo lugar las rutas de buseta de Fusagasugá —barrios y tarifas— con cuenta de usuario. Backend hexagonal (Java 25 + Spring Boot 3.5), frontend Angular 21, PostgreSQL en Supabase. Lo que ven hoy funciona de punta a punta; lo que falta lo declaramos.</p></div>
+
+<div class="card"><h2><i>2</i> Números para saber de memoria</h2>
+<div class="g3">
+<div class="n"><b>20+ / 0</b><span>rutas de buseta / registradas en Google Maps</span></div>
+<div class="n"><b>285.000</b><span>habitantes de la región (DANE)</span></div>
+<div class="n"><b>0 → 17</b><span>Sprint 1 velocidad 0 · Sprint 2 = 17/17 SP (según Jira)</span></div>
+<div class="n"><b>119 · 40</b><span>pruebas backend · frontend, todas pasan</span></div>
+<div class="n"><b>0</b><span>violaciones hexagonales (ArchUnit, 2 reglas)</span></div>
+<div class="n"><b>≥ 70 %</b><span>cobertura domain + application (JaCoCo, gate bloqueante)</span></div>
+<div class="n"><b>BCrypt 12</b><span>hash <code>$2a$12$…</code>; nunca texto plano</span></div>
+<div class="n"><b>JWT 7 días</b><span>login pedido como máximo 1 vez por semana</span></div>
+<div class="n"><b>4 tablas</b><span>users · routes · route_neighborhoods · fares · Flyway V1–V4</span></div>
+<div class="n"><b>8 · 51 · 23</b><span>rutas · barrios · tarifas cargadas</span></div>
+<div class="n"><b>12 = 15</b><span>12 RF en el documento = 15 historias en Jira · 7 RNF</span></div>
+<div class="n"><b>3 PR</b><span>#17 backend · #8 frontend · #14 docs — abiertos, esperan review</span></div>
+</div></div>
+
+<div class="g2">
+<div class="card l"><h2><i>3</i> Las 5 ideas que sostienen todo</h2>
+<ol class="five">
+<li><i>1</i><div>La dependencia apunta al dominio<span>El dominio no importa Spring, JPA ni Jackson. ArchUnit lo prueba en cada build.</span></div></li>
+<li><i>2</i><div>Hexagonal contiene Controller-Service-Repository<span>Otros nombres, dependencia invertida: la interfaz del repositorio vive en el dominio.</span></div></li>
+<li><i>3</i><div>Toda métrica tiene su instrumento<span>Sin herramienta que la mida, no se promete.</span></div></li>
+<li><i>4</i><div>Supabase es solo PostgreSQL<span>La autenticación es nuestra: Spring Security + JWT.</span></div></li>
+<li><i>5</i><div>Decimos lo que NO está<span>Sprint 1 con velocidad 0, sin despliegue, sin búsqueda con Maps. Eso da credibilidad.</span></div></li>
+</ol></div>
+
+<div class="card y"><h2><i>4</i> Si no sabes la respuesta</h2>
+<p class="big" style="margin-bottom:14px">«No lo sé todavía, pero lo investigamos y lo traemos al siguiente comité.»</p>
+<ul class="dont" style="grid-template-columns:1fr;gap:0"><li style="font-weight:700">Nunca inventes un número.</li><li style="font-weight:700">Si es del área del otro: «Lo lidera X, pero te lo explico…». Ambos debemos poder explicar cualquier archivo.</li><li style="font-weight:700">Vuelve siempre a una de las 5 ideas.</li></ul>
+<h2 style="margin-top:22px"><i>5</i> Plan B en vivo</h2>
+<p style="font:700 17px/1.5 var(--s)">Backend caído → video de respaldo · Postman falla → <code>docs/http/fusaroute.http</code> en VS Code · Supabase pausado → «Restore project» (~30 s) · Red bloqueada → hotspot.</p></div>
+</div>
+
+<h2 style="margin:8px 0 16px"><i>6</i> Preguntas trampa → respuesta corta</h2>
+<div class="g2">
+<div>
+<div class="q"><h3>¿Por qué hexagonal si el docente pide Controller-Service-Repository?</h3><p>Lo <b>contiene</b>: Controller = <code>adapter/in/web</code>, Service = <code>application/usecase</code>, Repository = <code>adapter/out/persistence</code>. Lo nuevo: la <b>interfaz</b> del repositorio es del dominio, así se cambia de BD sin tocar negocio y se prueba sin levantar Spring.</p></div>
+<div class="q"><h3>¿Dónde está SOLID en su código?</h3><p><b>S</b> un servicio por caso de uso · <b>O</b> puertos: se cambia BCrypt/JPA sin editar el caso de uso · <b>L</b> los adaptadores implementan su puerto y las pruebas usan dobles · <b>I</b> un <code>port/in</code> por caso de uso · <b>D</b> <code>RegisterUserService</code> recibe <code>UserRepositoryPort</code>; <code>UseCaseConfig</code> ensambla.</p></div>
+<div class="q"><h3>¿Por qué no usaron Supabase Auth?</h3><p>Para que ambos aprendamos todo el stack, para no acoplar el dominio a un proveedor (coherente con hexagonal) y por tener seguridad propia que defender.</p></div>
+<div class="q"><h3>¿Cómo guardan las contraseñas y cómo funciona el JWT?</h3><p>Hash <b>BCrypt costo 12</b>. Al hacer login se emite un JWT de 7 días; el interceptor lo adjunta como Bearer, excepto en <code>/api/auth/**</code>. Un 401 fuera de auth lleva al login.</p></div>
+<div class="q"><h3>¿Por qué Spring Boot 3.5 y no 4?</h3><p>Primera vez del equipo con Spring: el material es de 3.x. La 4 es un salto mayor y la publicada hoy es un milestone (4.2.0-M2). Sería decisión propia con su tarjeta.</p></div>
+<div class="q"><h3>¿Están las dependencias al día?</h3><p>Frontend: <b>0 vulnerabilidades</b> en <code>npm audit</code>. Backend: dentro de la línea elegida; pendientes 2 parches (ArchUnit 1.5.1, JaCoCo 0.8.15) y saltos mayores diferidos a propósito. TypeScript 7 es imposible con Angular 21 (exige &lt; 6.1).</p></div>
+<div class="q"><h3>¿Por qué zoneless / signals?</h3><p>Angular 21 no usa zone.js: con una variable normal la vista no se entera del cambio. Por eso el estado local va en signals.</p></div>
+<div class="q"><h3>¿Por qué barrios como lista y no paradas?</h3><p>En Fusagasugá no hay paradas fijas: la buseta se para con la mano. Modelar paradas sería inventar un dato que no existe.</p></div>
+<div class="q"><h3>¿Cómo se defiende que el catálogo es público?</h3><p>Es el requisito RF-15 (información pública clara es la razón del proyecto). <code>SecurityConfig</code> permite <code>GET /api/routes</code> sin token; el perfil sí exige JWT.</p></div>
+</div>
+<div>
+<div class="q"><h3>¿Por qué el Sprint 1 cerró con velocidad 0?</h3><p>El trabajo técnico quedó en ramas sin mergear y la infraestructura no estaba registrada como issues. Lo registramos tal cual y lo corregimos: 9 tareas visibles y regla de cerrar solo con PR mergeado y CI en verde.</p></div>
+<div class="q"><h3>¿Qué falta? ¿Está desplegado?</h3><p><b>No está desplegado</b>: corre local. Sprint 3: Vercel + Render (Render se duerme a los 15 min, cold start 30–60 s; no prometemos 24/7). Pendiente: búsqueda con Google Maps, offline, historial, favoritos, comentarios, administración.</p></div>
+<div class="q"><h3>¿Por qué el perfil no está en main?</h3><p>Está en PR abierto (#17 backend, #8 frontend), con CI en verde, esperando la revisión del otro integrante. Nadie mergea su propio PR.</p></div>
+<div class="q"><h3>¿Cuántos requerimientos son: 12 o 15?</h3><p>La guía pide de 8 a 12: agrupamos las <b>15 historias de Jira en 12 RF</b>. La correspondencia está en el Anexo C del documento.</p></div>
+<div class="q"><h3>¿Cómo prueban y qué miden?</h3><p>119 pruebas de backend (casos de uso con mocks de puertos, sin Spring) y 40 de frontend (Vitest). ArchUnit vigila las capas; JaCoCo bloquea bajo 70 %; OWASP falla el build con CVSS ≥ 7.</p></div>
+<div class="q"><h3>¿Y Google Maps?</h3><p>Aún no está integrado. Será un puerto de salida: Google solo <b>cronometra</b> rutas que nuestro dominio ya filtró; el trazado y la decisión son nuestros. Sprint 4.</p></div>
+<div class="q"><h3>¿Rendimiento y disponibilidad?</h3><p>Comprometidos: p95 &lt; 8 s y ≥ 95 % en horario hábil. <b>Todavía no medibles</b>: el endpoint de búsqueda no existe y no hay despliegue. Lo decimos así.</p></div>
+<div class="q"><h3>¿Sabe el código quien lo presenta? ¿Usaron IA?</h3><p>Sí usamos Claude Code como asistente, y <b>revisamos cada línea</b>. Tenemos la regla de que cada sprint cada uno resuelve a mano una subtarea (se verifica con <code>git log</code>). Pueden pedirnos explicar cualquier archivo.</p></div>
+<div class="q"><h3>¿Qué es el CVE suprimido?</h3><p>Hay CVE de Spring con CVSS ≥ 7 sin versión corregida publicada en abierto. Están suprimidas con justificación de inalcanzabilidad y fecha de revisión (15/01/2027); si hay fix, se sube la versión.</p></div>
+</div>
+</div>
+
+<div class="dont">
+<div class="card"><h2 style="color:#B91C1C">No digas</h2><ul class="no">
+<li>«Está en producción» / fechas de despliegue cerradas.</li><li>«99 % de disponibilidad» o «responde en 3 s».</li><li>«Es 100 % terminado».</li><li>Cifras que no estén en esta hoja.</li></ul></div>
+<div class="card l"><h2>Sí di</h2><ul class="si">
+<li>«Está medido con…» + el nombre de la herramienta.</li><li>«Eso no está hecho todavía; es del Sprint N».</li><li>«Lo verificamos hoy: 119 y 40 pruebas en verde».</li><li>«Ambos podemos explicar cualquier archivo».</li></ul></div>
+</div>
+<footer>Antes de entrar: Postman abierto · backend y frontend arriba · Supabase en el esquema <code>fusaroute</code> · diagrama draw.io listo · deck en la slide 1.</footer>
+</body>
+</html>
