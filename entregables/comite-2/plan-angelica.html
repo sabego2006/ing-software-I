@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Plan Angélica — Comité 2 · FusaRoute</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root { --ink: #0E2A47; --paper: #F5F0E6; --bus: #E8743B; --route: #2A6F4A; --pink: #D63384; --accent: var(--pink); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --ink: #E8E0D0; --paper: #1A2A3A; } }
+:root[data-theme="dark"] { --ink: #E8E0D0; --paper: #1A2A3A; }
+*, *::before, *::after { box-sizing: border-box; }
+body { font-family: 'Inter', system-ui, sans-serif; margin: 0; padding: 1rem; background: var(--paper); color: var(--ink); line-height: 1.6; max-width: 800px; margin: 0 auto; }
+h1 { font-size: 1.6rem; border-bottom: 3px solid var(--accent); padding-bottom: .4rem; }
+h2 { color: var(--accent); font-size: 1.15rem; margin-top: 1.8rem; border-left: 4px solid var(--accent); padding-left: .6rem; }
+h3 { font-size: 1rem; margin-top: 1.2rem; }
+code { font-family: 'JetBrains Mono', monospace; font-size: .85em; background: #e8e0d0; padding: 2px 6px; border-radius: 3px; }
+@media (prefers-color-scheme: dark) { code { background: #2a3a4a; } }
+.time-block { background: #fff; border: 1px solid #ddd; border-radius: 8px; padding: 1rem 1.2rem; margin: .8rem 0; }
+@media (prefers-color-scheme: dark) { .time-block { background: #1e2e3e; border-color: #3a4a5a; } }
+.time-label { font-family: 'JetBrains Mono', monospace; font-size: .85rem; color: var(--accent); font-weight: 700; }
+.task-list { list-style: none; padding: 0; }
+.task-list li { padding: .3rem 0; padding-left: 1.5rem; position: relative; }
+.task-list li::before { content: "☐"; position: absolute; left: 0; font-size: 1.1em; }
+.warn { background: #fff3e0; border-left: 4px solid var(--bus); padding: .5rem 1rem; margin: .5rem 0; font-size: .9rem; border-radius: 0 6px 6px 0; }
+@media (prefers-color-scheme: dark) { .warn { background: #3a2a1a; } }
+.warn::before { content: "⚠️ "; }
+.study-file { font-family: 'JetBrains Mono', monospace; font-size: .85em; color: var(--route); }
+.role-badge { display: inline-block; font-size: .75rem; padding: 2px 10px; border-radius: 20px; font-weight: 600; color: #fff; background: var(--pink); margin-left: .3rem; }
+.checklist-box { background: #fdf2f8; border: 2px solid var(--pink); border-radius: 8px; padding: 1rem 1.2rem; margin: .8rem 0; }
+@media (prefers-color-scheme: dark) { .checklist-box { background: #2a1a2a; } }
+table { width: 100%; border-collapse: collapse; margin: .8rem 0; font-size: .9rem; }
+th { background: var(--ink); color: var(--paper); text-align: left; padding: 6px 10px; }
+td { padding: 6px 10px; border-bottom: 1px solid #ccc; vertical-align: top; }
+tr:nth-child(even) td { background: rgba(0,0,0,.03); }
+@media print { body { max-width: 100%; padding: 0; } .time-block { break-inside: avoid; } }
+</style>
+</head>
+<body>
+
+<h1>🗂️ Plan de Angélica <span class="role-badge">Product Owner · Resp. Frontend</span></h1>
+<p>Comité 2 — lunes 28 de septiembre de 2026, 2:00 pm.<br>
+<strong>Rol en la demo:</strong> presenta problema, alcance, frontend, el recorrido de la app en vivo y el flujo del PUT dentro del backend.</p>
+
+<h2>Fase 1 · Mientras Claude programa <span class="time-label">00:35 → 01:40</span></h2>
+
+<div class="time-block">
+<h3>1. Estudio guiado — El flujo del PUT por dentro</h3>
+<p>Debes poder contar el recorrido del <code>PUT /api/users/me</code> <strong>sin mirar el código</strong>. Lee estos archivos en orden:</p>
+
+<table>
+<tr><th>#</th><th>Archivo</th><th>Qué buscar</th></tr>
+<tr>
+  <td>1</td>
+  <td class="study-file">adapter/in/web/UserController.java</td>
+  <td>¿Qué recibe el PUT? ¿De dónde saca el <code>userId</code>? ¿Qué devuelve?</td>
+</tr>
+<tr>
+  <td>2</td>
+  <td class="study-file">application/usecase/UpdateProfileService.java</td>
+  <td>¿Qué valida? ¿Cómo crea el User actualizado (inmutable)? ¿Cuándo lanza 409?</td>
+</tr>
+<tr>
+  <td>3</td>
+  <td class="study-file">domain/port/out/UserRepositoryPort.java</td>
+  <td>¿Por qué es una interfaz en <code>domain/</code> y no en <code>infrastructure/</code>?</td>
+</tr>
+<tr>
+  <td>4</td>
+  <td class="study-file">adapter/out/persistence/UserPersistenceAdapter.java</td>
+  <td>¿Cómo traduce del dominio a JPA y viceversa? ¿Qué pasa si cambiamos de base de datos?</td>
+</tr>
+</table>
+
+<p><strong>El recorrido que debes poder contar (slide 7):</strong></p>
+<ol>
+  <li>El request entra al <strong>controller</strong> (<code>@PutMapping</code>)</li>
+  <li>El controller extrae el <code>userId</code> del JWT (<code>@AuthenticationPrincipal Jwt</code>)</li>
+  <li>Pasa al <strong>use case</strong> (<code>UpdateProfileService</code>)</li>
+  <li>El dominio valida nombre, correo y teléfono, y crea un <strong>User nuevo</strong> — inmutable</li>
+  <li>El <strong>adaptador de persistencia</strong> traduce a JPA y guarda</li>
+  <li>La respuesta vuelve al controller como DTO</li>
+</ol>
+<div class="warn">Si el comité pregunta "¿qué pasa si el correo ya existe?", la respuesta es: el servicio consulta <code>existsByEmail</code>, y si existe para otro usuario, lanza una excepción que el advice convierte en 409.</div>
+</div>
+
+<div class="time-block">
+<h3>2. Repasar tus slides</h3>
+<p>Abre <code>presentacion-comite2.html</code> y practica estas slides con las frases clave:</p>
+<ul class="task-list">
+  <li><strong>Slides 2–3:</strong> Problema, usuario y alcance (Sprint 1 = 0, Sprint 2 = funcionalidades)</li>
+  <li><strong>Slide 7:</strong> El flujo del PUT por capas (el recorrido de arriba)</li>
+  <li><strong>Slide 14:</strong> Próximos pasos (Sprint 3: despliegue, Sprint 4: búsqueda con Maps)</li>
+</ul>
+</div>
+
+<h2>Fase 2 · Revisar y mergear los PR <span class="time-label">01:40 → 02:15</span></h2>
+
+<div class="time-block">
+<h3>3. Mergear los PR de código</h3>
+<p>Hay 2 PR en la rama <code>claude/gracious-clarke-2fqs2v</code> de cada repo de código. Tu trabajo es <strong>revisar y mergear</strong>, no solo aprobar.</p>
+
+<div class="checklist-box">
+<h3 style="margin-top: 0; color: var(--pink);">Checklist de revisión (6 puntos por PR)</h3>
+<ul class="task-list">
+  <li><strong>CI en verde</strong> — si hay checks rojos, no mergear</li>
+  <li><strong>Sin secretos</strong> — buscar en el diff: passwords, API keys, tokens, <code>.env</code> con valores reales</li>
+  <li><strong>Sin <code>any</code></strong> (frontend) — buscar la palabra <code>any</code> en archivos <code>.ts</code> del diff</li>
+  <li><strong>ArchUnit / JaCoCo pasan</strong> (backend) — verificar en el log del CI</li>
+  <li><strong>Endpoints nuevos documentados en el README</strong> — revisar que la tabla de endpoints esté completa</li>
+  <li><strong>Probar la pantalla de perfil</strong> — si es posible, desde el portátil de Santiago o desde el preview</li>
+</ul>
+</div>
+
+<p><strong>Orden de merge:</strong></p>
+<ol>
+  <li>PR del <strong>backend</strong> primero (el frontend depende de la API)</li>
+  <li>PR del <strong>frontend</strong> después</li>
+</ol>
+
+<div class="warn">Mergear no es opcional. La regla "nadie mergea su propio PR" exige que lo hagas tú. Si no lo haces, el código no llega a <code>main</code> y la demo no funciona.</div>
+</div>
+
+<h2>Fase 3 · Ensayo <span class="time-label">02:30 → 03:00</span></h2>
+
+<div class="time-block">
+<h3>4. Ensayo 1 — por llamada con Santiago</h3>
+<ul class="task-list">
+  <li>Santiago comparte pantalla con el deck</li>
+  <li>Practicar los cambios de mano: tú tomas en las slides 2–3, 7, 10 y 14</li>
+  <li>Cronometrar: meta ≤ 13 minutos</li>
+  <li>Practicar la historia de Doña Gladys (slide 10) — los clics exactos</li>
+</ul>
+</div>
+
+<h2>Fase 4 · Clase <span class="time-label">07:00 → 11:00</span></h2>
+
+<div class="time-block">
+<h3>5. Flashcards de backend (modo cruzado)</h3>
+<p>Abre <code>estudio-comite2.html</code> en el celular. El modo cruzado te toca las preguntas del área que <em>no</em> es la tuya: <strong>Arquitectura / Hexagonal</strong> y <strong>Spring / JPA / Flyway</strong>.</p>
+<p>Preguntas clave que debes poder contestar sin pensar:</p>
+<ul class="task-list">
+  <li>¿Qué pasa si una clase de <code>domain/</code> importa <code>@Entity</code>?</li>
+  <li>¿Por qué la interfaz del repositorio está en <code>domain/port/out/</code> y no en <code>infrastructure/</code>?</li>
+  <li>¿Qué hace Flyway que <code>ddl-auto=update</code> no puede?</li>
+  <li>¿Dónde se hashea la contraseña y con qué algoritmo?</li>
+  <li>¿Por qué el dominio tiene un <code>User.register()</code> y no un constructor público?</li>
+</ul>
+<p>Usa también el <strong>simulador de preguntas aleatorias</strong> para mezclar categorías.</p>
+</div>
+
+<h2>Fase 5 · Pre-comité <span class="time-label">11:00 → 13:00</span></h2>
+
+<div class="time-block">
+<h3>6. Revisar y mergear el PR de documentación</h3>
+<ul class="task-list">
+  <li>PR en <code>sabego2006/ing-software-I</code> con la presentación, guion, estudio y planes</li>
+  <li>Revisar que los contenidos no tengan errores factuales</li>
+  <li>Mergear</li>
+</ul>
+</div>
+
+<div class="time-block">
+<h3>7. Subir los documentos formales</h3>
+<ul class="task-list">
+  <li>Documento V2 (PDF)</li>
+  <li>HU (4 documentos)</li>
+  <li>CU (4 documentos)</li>
+  <li>Subir por el canal que indique el docente</li>
+</ul>
+</div>
+
+<div class="time-block">
+<h3>8. Ensayos 2 y 3 con Santiago</h3>
+<ul class="task-list">
+  <li><strong>Ensayo 2:</strong> recorrido completo de las 15 slides + demo en el portátil de Santiago</li>
+  <li><strong>Ensayo 3:</strong> solo la demo + 10 preguntas cruzadas (Santiago te pregunta de backend, tú le preguntas de frontend)</li>
+</ul>
+</div>
+
+<h2>Qué presentas tú</h2>
+<table>
+<tr><th>Slide(s)</th><th>Tema</th><th>Duración</th></tr>
+<tr><td>2–3</td><td>Problema, usuario, alcance (Sprint 1 → Sprint 2)</td><td>1:30</td></tr>
+<tr><td>7</td><td>Flujo del PUT por capas — señalar cada archivo</td><td>1:00</td></tr>
+<tr><td>10</td><td>▶ App en vivo — la historia de Doña Gladys</td><td>3:00</td></tr>
+<tr><td>14</td><td>Próximos pasos</td><td>0:30</td></tr>
+</table>
+
+<h3>Demo en vivo — tu guion (slide 10)</h3>
+<p>Tú manejas la app mientras cuentas la historia:</p>
+<ol>
+  <li><code>/rutas</code> — "Doña Gladys quiere ir a Chinauta. Empieza viendo las rutas sin cuenta."</li>
+  <li>Click en ruta intermunicipal → tabla de tarifas</li>
+  <li><code>/registro</code> — primero con datos malos (400), luego correo existente (409), luego bien → toast verde → redirige al login con correo</li>
+  <li><code>/login</code> — contraseña mala → error visible, luego bien → header cambia</li>
+  <li><code>/perfil</code> → actualizar teléfono → toast verde</li>
+</ol>
+<div class="warn">Practica el recorrido con los errores a propósito. Los errores controlados demuestran que el sistema maneja los casos borde.</div>
+
+<h2>Tu frase si no sabes algo</h2>
+<p style="font-size: 1.1rem; color: var(--route); font-weight: 600; text-align: center; padding: 1rem; border: 2px dashed var(--route); border-radius: 8px;">
+"No lo sé todavía, pero lo investigamos y lo traemos para el siguiente comité."
+</p>
+
+</body>
+</html>

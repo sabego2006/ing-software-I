@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guion de Demo — Comité 2 · FusaRoute</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root { --ink: #0E2A47; --paper: #F5F0E6; --bus: #E8743B; --route: #2A6F4A; --blue: #2980B9; --pink: #D63384; --red: #C0392B; }
+*, *::before, *::after { box-sizing: border-box; }
+body { font-family: 'Inter', system-ui, sans-serif; margin: 0; padding: 2rem; background: var(--paper); color: var(--ink); line-height: 1.6; max-width: 900px; margin: 0 auto; }
+h1 { font-size: 1.8rem; border-bottom: 3px solid var(--bus); padding-bottom: .5rem; }
+h2 { color: var(--bus); font-size: 1.3rem; margin-top: 2rem; }
+code { font-family: 'JetBrains Mono', monospace; font-size: .85em; background: #e8e0d0; padding: 2px 6px; border-radius: 3px; }
+table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: .95rem; }
+th { background: var(--ink); color: #fff; text-align: left; padding: 8px 12px; }
+td { padding: 8px 12px; border-bottom: 1px solid #ccc; vertical-align: top; }
+tr:nth-child(even) td { background: #ece5d3; }
+.badge { display: inline-block; font-size: .8rem; padding: 2px 10px; border-radius: 20px; font-weight: 600; color: #fff; }
+.badge-s { background: var(--blue); }
+.badge-a { background: var(--pink); }
+.plan-b { background: #fff3e0; border-left: 4px solid var(--bus); padding: .6rem 1rem; margin: .5rem 0; font-size: .9rem; border-radius: 0 6px 6px 0; }
+.plan-b::before { content: "Plan B: "; font-weight: 700; color: var(--bus); }
+.key-phrase { color: var(--route); font-weight: 600; }
+.timer { font-family: 'JetBrains Mono', monospace; font-size: .85rem; color: var(--bus); font-weight: 600; }
+.checklist { list-style: none; padding: 0; }
+.checklist li::before { content: "☐ "; font-size: 1.1em; }
+.checklist li.done::before { content: "☑ "; color: var(--route); }
+</style>
+</head>
+<body>
+
+<h1>🎬 Guion de Demo — Comité 2</h1>
+<p>Duración total: <strong>~13 minutos + 2 de colchón</strong>. La demo cuenta la historia de <strong>Doña Gladys</strong>, que quiere ir a Chinauta.</p>
+
+<h2>Antes de empezar (checklist)</h2>
+<ul class="checklist">
+  <li>Backend corriendo: <code>mvn spring-boot:run -Dspring-boot.run.profiles=dev</code></li>
+  <li>Frontend corriendo: <code>npm start</code> en <code>http://localhost:4200</code></li>
+  <li><code>GET http://localhost:8080/health</code> → <code>{"status":"UP"}</code></li>
+  <li>DBeaver conectado al esquema <code>fusaroute</code></li>
+  <li>Postman con la colección importada</li>
+  <li>localStorage limpio: <code>localStorage.clear()</code> en la consola del navegador</li>
+  <li>Zoom al 125%, notificaciones en silencio</li>
+  <li>Video de respaldo grabado (Win+Alt+R)</li>
+</ul>
+
+<h2>Flujo minuto a minuto</h2>
+
+<table>
+<tr>
+  <th style="width:60px;">Min</th>
+  <th style="width:100px;">Quién</th>
+  <th>Acción</th>
+  <th>Frase clave</th>
+</tr>
+
+<tr>
+  <td><span class="timer">0:00</span></td>
+  <td><span class="badge badge-s">Santiago</span></td>
+  <td>Slide 1 (portada). Presentar equipo y materia.</td>
+  <td class="key-phrase">"Somos Santiago y Angélica, equipo FusaRoute."</td>
+</tr>
+
+<tr>
+  <td><span class="timer">0:30</span></td>
+  <td><span class="badge badge-a">Angélica</span></td>
+  <td>Slides 2–3. Problema, usuario, alcance hecho vs. pendiente.</td>
+  <td class="key-phrase">"Más de 20 rutas y ni Google Maps las tiene. Sprint 1 tuvo velocidad 0: aprendimos la lección."</td>
+</tr>
+
+<tr>
+  <td><span class="timer">2:00</span></td>
+  <td><span class="badge badge-s">Santiago</span></td>
+  <td>Slides 4–6. Arquitectura general, diagrama drawio, capas hexagonales.</td>
+  <td class="key-phrase">"Hexagonal contiene al patrón Controller-Service-Repository, con la dependencia invertida."</td>
+</tr>
+
+<tr>
+  <td><span class="timer">3:30</span></td>
+  <td><span class="badge badge-a">Angélica</span></td>
+  <td>Slide 7. Flujo del PUT por capas. Señalar cada archivo.</td>
+  <td class="key-phrase">"El request entra al controller, pasa por el use case, el dominio valida y crea un User nuevo — inmutable — y el adaptador persiste."</td>
+</tr>
+
+<tr>
+  <td><span class="timer">4:30</span></td>
+  <td><span class="badge badge-s">Santiago</span></td>
+  <td>Slide 8. Frontend: señalar el interceptor en el código.</td>
+  <td class="key-phrase">"Angular 21 es zoneless: si usás una variable normal en vez de un signal, Angular no se entera de que cambió. Por eso migramos todo a signals."</td>
+</tr>
+
+<tr>
+  <td><span class="timer">5:30</span></td>
+  <td><span class="badge badge-s">Santiago</span></td>
+  <td>Slide 9 (portal). Abrir Postman.<br>
+    1. Mostrar la colección con las 6 carpetas.<br>
+    2. Abrir el pre-request del registro: <code>gladys.{{$timestamp}}@fusaroute.co</code><br>
+    3. Run Collection → todo en verde.
+  </td>
+  <td class="key-phrase">"Cada request tiene tests que verifican status y forma del cuerpo. El token se guarda solo."</td>
+</tr>
+
+<tr>
+  <td colspan="4">
+    <div class="plan-b">Postman no abre o falla → abrir <code>docs/http/fusaroute.http</code> en VS Code con REST Client. Correr los requests manualmente.</div>
+  </td>
+</tr>
+
+<tr>
+  <td><span class="timer">7:00</span></td>
+  <td><span class="badge badge-a">Angélica</span></td>
+  <td>Slide 10 (portal). App en vivo — la historia de Doña Gladys:<br>
+    1. <code>/rutas</code> — catálogo sin cuenta<br>
+    2. Click en una ruta intermunicipal → tabla de tarifas<br>
+    3. <code>/registro</code> — primero con datos malos (400), luego con correo existente (409), luego bien → toast verde → redirige al login con correo<br>
+    4. <code>/login</code> — contraseña mala → error visible, luego bien → header cambia<br>
+    5. <code>/perfil</code> → actualizar teléfono → toast verde
+  </td>
+  <td class="key-phrase">"Doña Gladys quiere ir a Chinauta. Empieza viendo las rutas sin cuenta. Luego se registra."</td>
+</tr>
+
+<tr>
+  <td colspan="4">
+    <div class="plan-b">Backend caído → reproducir el video de respaldo (Win+Alt+R grabado antes).</div>
+    <div class="plan-b">Supabase pausado → ir al dashboard de Supabase, botón "Restore project", esperar ~30s.</div>
+    <div class="plan-b">Red bloqueada → activar hotspot del celular.</div>
+  </td>
+</tr>
+
+<tr>
+  <td><span class="timer">10:00</span></td>
+  <td><span class="badge badge-s">Santiago</span></td>
+  <td>Slide 11 (portal). Abrir DBeaver.<br>
+    <code>SELECT id, name, email, phone, password_hash FROM fusaroute.users WHERE email LIKE 'gladys%';</code><br>
+    Señalar: el hash BCrypt <code>$2a$12$...</code>, no el texto plano. El teléfono actualizado.
+  </td>
+  <td class="key-phrase">"Aquí está la fila de Gladys. La contraseña es un hash BCrypt — nunca se guarda en texto plano."</td>
+</tr>
+
+<tr>
+  <td><span class="timer">11:00</span></td>
+  <td><span class="badge badge-s">Santiago</span></td>
+  <td>Slide 12. Calidad: CI verde, ArchUnit, JaCoCo, OWASP. Mostrar capturas o la pestaña de GitHub Actions.</td>
+  <td class="key-phrase">"119 tests en backend, 40 en frontend. ArchUnit 0 violaciones. JaCoCo ≥70% por paquete."</td>
+</tr>
+
+<tr>
+  <td><span class="timer">11:45</span></td>
+  <td><span class="badge badge-s">Santiago</span></td>
+  <td>Slide 13. Problemas encontrados — ser honestos.</td>
+  <td class="key-phrase">"El Sprint 1 cerró con velocidad cero. Lo registramos tal cual porque maquillarlo resta más."</td>
+</tr>
+
+<tr>
+  <td><span class="timer">12:15</span></td>
+  <td><span class="badge badge-a">Angélica</span></td>
+  <td>Slide 14. Próximos pasos.</td>
+  <td class="key-phrase">"El Sprint 3 es despliegue real: Vercel y Render. La búsqueda de ruta con Google Maps viene en el Sprint 4."</td>
+</tr>
+
+<tr>
+  <td><span class="timer">12:45</span></td>
+  <td><span class="badge badge-s">Santiago</span> <span class="badge badge-a">Angélica</span></td>
+  <td>Slide 15. Cierre.</td>
+  <td class="key-phrase">"Pregúntenle a cualquiera de los dos."</td>
+</tr>
+
+</table>
+
+<h2>Plan B global</h2>
+<table>
+<tr><th>Escenario</th><th>Acción</th></tr>
+<tr><td>Backend no arranca</td><td>Video de respaldo. Explicar con el código en VS Code.</td></tr>
+<tr><td>Supabase pausado</td><td>Dashboard → Restore project (~30s)</td></tr>
+<tr><td>Red de la universidad bloqueada</td><td>Hotspot del celular de Santiago</td></tr>
+<tr><td>Postman falla</td><td><code>docs/http/fusaroute.http</code> en VS Code (REST Client)</td></tr>
+<tr><td>Frontend no compila</td><td>Demo solo con Postman + DBeaver + video</td></tr>
+<tr><td>Pregunta que no sabemos</td><td>"No lo sé todavía, pero lo investigamos y lo traemos para el siguiente comité."</td></tr>
+</table>
+
+</body>
+</html>
