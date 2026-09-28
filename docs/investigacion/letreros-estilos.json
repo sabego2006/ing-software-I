@@ -1,0 +1,121 @@
+{
+  "version": "2026-09-27",
+  "nota": "Estilos de letreros de busetas de Fusagasugá. Colores muestreados de fotos públicas o copiados de gráficos oficiales; las fuentes son sustitutas (la original no es identificable). Ver rutas-busetas-fusagasuga.md §5.",
+  "fonts": {
+    "placa-pesada": {
+      "family": "Archivo Black",
+      "googleFonts": "Archivo+Black",
+      "weight": 400,
+      "fallback": "'Arial Black', Impact, sans-serif",
+      "sustituye": "palo seca negra de rotulista (placas en foto dic-2022)"
+    },
+    "placa-condensada": {
+      "family": "Archivo Narrow",
+      "googleFonts": "Archivo+Narrow:wght@700",
+      "weight": 700,
+      "fallback": "'Arial Narrow', sans-serif",
+      "sustituye": "líneas largas de la placa en arco"
+    },
+    "tabla-serif": {
+      "family": "Tinos",
+      "googleFonts": "Tinos:wght@400;700",
+      "weight": 700,
+      "fallback": "'Times New Roman', Times, serif",
+      "sustituye": "Times New Roman Bold (gráfico oficial de tablas subiendo/bajando)"
+    }
+  },
+  "templates": {
+    "PLACA_ARCO": {
+      "descripcion": "Placa principal con la parte superior en arco.",
+      "shape": "arco",
+      "background": "#F7A93B",
+      "text": "#4A1D06",
+      "baseBorder": { "side": "bottom", "width": 6, "color": "#111111" },
+      "highlightLine": { "background": "#FBE3DC", "text": "#7A1414", "font": "placa-condensada" },
+      "lineFonts": { "codigo": "placa-pesada", "principal": "placa-pesada", "secundaria": "placa-condensada" },
+      "relSizes": { "codigo": 0.6, "principal": 1.0, "secundaria": 0.7 },
+      "evidencia": "foto"
+    },
+    "PLACA_RECT": {
+      "descripcion": "Placa rectangular pequeña que acompaña a la principal.",
+      "shape": "rect",
+      "variants": {
+        "amarilla": { "background": "#F3E31B", "text": "#111111" },
+        "blanca": { "background": "#FFFFFF", "text": "#111111" }
+      },
+      "border": { "width": 3, "color": "#111111" },
+      "font": "placa-pesada",
+      "evidencia": "foto"
+    },
+    "TABLA_FRANJAS": {
+      "descripcion": "Tabla de un sentido (SUBIENDO o BAJANDO); cada línea es una franja de color.",
+      "shape": "rect",
+      "border": { "width": 2, "color": "#000000" },
+      "font": "tabla-serif",
+      "palette": {
+        "amarillo": { "background": "#FFFF00", "text": "#000000" },
+        "gris": { "background": "#C0C0C0", "text": "#000000" },
+        "verde": { "background": "#008000", "text": "#FFFFFF", "weight": 400 },
+        "rojo": { "background": "#FF0000", "text": "#FFFFFF" },
+        "blanco-texto-rojo": { "background": "#FFFFFF", "text": "#E00000" },
+        "blanco-texto-negro": { "background": "#FFFFFF", "text": "#000000" }
+      },
+      "evidencia": "gráfico oficial (no foto del letrero físico)"
+    }
+  },
+  "ejemplos": [
+    {
+      "ruta": "Llano Largo – La Clarita",
+      "fuente": "https://www.tizumbaonline.com/wp-content/uploads/2022/12/WhatsApp-Image-2022-12-30-at-6.44.59-AM.jpeg",
+      "fecha": "2022-12-30",
+      "placas": [
+        {
+          "template": "PLACA_RECT", "variant": "amarilla", "position": 1,
+          "lines": [
+            { "text": "U.HOSPITAL" },
+            { "text": "exito", "transform": "lowercase", "relSize": 1.15 }
+          ]
+        },
+        {
+          "template": "PLACA_ARCO", "position": 2,
+          "lines": [
+            { "text": "100", "role": "codigo" },
+            { "text": "CENTRO", "role": "principal" },
+            { "text": "CRA. 1 SANTANDER", "role": "secundaria" },
+            { "text": "PANTANO DE VARGAS", "role": "secundaria", "highlight": true },
+            { "text": "LA CLARITA", "role": "principal", "relSize": 0.78 }
+          ]
+        },
+        {
+          "template": "PLACA_RECT", "variant": "blanca", "position": 3,
+          "lines": [ { "text": "CENTRO" }, { "text": "GALERIA" } ]
+        }
+      ]
+    },
+    {
+      "ruta": "Camino Real – La Pampa",
+      "fuente": "https://www.facebook.com/TIZumbaONLine/posts/1453529904852025/",
+      "fecha": "2020-10-27",
+      "placas": [
+        {
+          "template": "TABLA_FRANJAS", "direction": "SUBIENDO",
+          "lines": [
+            { "text": "ÉXITO", "color": "amarillo", "relSize": 1.25 },
+            { "text": "CALLE 22", "color": "gris" },
+            { "text": "PRADOS DE ALTA GRACIA", "color": "amarillo", "relSize": 0.8 },
+            { "text": "CAMINO REAL", "color": "verde" }
+          ]
+        },
+        {
+          "template": "TABLA_FRANJAS", "direction": "BAJANDO",
+          "lines": [
+            { "text": "HOSPITAL", "color": "blanco-texto-rojo", "relSize": 1.05 },
+            { "text": "BATALLON", "color": "blanco-texto-negro" },
+            { "text": "LA PAMPA", "color": "blanco-texto-rojo" },
+            { "text": "LLANO GRANDE", "color": "rojo" }
+          ]
+        }
+      ]
+    }
+  ]
+}

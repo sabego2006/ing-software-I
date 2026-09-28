@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Letreros de busetas — réplicas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo+Narrow:wght@700&family=Tinos:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root { --bg:#f6f5f2; --card:#ffffff; --ink:#1d1d1b; --muted:#6b6a66; --line:#dcdad3; --glass:#1b2530; }
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--bg); color:var(--ink); font:16px/1.6 system-ui, sans-serif; padding:24px 16px 48px; }
+  main { max-width: 960px; margin: 0 auto; }
+  h1 { font-size: 24px; margin: 0 0 4px; }
+  h2 { font-size: 18px; margin: 32px 0 12px; }
+  p.lead { color: var(--muted); margin: 0 0 8px; }
+  .grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap:16px; }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:16px; }
+  .card h3 { font-size:15px; margin:0 0 4px; }
+  .meta { font-size:13px; color:var(--muted); margin:0 0 12px; }
+  .note { font-size:13px; color:var(--muted); margin:12px 0 0; }
+  .glass { background:var(--glass); border-radius:8px; padding:16px 12px; display:flex; flex-direction:column; align-items:center; gap:10px; }
+  .row { display:flex; align-items:flex-end; gap:10px; flex-wrap:wrap; justify-content:center; }
+
+  .f-heavy { font-family:'Archivo Black','Arial Black',Impact,sans-serif; }
+  .f-narrow { font-family:'Archivo Narrow','Arial Narrow',sans-serif; font-weight:700; }
+  .f-serif { font-family:Tinos,'Times New Roman',Times,serif; font-weight:700; }
+
+  .placa-arco { width:200px; background:#F7A93B; color:#4A1D06; border-radius:80px 80px 0 0; border-bottom:6px solid #111; text-align:center; padding:12px 8px 6px; line-height:1.15; }
+  .placa-arco .codigo { font-size:14px; }
+  .placa-arco .principal { font-size:23px; }
+  .placa-arco .secundaria { font-size:16px; }
+  .placa-arco .destacada { background:#FBE3DC; color:#7A1414; margin:2px -8px; }
+
+  .placa-rect { border:3px solid #111; color:#111; padding:3px 10px; text-align:center; line-height:1.1; }
+  .placa-rect.amarilla { background:#F3E31B; }
+  .placa-rect.blanca { background:#FFFFFF; }
+  .inclinada { transform: rotate(-1.5deg); }
+
+  .tabla-wrap { text-align:center; }
+  .tabla-titulo { font-family:Tinos,'Times New Roman',serif; font-size:13px; color:#d9dde2; margin-bottom:4px; }
+  .tabla { width:170px; border:2px solid #000; background:#fff; line-height:1.4; text-align:center; }
+  .tabla div { font-size:15px; }
+  .c-amarillo { background:#FFFF00; color:#000; }
+  .c-gris { background:#C0C0C0; color:#000; }
+  .c-verde { background:#008000; color:#fff; font-weight:400; }
+  .c-rojo { background:#FF0000; color:#fff; }
+  .c-blanco-rojo { background:#fff; color:#E00000; }
+  .c-blanco-negro { background:#fff; color:#000; }
+
+  table.spec { width:100%; border-collapse:collapse; font-size:14px; }
+  table.spec th, table.spec td { text-align:left; padding:6px 8px; border-bottom:1px solid var(--line); vertical-align:top; }
+  .sw { display:inline-block; width:14px; height:14px; border:1px solid #0003; vertical-align:-2px; margin-right:6px; }
+  code { font-size:13px; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Letreros de busetas de Fusagasugá</h1>
+  <p class="lead">Réplicas lo más parecidas posible a la realidad con la evidencia pública disponible (consulta del 27-sep-2026). Los estilos están en <code>letreros-estilos.json</code>.</p>
+
+  <h2>Réplicas con evidencia</h2>
+  <div class="grid">
+    <section class="card">
+      <h3>Llano Largo – La Clarita</h3>
+      <p class="meta">Foto real de una buseta urbana, 30-dic-2022 (Tizumba Online)</p>
+      <div class="glass">
+        <div class="placa-rect amarilla inclinada">
+          <div class="f-heavy" style="font-size:16px">U.HOSPITAL</div>
+          <div class="f-heavy" style="font-size:19px">exito</div>
+        </div>
+        <div class="row">
+          <div class="placa-arco">
+            <div class="f-heavy codigo">100</div>
+            <div class="f-heavy principal">CENTRO</div>
+            <div class="f-narrow secundaria">CRA. 1 SANTANDER</div>
+            <div class="f-narrow secundaria destacada">PANTANO DE VARGAS</div>
+            <div class="f-heavy" style="font-size:18px">LA CLARITA</div>
+          </div>
+          <div class="placa-rect blanca">
+            <div class="f-heavy" style="font-size:14px">CENTRO</div>
+            <div class="f-heavy" style="font-size:14px">GALERIA</div>
+          </div>
+        </div>
+      </div>
+      <p class="note">Colores muestreados de la foto. La fuente original (palo seca negra de rotulista) no se identifica en la resolución disponible; Archivo Black y Archivo Narrow son las más parecidas.</p>
+    </section>
+
+    <section class="card">
+      <h3>Camino Real – La Pampa</h3>
+      <p class="meta">Gráfico oficial de la ruta, 27-oct-2020 (Tizumba Online)</p>
+      <div class="glass">
+        <div class="row" style="align-items:flex-start">
+          <div class="tabla-wrap">
+            <div class="tabla-titulo">TABLA SUBIENDO</div>
+            <div class="tabla f-serif">
+              <div class="c-amarillo" style="font-size:19px">ÉXITO</div>
+              <div class="c-gris">CALLE 22</div>
+              <div class="c-amarillo" style="font-size:12px;padding:2px 0">PRADOS DE ALTA GRACIA</div>
+              <div class="c-verde">CAMINO REAL</div>
+            </div>
+          </div>
+          <div class="tabla-wrap">
+            <div class="tabla-titulo">TABLA BAJANDO</div>
+            <div class="tabla f-serif">
+              <div class="c-blanco-rojo" style="font-size:16px">HOSPITAL</div>
+              <div class="c-blanco-negro">BATALLON</div>
+              <div class="c-blanco-rojo">LA PAMPA</div>
+              <div class="c-rojo">LLANO GRANDE</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p class="note">Copiado del gráfico oficial (serif tipo Times; Tinos tiene sus mismas métricas). No es foto del letrero físico.</p>
+    </section>
+  </div>
+
+  <h2>Reconstruidas (sin foto del letrero)</h2>
+  <p class="lead">Armadas con las plantillas y los puntos de cada ficha de ruta. Son aproximaciones: confirmar en campo antes de usarlas como definitivas.</p>
+  <div class="grid">
+    <section class="card">
+      <h3>Maíz Amarillo</h3>
+      <p class="meta">Puntos: Inventum 2014 (sin orden confirmado)</p>
+      <div class="glass"><div class="row">
+        <div class="placa-arco">
+          <div class="f-heavy principal">CENTRO</div>
+          <div class="f-narrow secundaria">GRAN COLOMBIA</div>
+          <div class="f-narrow secundaria destacada">EBENEZER</div>
+          <div class="f-heavy" style="font-size:18px">MAIZ AMARILLO</div>
+        </div>
+        <div class="placa-rect amarilla"><div class="f-heavy" style="font-size:14px">PANAMERICANA</div></div>
+      </div></div>
+    </section>
+    <section class="card">
+      <h3>Pablo Bello – Cedritos</h3>
+      <p class="meta">Puntos: Inventum 2014 (sin orden confirmado)</p>
+      <div class="glass"><div class="row">
+        <div class="placa-arco">
+          <div class="f-heavy principal">CENTRO</div>
+          <div class="f-narrow secundaria destacada">PABLO BELLO</div>
+          <div class="f-heavy" style="font-size:18px">CEDRITOS</div>
+        </div>
+        <div class="placa-rect blanca"><div class="f-heavy" style="font-size:14px">CENTRO</div><div class="f-heavy" style="font-size:14px">GALERIA</div></div>
+      </div></div>
+    </section>
+    <section class="card">
+      <h3>Villa Leny – SENA Quebrajacho</h3>
+      <p class="meta">Puntos: mapa del blog SENA, ene-2020</p>
+      <div class="glass"><div class="row" style="align-items:flex-start">
+        <div class="tabla-wrap"><div class="tabla-titulo">TABLA SUBIENDO</div>
+          <div class="tabla f-serif">
+            <div class="c-amarillo">ÉXITO</div><div class="c-gris">CENTRO</div>
+            <div class="c-blanco-negro">VILLA NATALIA</div><div class="c-verde">SENA</div></div></div>
+        <div class="tabla-wrap"><div class="tabla-titulo">TABLA BAJANDO</div>
+          <div class="tabla f-serif">
+            <div class="c-blanco-rojo">CENTRO</div><div class="c-blanco-negro">ÉXITO</div>
+            <div class="c-rojo">VILLA LENY</div></div></div>
+      </div></div>
+    </section>
+    <section class="card">
+      <h3>Fusagasugá – Chinauta</h3>
+      <p class="meta">Puntos y orden: Decreto 16/2026 (vía Melgar)</p>
+      <div class="glass"><div class="row">
+        <div class="placa-arco">
+          <div class="f-heavy principal">CHINAUTA</div>
+          <div class="f-narrow secundaria">JAIBANA</div>
+          <div class="f-narrow secundaria destacada">PIRAMIDES</div>
+          <div class="f-heavy" style="font-size:18px">EL TRIUNFO</div>
+        </div>
+        <div class="placa-rect amarilla"><div class="f-heavy" style="font-size:14px">TERMINAL</div></div>
+      </div></div>
+    </section>
+    <section class="card">
+      <h3>Fusagasugá – Arbeláez</h3>
+      <p class="meta">Intermunicipal: suelen usar placa simple con el destino</p>
+      <div class="glass"><div class="row">
+        <div class="placa-rect blanca"><div class="f-heavy" style="font-size:20px">ARBELAEZ</div></div>
+        <div class="placa-rect amarilla"><div class="f-heavy" style="font-size:13px">KENNEDY</div><div class="f-heavy" style="font-size:13px">LOS RIOS</div></div>
+      </div></div>
+    </section>
+    <section class="card">
+      <h3>Fusagasugá – Pasca</h3>
+      <p class="meta">Intermunicipal: puntos de la vía, Decreto 16/2026</p>
+      <div class="glass"><div class="row">
+        <div class="placa-rect blanca"><div class="f-heavy" style="font-size:20px">PASCA</div></div>
+        <div class="placa-rect amarilla"><div class="f-heavy" style="font-size:13px">ALASKA</div><div class="f-heavy" style="font-size:13px">B. TARDES</div></div>
+      </div></div>
+    </section>
+    <section class="card">
+      <h3>Fusacatán "FUSA CENTRO"</h3>
+      <p class="meta">Foto pública de baja resolución; colores aproximados</p>
+      <div class="glass">
+        <div class="placa-rect amarilla"><div class="f-heavy" style="font-size:16px">FUSA</div><div class="f-heavy" style="font-size:16px">CENTRO</div></div>
+      </div>
+    </section>
+  </div>
+
+  <h2>Plantillas para cargar cualquier ruta</h2>
+  <div class="grid">
+    <section class="card">
+      <h3><code>PLACA_ARCO</code></h3>
+      <p class="meta">Placa principal de la ruta</p>
+      <div class="glass">
+        <div class="placa-arco">
+          <div class="f-heavy codigo">000</div>
+          <div class="f-heavy principal">PUNTO 1</div>
+          <div class="f-narrow secundaria">PUNTO 2</div>
+          <div class="f-narrow secundaria destacada">PUNTO DESTACADO</div>
+          <div class="f-heavy" style="font-size:18px">DESTINO</div>
+        </div>
+      </div>
+    </section>
+    <section class="card">
+      <h3><code>PLACA_RECT</code></h3>
+      <p class="meta">Placas acompañantes, amarilla o blanca</p>
+      <div class="glass">
+        <div class="row">
+          <div class="placa-rect amarilla"><div class="f-heavy" style="font-size:15px">HITO 1</div><div class="f-heavy" style="font-size:15px">HITO 2</div></div>
+          <div class="placa-rect blanca"><div class="f-heavy" style="font-size:15px">HITO 1</div><div class="f-heavy" style="font-size:15px">HITO 2</div></div>
+        </div>
+      </div>
+    </section>
+    <section class="card">
+      <h3><code>TABLA_FRANJAS</code></h3>
+      <p class="meta">Una por sentido, una franja por línea</p>
+      <div class="glass">
+        <div class="tabla-wrap">
+          <div class="tabla-titulo">TABLA SUBIENDO</div>
+          <div class="tabla f-serif">
+            <div class="c-amarillo">PUNTO 1</div>
+            <div class="c-gris">PUNTO 2</div>
+            <div class="c-blanco-rojo">PUNTO 3</div>
+            <div class="c-verde">DESTINO</div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <h2>Paleta y tipografías</h2>
+  <div class="card">
+    <table class="spec">
+      <tr><th>Uso</th><th>Fondo</th><th>Texto</th><th>Fuente sustituta</th></tr>
+      <tr><td>Placa en arco</td><td><span class="sw" style="background:#F7A93B"></span>#F7A93B</td><td><span class="sw" style="background:#4A1D06"></span>#4A1D06</td><td>Archivo Black / Archivo Narrow 700</td></tr>
+      <tr><td>Línea destacada</td><td><span class="sw" style="background:#FBE3DC"></span>#FBE3DC</td><td><span class="sw" style="background:#7A1414"></span>#7A1414</td><td>Archivo Narrow 700</td></tr>
+      <tr><td>Placa amarilla</td><td><span class="sw" style="background:#F3E31B"></span>#F3E31B</td><td><span class="sw" style="background:#111"></span>#111111</td><td>Archivo Black</td></tr>
+      <tr><td>Placa blanca</td><td><span class="sw" style="background:#fff"></span>#FFFFFF</td><td><span class="sw" style="background:#111"></span>#111111</td><td>Archivo Black</td></tr>
+      <tr><td>Franja amarilla</td><td><span class="sw" style="background:#FFFF00"></span>#FFFF00</td><td>#000000</td><td>Tinos 700</td></tr>
+      <tr><td>Franja gris</td><td><span class="sw" style="background:#C0C0C0"></span>#C0C0C0</td><td>#000000</td><td>Tinos 700</td></tr>
+      <tr><td>Franja verde</td><td><span class="sw" style="background:#008000"></span>#008000</td><td>#FFFFFF</td><td>Tinos 400</td></tr>
+      <tr><td>Franja roja</td><td><span class="sw" style="background:#FF0000"></span>#FF0000</td><td>#FFFFFF</td><td>Tinos 700</td></tr>
+      <tr><td>Texto rojo sobre blanco</td><td>#FFFFFF</td><td><span class="sw" style="background:#E00000"></span>#E00000</td><td>Tinos 700</td></tr>
+    </table>
+  </div>
+</main>
+</body>
+</html>
