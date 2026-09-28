@@ -95,7 +95,7 @@ tr:nth-child(even) td { background: #ece5d3; }
   <td><span class="badge badge-s">Santiago</span></td>
   <td>Slide 9 (portal). Abrir Postman.<br>
     1. Mostrar la colección con las 6 carpetas.<br>
-    2. Abrir el pre-request del registro: <code>gladys.{{$timestamp}}@fusaroute.co</code><br>
+    2. Abrir el pre-request del registro: <code>gladys.&lt;timestamp&gt;@fusaroute.co (Date.now())</code><br>
     3. Run Collection → todo en verde.
   </td>
   <td class="key-phrase">"Cada request tiene tests que verifican status y forma del cuerpo. El token se guarda solo."</td>
@@ -113,7 +113,7 @@ tr:nth-child(even) td { background: #ece5d3; }
   <td>Slide 10 (portal). App en vivo — la historia de Doña Gladys:<br>
     1. <code>/rutas</code> — catálogo sin cuenta<br>
     2. Click en una ruta intermunicipal → tabla de tarifas<br>
-    3. <code>/registro</code> — primero con datos malos (400), luego con correo existente (409), luego bien → toast verde → redirige al login con correo<br>
+    3. <code>/registro</code> — primero con correo ya existente (409; el 400 de datos inválidos se muestra en Postman, porque el botón del formulario se deshabilita), luego bien → toast verde → redirige al login con correo<br>
     4. <code>/login</code> — contraseña mala → error visible, luego bien → header cambia<br>
     5. <code>/perfil</code> → actualizar teléfono → toast verde
   </td>

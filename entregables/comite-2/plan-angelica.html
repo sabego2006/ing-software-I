@@ -192,7 +192,7 @@ tr:nth-child(even) td { background: rgba(0,0,0,.03); }
 <ol>
   <li><code>/rutas</code> — "Doña Gladys quiere ir a Chinauta. Empieza viendo las rutas sin cuenta."</li>
   <li>Click en ruta intermunicipal → tabla de tarifas</li>
-  <li><code>/registro</code> — primero con datos malos (400), luego correo existente (409), luego bien → toast verde → redirige al login con correo</li>
+  <li><code>/registro</code> — primero con correo ya existente (409; el 400 se muestra en Postman), luego bien → toast verde → redirige al login con correo</li>
   <li><code>/login</code> — contraseña mala → error visible, luego bien → header cambia</li>
   <li><code>/perfil</code> → actualizar teléfono → toast verde</li>
 </ol>

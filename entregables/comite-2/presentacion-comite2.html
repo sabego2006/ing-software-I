@@ -305,11 +305,11 @@ tr:nth-child(even) td { background: var(--paper-2); }
     <h1>Diagrama de arquitectura</h1>
     <div style="flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center;">
       <div style="background: var(--paper-2); border: 2px dashed var(--rail); border-radius: 8px; padding: 2em; text-align: center; max-width: 600px;">
-        <p style="font-size: 1.4rem;">📊 Abrir <code>drawio</code> en ventana externa</p>
-        <p class="muted">Plantilla del docente llenada con el sistema real:<br>
-        Oracle → PostgreSQL/Supabase · React → Angular<br>
-        Módulos reales · Casos de uso reales<br>
-        Google Maps punteado (Sprint 4)</p>
+        <p style="font-size: 1.4rem;"><a href="diagrama-arquitectura.drawio.html" target="_blank" rel="noopener">📊 Abrir el diagrama de arquitectura (draw.io)</a></p>
+        <p class="muted">Plantilla del docente con el sistema real:<br>
+        PostgreSQL/Supabase · Angular 21 · Spring Boot 3.5<br>
+        Hexágono con sus 10 componentes reales<br>
+        Google Maps punteado (Sprint 4). Requiere internet.</p>
       </div>
     </div>
     <div class="slide-footer">
@@ -492,7 +492,7 @@ if (token) {
 <!-- ============================================================
      SLIDE 10 — PORTAL: App en vivo
      ============================================================ -->
-<div class="slide portal" data-notes="Angélica maneja la app. Guion de Doña Gladys: 1) Ve el catálogo sin cuenta, 2) Ve la tabla de tarifas, 3) Se registra (provocar 400 y 409), 4) Inicia sesión, 5) Actualiza su teléfono (PUT).">
+<div class="slide portal" data-notes="Angélica maneja la app. Guion de Doña Gladys: 1) Ve el catálogo sin cuenta, 2) Ve la tabla de tarifas, 3) Se registra (mostrar el 409 de correo duplicado; el 400 ya se mostró en Postman), 4) Inicia sesión, 5) Actualiza su teléfono (PUT).">
   <div class="route-line"></div>
   <div class="slide-inner" style="justify-content: center; align-items: center; text-align: center;">
     <p style="font-size: 4rem; margin: 0;">🚌</p>
@@ -502,7 +502,7 @@ if (token) {
       <ol style="font-size: var(--fs-lead); color: var(--white);">
         <li>Consulta el catálogo <strong>sin cuenta</strong></li>
         <li>Ve la tabla de tarifas de Chinauta</li>
-        <li>Se registra <span class="muted">(provocar 400 y 409)</span></li>
+        <li>Se registra <span class="muted">(mostrar el 409 de correo duplicado; el 400 ya se mostró en Postman)</span></li>
         <li>Inicia sesión</li>
         <li>Actualiza su teléfono <span class="tag tag-bus" style="font-size: .7rem;">PUT</span></li>
       </ol>
