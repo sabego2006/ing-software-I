@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Estudio para el Comité 2 — FusaRoute</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root { --ink: #0E2A47; --paper: #F5F0E6; --bus: #E8743B; --route: #2A6F4A; --blue: #2980B9; --pink: #D63384; }
+body { font-family: 'Inter', sans-serif; margin: 0; padding: 1rem; background: var(--paper); color: var(--ink); line-height: 1.6; max-width: 960px; margin: 0 auto; }
+h1 { font-size: 1.8rem; border-bottom: 3px solid var(--bus); padding-bottom: .5rem; }
+h2 { color: var(--bus); margin-top: 2rem; cursor: pointer; }
+h2::before { content: "▸ "; }
+h2.open::before { content: "▾ "; }
+code { font-family: 'JetBrains Mono', monospace; font-size: .85em; background: #e8e0d0; padding: 1px 5px; border-radius: 3px; }
+.qa { border-left: 3px solid var(--route); padding: .5rem 1rem; margin: .8rem 0; background: #fff; border-radius: 0 6px 6px 0; }
+.qa .q { font-weight: 600; margin-bottom: .3rem; cursor: pointer; }
+.qa .q::before { content: "❓ "; }
+.qa .a { display: none; font-size: .95rem; color: #333; }
+.qa .a.show { display: block; }
+.qa .file { font-size: .8rem; color: var(--blue); margin-top: .2rem; }
+.badge { display: inline-block; font-size: .75rem; padding: 1px 8px; border-radius: 20px; font-weight: 600; color: #fff; }
+.badge-s { background: var(--blue); }
+.badge-a { background: var(--pink); }
+.trap { border-left-color: var(--bus); }
+.trap .q::before { content: "⚠️ "; }
+.controls { position: sticky; top: 0; background: var(--ink); color: #fff; padding: .5rem 1rem; border-radius: 0 0 8px 8px; display: flex; gap: 1rem; z-index: 10; flex-wrap: wrap; }
+.controls button { background: var(--bus); color: #fff; border: none; padding: 4px 12px; border-radius: 4px; cursor: pointer; font-size: .85rem; }
+.controls button:hover { opacity: .85; }
+.counter { margin-left: auto; font-family: 'JetBrains Mono', monospace; }
+.flashcard-mode .qa .a { display: none !important; }
+.mode-label { font-size: .8rem; color: var(--bus); }
+</style>
+</head>
+<body>
+
+<h1>📚 Estudio para el Comité 2</h1>
+<p>~50 preguntas probables con respuestas de ≤ 3 líneas y el archivo exacto que hay que señalar.<br>
+Click en la pregunta para ver/ocultar la respuesta. Click en la categoría para expandir/colapsar.</p>
+
+<div class="controls">
+  <button onclick="showAll()">Mostrar todo</button>
+  <button onclick="hideAll()">Ocultar todo</button>
+  <button onclick="randomQ()">🎲 Pregunta aleatoria</button>
+  <button onclick="toggleCross()">🔄 Modo cruzado</button>
+  <span class="mode-label" id="modeLabel"></span>
+  <span class="counter" id="counter"></span>
+</div>
+
+<!-- ===================== ARQUITECTURA / HEXAGONAL ===================== -->
+<h2 onclick="toggleSection(this)">Arquitectura y Hexagonal (12)</h2>
+<div class="section">
+
+<div class="qa"><div class="q" onclick="toggle(this)">¿Qué patrón de arquitectura usan en el backend y por qué?</div>
+<div class="a">Hexagonal (puertos y adaptadores), exigido por el docente. Permite testear la lógica de negocio sin Spring, y cambiar de BD sin tocar el dominio. La dependencia siempre apunta hacia adentro: domain ← application ← infrastructure.</div>
+<div class="file">📄 <code>CLAUDE.md</code> del backend, sección "Arquitectura hexagonal"</div></div>
+
+<div class="qa"><div class="q" onclick="toggle(this)">¿Cómo se relaciona hexagonal con Controller-Service-Repository?</div>
+<div class="a">Hexagonal <strong>contiene</strong> a las tres capas del docente: Controller = adapter/in/web, Service = application/usecase, Repository = adapter/out/persistence. La diferencia clave: la interfaz del repositorio pertenece al dominio (port/out/), no a la infraestructura.</div>
+<div class="file">📄 <code>CLAUDE.md</code> de la carpeta del curso, sección "La contradicción del docente"</div></div>
+
+<div class="qa"><div class="q" onclick="toggle(this)">¿Qué pasa si una clase del dominio importa Spring?</div>
+<div class="a">ArchUnit lo detecta y falla el build. Tenemos una regla que prohíbe que <code>com.fusaroute.domain..</code> importe <code>org.springframework..</code>, <code>jakarta.persistence..</code> o <code>com.fasterxml.jackson..</code>. Si aparece un @Entity en domain/, la capa está contaminada.</div>
+<div class="file">📄 <code>src/test/java/.../ArchitectureTest.java</code></div></div>
+
+<div class="qa"><div class="q" onclick="toggle(this)">¿Por qué tienen dos modelos de User (uno de dominio y uno JPA)?</div>
+<div class="a">Es intencional. <code>User</code> (domain/model) es un objeto puro de negocio. <code>UserJpaEntity</code> (adapter/out/persistence) es la tabla. Un mapper los traduce. Esto permite cambiar de BD (Supabase, MySQL, lo que sea) sin tocar la lógica de negocio.</div>
+<div class="file">📄 <code>UserPersistenceAdapter.java</code> — el mapper está ahí</div></div>
+
+<div class="qa"><div class="q" onclick="toggle(this)">¿Cómo garantizan que la regla hexagonal se cumple?</div>
+<div class="a">Con <strong>ArchUnit</strong> en el build: falla automáticamente si alguien rompe la regla. No depende de revisión manual. Además, JaCoCo cubre domain/ y application/ con ≥70% de cobertura por paquete.</div>
+<div class="file">📄 <code>src/test/java/.../ArchitectureTest.java</code> + <code>pom.xml</code> (JaCoCo rules)</div></div>
+
+<div class="qa"><div class="q" onclick="toggle(this)">¿Qué es un puerto y qué es un adaptador?</div>
+<div class="a"><strong>Puerto</strong> = interfaz que define lo que el dominio necesita (port/out) o lo que el mundo puede pedirle (port/in). <strong>Adaptador</strong> = implementación concreta que cumple esa interfaz (un controller, un repositorio JPA, un cliente HTTP). Los puertos viven en domain/, los adaptadores en infrastructure/.</div>
+<div class="file">📄 <code>domain/port/in/RegisterUserUseCase.java</code>, <code>domain/port/out/UserRepositoryPort.java</code></div></div>
+
+<div class="qa"><div class="q" onclick="toggle(this)">¿Cómo se agrega una funcionalidad nueva? ¿En qué orden?</div>
+<div class="a">1) Modelo y reglas en domain/model. 2) Interfaz del caso de uso en port/in; si necesita algo externo, interfaz en port/out. 3) Implementación en application/usecase (solo depende de interfaces). 4) Adaptadores (controller, JPA) en infrastructure. 5) Tests del caso de uso con mocks de puertos.</div>
+<div class="file">📄 <code>CLAUDE.md</code> del backend, sección "Cómo se agrega una funcionalidad"</div></div>
+
+<div class="qa"><div class="q" onclick="toggle(this)">¿Quién cablea los casos de uso con los adaptadores?</div>
+<div class="a"><code>UseCaseConfig</code> — una clase @Configuration en infrastructure/config que crea los @Bean de cada caso de uso inyectándoles los puertos. Los use cases no tienen @Service ni @Component porque pertenecen a application/, que no conoce Spring.</div>
+<div class="file">📄 <code>infrastructure/config/UseCaseConfig.java</code></div></div>
+
+<div class="qa"><div class="q" onclick="toggle(this)">¿Para qué sirve ddl-auto=validate?</div>
+<div class="a">Hibernate comprueba que las entidades JPA calcen con las tablas, pero <strong>nunca crea ni altera</strong> la BD. El dueño del esquema es Flyway: cada cambio es un archivo V*.sql revisable en el PR, aplicado igual en DEV, PRE y PROD.</div>
+<div class="file">📄 <code>application.properties</code> — <code>spring.jpa.hibernate.ddl-auto=validate</code></div></div>
+
+<div class="qa"><div class="q" onclick="toggle(this)">¿Para qué sirve Flyway?</div>
+<div class="a">Versionar el esquema de la BD. Cada migración es un archivo SQL (V1__, V2__...) que Flyway aplica en orden y registra en flyway_schema_history. Si se edita una migración ya aplicada, el arranque falla (checksum). Un cambio se corrige con una migración nueva, no editando la anterior.</div>
+<div class="file">📄 <code>src/main/resources/db/migration/V1__*.sql</code> a <code>V4__*.sql</code></div></div>
+
+<div class="qa"><div class="q" onclick="toggle(this)">¿Cuántas migraciones tienen y qué hace cada una?</div>
+<div class="a">4 migraciones: V1 crea la tabla users, V2 crea routes/neighborhoods/fares/route_neighborhoods, V3 carga las 8 rutas y 51 barrios de Fusagasugá, V4 carga las 23 tarifas.</div>
+<div class="file">📄 <code>src/main/resources/db/migration/</code></div></div>
+
+<div class="qa trap"><div class="q" onclick="toggle(this)">⚠️ ¿Si cambian a MySQL, qué tocan?</div>
+<div class="a">Solo los adaptadores de persistencia (infrastructure/adapter/out/persistence): las entidades JPA, el driver en pom.xml, y las propiedades de conexión. El dominio, los use cases y los controllers quedan <strong>intactos</strong>. Esa es la gracia de hexagonal.</div>
+<div class="file">📄 <code>UserPersistenceAdapter.java</code>, <code>pom.xml</code> (driver), <code>application-*.properties</code></div></div>
+
+</div>
+
+<!-- ===================== SPRING / JPA / FLYWAY ===================== -->
+<h2 onclick="toggleSection(this)">Spring Boot, JPA y Flyway (8)</h2>
+<div class="section">
+
+<div class="qa"><div class="q" onclick="toggle(this)">¿Qué versión de Java y Spring Boot usan?</div>
+<div class="a">Java 25 (LTS vigente) y Spring Boot 3.5.16. No saltamos a la línea 4 porque es la primera vez con Spring: el material disponible (tutoriales, StackOverflow) es de 3.x.</div>
+<div class="file">📄 <code>pom.xml</code> — <code>&lt;java.version&gt;25&lt;/java.version&gt;</code></div></div>
+
+<div class="qa"><div class="q" onclick="toggle(this)">¿Cómo manejan los errores HTTP?</div>
+<div class="a">Con <code>GlobalExceptionHandler</code> que extiende <code>ResponseEntityExceptionHandler</code>, usando ProblemDetail (RFC 9457). Cada excepción devuelve su código real (400, 401, 404, 409) con un cuerpo JSON consistente: type, title, status, detail y opcionalmente errors[] con campo y mensaje.</div>
+<div class="file">📄 <code>infrastructure/adapter/in/web/GlobalExceptionHandler.java</code></div></div>
+
+<div class="qa"><div class="q" onclick="toggle(this)">¿Qué es ProblemDetail y por qué lo usan?</div>
+<div class="a">Es el estándar RFC 9457 para errores HTTP. Da un formato JSON uniforme: type, title, status, detail. Lo usamos para que el frontend siempre sepa cómo leer un error: misma forma para 400, 401, 404, 409. Spring Boot lo soporta nativamente.</div>
+<div class="file">📄 <code>GlobalExceptionHandler.java</code></div></div>
+
+<div class="qa"><div class="q" onclick="toggle(this)">¿Cómo funciona la inyección de dependencias en su proyecto?</div>
+<div class="a">Spring inyecta los adaptadores en los use cases a través de <code>UseCaseConfig</code> (constructor injection). Los use cases no tienen anotaciones de Spring: reciben interfaces (puertos) y Spring resuelve qué implementación concreta inyectar.</div>
+<div class="file">📄 <code>UseCaseConfig.java</code></div></div>
+
+<div class="qa"><div class="q" onclick="toggle(this)">¿Por qué no usan @Service en los use cases?</div>
+<div class="a">Porque los use cases están en application/, que no debe conocer Spring. Si les ponemos @Service, estamos contaminando esa capa con infraestructura. En cambio, los registramos como @Bean en UseCaseConfig (que sí vive en infrastructure/).</div>
+<div class="file">📄 <code>UseCaseConfig.java</code> vs <code>RegisterUserService.java</code></div></div>
+
+<div class="qa"><div class="q" onclick="toggle(this)">¿Qué perfiles de configuración tienen?</div>
+<div class="a">Cuatro: application.properties (común), application-dev.properties (Supabase fusaroute-dev), application-pre.properties y application-prod.properties. Los dos últimos tienen las claves declaradas pero vacías hasta el Sprint 3. Se activan con SPRING_PROFILE.</div>
+<div class="file">📄 <code>src/main/resources/application*.properties</code></div></div>
+
+<div class="qa"><div class="q" onclick="toggle(this)">¿Cómo se conectan a la base de datos?</div>
+<div class="a">Con un rol dedicado <code>fusaroute_dev</code> (sin privilegios de superusuario), dueño del esquema <code>fusaroute</code> en la base postgres del proyecto Supabase. Nunca con el usuario postgres — si se filtra el superusuario, se pierde todo el servidor.</div>
+<div class="file">📄 <code>.env.example</code> — <code>DB_USERNAME=fusaroute_dev.xxx</code></div></div>
+
+<div class="qa trap"><div class="q" onclick="toggle(this)">⚠️ ¿Por qué no usan Supabase Auth?</div>
+<div class="a">Tres razones: 1) El docente exige que ambos aprendamos todo el stack, incluyendo seguridad. 2) Mantiene el dominio desacoplado de un proveedor (coherente con hexagonal). 3) Da material real para defender ante el comité. Supabase es solo PostgreSQL administrado.</div>
+<div class="file">📄 <code>CLAUDE.md</code> de la carpeta del curso, sección "Decisiones de arquitectura"</div></div>
+
+</div>
+
+<!-- ===================== SEGURIDAD / JWT / BCRYPT ===================== -->
+<h2 onclick="toggleSection(this)">Seguridad, JWT y BCrypt (10)</h2>
+<div class="section">
+
+<div class="qa"><div class="q" onclick="toggle(this)">¿Cómo funciona la autenticación?</div>
+<div class="a">Registro con nombre, correo (único) y contraseña (mín. 8, 1 mayúscula, 1 número). La contraseña se hashea con BCrypt (costo 12). Al login exitoso, el backend emite un JWT (HS256) con validez de 7 días. El frontend adjunta el token en el header Authorization.</div>
+<div class="file">📄 <code>AuthController.java</code>, <code>SecurityConfig.java</code></div></div>
+
+<div class="qa"><div class="q" onclick="toggle(this)">¿Qué algoritmo usan para hashear contraseñas y por qué?</div>
+<div class="a">BCrypt con costo 12. Es un algoritmo de hashing lento a propósito: cada intento de fuerza bruta tarda ~250ms. No es reversible — no se puede obtener la contraseña del hash. Implementado en BCryptPasswordHasher (infrastructure/adapter/out/security), que implementa PasswordHasherPort (domain/port/out).</div>
+<div class="file">📄 <code>BCryptPasswordHasher.java</code>, <code>PasswordHasherPort.java</code></div></div>
+
+<div class="qa"><div class="q" onclick="toggle(this)">¿Qué es el JWT y qué contiene?</div>
+<div class="a">JSON Web Token, un estándar para transmitir claims entre partes. El nuestro tiene: sub (id del usuario), iat (fecha de emisión), exp (expiración, 7 días), name y email. Firmado con HS256 y un secreto de 256 bits (JWT_SECRET en .env).</div>
+<div class="file">📄 <code>SecurityConfig.java</code> — configuración del decoder JWT</div></div>
+
+<div class="qa"><div class="q" onclick="toggle(this)">¿Cómo manejan CORS?</div>
+<div class="a">En SecurityConfig, con los orígenes permitidos leídos de la variable app.cors.allowed-origins. Nunca usamos * (con credenciales ni siquiera es válido). En PRE/PROD no hay valor por defecto, a propósito: un origen mal configurado rompe el arranque.</div>
+<div class="file">📄 <code>SecurityConfig.java</code></div></div>
+
+<div class="qa"><div class="q" onclick="toggle(this)">¿Qué endpoints son públicos y cuáles requieren autenticación?</div>
+<div class="a">Públicos: /health, /api/auth/** (login y registro), GET /api/routes/**. Con token: GET/PUT /api/users/me y PUT /api/users/me/password. Configurado en SecurityConfig con requestMatchers y permitAll().</div>
+<div class="file">📄 <code>SecurityConfig.java</code></div></div>
+
+<div class="qa"><div class="q" onclick="toggle(this)">¿Qué hace el BearerTokenResolver personalizado?</div>
+<div class="a">Ignora el token en rutas públicas (/health, /api/auth/**, GET /api/routes/**). Evita que un token vencido en el header provoque un 401 en endpoints que no lo necesitan. Sin esto, un usuario con token expirado no podría ni ver el catálogo.</div>
+<div class="file">📄 <code>SecurityConfig.java</code> — bearerTokenResolver bean</div></div>
+
+<div class="qa"><div class="q" onclick="toggle(this)">¿Cómo sacan el id del usuario del JWT?</div>
+<div class="a">Con <code>@AuthenticationPrincipal Jwt jwt</code> en el controller. El claim "sub" contiene el id del usuario. <code>Long.parseLong(jwt.getSubject())</code> lo convierte a Long para pasarlo al use case.</div>
+<div class="file">📄 <code>UserController.java</code></div></div>
+
+<div class="qa"><div class="q" onclick="toggle(this)">¿Qué pasa con la CVE-2026-41707?</div>
+<div class="a">Es de spring-security-oauth2-resource-server (módulo SSE). No tenemos endpoints SSE en ningún controller; además, la versión en la que se corrige no existe todavía. La supresión está en config/owasp/suppression.xml con justificación de inalcanzabilidad y fecha de revisión.</div>
+<div class="file">📄 <code>config/owasp/suppression.xml</code></div></div>
+
+<div class="qa"><div class="q" onclick="toggle(this)">¿Dónde están las credenciales?</div>
+<div class="a">En el archivo .env (que está en .gitignore, nunca en el repo). Las variables están declaradas en .env.example con valores vacíos. JWT_SECRET se genera con openssl rand -base64 32. Nunca en application.properties ni en el código.</div>
+<div class="file">📄 <code>.env.example</code></div></div>
+
+<div class="qa trap"><div class="q" onclick="toggle(this)">⚠️ ¿Ocultar un botón de admin en Angular es seguridad?</div>
+<div class="a"><strong>No.</strong> Es cortesía visual. El permiso real lo verifica el backend siempre. Todo lo que llega al navegador es inspeccionable — cualquiera puede abrir DevTools y cambiar el HTML. La seguridad vive en Spring Security, no en el CSS.</div>
+<div class="file">📄 <code>CLAUDE.md</code> del frontend, sección "Autenticación"</div></div>
+
+</div>
+
+<!-- ===================== ANGULAR / SIGNALS / INTERCEPTOR ===================== -->
+<h2 onclick="toggleSection(this)">Angular, Signals e Interceptor (10)</h2>
+<div class="section">
+
+<div class="qa"><div class="q" onclick="toggle(this)">¿Por qué Angular y no React?</div>
+<div class="a">Cambió en la v4 del documento: React + Vite → Angular. Angular es un framework completo (router, forms, HTTP, testing, PWA) mientras que React necesita elegir cada librería por separado. Para un equipo en su primera vez, tener todo integrado reduce decisiones.</div>
+<div class="file">📄 <code>CLAUDE.md</code> de la carpeta del curso, sección "Decisiones de arquitectura"</div></div>
+
+<div class="qa"><div class="q" onclick="toggle(this)">¿Qué son los signals y por qué los usan?</div>
+<div class="a">Signals son primitivas reactivas de Angular: cuando un signal cambia, Angular sabe exactamente qué parte del DOM actualizar. Angular 21 corre en modo <strong>zoneless</strong> (sin zone.js), así que sin signals, un cambio de variable después de un subscribe() no se refleja en la vista.</div>
+<div class="file">📄 <code>login.component.ts</code> — <code>errorMessage = signal&lt;string | null&gt;(null)</code></div></div>
+
+<div class="qa"><div class="q" onclick="toggle(this)">¿Qué problema resolvieron con signals?</div>
+<div class="a">Los mensajes de error eran <strong>invisibles</strong>. Login y registro guardaban el error en variables normales, y sin zone.js Angular no se enteraba del cambio. Al migrar a signals, el template se actualiza automáticamente cuando el signal cambia.</div>
+<div class="file">📄 <code>login.component.ts</code> — antes vs. después</div></div>
+
+<div class="qa"><div class="q" onclick="toggle(this)">¿Qué hace el interceptor de autenticación?</div>
+<div class="a">Adjunta el header Authorization: Bearer {token} a cada petición HTTP, con dos excepciones: 1) No adjunta token en /api/auth/** (evita 401 espurio con token vencido). 2) No redirige al login en 401 de rutas de auth (401 en login = "credenciales incorrectas", no "sesión expirada").</div>
+<div class="file">📄 <code>core/interceptors/auth.interceptor.ts</code></div></div>
+
+<div class="qa"><div class="q" onclick="toggle(this)">¿Cómo saben si el usuario está logueado?</div>
+<div class="a"><code>isLoggedIn</code> es un computed signal que revisa dos cosas: que el token exista Y que no esté vencido (compara expiresAt con Date.now()). Si el token venció, isLoggedIn es false y el header muestra "Ingresar" en vez de "Hola, nombre".</div>
+<div class="file">📄 <code>services/auth.service.ts</code></div></div>
+
+<div class="qa"><div class="q" onclick="toggle(this)">¿Por qué los componentes son standalone?</div>
+<div class="a">Es el patrón estándar de Angular 21. Cada componente declara sus imports directamente (ReactiveFormsModule, RouterLink...) sin necesidad de un NgModule que los agrupe. Reduce el boilerplate y facilita el lazy loading.</div>
+<div class="file">📄 <code>login.component.ts</code> — <code>standalone: true, imports: [...]</code></div></div>
+
+<div class="qa"><div class="q" onclick="toggle(this)">¿Cómo se protege la ruta /perfil?</div>
+<div class="a">Con un <code>authGuard</code> funcional que revisa <code>authService.isLoggedIn()</code>. Si es false, redirige a /login. El guard está registrado en app.routes.ts con <code>canActivate: [authGuard]</code>.</div>
+<div class="file">📄 <code>core/guards/auth.guard.ts</code>, <code>app.routes.ts</code></div></div>
+
+<div class="qa"><div class="q" onclick="toggle(this)">¿Por qué no usan librerías de UI (Material, PrimeNG...)?</div>
+<div class="a">El principio es: cada dependencia hay que poder justificarla ante el comité. Para las pantallas actuales (forms, tabla, cards) no hacen falta. Se agrega una dependencia cuando haya un problema real que resolver, no antes.</div>
+<div class="file">📄 <code>CLAUDE.md</code> del frontend, sección "Convenciones de código"</div></div>
+
+<div class="qa"><div class="q" onclick="toggle(this)">¿Por qué el formulario de registro muestra errores por campo?</div>
+<div class="a">El backend devuelve un ProblemDetail con un array errors[] que tiene {field, message}. El frontend guarda ese array en un signal y usa un helper <code>fieldError('email')</code> que busca el error de ese campo. Así cada input muestra su error específico debajo.</div>
+<div class="file">📄 <code>register.component.ts</code> — <code>fieldErrors</code> signal</div></div>
+
+<div class="qa trap"><div class="q" onclick="toggle(this)">⚠️ ¿Dónde está Google Maps en el frontend?</div>
+<div class="a"><strong>Todavía no está implementado.</strong> Google Maps entra en el Sprint 4 con la búsqueda de ruta. Hoy el frontend muestra el catálogo, barrios y tarifas — datos propios de la BD, sin mapa. Decirlo honestamente suma más que inventar que "está en progreso".</div>
+<div class="file">📄 <code>CLAUDE.md</code> de la carpeta del curso, sección "Alcance"</div></div>
+
+</div>
+
+<!-- ===================== BASE DE DATOS ===================== -->
+<h2 onclick="toggleSection(this)">Base de datos y Supabase (5)</h2>
+<div class="section">
+
+<div class="qa"><div class="q" onclick="toggle(this)">¿Cuántas tablas tienen y cuáles son?</div>
+<div class="a">4 tablas en el esquema fusaroute: <code>users</code> (id, name, email, password_hash, phone, role, active), <code>routes</code> (id, name, type, active), <code>neighborhoods</code> (id, name), <code>fares</code> (id, route_id, amount, reference_point, valid_from). Más la tabla de unión <code>route_neighborhoods</code> y <code>flyway_schema_history</code>.</div>
+<div class="file">📄 <code>db/migration/V1__*.sql</code> a <code>V4__*.sql</code></div></div>
+
+<div class="qa"><div class="q" onclick="toggle(this)">¿Cuántas rutas tienen cargadas?</div>
+<div class="a">8 rutas: 6 urbanas de Fusagasugá y 2 intermunicipales (Chinauta y Pasca). Con 51 barrios y 23 tarifas. Son datos reales investigados en campo — tenemos fotos de los letreros de las busetas.</div>
+<div class="file">📄 <code>db/migration/V3__*.sql</code> (rutas y barrios), <code>V4__*.sql</code> (tarifas)</div></div>
+
+<div class="qa"><div class="q" onclick="toggle(this)">¿Por qué no usan PostGIS?</div>
+<div class="a">Fuera de alcance este semestre. La geometría de rutas se carga como GeoJSON en el backend y se calcula en Java (domain/). El cálculo es el mismo online y offline, evitando partir la lógica entre PostGIS en servidor y JS en cliente.</div>
+<div class="file">📄 <code>CLAUDE.md</code> de la carpeta del curso, sección "Decisiones de arquitectura"</div></div>
+
+<div class="qa"><div class="q" onclick="toggle(this)">¿Por qué la contraseña se guarda como hash y no encriptada?</div>
+<div class="a">Un hash (BCrypt) es irreversible: ni nosotros, ni un atacante que acceda a la BD puede obtener la contraseña original. Encriptación sería reversible con la clave, lo cual es más débil. BCrypt además es resistente a fuerza bruta por su costo computacional.</div>
+<div class="file">📄 DBeaver: la columna <code>password_hash</code> muestra <code>$2a$12$...</code></div></div>
+
+<div class="qa trap"><div class="q" onclick="toggle(this)">⚠️ ¿Por qué no se conectan con el usuario postgres?</div>
+<div class="a">Regla fija: nunca el superusuario. Si ese usuario se filtra, se pierde el servidor entero. Con un rol dedicado (fusaroute_dev), el daño se limita al esquema fusaroute. En Supabase la base siempre se llama postgres, así que la regla se cumple con rol + esquema propio.</div>
+<div class="file">📄 <code>.env.example</code>, <code>CLAUDE.md</code> del backend</div></div>
+
+</div>
+
+<!-- ===================== CALIDAD ISO 25010 ===================== -->
+<h2 onclick="toggleSection(this)">Calidad ISO 25010 y CI (5)</h2>
+<div class="section">
+
+<div class="qa"><div class="q" onclick="toggle(this)">¿Qué métricas de calidad tienen?</div>
+<div class="a">5 métricas, una por atributo ISO 25010: Rendimiento (p95 < 8s), Disponibilidad (≥ 95% en horario hábil), Mantenibilidad (0 violaciones ArchUnit + JaCoCo ≥70%), Usabilidad (≤ 4 acciones), Seguridad (0 vulns altas sin suprimir). Cada una con instrumento ejecutable.</div>
+<div class="file">📄 <code>CLAUDE.md</code> de la carpeta del curso, tabla de métricas</div></div>
+
+<div class="qa"><div class="q" onclick="toggle(this)">¿Qué es ArchUnit y cómo funciona?</div>
+<div class="a">Es un framework de tests de arquitectura en Java. Nuestro test verifica que ninguna clase de domain/ importe Spring, JPA ni Jackson. Corre en cada build como un test más — si falla, falla el build completo.</div>
+<div class="file">📄 <code>ArchitectureTest.java</code></div></div>
+
+<div class="qa"><div class="q" onclick="toggle(this)">¿Qué cubre JaCoCo y qué no?</div>
+<div class="a">Cubre domain/ y application/ con umbral ≥70% por paquete. No cubre controllers ni adaptadores a propósito: la lógica de negocio está en dominio/aplicación; cubrir controllers para subir un % es maquillaje.</div>
+<div class="file">📄 <code>pom.xml</code> — JaCoCo rules element</div></div>
+
+<div class="qa"><div class="q" onclick="toggle(this)">¿Cuántos tests tienen?</div>
+<div class="a">Backend: 119 tests (unit + integration). Frontend: 40 tests en 10 suites. Backend CI: build + Checkstyle + tests + ArchUnit + JaCoCo + OWASP. Frontend CI: npm ci + build + test.</div>
+<div class="file">📄 GitHub Actions — workflows de CI</div></div>
+
+<div class="qa"><div class="q" onclick="toggle(this)">¿Qué es OWASP Dependency-Check?</div>
+<div class="a">Herramienta que escanea las dependencias contra la base de datos de vulnerabilidades conocidas (NVD). Configurada para fallar el build si encuentra vulnerabilidades con CVSS ≥ 7. Las supresiones necesitan justificación y fecha de revisión.</div>
+<div class="file">📄 <code>pom.xml</code> (plugin), <code>config/owasp/suppression.xml</code></div></div>
+
+</div>
+
+<!-- ===================== PROCESO SCRUM ===================== -->
+<h2 onclick="toggleSection(this)">Proceso Scrum y gestión (5)</h2>
+<div class="section">
+
+<div class="qa"><div class="q" onclick="toggle(this)">¿Qué metodología usan?</div>
+<div class="a">Iterativo-incremental con Scrum como marco. No son cosas en competencia: el enfoque dice cómo crece el producto (por incrementos demostrables), y Scrum dice cómo se organiza el equipo. Sprints semanales, de martes a lunes.</div>
+<div class="file">📄 <code>docs/metodologia/enfoque-metodologico.md</code></div></div>
+
+<div class="qa"><div class="q" onclick="toggle(this)">¿Por qué el Sprint 1 tuvo velocidad 0?</div>
+<div class="a">Solo tenía 2 issues en Jira (RNF-03 y RNF-05) y ninguno se completó. El trabajo técnico sí se hizo (CI, ArchUnit, READMEs) pero quedó en ramas sin mergear — los PR se cerraron sin merge. La infraestructura nunca se registró como issues. Lo reportamos tal cual.</div>
+<div class="file">📄 <code>docs/historial-sprints.md</code></div></div>
+
+<div class="qa"><div class="q" onclick="toggle(this)">¿Cómo reparten el trabajo?</div>
+<div class="a">Ambos programamos frontend y backend en todos los sprints. Santiago es Scrum Master y Líder Técnico; Angélica es PO y Responsable de Frontend/Documentación. Pruebas es compartido. Los roles técnicos rotan cada 2 sprints.</div>
+<div class="file">📄 <code>CLAUDE.md</code> de la carpeta del curso, sección "Roles"</div></div>
+
+<div class="qa"><div class="q" onclick="toggle(this)">¿Por qué no tienen Daily?</div>
+<div class="a">Descartada explícitamente: dos personas que comparten tres clases semanales no sostienen una reunión diaria formal. La reemplazamos con un check-in escrito (ayer/hoy/bloqueos). Un evento declarado y no cumplido resta más que uno nunca prometido.</div>
+<div class="file">📄 <code>docs/metodologia/enfoque-metodologico.md</code></div></div>
+
+<div class="qa"><div class="q" onclick="toggle(this)">¿Qué herramienta de gestión usan?</div>
+<div class="a">Jira, proyecto SCRUM. 5 épicas, 15 historias con subtasks, 7 RNF como Task. GitHub for Jira vincula automáticamente la key SCRUM-N de los commits con el issue. Sprint Planning cerrado el 17-sep, 9 sprints planeados.</div>
+<div class="file">📄 <code>docs/guia-jira-fusaroute.md</code></div></div>
+
+</div>
+
+<!-- ===================== PREGUNTAS TRAMPA ===================== -->
+<h2 onclick="toggleSection(this)">Preguntas trampa (5)</h2>
+<div class="section">
+
+<div class="qa trap"><div class="q" onclick="toggle(this)">⚠️ ¿Usan microservicios?</div>
+<div class="a"><strong>No.</strong> Es un monolito modular con arquitectura hexagonal. Para un equipo de dos, en su primer proyecto con Spring, microservicios agregarían complejidad operacional (red, despliegue, debugging) sin beneficio real. Si escala, la separación por puertos facilitaría extraer un módulo.</div></div>
+
+<div class="qa trap"><div class="q" onclick="toggle(this)">⚠️ ¿Qué pasa si Supabase cierra o deja de dar el tier gratis?</div>
+<div class="a">Nos llevamos el esquema (los .sql de Flyway son nuestros) a cualquier PostgreSQL: local, RDS, otro proveedor. El backend no depende de nada propio de Supabase — ni Auth, ni Storage, ni Realtime. Es una decisión de arquitectura documentada.</div></div>
+
+<div class="qa trap"><div class="q" onclick="toggle(this)">⚠️ ¿Por qué no usan Docker?</div>
+<div class="a">Todavía no. El despliegue actual es directo (Render monta el Dockerfile que genera). Para desarrollo, cada integrante corre el backend con Maven y el frontend con npm — no hay configuración compleja que Docker resolvería hoy. Si el equipo crece o los ambientes divergen, se agrega.</div></div>
+
+<div class="qa trap"><div class="q" onclick="toggle(this)">⚠️ ¿Tienen tests de integración end-to-end?</div>
+<div class="a">Sí, pero no automatizados con Selenium/Playwright todavía. Hoy: la colección de Postman corre de punta a punta (registro → login → perfil → errores) como smoke test automatizable. Los tests unitarios cubren dominio, application y componentes Angular. E2E con Playwright está en el backlog.</div></div>
+
+<div class="qa trap"><div class="q" onclick="toggle(this)">⚠️ ¿Cómo saben que su código no es solo de Claude?</div>
+<div class="a">Cada sprint, cada integrante resuelve al menos una subtask con sus propias manos — el commit no lleva Co-Authored-By: Claude. Además, ambos sabemos explicar cualquier archivo del proyecto porque los PR se revisan cruzados. Pregúntenle a cualquiera de los dos sobre cualquier línea.</div>
+<div class="file">📄 <code>CLAUDE.md</code> — "Bloque de ejecución manual"</div></div>
+
+</div>
+
+<!-- ===================== TOUR DEL CÓDIGO ===================== -->
+<h2 onclick="toggleSection(this)">Tour del código: 10 archivos por persona</h2>
+<div class="section">
+
+<h3><span class="badge badge-s">Santiago</span> — Backend (5) + Frontend (5)</h3>
+<ol>
+<li><code>SecurityConfig.java</code> — CORS, JWT decoder, rutas públicas, bearerTokenResolver</li>
+<li><code>AuthController.java</code> — register y login, DTOs</li>
+<li><code>RegisterUserService.java</code> — caso de uso, validaciones, hasheo</li>
+<li><code>UserPersistenceAdapter.java</code> — adaptador JPA, mapper dominio↔entity</li>
+<li><code>V1__create_users_table.sql</code> — primera migración de Flyway</li>
+<li><code>auth.interceptor.ts</code> — adjuntar token, excepciones, manejo de 401</li>
+<li><code>auth.service.ts</code> — signals, computed isLoggedIn, localStorage</li>
+<li><code>routes-list.component.ts</code> — catálogo público, llamada a RouteService</li>
+<li><code>app.routes.ts</code> — rutas, lazy loading, authGuard</li>
+<li><code>user.service.ts</code> — cliente HTTP para perfil</li>
+</ol>
+
+<h3><span class="badge badge-a">Angélica</span> — Backend (5) + Frontend (5)</h3>
+<ol>
+<li><code>UserController.java</code> — GET/PUT /me, PUT /password, @AuthenticationPrincipal</li>
+<li><code>UpdateProfileService.java</code> — caso de uso, validaciones, 409</li>
+<li><code>User.java</code> (domain/model) — register, updateProfile, withPasswordHash, inmutable</li>
+<li><code>UserRepositoryPort.java</code> — interfaz en el dominio (port/out)</li>
+<li><code>GlobalExceptionHandler.java</code> — ProblemDetail, extends ResponseEntityExceptionHandler</li>
+<li><code>profile.component.ts</code> — dos formularios, errores por campo, toast</li>
+<li><code>register.component.ts</code> — signals, fieldErrors, toast, redirect</li>
+<li><code>header.component.ts</code> — wordmark, isLoggedIn, currentUser, logout</li>
+<li><code>login.component.ts</code> — signals, errorMessage, queryParam email</li>
+<li><code>toast.service.ts</code> + <code>toast.component.ts</code> — signal, auto-dismiss</li>
+</ol>
+
+</div>
+
+<script>
+function toggle(el) {
+  el.nextElementSibling.classList.toggle('show');
+  updateCounter();
+}
+function toggleSection(h2) {
+  h2.classList.toggle('open');
+  const sec = h2.nextElementSibling;
+  sec.style.display = sec.style.display === 'none' ? 'block' : 'none';
+}
+function showAll() {
+  document.querySelectorAll('.qa .a').forEach(a => a.classList.add('show'));
+  updateCounter();
+}
+function hideAll() {
+  document.querySelectorAll('.qa .a').forEach(a => a.classList.remove('show'));
+  updateCounter();
+}
+function randomQ() {
+  hideAll();
+  const qas = Array.from(document.querySelectorAll('.qa'));
+  const idx = Math.floor(Math.random() * qas.length);
+  qas[idx].scrollIntoView({ behavior: 'smooth', block: 'center' });
+  qas[idx].querySelector('.q').style.background = '#fff3e0';
+  setTimeout(() => qas[idx].querySelector('.q').style.background = '', 3000);
+}
+function toggleCross() {
+  const label = document.getElementById('modeLabel');
+  if (!label.dataset.mode || label.dataset.mode === 'normal') {
+    label.dataset.mode = 'cross';
+    label.textContent = '🔄 Modo cruzado: Santiago practica frontend, Angélica backend';
+  } else {
+    label.dataset.mode = 'normal';
+    label.textContent = '';
+  }
+}
+function updateCounter() {
+  const total = document.querySelectorAll('.qa').length;
+  const shown = document.querySelectorAll('.qa .a.show').length;
+  document.getElementById('counter').textContent = `${shown}/${total}`;
+}
+// Inicializar secciones abiertas
+document.querySelectorAll('.section').forEach(s => s.style.display = 'block');
+document.querySelectorAll('h2').forEach(h => h.classList.add('open'));
+updateCounter();
+</script>
+</body>
+</html>

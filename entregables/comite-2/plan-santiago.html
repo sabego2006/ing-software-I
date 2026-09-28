@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Plan Santiago — Comité 2 · FusaRoute</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root { --ink: #0E2A47; --paper: #F5F0E6; --bus: #E8743B; --route: #2A6F4A; --blue: #2980B9; --accent: var(--blue); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --ink: #E8E0D0; --paper: #1A2A3A; } }
+:root[data-theme="dark"] { --ink: #E8E0D0; --paper: #1A2A3A; }
+*, *::before, *::after { box-sizing: border-box; }
+body { font-family: 'Inter', system-ui, sans-serif; margin: 0; padding: 1rem; background: var(--paper); color: var(--ink); line-height: 1.6; max-width: 800px; margin: 0 auto; }
+h1 { font-size: 1.6rem; border-bottom: 3px solid var(--accent); padding-bottom: .4rem; }
+h2 { color: var(--accent); font-size: 1.15rem; margin-top: 1.8rem; border-left: 4px solid var(--accent); padding-left: .6rem; }
+h3 { font-size: 1rem; margin-top: 1.2rem; }
+code { font-family: 'JetBrains Mono', monospace; font-size: .85em; background: #e8e0d0; padding: 2px 6px; border-radius: 3px; }
+@media (prefers-color-scheme: dark) { code { background: #2a3a4a; } }
+.time-block { background: #fff; border: 1px solid #ddd; border-radius: 8px; padding: 1rem 1.2rem; margin: .8rem 0; }
+@media (prefers-color-scheme: dark) { .time-block { background: #1e2e3e; border-color: #3a4a5a; } }
+.time-label { font-family: 'JetBrains Mono', monospace; font-size: .85rem; color: var(--accent); font-weight: 700; }
+.task-list { list-style: none; padding: 0; }
+.task-list li { padding: .3rem 0; padding-left: 1.5rem; position: relative; }
+.task-list li::before { content: "☐"; position: absolute; left: 0; font-size: 1.1em; }
+.warn { background: #fff3e0; border-left: 4px solid var(--bus); padding: .5rem 1rem; margin: .5rem 0; font-size: .9rem; border-radius: 0 6px 6px 0; }
+@media (prefers-color-scheme: dark) { .warn { background: #3a2a1a; } }
+.warn::before { content: "⚠️ "; }
+.study-file { font-family: 'JetBrains Mono', monospace; font-size: .85em; color: var(--route); }
+.role-badge { display: inline-block; font-size: .75rem; padding: 2px 10px; border-radius: 20px; font-weight: 600; color: #fff; background: var(--blue); margin-left: .3rem; }
+table { width: 100%; border-collapse: collapse; margin: .8rem 0; font-size: .9rem; }
+th { background: var(--ink); color: var(--paper); text-align: left; padding: 6px 10px; }
+td { padding: 6px 10px; border-bottom: 1px solid #ccc; vertical-align: top; }
+tr:nth-child(even) td { background: rgba(0,0,0,.03); }
+@media print { body { max-width: 100%; padding: 0; } .time-block { break-inside: avoid; } }
+</style>
+</head>
+<body>
+
+<h1>🗂️ Plan de Santiago <span class="role-badge">Líder Técnico · Scrum Master</span></h1>
+<p>Comité 2 — lunes 28 de septiembre de 2026, 2:00 pm.<br>
+<strong>Rol en la demo:</strong> presenta arquitectura, backend, Postman, DBeaver y el interceptor de Angular.</p>
+
+<h2>Fase 1 · Mientras Claude programa <span class="time-label">00:35 → 01:40</span></h2>
+
+<div class="time-block">
+<h3>1. Verificar el <code>.env</code> del backend</h3>
+<ul class="task-list">
+  <li>Abrir <code>.env</code> en <code>C:/Users/Santiago/dev/FusaRoute/FusaRoute-BACKEND/</code></li>
+  <li><code>JWT_SECRET</code> = salida de <code>openssl rand -base64 32</code> (si ya tiene uno válido, dejarlo)</li>
+  <li>Borrar la línea <code>CORS_ALLOWED_ORIGINS=</code> si está vacía (vacío anula el default)</li>
+  <li><code>DB_USERNAME</code> debe ser <code>fusaroute_dev.&lt;ref&gt;</code>, <strong>nunca</strong> <code>postgres</code></li>
+  <li>Verificar que <code>DB_URL</code> apunte al proyecto Supabase <code>fusaroute-dev</code></li>
+</ul>
+<div class="warn">Si <code>DB_USERNAME=postgres</code>, corregirlo ya. Es una violación de la regla "nunca el superusuario".</div>
+</div>
+
+<div class="time-block">
+<h3>2. DBeaver</h3>
+<ul class="task-list">
+  <li>Conectar al esquema <code>fusaroute</code> del proyecto Supabase <code>fusaroute-dev</code></li>
+  <li>Guardar estas dos consultas como favoritas:
+    <ol>
+      <li><code>SELECT id, name, email, phone, password_hash FROM fusaroute.users WHERE email LIKE 'gladys%';</code></li>
+      <li><code>SELECT r.name, r.type, COUNT(n.id) AS barrios FROM fusaroute.routes r LEFT JOIN fusaroute.route_neighborhoods rn ON r.id = rn.route_id LEFT JOIN fusaroute.neighborhoods n ON rn.neighborhood_id = n.id GROUP BY r.id ORDER BY r.name;</code></li>
+    </ol>
+  </li>
+  <li>Verificar que la conexión funciona y que las tablas existen</li>
+</ul>
+</div>
+
+<div class="time-block">
+<h3>3. Estudio guiado — Recorrido por el backend</h3>
+<p>Leer estos archivos <strong>en este orden</strong> y responder las preguntas en voz alta:</p>
+
+<table>
+<tr><th>#</th><th>Archivo</th><th>Pregunta a responder</th></tr>
+<tr>
+  <td>1</td>
+  <td class="study-file">infrastructure/config/SecurityConfig.java</td>
+  <td>¿Cuáles endpoints son públicos y cuáles requieren token? ¿Dónde se configura BCrypt?</td>
+</tr>
+<tr>
+  <td>2</td>
+  <td class="study-file">adapter/in/web/AuthController.java</td>
+  <td>¿Qué recibe el POST de registro? ¿Y el de login? ¿Qué devuelve cada uno?</td>
+</tr>
+<tr>
+  <td>3</td>
+  <td class="study-file">application/usecase/RegisterUserService.java</td>
+  <td>¿Cómo valida el nombre, el correo y la contraseña? ¿Dónde se hashea la contraseña?</td>
+</tr>
+<tr>
+  <td>4</td>
+  <td class="study-file">adapter/out/persistence/UserPersistenceAdapter.java</td>
+  <td>¿Por qué hay un mapper entre el dominio y la entidad JPA? ¿Qué pasa si cambio la base de datos?</td>
+</tr>
+<tr>
+  <td>5</td>
+  <td class="study-file">db/migration/V1__create_schema.sql</td>
+  <td>¿Por qué Flyway y no <code>ddl-auto=update</code>? ¿Qué pasa si edito una migración ya aplicada?</td>
+</tr>
+<tr>
+  <td>6</td>
+  <td class="study-file">FusaRoute-FRONTEND/src/app/core/interceptors/auth.interceptor.ts</td>
+  <td>¿Por qué no adjunta el token en rutas de <code>/api/auth/</code>? ¿Qué pasa con un 401?</td>
+</tr>
+</table>
+
+<div class="warn">Si no puedes contestar alguna sin mirar el archivo, marca esa pregunta para el ensayo.</div>
+</div>
+
+<h2>Fase 2 · Después del merge <span class="time-label">01:45 → 02:30</span></h2>
+
+<div class="time-block">
+<h3>4. Levantar todo y verificar</h3>
+<ul class="task-list">
+  <li><code>cd C:/Users/Santiago/dev/FusaRoute/FusaRoute-BACKEND</code></li>
+  <li><code>git pull origin main</code> (después de que Angélica mergee los PR)</li>
+  <li><code>mvn spring-boot:run -Dspring-boot.run.profiles=dev</code></li>
+  <li>Verificar: <code>GET http://localhost:8080/health</code> → <code>{"status":"UP"}</code></li>
+  <li><code>cd C:/Users/Santiago/dev/FusaRoute/FusaRoute-FRONTEND</code></li>
+  <li><code>git pull origin main</code></li>
+  <li><code>npm ci</code> (debe funcionar limpio con el <code>.npmrc</code>)</li>
+  <li><code>npm start</code> → abrir <code>http://localhost:4200</code></li>
+</ul>
+</div>
+
+<div class="time-block">
+<h3>5. Postman: importar y correr</h3>
+<ul class="task-list">
+  <li>Importar <code>docs/postman/FusaRoute.postman_collection.json</code></li>
+  <li>Importar <code>docs/postman/FusaRoute-DEV.postman_environment.json</code></li>
+  <li>Seleccionar el environment <strong>FusaRoute-DEV</strong></li>
+  <li>Abrir el <strong>Collection Runner</strong></li>
+  <li>Run Collection → <strong>todo en verde</strong></li>
+</ul>
+<div class="warn">Si algún test falla, anotar cuál y reportar en la sesión de Claude para un hotfix.</div>
+</div>
+
+<div class="time-block">
+<h3>6. Recorrido completo en la app</h3>
+<ul class="task-list">
+  <li>Ir a <code>/rutas</code> — verificar el catálogo sin cuenta</li>
+  <li>Hacer clic en una ruta intermunicipal → tabla de tarifas</li>
+  <li>Ir a <code>/registro</code> → registrar a "Doña Gladys" con datos válidos</li>
+  <li>Mostrar el 409 (correo duplicado); el 400 de datos inválidos se muestra en Postman</li>
+  <li>Registrar con datos buenos → toast verde → redirige a login con correo</li>
+  <li>Ir a <code>/login</code> → contraseña mala → error visible, luego bien → header cambia</li>
+  <li>Ir a <code>/perfil</code> → actualizar teléfono → toast verde</li>
+  <li>Verificar en DBeaver: <code>SELECT ... FROM fusaroute.users WHERE email LIKE 'gladys%';</code></li>
+  <li>Confirmar que el <code>password_hash</code> empieza por <code>$2a$12$</code></li>
+</ul>
+</div>
+
+<div class="time-block">
+<h3>7. Grabar el video de respaldo</h3>
+<ul class="task-list">
+  <li><strong>Win+Alt+R</strong> para grabar (Xbox Game Bar)</li>
+  <li>Hacer el recorrido completo (~4 min): catálogo → registro → login → perfil → DBeaver</li>
+  <li>Parar la grabación</li>
+  <li>Verificar que se reproduzca bien</li>
+</ul>
+<div class="warn">Este video es el plan B si algo falla en vivo. No es opcional.</div>
+</div>
+
+<h2>Fase 3 · Ensayo <span class="time-label">02:30 → 03:00</span></h2>
+
+<div class="time-block">
+<h3>8. Ensayo 1 — por llamada con Angélica</h3>
+<ul class="task-list">
+  <li>Abrir el deck en Chromium (<code>presentacion-comite2.html</code>)</li>
+  <li>Cronometrar cada slide (el deck tiene cronómetro integrado)</li>
+  <li>Meta: ≤ 13 minutos en total</li>
+  <li>Practicar los cambios de mano (tú → Angélica → tú)</li>
+  <li>Si se pasa de 13 min, recortar las frases clave</li>
+</ul>
+</div>
+
+<h2>Fase 4 · Clase <span class="time-label">07:00 → 11:00</span></h2>
+
+<div class="time-block">
+<h3>9. Flashcards de frontend (modo cruzado)</h3>
+<p>Abre <code>estudio-comite2.html</code> en el celular y practica las preguntas de <strong>Angular / Signals / Interceptor</strong> y <strong>Calidad ISO 25010</strong>. El modo cruzado te toca las preguntas del área que <em>no</em> es la tuya.</p>
+<p>Preguntas clave que debes poder contestar sin pensar:</p>
+<ul class="task-list">
+  <li>¿Por qué Angular 21 es zoneless y qué cambia con signals?</li>
+  <li>¿Qué hace el interceptor cuando recibe un 401 en <code>/api/auth/login</code>?</li>
+  <li>¿Dónde vive la validación de formulario y dónde la validación de negocio?</li>
+  <li>¿Por qué no usan Supabase Auth?</li>
+  <li>¿Qué paquete toca si cambian de PostgreSQL a MySQL?</li>
+</ul>
+</div>
+
+<h2>Fase 5 · Pre-comité <span class="time-label">11:00 → 13:00</span></h2>
+
+<div class="time-block">
+<h3>10. Pull final y setup</h3>
+<ul class="task-list">
+  <li><code>git pull origin main</code> en los dos repos</li>
+  <li>Abrir el dashboard de Supabase → confirmar que <code>fusaroute-dev</code> está <strong>ACTIVE</strong> (no pausado)</li>
+  <li>Si está pausado: botón <strong>"Restore project"</strong>, esperar ~30 s</li>
+</ul>
+</div>
+
+<div class="time-block">
+<h3>11. Ensayo 2 — completo en tu portátil</h3>
+<ul class="task-list">
+  <li>Recorrer las 15 slides con cronómetro</li>
+  <li>Abrir Postman, correr la colección, verificar todo verde</li>
+  <li>Hacer el recorrido de la app (Doña Gladys)</li>
+  <li>Abrir DBeaver, correr la consulta de Gladys</li>
+</ul>
+</div>
+
+<div class="time-block">
+<h3>12. Ensayo 3 — solo la demo + 10 preguntas cruzadas</h3>
+<ul class="task-list">
+  <li>Demo sola (sin slides), cronometrada — meta: ≤ 7 min</li>
+  <li>Angélica te hace 5 preguntas de backend (modo cruzado inverso)</li>
+  <li>Tú le haces 5 preguntas de frontend</li>
+</ul>
+</div>
+
+<div class="time-block">
+<h3>13. Setup final — dejar las ventanas listas</h3>
+<p>En este orden, de izquierda a derecha:</p>
+<ol>
+  <li>Deck (<code>presentacion-comite2.html</code>) en Chromium, en la slide 1</li>
+  <li>Postman con la colección importada, Collection Runner listo</li>
+  <li>Navegador en <code>http://localhost:4200/rutas</code> con DevTools abierto (pestaña Network)</li>
+  <li>DBeaver conectado, con las 2 consultas guardadas</li>
+  <li>VS Code con el proyecto backend abierto</li>
+</ol>
+<ul class="task-list">
+  <li>Limpiar localStorage: <code>localStorage.clear()</code> en consola del navegador</li>
+  <li>Zoom al 125%</li>
+  <li>Notificaciones del sistema en silencio</li>
+  <li>Cargador conectado</li>
+  <li>Hotspot del celular listo (por si la red de la universidad falla)</li>
+</ul>
+</div>
+
+<h2>Qué presentas tú</h2>
+<table>
+<tr><th>Slide(s)</th><th>Tema</th><th>Duración</th></tr>
+<tr><td>1</td><td>Portada — presentar al equipo</td><td>30 s</td></tr>
+<tr><td>4–6</td><td>Arquitectura general, drawio, capas hexagonales</td><td>1:30</td></tr>
+<tr><td>8</td><td>Frontend: interceptor y signals</td><td>1:00</td></tr>
+<tr><td>9</td><td>▶ Postman — Collection Runner</td><td>1:30</td></tr>
+<tr><td>11</td><td>▶ DBeaver — fila de Gladys, hash BCrypt</td><td>1:00</td></tr>
+<tr><td>12</td><td>Calidad: CI, ArchUnit, JaCoCo, OWASP</td><td>0:45</td></tr>
+<tr><td>13</td><td>Problemas encontrados — ser honesto</td><td>0:45</td></tr>
+<tr><td>15</td><td>Cierre — "Pregúntenle a cualquiera de los dos"</td><td>0:15</td></tr>
+</table>
+
+<h2>Tu frase si no sabes algo</h2>
+<p style="font-size: 1.1rem; color: var(--route); font-weight: 600; text-align: center; padding: 1rem; border: 2px dashed var(--route); border-radius: 8px;">
+"No lo sé todavía, pero lo investigamos y lo traemos para el siguiente comité."
+</p>
+
+</body>
+</html>
