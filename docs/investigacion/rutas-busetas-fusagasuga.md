@@ -117,6 +117,43 @@ Salen de las réplicas y están definidas en [`letreros-estilos.json`](letreros-
 - **`TABLA_FRANJAS`**: una franja por línea (`#FFFF00`, `#C0C0C0`, `#008000`, `#FF0000` o blanco),
   serif negrita, borde negro. Se usa una para "subiendo" y otra para "bajando".
 
+### Evidencia de campo (27-sep-2026, SCRUM-175)
+
+Santiago fotografió letreros en un recorrido de ~35 min. Son **41 fotos** (los issues decían 45), guardadas
+en `docs/fotos-letreros/`. Se leyeron una por una a resolución completa y quedó así: **22 modeladas, 9 por
+revisar, 5 duplicadas y 5 ilegibles**, que dan **29 letreros distintos**. La bitácora está en
+[`letreros-procesados.json`](letreros-procesados.json), los letreros en `letreros-estilos.json` → `campo`, y
+cada uno se ve junto a su foto en [`letreros-replicas.html`](letreros-replicas.html). El flujo se repite con
+`docs/investigacion/scripts/generar_replicas_letreros.py`.
+
+Lo que cambia respecto a lo que decía este documento:
+
+- **Sí hay placas legibles de Tierra Grata y de Fusacatán**, y también de Cootransfusa y Cootranspeover. La
+  frase anterior ("de Tierra Grata y Fusacatán no hay placas legibles") ya no vale.
+- **Casi todos los letreros son placas "de arco"** con el código de ruta arriba (`P-10`, `P-12`, `P-15`,
+  `P-20`, `03`, `18`, `74`, `100`, `116`). Los colores varían mucho por empresa y por placa: verde oscuro,
+  blanco, amarillo, rojo. El naranja de `PLACA_ARCO` solo se parece a la placa de la ruta con código 100;
+  `PLACA_ARCO` sirve como forma, y el color hay que guardarlo por placa (ya lo hace `campo`).
+- **Camino Real – La Pampa queda confirmada con foto**: las franjas y su orden coinciden con las tablas
+  SUBIENDO y BAJANDO del gráfico de 2020, pero con contorno en arco y letra **sin serifa**, no serif. Las
+  tablas no son un rectángulo: hay que permitir el contorno en arco.
+- **Maíz Amarillo** (P-15: U.Hospital · Maíz Amarillo · Comfenalco · Ciudad Ebenezer) y **Llano Largo – La
+  Clarita** (código 100) están confirmadas con foto. La segunda sigue idéntica a la foto de 2022.
+- **Placas nuevas en el catálogo**: `P-10` (U.Hospital · Batallón · Llano Largo), `P-12` (Cra. 6 – Cll. 22 ·
+  Hospital · Cooviprof · Villa Patricia), `P-20` (Centro · Colsubsidio · Calle 4 · Cedritos · San Antonio),
+  Palacios · Trinidad · Guavio, Chinauta · Boquerón (`74`), Chinauta · Escuela (`03`) y Arbeláez. No las
+  cruzamos contra las rutas ya sembradas, y las fotos **no muestran el orden de recorrido ni los sentidos**.
+- **Una placa trae pintada una tarifa vieja** ("$2. 00"); la oficial de 2026 es $2.600. No hay que fiarse de
+  lo que dice el letrero para la tarifa.
+- Las placas son **intercambiables y se combinan** (cada buseta lleva 2 a 4: la de ruta más "U.HOSPITAL /
+  ÉXITO", "CENTRO / GALERÍA" o "CENTRO / AV. LAS PALMAS"). El modelo de datos (§6) debe permitir placas
+  compartidas entre rutas, no una por ruta.
+
+Límites que hay que tener presentes: los **colores están estimados a ojo**, no tomados con gotero; los
+logos (Colsubsidio, Shell) se reproducen como texto; y en los 9 casos "por revisar" falta alguna línea.
+Con 29 letreros no se llega a la meta de "más de 35 rutas" del issue SCRUM-173: varias fotos son de la
+misma ruta, y muchos letreros comparten placas.
+
 ## 6. Modelo de datos propuesto (para Flyway)
 
 Es una propuesta para discutir con Angélica; no está en el backlog todavía.
