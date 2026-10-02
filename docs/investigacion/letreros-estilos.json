@@ -1,5 +1,5 @@
 {
-  "version": "2026-09-27",
+  "version": "2026-10-01",
   "nota": "Estilos de letreros de busetas de Fusagasugá. Colores muestreados de fotos públicas o copiados de gráficos oficiales; las fuentes son sustitutas (la original no es identificable). Ver rutas-busetas-fusagasuga.md §5.",
   "fonts": {
     "placa-pesada": {
@@ -114,6 +114,892 @@
             { "text": "LA PAMPA", "color": "blanco-texto-rojo" },
             { "text": "LLANO GRANDE", "color": "rojo" }
           ]
+        }
+      ]
+    }
+  ],
+  "campoNota": "Letreros leídos de las fotos propias del 2026-09-27 (SCRUM-175). Los colores (bg/fg) están estimados a ojo desde el recorte, no muestreados con gotero. 'contorno: arco' = la tabla de franjas tiene la parte superior en arco, a diferencia de la tabla rectangular del gráfico de 2020. Plantillas existentes sin cambios.",
+  "campo": [
+    {
+      "id": "LC-001",
+      "ruta": null,
+      "fuente": "foto propia",
+      "fecha": "2026-09-27",
+      "fotos": [ "20260927_145613.jpg" ],
+      "nota": "Tono apagado por el vidrio; el color real puede ser más claro.",
+      "placas": [
+        {
+          "template": "PLACA_ARCO",
+          "bg": "#6F7F72",
+          "fg": "#F2F2EE",
+          "codigo": "P-15",
+          "lines": [
+            { "text": "CENTRO" },
+            { "text": "CALLE 3" },
+            { "text": "OLAYA" }
+          ],
+          "position": 1
+        }
+      ]
+    },
+    {
+      "id": "LC-002",
+      "ruta": null,
+      "fuente": "foto propia",
+      "fecha": "2026-09-27",
+      "fotos": [ "20260927_145627.jpg" ],
+      "placas": [
+        {
+          "template": "PLACA_RECT",
+          "bg": "#FFFFFF",
+          "fg": "#1E1E1E",
+          "border": "#555555",
+          "lines": [
+            { "text": "CENTRO", "fg": "#1F5A3F" },
+            { "text": "GALERIA", "fg": "#1F5A3F" }
+          ],
+          "position": 1
+        },
+        {
+          "template": "PLACA_ARCO",
+          "bg": "#E6F0E6",
+          "fg": "#1F5A3F",
+          "lines": [
+            { "text": "CENTRO" },
+            { "text": "GALERIA" },
+            { "text": "TERMINAL" }
+          ],
+          "position": 2
+        },
+        {
+          "template": "PLACA_RECT",
+          "bg": "#FFFFFF",
+          "fg": "#1E1E1E",
+          "lines": [
+            { "text": "U.HOSPITAL", "bg": "#FFFFFF", "fg": "#6B2A2A" },
+            { "text": "EXITO", "bg": "#E9E36A", "fg": "#2E5A2E" }
+          ],
+          "position": 3
+        }
+      ]
+    },
+    {
+      "id": "LC-003",
+      "ruta": null,
+      "fuente": "foto propia",
+      "fecha": "2026-09-27",
+      "fotos": [ "20260927_145634.jpg" ],
+      "nota": "El código de arriba ('P-1?') no se lee. 'Colsubsidio' es logo; se reproduce como texto.",
+      "placas": [
+        {
+          "template": "PLACA_ARCO",
+          "bg": "#CFEDE6",
+          "fg": "#12332B",
+          "lines": [
+            { "text": "NARIÑO PEKIN" },
+            { "text": "STA. Mª DE LOS ANGELES" },
+            { "text": "ALTOS DE PEKIN" }
+          ],
+          "position": 1
+        },
+        {
+          "template": "PLACA_RECT",
+          "bg": "#FFFFFF",
+          "fg": "#1E1E1E",
+          "lines": [
+            { "text": "CENTRO" },
+            { "text": "Colsubsidio", "fg": "#3A4A8A" }
+          ],
+          "position": 2
+        }
+      ]
+    },
+    {
+      "id": "LC-004",
+      "ruta": null,
+      "fuente": "foto propia",
+      "fecha": "2026-09-27",
+      "fotos": [ "20260927_145643.jpg" ],
+      "placas": [
+        {
+          "template": "PLACA_ARCO",
+          "bg": "#D8EDE4",
+          "fg": "#1A2B22",
+          "lines": [
+            { "text": "CANEY" },
+            { "text": "GALERIA" },
+            { "text": "CENTRO" },
+            { "text": "Colsubsidio", "fg": "#8A8A30" },
+            { "text": "EL EDEN" }
+          ],
+          "position": 1
+        },
+        {
+          "template": "PLACA_RECT",
+          "bg": "#F4F4F0",
+          "fg": "#1E1E1E",
+          "lines": [
+            { "text": "EXITO" },
+            { "text": "INDIO" }
+          ],
+          "position": 2
+        }
+      ]
+    },
+    {
+      "id": "LC-005",
+      "ruta": null,
+      "fuente": "foto propia",
+      "fecha": "2026-09-27",
+      "fotos": [ "20260927_150110.jpg" ],
+      "nota": "Fondo rojo con franja azul bajo 'Colsubsidio': los colores son una estimación. No encaja del todo con PLACA_ARCO.",
+      "placas": [
+        {
+          "template": "PLACA_ARCO",
+          "bg": "#C23B30",
+          "fg": "#FFFFFF",
+          "codigo": "116",
+          "lines": [
+            { "text": "LA PALMA" },
+            { "text": "Colsubsidio", "fg": "#F2C230" },
+            { "text": "SAN ANTONIO" },
+            { "text": "SANTANDER" }
+          ],
+          "position": 1
+        },
+        {
+          "template": "PLACA_RECT",
+          "bg": "#1E5B3A",
+          "fg": "#FFFFFF",
+          "lines": [
+            { "text": "CENTRO" }
+          ],
+          "position": 2
+        }
+      ]
+    },
+    {
+      "id": "LC-006",
+      "ruta": null,
+      "fuente": "foto propia",
+      "fecha": "2026-09-27",
+      "fotos": [ "20260927_150700.jpg" ],
+      "nota": "Buseta de Tierra Grata.",
+      "placas": [
+        {
+          "template": "PLACA_RECT",
+          "bg": "#FFFFFF",
+          "fg": "#1E1E1E",
+          "lines": [
+            { "text": "HOSPITAL", "fg": "#7A1F2A" },
+            { "text": "AV. LAS PALMAS", "fg": "#7A1F2A" }
+          ],
+          "position": 1
+        },
+        {
+          "template": "PLACA_ARCO",
+          "bg": "#F2E24A",
+          "fg": "#2B2B2B",
+          "lines": [
+            { "text": "FUSA" },
+            { "text": "CENTRO" }
+          ],
+          "position": 2
+        }
+      ]
+    },
+    {
+      "id": "LC-007",
+      "ruta": null,
+      "fuente": "foto propia",
+      "fecha": "2026-09-27",
+      "fotos": [ "20260927_150736.jpg" ],
+      "nota": "Código de arriba ilegible. Mismo destino que LC-001 pero con la línea 'Colsubsidio'.",
+      "placas": [
+        {
+          "template": "PLACA_ARCO",
+          "bg": "#2F6B55",
+          "fg": "#F2F2EE",
+          "lines": [
+            { "text": "CENTRO" },
+            { "text": "Colsubsidio", "fg": "#CFE8D8" },
+            { "text": "CALLE 3" },
+            { "text": "OLAYA" }
+          ],
+          "position": 1
+        },
+        {
+          "template": "PLACA_RECT",
+          "bg": "#F1F1EA",
+          "fg": "#1E1E1E",
+          "lines": [
+            { "text": "CENTRO" },
+            { "text": "AV. LAS PALMAS" }
+          ],
+          "position": 2
+        }
+      ]
+    },
+    {
+      "id": "LC-008",
+      "ruta": "Camino Real – La Pampa",
+      "rutaNota": "Mismas franjas y orden que la tabla SUBIENDO del gráfico oficial de 2020 (§5 del doc de investigación), pero con contorno en arco.",
+      "fuente": "foto propia",
+      "fecha": "2026-09-27",
+      "fotos": [ "20260927_150814.jpg" ],
+      "placas": [
+        {
+          "template": "TABLA_FRANJAS",
+          "direction": "SUBIENDO",
+          "contorno": "arco",
+          "lines": [
+            { "text": "EXITO", "bg": "#F0D84A", "fg": "#222222" },
+            { "text": "CALLE 22", "bg": "#BFE0DA", "fg": "#222222" },
+            { "text": "PRADOS DE ALTA GRACIA", "bg": "#F0D84A", "fg": "#7A4A1A", "relSize": 0.8 },
+            { "text": "CAMINO REAL", "bg": "#2F8F6A", "fg": "#E8F5EE" }
+          ],
+          "position": 1
+        },
+        {
+          "template": "PLACA_RECT",
+          "bg": "#FFFFFF",
+          "fg": "#1E1E1E",
+          "lines": [
+            { "text": "INDIO", "bg": "#BFE0DA", "fg": "#222222" },
+            { "text": "LA SHELL", "bg": "#E8A93A", "fg": "#8A2A1A" }
+          ],
+          "position": 2
+        },
+        {
+          "template": "PLACA_RECT",
+          "bg": "#FFFFFF",
+          "fg": "#1E1E1E",
+          "lines": [
+            { "text": "U.HOSPITAL", "bg": "#F4F1C8", "fg": "#7A2A2A" },
+            { "text": "EXITO", "bg": "#E0D048", "fg": "#444444" }
+          ],
+          "position": 3
+        }
+      ]
+    },
+    {
+      "id": "LC-009",
+      "ruta": null,
+      "fuente": "foto propia",
+      "fecha": "2026-09-27",
+      "fotos": [ "20260927_150929.jpg" ],
+      "nota": "Hay otra placa 'U.HOSPITAL / EXITO' tapada por la anterior; no se modela.",
+      "placas": [
+        {
+          "template": "PLACA_ARCO",
+          "bg": "#8FA3A8",
+          "fg": "#F4F4F4",
+          "lines": [
+            { "text": "FUSA" },
+            { "text": "CENTRO" }
+          ],
+          "position": 1
+        },
+        {
+          "template": "PLACA_RECT",
+          "bg": "#F1F1EA",
+          "fg": "#1E1E1E",
+          "lines": [
+            { "text": "CENTRO" },
+            { "text": "AV. LAS PALMAS" }
+          ],
+          "position": 2
+        }
+      ]
+    },
+    {
+      "id": "LC-010",
+      "ruta": null,
+      "fuente": "foto propia",
+      "fecha": "2026-09-27",
+      "fotos": [ "20260927_151012.jpg" ],
+      "nota": "En la primera placa falta una línea entre EXITO e INDIO que no se lee ('NUEVA U…').",
+      "placas": [
+        {
+          "template": "PLACA_ARCO",
+          "bg": "#E6D9A0",
+          "fg": "#1F4A3A",
+          "lines": [
+            { "text": "EXITO" },
+            { "text": "INDIO" },
+            { "text": "SHELL" }
+          ],
+          "position": 1
+        },
+        {
+          "template": "PLACA_RECT",
+          "bg": "#F2F5F5",
+          "fg": "#1F3A5A",
+          "lines": [
+            { "text": "CLINICA BELEN" },
+            { "text": "HOSPITAL" }
+          ],
+          "position": 2
+        },
+        {
+          "template": "PLACA_ARCO",
+          "bg": "#8E2F2F",
+          "fg": "#F2EEEE",
+          "lines": [
+            { "text": "CENTRO" },
+            { "text": "CARRERA 9" },
+            { "text": "GALERIA" }
+          ],
+          "position": 3
+        }
+      ]
+    },
+    {
+      "id": "LC-011",
+      "ruta": null,
+      "fuente": "foto propia",
+      "fecha": "2026-09-27",
+      "fotos": [ "20260927_151056.jpg" ],
+      "nota": "Solo se lee 'FUSA'; el resto de la placa lo tapa el limpiaparabrisas.",
+      "placas": [
+        {
+          "template": "PLACA_ARCO",
+          "bg": "#B03A3A",
+          "fg": "#F2F2F2",
+          "lines": [
+            { "text": "FUSA" }
+          ],
+          "position": 1
+        }
+      ]
+    },
+    {
+      "id": "LC-012",
+      "ruta": "Chinauta – Boquerón",
+      "rutaNota": "Nombre tomado literalmente del letrero.",
+      "fuente": "foto propia",
+      "fecha": "2026-09-27",
+      "fotos": [ "20260927_151133.jpg" ],
+      "placas": [
+        {
+          "template": "PLACA_ARCO",
+          "bg": "#B7CFC2",
+          "fg": "#E9E27A",
+          "codigo": "74",
+          "lines": [
+            { "text": "CHINAUTA" },
+            { "text": "BOQUERON" }
+          ],
+          "position": 1
+        }
+      ]
+    },
+    {
+      "id": "LC-013",
+      "ruta": "Chinauta – Escuela",
+      "rutaNota": "Nombre tomado literalmente del letrero. Buseta de Tierra Grata.",
+      "fuente": "foto propia",
+      "fecha": "2026-09-27",
+      "fotos": [ "20260927_151229.jpg" ],
+      "placas": [
+        {
+          "template": "PLACA_ARCO",
+          "bg": "#F2C230",
+          "fg": "#2A2A2A",
+          "codigo": "03",
+          "lines": [
+            { "text": "CHINAUTA" },
+            { "text": "ESCUELA" }
+          ],
+          "position": 1
+        }
+      ]
+    },
+    {
+      "id": "LC-014",
+      "ruta": null,
+      "fuente": "foto propia",
+      "fecha": "2026-09-27",
+      "fotos": [ "20260927_151512.jpg" ],
+      "nota": "Hay una placa en arco roja entre las dos que no se lee (empieza por 'U.HOSPITAL'); la línea bajo 'EL INDIO' tampoco.",
+      "placas": [
+        {
+          "template": "PLACA_RECT",
+          "bg": "#CDEBE6",
+          "fg": "#1F3A3A",
+          "lines": [
+            { "text": "EL INDIO" }
+          ],
+          "position": 1
+        },
+        {
+          "template": "PLACA_RECT",
+          "bg": "#FFFFFF",
+          "fg": "#1E1E1E",
+          "lines": [
+            { "text": "U.HOSPITAL", "bg": "#F4F1E0", "fg": "#333333" },
+            { "text": "EXITO", "bg": "#E8E060", "fg": "#333333" }
+          ],
+          "position": 2
+        }
+      ]
+    },
+    {
+      "id": "LC-015",
+      "ruta": "Camino Real – La Pampa",
+      "rutaNota": "Mismo orden y mismos tonos que la tabla BAJANDO del gráfico oficial de 2020; contorno en arco.",
+      "fuente": "foto propia",
+      "fecha": "2026-09-27",
+      "fotos": [ "20260927_151514.jpg" ],
+      "placas": [
+        {
+          "template": "PLACA_RECT",
+          "bg": "#FFFFFF",
+          "fg": "#1E1E1E",
+          "lines": [
+            { "text": "CENTRO", "fg": "#1F4A3A" },
+            { "text": "GALERIA", "fg": "#7A2A2A" }
+          ],
+          "position": 1
+        },
+        {
+          "template": "TABLA_FRANJAS",
+          "direction": "BAJANDO",
+          "contorno": "arco",
+          "lines": [
+            { "text": "HOSPITAL", "bg": "#FFFFFF", "fg": "#2F5A4A" },
+            { "text": "BATALLON", "bg": "#FFFFFF", "fg": "#2A2A2A" },
+            { "text": "LA PAMPA", "bg": "#FFFFFF", "fg": "#8A3A2A" },
+            { "text": "LLANO GRANDE", "bg": "#7A1F25", "fg": "#FFFFFF", "relSize": 0.85 }
+          ],
+          "position": 2
+        }
+      ]
+    },
+    {
+      "id": "LC-016",
+      "ruta": null,
+      "fuente": "foto propia",
+      "fecha": "2026-09-27",
+      "fotos": [ "20260927_151525.jpg" ],
+      "nota": "Foto tomada a través de matas y de lado. Hay una cuarta línea cortada ('GALAN…').",
+      "placas": [
+        {
+          "template": "PLACA_ARCO",
+          "bg": "#1E3A3A",
+          "fg": "#E8EEF0",
+          "lines": [
+            { "text": "CENTRO" },
+            { "text": "CEMENTERIO" },
+            { "text": "GAITAN" }
+          ],
+          "position": 1
+        }
+      ]
+    },
+    {
+      "id": "LC-017",
+      "ruta": null,
+      "fuente": "foto propia",
+      "fecha": "2026-09-27",
+      "fotos": [ "20260927_151529.jpg" ],
+      "nota": "Buseta de Cootranspeover. La placa blanca trae pintada una tarifa que se lee '$2. 00'; la oficial de 2026 es $2.600, así que es una placa vieja.",
+      "placas": [
+        {
+          "template": "PLACA_ARCO",
+          "bg": "#2D6A4E",
+          "fg": "#F2F2EE",
+          "lines": [
+            { "text": "PALACIOS" },
+            { "text": "TRINIDAD" },
+            { "text": "GUAVIO" }
+          ],
+          "position": 1
+        },
+        {
+          "template": "PLACA_ARCO",
+          "bg": "#F4F4F0",
+          "fg": "#1E1E1E",
+          "lines": [
+            { "text": "$2. 00", "fg": "#C0302A", "relSize": 0.5 },
+            { "text": "HOSPITAL" },
+            { "text": "INDIO" },
+            { "text": "LA SHELL" }
+          ],
+          "position": 2
+        }
+      ]
+    },
+    {
+      "id": "LC-018",
+      "ruta": "Maíz Amarillo",
+      "rutaNota": "Coincide con la ficha §2 (Ciudad Ebenezer · Maíz Amarillo).",
+      "fuente": "foto propia",
+      "fecha": "2026-09-27",
+      "fotos": [ "20260927_151631.jpg" ],
+      "nota": "En esta foto 'COMFENALCO' se lee 'CONFENALCO' por la resolución; se toma la grafía de la otra foto de la misma placa (20260927_151746).",
+      "placas": [
+        {
+          "template": "PLACA_ARCO",
+          "bg": "#E4F2EC",
+          "fg": "#2A2A2A",
+          "codigo": "P-15",
+          "lines": [
+            { "text": "U. HOSPITAL", "fg": "#222222" },
+            { "text": "MAIZ AMARILLO", "fg": "#2F6B55" },
+            { "text": "COMFENALCO", "fg": "#7A2A2A" },
+            { "text": "CIUDAD EBENEZER", "fg": "#2F6B55" }
+          ],
+          "position": 1
+        },
+        {
+          "template": "PLACA_RECT",
+          "bg": "#FFFFFF",
+          "fg": "#1E1E1E",
+          "lines": [
+            { "text": "BATALLON", "bg": "#CFEAE4", "fg": "#1E3A3A" },
+            { "text": "Shell", "bg": "#F0C030", "fg": "#6A2A1A" }
+          ],
+          "position": 2
+        },
+        {
+          "template": "PLACA_RECT",
+          "bg": "#FFFFFF",
+          "fg": "#1E1E1E",
+          "lines": [
+            { "text": "U.HOSPITAL", "bg": "#F4F1E0", "fg": "#333333" },
+            { "text": "éxito", "bg": "#E8C84A", "fg": "#333333", "transform": "lowercase" }
+          ],
+          "position": 3
+        }
+      ]
+    },
+    {
+      "id": "LC-019",
+      "ruta": null,
+      "fuente": "foto propia",
+      "fecha": "2026-09-27",
+      "fotos": [ "20260927_151642.jpg" ],
+      "placas": [
+        {
+          "template": "PLACA_ARCO",
+          "bg": "#F4F4F4",
+          "fg": "#2A2A2A",
+          "codigo": "P-12",
+          "lines": [
+            { "text": "CRA. 6 - CLL. 22" },
+            { "text": "HOSPITAL" },
+            { "text": "COOVIPROF" },
+            { "text": "VILLA PATRICIA" }
+          ],
+          "position": 1
+        }
+      ]
+    },
+    {
+      "id": "LC-020",
+      "ruta": null,
+      "fuente": "foto propia",
+      "fecha": "2026-09-27",
+      "fotos": [ "20260927_151720.jpg" ],
+      "nota": "Mismo código P-12 que LC-019 pero la primera línea dice 'CRA. 8 HOSPITAL'.",
+      "placas": [
+        {
+          "template": "PLACA_ARCO",
+          "bg": "#E6F1EA",
+          "fg": "#2A2A2A",
+          "codigo": "P-12",
+          "lines": [
+            { "text": "CRA. 8 HOSPITAL" },
+            { "text": "COOVIPROF" },
+            { "text": "VILLA PATRICIA" }
+          ],
+          "position": 1
+        },
+        {
+          "template": "PLACA_RECT",
+          "bg": "#FFFFFF",
+          "fg": "#1E1E1E",
+          "lines": [
+            { "text": "U.HOSPITAL", "bg": "#F4F1E0", "fg": "#222222" },
+            { "text": "EXITO", "bg": "#E8C020", "fg": "#333333" }
+          ],
+          "position": 2
+        }
+      ]
+    },
+    {
+      "id": "LC-021",
+      "ruta": "Camino Real – La Pampa",
+      "rutaNota": "Igual que LC-015 pero la primera línea dice 'U. HOSPITAL'. Buseta de Tierra Grata.",
+      "fuente": "foto propia",
+      "fecha": "2026-09-27",
+      "fotos": [ "20260927_151727.jpg" ],
+      "placas": [
+        {
+          "template": "TABLA_FRANJAS",
+          "direction": "BAJANDO",
+          "contorno": "arco",
+          "lines": [
+            { "text": "U. HOSPITAL", "bg": "#E6F2EE", "fg": "#2F5A4A" },
+            { "text": "BATALLON", "bg": "#E6F2EE", "fg": "#2A2A2A" },
+            { "text": "LA PAMPA", "bg": "#E6F2EE", "fg": "#8A3A2A" },
+            { "text": "LLANO GRANDE", "bg": "#7A1F25", "fg": "#FFFFFF", "relSize": 0.85 }
+          ],
+          "position": 1
+        },
+        {
+          "template": "PLACA_RECT",
+          "bg": "#FFFFFF",
+          "fg": "#1E1E1E",
+          "lines": [
+            { "text": "U.HOSPITAL", "bg": "#F4F1E0", "fg": "#333333" },
+            { "text": "éxito", "bg": "#E8C84A", "fg": "#333333", "transform": "lowercase" }
+          ],
+          "position": 2
+        }
+      ]
+    },
+    {
+      "id": "LC-022",
+      "ruta": null,
+      "fuente": "foto propia",
+      "fecha": "2026-09-27",
+      "fotos": [ "20260927_151857.jpg" ],
+      "placas": [
+        {
+          "template": "PLACA_ARCO",
+          "bg": "#CFEAE4",
+          "fg": "#2A2A2A",
+          "codigo": "P-10",
+          "lines": [
+            { "text": "U. HOSPITAL", "fg": "#2A2A2A" },
+            { "text": "BATALLON", "fg": "#7A2A2A" },
+            { "text": "LLANO LARGO", "fg": "#2A2A2A" }
+          ],
+          "position": 1
+        },
+        {
+          "template": "PLACA_RECT",
+          "bg": "#FFFFFF",
+          "fg": "#1E1E1E",
+          "lines": [
+            { "text": "U.HOSPITAL", "bg": "#F4F1E0", "fg": "#222222" },
+            { "text": "EXITO", "bg": "#E0C830", "fg": "#2F5A2F" }
+          ],
+          "position": 2
+        }
+      ]
+    },
+    {
+      "id": "LC-023",
+      "ruta": null,
+      "fuente": "foto propia",
+      "fecha": "2026-09-27",
+      "fotos": [ "20260927_151913.jpg" ],
+      "nota": "Hay una tercera línea tapada por el limpiaparabrisas ('MESITAS' o parecido).",
+      "placas": [
+        {
+          "template": "PLACA_RECT",
+          "bg": "#FFFFFF",
+          "fg": "#1E1E1E",
+          "lines": [
+            { "text": "CENTRO" }
+          ],
+          "position": 1
+        },
+        {
+          "template": "PLACA_ARCO",
+          "bg": "#E8EAE0",
+          "fg": "#2A2A2A",
+          "lines": [
+            { "text": "CUJA" },
+            { "text": "HORIZONTE" }
+          ],
+          "position": 2
+        }
+      ]
+    },
+    {
+      "id": "LC-024",
+      "ruta": null,
+      "fuente": "foto propia",
+      "fecha": "2026-09-27",
+      "fotos": [ "20260927_151956.jpg" ],
+      "nota": "Arriba hay otra línea, probablemente el logo de Colsubsidio, que no se distingue.",
+      "placas": [
+        {
+          "template": "PLACA_ARCO",
+          "bg": "#D8E6E0",
+          "fg": "#1E1E1E",
+          "lines": [
+            { "text": "PROGRESO" },
+            { "text": "SAN ANTONIO" }
+          ],
+          "position": 1
+        }
+      ]
+    },
+    {
+      "id": "LC-025",
+      "ruta": "Fusagasugá – Arbeláez",
+      "rutaNota": "Nombre tomado literalmente del letrero. Furgoneta Mercedes de Cootransfusa.",
+      "fuente": "foto propia",
+      "fecha": "2026-09-27",
+      "fotos": [ "20260927_152133.jpg" ],
+      "placas": [
+        {
+          "template": "PLACA_ARCO",
+          "bg": "#C23A32",
+          "fg": "#FFFFFF",
+          "lines": [
+            { "text": "ARBELAEZ" }
+          ],
+          "position": 1
+        }
+      ]
+    },
+    {
+      "id": "LC-026",
+      "ruta": null,
+      "fuente": "foto propia",
+      "fecha": "2026-09-27",
+      "fotos": [ "20260927_152215.jpg" ],
+      "nota": "Buseta de Cootranspeover. La placa grande es translúcida: el fondo real es el vidrio.",
+      "placas": [
+        {
+          "template": "PLACA_ARCO",
+          "bg": "#4A5A60",
+          "fg": "#FFFFFF",
+          "lines": [
+            { "text": "HOSPITAL" },
+            { "text": "LA SHELL" },
+            { "text": "CUJA" },
+            { "text": "HORIZONTE" },
+            { "text": "BATALLON" }
+          ],
+          "position": 1
+        },
+        {
+          "template": "PLACA_RECT",
+          "bg": "#FFFFFF",
+          "fg": "#1E1E1E",
+          "lines": [
+            { "text": "CLINICA BELEN", "bg": "#F4F4F4", "fg": "#3A5A8A" },
+            { "text": "LA SHELL", "bg": "#E8A060", "fg": "#8A2A1A" }
+          ],
+          "position": 2
+        },
+        {
+          "template": "PLACA_RECT",
+          "bg": "#FFFFFF",
+          "fg": "#1E1E1E",
+          "lines": [
+            { "text": "U.HOSPITAL", "bg": "#F4F1E0", "fg": "#333333" },
+            { "text": "éxito", "bg": "#E8C84A", "fg": "#333333", "transform": "lowercase" }
+          ],
+          "position": 3
+        }
+      ]
+    },
+    {
+      "id": "LC-027",
+      "ruta": null,
+      "fuente": "foto propia",
+      "fecha": "2026-09-27",
+      "fotos": [ "20260927_152349.jpg" ],
+      "nota": "Foto tomada desde dentro de la buseta, la más nítida del lote. 'Colsubsidio' es logo; se reproduce como texto. El '0717' de abajo es el número interno del vehículo.",
+      "placas": [
+        {
+          "template": "TABLA_FRANJAS",
+          "direction": "UNICO",
+          "contorno": "arco",
+          "codigo": "P-20",
+          "borde": "#D82A3A",
+          "lines": [
+            { "text": "CENTRO", "bg": "#6A1F2A", "fg": "#F4B8C8" },
+            { "text": "Colsubsidio", "bg": "#E8709A", "fg": "#1E2A5A" },
+            { "text": "CALLE 4", "bg": "#6A1F2A", "fg": "#F4B8C8" },
+            { "text": "CEDRITOS", "bg": "#E8742A", "fg": "#111111" },
+            { "text": "SAN ANTONIO", "bg": "#6A1F2A", "fg": "#F4B8C8" }
+          ],
+          "position": 1
+        }
+      ]
+    },
+    {
+      "id": "LC-028",
+      "ruta": null,
+      "fuente": "foto propia",
+      "fecha": "2026-09-27",
+      "fotos": [ "20260927_152742.jpg" ],
+      "nota": "Foto desde dentro de otra buseta, con reflejos.",
+      "placas": [
+        {
+          "template": "PLACA_ARCO",
+          "bg": "#A03A3A",
+          "fg": "#F2EEEE",
+          "codigo": "18",
+          "lines": [
+            { "text": "FUSA" },
+            { "text": "CENTRO" },
+            { "text": "CARRERA 9" },
+            { "text": "GALERIA" }
+          ],
+          "position": 1
+        },
+        {
+          "template": "PLACA_RECT",
+          "bg": "#FFFFFF",
+          "fg": "#1E1E1E",
+          "lines": [
+            { "text": "U.HOSPITAL", "bg": "#F4F1E0", "fg": "#333333" },
+            { "text": "éxito", "bg": "#E8C84A", "fg": "#333333", "transform": "lowercase" }
+          ],
+          "position": 2
+        }
+      ]
+    },
+    {
+      "id": "LC-029",
+      "ruta": "Llano Largo – La Clarita",
+      "rutaNota": "Mismo texto y código 100 que el ejemplo público de Tizumba (2022): el letrero sigue vigente en 2026.",
+      "fuente": "foto propia",
+      "fecha": "2026-09-27",
+      "fotos": [ "20260927_152746.jpg" ],
+      "placas": [
+        {
+          "template": "PLACA_RECT",
+          "bg": "#F4F6F4",
+          "fg": "#1E1E1E",
+          "lines": [
+            { "text": "CENTRO", "fg": "#1E1E1E" },
+            { "text": "GALERIA", "fg": "#2F8F5A" }
+          ],
+          "position": 1
+        },
+        {
+          "template": "PLACA_ARCO",
+          "bg": "#EDB03A",
+          "fg": "#1E1E1E",
+          "codigo": "100",
+          "lines": [
+            { "text": "CENTRO" },
+            { "text": "CRA. 1 SANTANDER" },
+            { "text": "PANTANO DE VARGAS" },
+            { "text": "LA CLARITA" }
+          ],
+          "position": 2
+        },
+        {
+          "template": "PLACA_RECT",
+          "bg": "#FFFFFF",
+          "fg": "#1E1E1E",
+          "lines": [
+            { "text": "CENTRO" },
+            { "text": "AV. LAS PALMAS" }
+          ],
+          "position": 3
         }
       ]
     }

@@ -1,0 +1,478 @@
+{
+  "version": "2026-10-01",
+  "nota": "Bitácora incremental de SCRUM-175. Una entrada por foto de docs/fotos-letreros/. Volver a correr el flujo solo procesa las fotos que no estén aquí. 'recorte' = caja [x0, y0, x1, y1] en píxeles de la foto ya orientada (3060×4080).",
+  "estados": {
+    "modelado": "Se leyeron las placas y están en letreros-estilos.json → campo.",
+    "duplicado": "Misma(s) placa(s) que otra foto; 'duplicadoDe' apunta al letrero.",
+    "ilegible": "No se puede leer ningún texto con la resolución o el ángulo disponibles.",
+    "revisar": "Lectura parcial o dudosa, o no encaja en las plantillas. Requiere ojo humano o una foto mejor."
+  },
+  "fotos": {
+    "20260927_145557.jpg": {
+      "estado": "revisar",
+      "letrero": null,
+      "duplicadoDe": null,
+      "recorte": [
+        2631,
+        1468,
+        3060,
+        2284
+      ],
+      "nota": "Buseta de costado: el espejo tapa la placa; se alcanza a leer '…E 22' y '…MINO REAL', que apuntan a la tabla de Camino Real – La Pampa. No se modela."
+    },
+    "20260927_145613.jpg": {
+      "estado": "modelado",
+      "letrero": "LC-001",
+      "duplicadoDe": null,
+      "recorte": [
+        795,
+        1754,
+        1530,
+        2203
+      ]
+    },
+    "20260927_145627.jpg": {
+      "estado": "modelado",
+      "letrero": "LC-002",
+      "duplicadoDe": null,
+      "recorte": [
+        1224,
+        1142,
+        2203,
+        1876
+      ]
+    },
+    "20260927_145634.jpg": {
+      "estado": "modelado",
+      "letrero": "LC-003",
+      "duplicadoDe": null,
+      "recorte": [
+        918,
+        1550,
+        1530,
+        1999
+      ]
+    },
+    "20260927_145643.jpg": {
+      "estado": "modelado",
+      "letrero": "LC-004",
+      "duplicadoDe": null,
+      "recorte": [
+        795,
+        1713,
+        1407,
+        2040
+      ]
+    },
+    "20260927_150110.jpg": {
+      "estado": "revisar",
+      "letrero": "LC-005",
+      "duplicadoDe": null,
+      "recorte": [
+        367,
+        1591,
+        1377,
+        2040
+      ],
+      "nota": "Colores de la placa roja inciertos; no encaja del todo en PLACA_ARCO."
+    },
+    "20260927_150111.jpg": {
+      "estado": "ilegible",
+      "letrero": null,
+      "duplicadoDe": null,
+      "recorte": null,
+      "nota": "Furgoneta fotografiada de costado; no se ve ninguna placa en el parabrisas."
+    },
+    "20260927_150607.jpg": {
+      "estado": "ilegible",
+      "letrero": null,
+      "duplicadoDe": null,
+      "recorte": [
+        2019,
+        1468,
+        3060,
+        2040
+      ],
+      "nota": "Buseta en la esquina del cuadro; las placas miden pocos píxeles y no se leen."
+    },
+    "20260927_150619.jpg": {
+      "estado": "ilegible",
+      "letrero": null,
+      "duplicadoDe": null,
+      "recorte": [
+        1897,
+        1468,
+        3060,
+        2121
+      ],
+      "nota": "Buseta a distancia, entre matas; solo se distingue que hay 3 o 4 placas, sin texto legible."
+    },
+    "20260927_150620.jpg": {
+      "estado": "ilegible",
+      "letrero": null,
+      "duplicadoDe": null,
+      "recorte": [
+        1683,
+        1468,
+        3060,
+        2121
+      ],
+      "nota": "Misma buseta que 20260927_150619, ángulo peor."
+    },
+    "20260927_150700.jpg": {
+      "estado": "modelado",
+      "letrero": "LC-006",
+      "duplicadoDe": null,
+      "recorte": [
+        550,
+        1509,
+        1224,
+        1958
+      ]
+    },
+    "20260927_150730.jpg": {
+      "estado": "revisar",
+      "letrero": null,
+      "duplicadoDe": null,
+      "recorte": [
+        1101,
+        1550,
+        1713,
+        2040
+      ],
+      "nota": "Placa oscura y lejana: se leen 'CENTRO CRA.', 'GALERIA' y 'VILLA NATALIA', pero faltan líneas y hay una placa 'TERMINAL'. No se completa a ojo."
+    },
+    "20260927_150736.jpg": {
+      "estado": "modelado",
+      "letrero": "LC-007",
+      "duplicadoDe": null,
+      "recorte": [
+        826,
+        1468,
+        1774,
+        1876
+      ]
+    },
+    "20260927_150814.jpg": {
+      "estado": "modelado",
+      "letrero": "LC-008",
+      "duplicadoDe": null,
+      "recorte": [
+        979,
+        1754,
+        1836,
+        2162
+      ]
+    },
+    "20260927_150929.jpg": {
+      "estado": "modelado",
+      "letrero": "LC-009",
+      "duplicadoDe": null,
+      "recorte": [
+        1285,
+        1713,
+        1836,
+        1958
+      ]
+    },
+    "20260927_151012.jpg": {
+      "estado": "revisar",
+      "letrero": "LC-010",
+      "duplicadoDe": null,
+      "recorte": [
+        979,
+        1346,
+        1652,
+        1713
+      ],
+      "nota": "Una línea de la primera placa no se lee."
+    },
+    "20260927_151056.jpg": {
+      "estado": "revisar",
+      "letrero": "LC-011",
+      "duplicadoDe": null,
+      "recorte": [
+        918,
+        1264,
+        1407,
+        1632
+      ],
+      "nota": "Solo se lee 'FUSA'."
+    },
+    "20260927_151105.jpg": {
+      "estado": "duplicado",
+      "letrero": null,
+      "duplicadoDe": "LC-003",
+      "recorte": [
+        550,
+        1264,
+        1407,
+        1713
+      ],
+      "nota": "Misma placa 'NARIÑO PEKIN / STA. Mª DE LOS ANGELES / ALTOS DE PEKIN' que 20260927_145634. En esta foto hay otras dos placas pequeñas arriba que no se leen."
+    },
+    "20260927_151133.jpg": {
+      "estado": "modelado",
+      "letrero": "LC-012",
+      "duplicadoDe": null,
+      "recorte": [
+        1652,
+        1428,
+        2203,
+        1917
+      ]
+    },
+    "20260927_151134.jpg": {
+      "estado": "duplicado",
+      "letrero": null,
+      "duplicadoDe": "LC-012",
+      "recorte": [
+        1407,
+        1550,
+        2019,
+        2040
+      ],
+      "nota": "Misma buseta y misma placa, un segundo después."
+    },
+    "20260927_151229.jpg": {
+      "estado": "modelado",
+      "letrero": "LC-013",
+      "duplicadoDe": null,
+      "recorte": [
+        1346,
+        979,
+        2203,
+        1632
+      ]
+    },
+    "20260927_151512.jpg": {
+      "estado": "revisar",
+      "letrero": "LC-014",
+      "duplicadoDe": null,
+      "recorte": [
+        918,
+        1224,
+        1683,
+        1632
+      ],
+      "nota": "Lejana; solo se leen 2 de las 3 placas."
+    },
+    "20260927_151514.jpg": {
+      "estado": "modelado",
+      "letrero": "LC-015",
+      "duplicadoDe": null,
+      "recorte": [
+        1162,
+        1224,
+        2019,
+        1754
+      ]
+    },
+    "20260927_151525.jpg": {
+      "estado": "revisar",
+      "letrero": "LC-016",
+      "duplicadoDe": null,
+      "recorte": [
+        1162,
+        1632,
+        1897,
+        2244
+      ],
+      "nota": "De lado y entre matas; cuarta línea cortada."
+    },
+    "20260927_151529.jpg": {
+      "estado": "modelado",
+      "letrero": "LC-017",
+      "duplicadoDe": null,
+      "recorte": [
+        1162,
+        1305,
+        2754,
+        2121
+      ]
+    },
+    "20260927_151631.jpg": {
+      "estado": "modelado",
+      "letrero": "LC-018",
+      "duplicadoDe": null,
+      "recorte": [
+        673,
+        1224,
+        1591,
+        1713
+      ]
+    },
+    "20260927_151642.jpg": {
+      "estado": "modelado",
+      "letrero": "LC-019",
+      "duplicadoDe": null,
+      "recorte": [
+        979,
+        938,
+        1591,
+        1428
+      ]
+    },
+    "20260927_151643.jpg": {
+      "estado": "duplicado",
+      "letrero": null,
+      "duplicadoDe": "LC-019",
+      "recorte": [
+        1224,
+        1020,
+        2080,
+        1632
+      ],
+      "nota": "Misma placa P-12 que 20260927_151642, mismo vehículo (597)."
+    },
+    "20260927_151720.jpg": {
+      "estado": "modelado",
+      "letrero": "LC-020",
+      "duplicadoDe": null,
+      "recorte": [
+        244,
+        1142,
+        1591,
+        1836
+      ]
+    },
+    "20260927_151727.jpg": {
+      "estado": "modelado",
+      "letrero": "LC-021",
+      "duplicadoDe": null,
+      "recorte": [
+        673,
+        1387,
+        1897,
+        2121
+      ]
+    },
+    "20260927_151746.jpg": {
+      "estado": "duplicado",
+      "letrero": null,
+      "duplicadoDe": "LC-018",
+      "recorte": [
+        1224,
+        1305,
+        1958,
+        1958
+      ],
+      "nota": "Misma placa P-15 'MAIZ AMARILLO' que 20260927_151631 (otra buseta, la 516)."
+    },
+    "20260927_151857.jpg": {
+      "estado": "modelado",
+      "letrero": "LC-022",
+      "duplicadoDe": null,
+      "recorte": [
+        795,
+        1264,
+        1774,
+        1836
+      ]
+    },
+    "20260927_151913.jpg": {
+      "estado": "revisar",
+      "letrero": "LC-023",
+      "duplicadoDe": null,
+      "recorte": [
+        367,
+        1550,
+        1683,
+        2244
+      ],
+      "nota": "Tercera línea tapada por el limpiaparabrisas."
+    },
+    "20260927_151956.jpg": {
+      "estado": "revisar",
+      "letrero": "LC-024",
+      "duplicadoDe": null,
+      "recorte": [
+        2264,
+        1550,
+        3060,
+        2040
+      ],
+      "nota": "Buseta en la esquina; solo se leen 2 líneas."
+    },
+    "20260927_151958.jpg": {
+      "estado": "duplicado",
+      "letrero": null,
+      "duplicadoDe": "LC-024",
+      "recorte": [
+        1346,
+        1754,
+        2264,
+        2244
+      ],
+      "nota": "Misma buseta (517) que 20260927_151956, algo más cerca; mismas 2 líneas legibles."
+    },
+    "20260927_152133.jpg": {
+      "estado": "modelado",
+      "letrero": "LC-025",
+      "duplicadoDe": null,
+      "recorte": [
+        1346,
+        1183,
+        1897,
+        1468
+      ]
+    },
+    "20260927_152215.jpg": {
+      "estado": "modelado",
+      "letrero": "LC-026",
+      "duplicadoDe": null,
+      "recorte": [
+        765,
+        1224,
+        1897,
+        1958
+      ]
+    },
+    "20260927_152349.jpg": {
+      "estado": "modelado",
+      "letrero": "LC-027",
+      "duplicadoDe": null,
+      "recorte": [
+        795,
+        1305,
+        2080,
+        2448
+      ]
+    },
+    "20260927_152531.jpg": {
+      "estado": "ilegible",
+      "letrero": null,
+      "duplicadoDe": null,
+      "recorte": [
+        550,
+        1428,
+        1040,
+        1958
+      ],
+      "nota": "Movida y a través de la ventanilla de otra buseta. Parece una placa en arco con franjas amarilla/azul/verde, como la de Camino Real – La Pampa, pero solo se lee 'EXITO'."
+    },
+    "20260927_152742.jpg": {
+      "estado": "modelado",
+      "letrero": "LC-028",
+      "duplicadoDe": null,
+      "recorte": [
+        1377,
+        1917,
+        2203,
+        2366
+      ]
+    },
+    "20260927_152746.jpg": {
+      "estado": "modelado",
+      "letrero": "LC-029",
+      "duplicadoDe": null,
+      "recorte": [
+        1040,
+        1264,
+        1774,
+        1836
+      ],
+      "nota": "Al borde derecho se ve el reverso de la placa P-20 de 20260927_152349 (el letrero del que tomó la foto); no cuenta como placa de esta buseta."
+    }
+  }
+}
