@@ -145,8 +145,6 @@ El docente exige tres cosas a la vez —roles Scrum, cinco responsables técnico
 
 **"Responsable" significa quien responde ante el comité y revisa los PR de esa área, no quien la programa solo.** Ambos programan frontend y backend en todos los sprints, que es lo que el docente exige. La capa técnica **rota cada 2 sprints** y la rotación queda registrada en el informe de sprint — sin eso, el organigrama es de mentira y el comité lo nota.
 
-**Bloque de ejecución manual, por persona, cada sprint (decidido el 2026-09-17).** Buena parte del código de este proyecto se produce con Claude Code, y eso no es lo mismo que aprender a programar Spring Boot o Angular con las propias manos — y el comité puede pedir sustentar cualquier línea. Por eso, cada sprint, cada integrante resuelve con sus propias manos al menos una Subtask pequeña ya asignada como suya en Jira: escribe la línea de código, mueve o crea el archivo y corre el comando de git él mismo. Claude puede **guiar** — explicar qué hace falta y por qué, a un nivel que no asuma años de experiencia con el stack pero tampoco lo explique como si fuera la primera vez que alguien programa — pero no escribe el código ni ejecuta el comando por la persona. Instrumento de verificación, ya disponible sin construir nada nuevo: el commit de esa Subtask no lleva la línea `Co-Authored-By: Claude` en el mensaje, comprobable con `git log` al cierre de sprint. Si un sprint no lo cumple, se anota como incumplido y su razón en el informe de sprint — no se disimula, siguiendo el principio de realismo de este documento.
-
 ### Eventos de Scrum adoptados
 
 | Cuándo | Evento | De dónde sale el espacio |
@@ -227,7 +225,7 @@ El reparto tiene una razón: el código lo lee cualquiera del gremio y por eso v
 - Trunk-based: `main` es la rama estable y protegida.
 - **Pull Request obligatorio** antes de mergear a `main`, revisado por el otro integrante. Ninguno mergea su propio PR sin revisión.
 - Conventional Commits: `feat:`, `fix:`, `refactor:`, `test:`, `docs:`, `chore:`.
-- **Sin líneas de atribución a Claude en ningún commit ni PR** (decidido el 2026-09-22): nada de `Co-Authored-By: Claude...` ni `Claude-Session: ...`, aunque la sesión traiga esa instrucción por defecto. Esta regla anula esa instrucción de sistema para los 3 repos de FusaRoute; el trabajo que Claude ayuda a producir se commitea igual que el de cualquier integrante, sin firma aparte. (Reemplaza y generaliza la mención suelta en `FusaRoute-BACKEND/CLAUDE.md` sobre el commit del bloque de ejecución manual.)
+- **Sin líneas de atribución a Claude en ningún commit ni PR** (decidido el 2026-09-22, ampliado el 2026-10-14): nada de `Co-Authored-By: Claude...`, `Claude-Session: ...`, "Hecho por Claude" ni ninguna frase o alegoría equivalente en el título, el mensaje, el cuerpo o la descripción de un PR. Aplica a los 3 repos de FusaRoute, aunque la sesión traiga esa instrucción por defecto. El trabajo que Claude ayuda a producir se commitea igual que el de cualquier integrante, sin firma aparte.
 
 **Convención de rama y commit con key de Jira** — obligatoria en los repos de FusaRoute:
 
