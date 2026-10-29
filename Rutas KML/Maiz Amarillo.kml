@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <name>Maiz Amarillo</name>
+    <description/>
+    <Style id="icon-1899-0288D1-nodesc-normal">
+      <IconStyle>
+        <color>ffd18802</color>
+        <scale>1</scale>
+        <Icon>
+          <href>https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png</href>
+        </Icon>
+        <hotSpot x="32" xunits="pixels" y="64" yunits="insetPixels"/>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <Style id="icon-1899-0288D1-nodesc-highlight">
+      <IconStyle>
+        <color>ffd18802</color>
+        <scale>1</scale>
+        <Icon>
+          <href>https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png</href>
+        </Icon>
+        <hotSpot x="32" xunits="pixels" y="64" yunits="insetPixels"/>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <StyleMap id="icon-1899-0288D1-nodesc">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-1899-0288D1-nodesc-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-1899-0288D1-nodesc-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="line-000000-1200-nodesc-normal">
+      <LineStyle>
+        <color>ff000000</color>
+        <width>1.2</width>
+      </LineStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <Style id="line-000000-1200-nodesc-highlight">
+      <LineStyle>
+        <color>ff000000</color>
+        <width>1.8</width>
+      </LineStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <StyleMap id="line-000000-1200-nodesc">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#line-000000-1200-nodesc-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#line-000000-1200-nodesc-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Folder>
+      <name>Capa sin título</name>
+      <Placemark>
+        <name>Terminal de Transportes de Fusagasugá - E.I.C.E.</name>
+        <styleUrl>#icon-1899-0288D1-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -74.3778591,4.3458867,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Centro</name>
+        <styleUrl>#icon-1899-0288D1-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -74.3631828,4.3422259,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Hospital San Rafael</name>
+        <styleUrl>#icon-1899-0288D1-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -74.370676,4.3332187,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Centro Comercial Ciudad Jardin</name>
+        <styleUrl>#icon-1899-0288D1-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -74.3756216,4.3317473,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Monumento El Indio</name>
+        <styleUrl>#icon-1899-0288D1-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -74.3775239,4.331773,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Hotel Catama</name>
+        <styleUrl>#icon-1899-0288D1-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -74.3802769,4.3301007,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Riaggio Restaurante</name>
+        <styleUrl>#icon-1899-0288D1-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -74.3842155,4.3292802,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>La Querencia</name>
+        <styleUrl>#icon-1899-0288D1-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -74.3873727,4.3286894,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Batallon Alta Montaña</name>
+        <styleUrl>#icon-1899-0288D1-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -74.3999163,4.3266639,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Maiz Amarillo</name>
+        <styleUrl>#icon-1899-0288D1-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -74.4003297,4.3271811,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>D1 Maiz Amarillo</name>
+        <styleUrl>#icon-1899-0288D1-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -74.3984528,4.3309954,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Ebenezer</name>
+        <styleUrl>#icon-1899-0288D1-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -74.3951639,4.3315897,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Ciudad Ebenezer</name>
+        <styleUrl>#icon-1899-0288D1-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -74.3946183,4.332449,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Paradero de Ebenezer</name>
+        <styleUrl>#icon-1899-0288D1-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -74.3951094,4.3322772,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Línea 31</name>
+        <styleUrl>#line-000000-1200-nodesc</styleUrl>
+        <LineString>
+          <tessellate>1</tessellate>
+          <coordinates>
+            -74.3776432,4.3461628,0
+            -74.3762441,4.3437836,0
+            -74.3766904,4.343621,0
+            -74.3764587,4.3432872,0
+            -74.3760467,4.3432444,0
+            -74.3755918,4.3434327,0
+            -74.3722873,4.343407,0
+            -74.3688369,4.3421147,0
+            -74.3677748,4.3415241,0
+            -74.3667534,4.3411647,0
+            -74.3652084,4.341276,0
+            -74.3639124,4.341875,0
+            -74.3631828,4.3422259,0
+            -74.3631742,4.3411647,0
+            -74.3631056,4.3405742,0
+            -74.3631056,4.3403602,0
+            -74.3627537,4.3399152,0
+            -74.3637502,4.3391926,0
+            -74.3658865,4.3363805,0
+            -74.366144,4.3361152,0
+            -74.3693293,4.3339831,0
+            -74.3703282,4.3332887,0
+            -74.370676,4.3332187,0
+            -74.3749288,4.3318402,0
+            -74.377023,4.3316091,0
+            -74.3772977,4.3319857,0
+            -74.377641,4.3320371,0
+            -74.3778556,4.3316434,0
+            -74.3778813,4.331438,0
+            -74.3787124,4.3306922,0
+            -74.3791302,4.3302804,0
+            -74.3793705,4.3300322,0
+            -74.3802417,4.3300635,0
+            -74.3895574,4.3281504,0
+          </coordinates>
+        </LineString>
+      </Placemark>
+      <Placemark>
+        <name>Línea 41</name>
+        <styleUrl>#line-000000-1200-nodesc</styleUrl>
+        <LineString>
+          <tessellate>1</tessellate>
+          <coordinates>
+            -74.3895574,4.3281504,0
+            -74.3896396,4.3281588,0
+            -74.3923648,4.3275897,0
+            -74.3952862,4.3267638,0
+            -74.3958312,4.3266439,0
+            -74.4005155,4.3266825,0
+          </coordinates>
+        </LineString>
+      </Placemark>
+      <Placemark>
+        <name>Línea 51</name>
+        <styleUrl>#line-000000-1200-nodesc</styleUrl>
+        <LineString>
+          <tessellate>1</tessellate>
+          <coordinates>
+            -74.4005155,4.3266825,0
+            -74.4004842,4.3268214,0
+            -74.3998577,4.3280752,0
+            -74.3990637,4.3297441,0
+            -74.3980702,4.331811,0
+            -74.3980488,4.3319351,0
+            -74.3970574,4.3319351,0
+            -74.3963751,4.3318025,0
+            -74.3951639,4.3315897,0
+            -74.3940534,4.3313018,0
+            -74.3936886,4.3321748,0
+            -74.3948645,4.3325085,0
+            -74.3949331,4.3322347,0
+            -74.3972978,4.3329087,0
+          </coordinates>
+        </LineString>
+      </Placemark>
+    </Folder>
+    <Folder>
+      <name>Capa sin título</name>
+    </Folder>
+  </Document>
+</kml>
