@@ -121,7 +121,7 @@ Cada quien traza **`POST /api/auth/login`** y llena la tabla. Santiago parte del
 | Controller | `AuthController.java` (pista: `:48-50`) | | |
 | Caso de uso | `LoginService.java` (pista: `:84-148`) | ¿Qué excepciones lanza? ¿Por qué el segundo factor? | |
 | Puertos que usa | `LoginService.java:62-67` | | |
-| Adaptadores reales | `BCryptPasswordHasher`, `JwtTokenIssuer`, `SamstevensTotpAdapter` | | |
+| Adaptadores reales | `BCryptPasswordHasher`, `JwtTokenIssuer`, `SamstevensTotpAdapter` (ojo: `AesGcmSecretCipher` está pendiente, ver B.7 punto 3) | | |
 | Cableado | `UseCaseConfig.java:100` | | |
 | Vuelta al frontend | `auth.service.ts:58-68` (`applySession`) | ¿Dónde se guarda el token? | |
 
@@ -229,17 +229,18 @@ Rutas relativas a la raíz del repo `FusaRoute-BACKEND`.
 Detectadas al auditar `origin/main`. Si el docente las encuentra primero, pierden credibilidad; mejor llegar con ellas anotadas.
 
 **Backend**
-1. `render.yaml:22-45` **no declara `TOTP_ENCRYPTION_KEY`**, pero `application-prod.properties:27` la exige sin valor por defecto. Si nadie la puso a mano en Render, producción no arranca.
-2. `docker-compose.yml:33-40` no pasa `JWT_SECRET` ni `TOTP_ENCRYPTION_KEY`, que `application-dev.properties:18,25` exigen (no lo ejecuté; puede que se carguen por otro medio).
-3. El README dice que `/api/routes/search` aún no existe, pero `RouteController.java:55` ya lo implementa.
-4. El comentario de `Dockerfile:16-18` afirma que el CI corre OWASP en `mvn verify`; OWASP corre aparte, en `security.yml`.
+1. **Confirmado en el código:** `render.yaml:22-45` **no declara `TOTP_ENCRYPTION_KEY`** (sí declara `JWT_SECRET` en `:38`), y `application-prod.properties:27` la exige sin valor por defecto. `AesGcmSecretCipher.java:61-69` lanza `IllegalStateException` si está vacía, así que **la app no arranca en prod** a menos que alguien la haya puesto a mano en el dashboard de Render. Eso no se puede ver desde el repo: hay que mirar el dashboard.
+2. **Confirmado en el código:** `docker-compose.yml:33-40` no pasa `JWT_SECRET` ni `TOTP_ENCRYPTION_KEY` (solo `GOOGLE_MAPS_API_KEY`), que `application-dev.properties:18,25` exigen. No hay `env_file`, y `.dockerignore:3-4` deja fuera `.env`, así que el contenedor tampoco lo lee. Resultado esperado: `JwtConfig.java:32-45` aborta el arranque del servicio `backend` en compose. No lo ejecuté. Ojo: el `.env.example` sí lista ambas variables (`:53`, `:64`).
+3. **Hallazgo nuevo, el más serio:** `AesGcmSecretCipher.java:72-84` es un **esqueleto**: `encrypt()` y `decrypt()` lanzan `UnsupportedOperationException` ("pendiente, subtask manual SCRUM-179"). `UserPersistenceAdapter.java:49` y `:67` los llaman cuando un usuario tiene secreto TOTP, o sea al guardar el enrolamiento y al leer un usuario con TOTP activo. En `origin/main` el segundo factor **no puede completarse de verdad**; las pruebas pasan porque usan dobles. No presentes TOTP como terminado ante el comité sin resolver o declarar esto.
+4. El README dice que `/api/routes/search` aún no existe, pero `RouteController.java:55` ya lo implementa.
+5. El comentario de `Dockerfile:16-18` afirma que el CI corre OWASP en `mvn verify`; OWASP corre aparte, en `security.yml`.
 
 **Frontend**
-5. `README.md:34` manda a hacer `cp .env.example .env`, pero nada del código lee `.env` ni `NG_API_KEY`.
-6. El README habla de `saveSession()`; el código usa `applySession()` (`auth.service.ts:58`).
-7. El lint (`angular.json:85-90`) no corre en el CI.
-8. Comentario corrupto en `environment.prod.ts:9` ("…en este archivo.dor es inspeccionable").
-9. `googleMapsApiKey` vacío en `main`: el mapa no funciona en producción hasta SCRUM-168.
+6. `README.md:34` manda a hacer `cp .env.example .env`, pero nada del código lee `.env` ni `NG_API_KEY`.
+7. El README habla de `saveSession()`; el código usa `applySession()` (`auth.service.ts:58`).
+8. El lint (`angular.json:85-90`) no corre en el CI.
+9. Comentario corrupto en `environment.prod.ts:9` ("…en este archivo.dor es inspeccionable").
+10. `googleMapsApiKey` vacío en `main`: el mapa no funciona en producción hasta SCRUM-168.
 
 ## B.8 Limitaciones de este documento
 
