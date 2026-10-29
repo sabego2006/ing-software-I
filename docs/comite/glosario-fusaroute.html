@@ -1,0 +1,470 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Glosario FusaRoute</title>
+<style>
+:root{
+  --paper:#EFF2F0; --card:#FFFFFF; --ink:#101A18; --muted:#4A5955; --line:#CFD8D4;
+  --accent:#0E7C66; --accent-soft:#DDF0EA; --alert:#A8481A; --alert-soft:#F6E4DA;
+  --warn:#8A6A00; --warn-soft:#F7EDC6; --code:#E6ECE9;
+  --sans:"IBM Plex Sans","Segoe UI",system-ui,-apple-system,Roboto,Arial,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Consolas,"Courier New",monospace;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --paper:#0F1715; --card:#17221F; --ink:#E6EFEC; --muted:#9DB0AA; --line:#2A3A36;
+    --accent:#3FC3A5; --accent-soft:#12312A; --alert:#F08A5D; --alert-soft:#3A2218;
+    --warn:#E6C54F; --warn-soft:#3A3212; --code:#22312D;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#0F1715; --card:#17221F; --ink:#E6EFEC; --muted:#9DB0AA; --line:#2A3A36;
+  --accent:#3FC3A5; --accent-soft:#12312A; --alert:#F08A5D; --alert-soft:#3A2218;
+  --warn:#E6C54F; --warn-soft:#3A3212; --code:#22312D;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding:0 16px 48px}
+header{padding:28px 0 8px}
+h1{font-size:clamp(1.6rem,4vw,2.4rem);margin:0 0 6px;letter-spacing:-.02em}
+.lead{color:var(--muted);margin:0;max-width:760px}
+.bar{position:sticky;top:0;z-index:5;background:var(--paper);padding:12px 0 10px;border-bottom:1px solid var(--line)}
+.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+input[type=search]{flex:1 1 260px;min-width:0;padding:11px 14px;font:inherit;color:var(--ink);background:var(--card);border:1.5px solid var(--line);border-radius:10px}
+input[type=search]:focus{outline:2px solid var(--accent);border-color:var(--accent)}
+button{font:inherit;cursor:pointer}
+.theme{padding:10px 12px;border:1.5px solid var(--line);background:var(--card);color:var(--ink);border-radius:10px}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.chip{padding:6px 12px;border-radius:999px;border:1.5px solid var(--line);background:var(--card);color:var(--ink);font-size:.85rem}
+.chip[aria-pressed=true]{background:var(--accent);border-color:var(--accent);color:#fff}
+.count{color:var(--muted);font-size:.85rem;margin-top:8px}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:.82rem;color:var(--muted);margin:14px 0 4px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px;margin-top:16px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;display:flex;flex-direction:column;gap:10px}
+.card h2{font-size:1.1rem;margin:0;line-height:1.25}
+.top{display:flex;justify-content:space-between;gap:8px;align-items:flex-start}
+.cat{font-size:.7rem;text-transform:uppercase;letter-spacing:.08em;color:var(--accent);font-weight:600}
+.abbr{font-family:var(--mono);font-size:.78rem;color:var(--muted)}
+.card p{margin:0;font-size:.93rem}
+.an{font-size:.88rem;color:var(--muted);border-left:3px solid var(--line);padding-left:10px}
+.where{background:var(--accent-soft);border-radius:10px;padding:9px 11px;font-size:.84rem}
+.where b{display:block;font-size:.7rem;text-transform:uppercase;letter-spacing:.06em;color:var(--accent);margin-bottom:3px}
+code{font-family:var(--mono);font-size:.78rem;background:var(--code);padding:1px 5px;border-radius:5px;word-break:break-word}
+.badge{white-space:nowrap;font-size:.7rem;font-weight:600;padding:3px 8px;border-radius:999px}
+.b-ok{background:var(--accent-soft);color:var(--accent)}
+.b-part{background:var(--warn-soft);color:var(--warn)}
+.b-no{background:var(--alert-soft);color:var(--alert)}
+.empty{display:none;text-align:center;color:var(--muted);padding:40px 0}
+footer{margin-top:36px;padding-top:16px;border-top:1px solid var(--line);color:var(--muted);font-size:.82rem}
+mark{background:var(--warn-soft);color:inherit;border-radius:3px}
+@media (max-width:480px){.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>Glosario FusaRoute</h1>
+    <p class="lead">Cada sigla, extensión y término del proyecto, en español llano, con el archivo real donde aparece. Las insignias dicen con honestidad si algo está implementado completo, parcial o no lo está.</p>
+  </header>
+
+  <div class="bar">
+    <div class="row">
+      <input id="q" type="search" placeholder="Buscar: JWT, factor 3, .properties, puerto…" aria-label="Buscar en el glosario" autocomplete="off">
+      <button id="theme" class="theme" type="button" aria-label="Cambiar tema claro u oscuro">◐ Tema</button>
+    </div>
+    <div id="chips" class="chips" role="group" aria-label="Filtrar por categoría"></div>
+    <div id="count" class="count" aria-live="polite"></div>
+  </div>
+
+  <div class="legend">
+    <span><span class="badge b-ok">✔ Implementado</span></span>
+    <span><span class="badge b-part">◐ Parcial</span></span>
+    <span><span class="badge b-no">✖ No implementado</span></span>
+    <span>Sin insignia = es un concepto o herramienta, no una afirmación sobre el proyecto.</span>
+  </div>
+
+  <main id="grid" class="grid"></main>
+  <div id="empty" class="empty">No hay términos que coincidan. Prueba con otra palabra o quita el filtro de categoría.</div>
+
+  <footer>
+    Citas verificadas en <code>origin/main</code> el 2026-10-28: backend <code>240a294</code>, frontend <code>bab4380</code>. Rutas del backend relativas a <code>src/main/java/com/fusaroute/</code> salvo indicación. Las líneas se mueven con cada merge: ver la guía <code>guia-revision-y-evidencias.md</code> (misma carpeta) para el mapa de evidencias y las limitaciones.
+  </footer>
+</div>
+
+<script>
+// Cada tarjeta: t=término, a=sigla/alias, c=categoría, d=explicación, an=analogía, w=dónde está, s=ok|part|no|null
+var CARDS = [
+/* ---------- ARQUITECTURA ---------- */
+{t:"Arquitectura hexagonal",a:"Puertos y adaptadores",c:"Arquitectura",
+ d:"El negocio (reglas de rutas, login) vive en el centro y no sabe nada de la base de datos, de HTTP ni de Google. Todo lo externo se conecta por los bordes mediante interfaces.",
+ an:"Un enchufe de pared: la lámpara (negocio) no cambia aunque cambies de proveedor de luz (base de datos).",
+ w:"Paquetes <code>domain/</code>, <code>application/</code> e <code>infrastructure/</code>. Lo vigila <code>src/test/java/com/fusaroute/architecture/HexagonalArchitectureTest.java:14-45</code>.",s:"ok"},
+{t:"Dominio",a:"domain/",c:"Arquitectura",
+ d:"La capa más interna: modelos y reglas puras del negocio (una ruta, una coordenada, un correo, una política de contraseña). No importa Spring, JPA ni Jackson.",
+ an:"El reglamento del juego, sin importar en qué cancha se juegue.",
+ w:"<code>domain/model/Route.java</code>, <code>Email.java</code>, <code>PasswordPolicy.java</code>, <code>Coordinate.java</code>.",s:"ok"},
+{t:"Caso de uso",a:"Use case / Service",c:"Arquitectura",
+ d:"Una acción concreta que el sistema ofrece: listar rutas, hacer login, buscar la mejor ruta. En FusaRoute hay una clase por caso de uso y orquesta puertos; no sabe cómo se guarda nada.",
+ an:"Una receta: dice los pasos y los ingredientes, no la marca de la estufa.",
+ w:"<code>application/usecase/ListActiveRoutesService.java:18-38</code> (13 servicios en total).",s:"ok"},
+{t:"Puerto",a:"Port",c:"Arquitectura",
+ d:"Una interfaz Java que describe lo que el negocio necesita o expone. De entrada (<code>port/in</code>): lo que se le pide al sistema. De salida (<code>port/out</code>): lo que el sistema necesita del exterior.",
+ an:"El contrato de un enchufe: forma de las clavijas, sin decir quién fabrica el cable.",
+ w:"<code>domain/port/in/ListActiveRoutesUseCase.java:8-11</code> y <code>domain/port/out/RouteRepositoryPort.java:13-18</code>.",s:"ok"},
+{t:"Adaptador",a:"Adapter",c:"Arquitectura",
+ d:"La clase concreta que cumple un puerto con una tecnología real: JPA para la base, BCrypt para contraseñas, Google Maps para tiempos. De entrada: los controllers REST.",
+ an:"El adaptador de viaje que convierte tu clavija a la pared del país.",
+ w:"<code>infrastructure/adapter/out/persistence/RoutePersistenceAdapter.java:19</code>, <code>.../security/BCryptPasswordHasher.java:16</code>, <code>.../maps/GoogleMapsClient.java</code>.",s:"ok"},
+{t:"Controller REST",a:"@RestController",c:"Arquitectura",
+ d:"Recibe la petición HTTP, la pasa al caso de uso y devuelve la respuesta. No debe contener reglas de negocio.",
+ an:"El mesero: toma el pedido y lo lleva a cocina; no cocina.",
+ w:"<code>infrastructure/adapter/in/web/RouteController.java:22,45-48</code>.",s:"ok"},
+{t:"Cableado de dependencias",a:"UseCaseConfig",c:"Arquitectura",
+ d:"Las clases de <code>application</code> no llevan anotaciones de Spring. Una sola clase de configuración crea cada caso de uso con <code>@Bean</code> y le entrega sus puertos.",
+ an:"El tablero eléctrico donde se conecta todo, en un solo lugar.",
+ w:"<code>infrastructure/config/UseCaseConfig.java:51-68</code> (login en <code>:100</code>).",s:"ok"},
+{t:"DTO",a:"Data Transfer Object",c:"Arquitectura",
+ d:"Un objeto simple que solo viaja con datos entre capas o hacia el cliente. Aquí son <code>record</code> de Java (inmutables) con una fábrica <code>from(...)</code>. En el frontend son interfaces TypeScript que espejan esos DTO.",
+ an:"El sobre con la carta: lleva información, no hace nada.",
+ w:"Backend: <code>adapter/in/web/RouteResponse.java:8,10</code>. Frontend: <code>src/app/models/route.model.ts</code>.",s:"ok"},
+{t:"Mapper",a:"toDomain()",c:"Arquitectura",
+ d:"Traduce de una forma a otra: de entidad JPA a objeto de dominio. Existe para que el dominio no dependa de JPA. Aquí están escritos a mano, sin librerías.",
+ an:"El intérprete entre dos idiomas.",
+ w:"<code>adapter/out/persistence/RoutePersistenceMapper.java:25-42</code>.",s:"ok"},
+{t:"Record Command / Result",a:null,c:"Arquitectura",
+ d:"Objetos inmutables que empaquetan lo que entra y sale de un caso de uso (p. ej. las credenciales del login y su resultado).",
+ an:"La orden de pedido y el recibo.",
+ w:"Dentro de <code>domain/port/in/</code> junto a cada <code>*UseCase</code>.",s:null},
+
+/* ---------- SOLID ---------- */
+{t:"SOLID",a:"5 principios de diseño",c:"SOLID",
+ d:"Cinco reglas para que el código sea fácil de cambiar sin romperlo: S (una responsabilidad), O (abierto/cerrado), L (sustitución), I (interfaces pequeñas), D (depender de abstracciones). Se evalúa honestamente: no todos se cumplen igual.",
+ an:"Reglas de orden en una cocina para que cambiar un plato no desordene todo.",
+ w:"Backend: sólido en S, I, D; parcial en O; L solo con dobles de prueba. Frontend: ver cada letra. Detalle en la guía, tabla B.4 y B.5.",s:"part"},
+{t:"S — Responsabilidad única",a:"Single Responsibility",c:"SOLID",
+ d:"Cada clase debe tener una sola razón para cambiar. El mapper solo traduce persistencia a dominio; <code>Email</code> solo valida correos.",
+ an:"Un cuchillo para cortar, no para destapar botellas.",
+ w:"<code>adapter/out/persistence/RoutePersistenceMapper.java:18-69</code>. Contraejemplo honesto: <code>GlobalExceptionHandler.java:43-209</code> concentra todos los errores. Frontend: <code>lib/route-steps.ts:8</code>.",s:"ok"},
+{t:"O — Abierto/cerrado",a:"Open/Closed",c:"SOLID",
+ d:"Abierto para extender, cerrado para modificar: se agrega un proveedor nuevo escribiendo un adaptador, sin editar el caso de uso.",
+ an:"Agregar un enchufe al tablero sin reabrir la pared.",
+ w:"<code>application/usecase/SearchRouteService.java:26,29</code> depende de <code>TravelTimePort</code>. Limitación: solo hay una implementación real y la lógica online/offline se repite (<code>:36-95</code>).",s:"part"},
+{t:"L — Sustitución de Liskov",a:"Liskov Substitution",c:"SOLID",
+ d:"Cualquier implementación de un puerto debe poder reemplazar a otra sin que el servicio lo note y respetando el contrato.",
+ an:"Cualquier bombillo con la rosca correcta debe encender la lámpara.",
+ w:"<code>.../security/BCryptPasswordHasher.java:33-39</code> cumple el contrato de <code>domain/port/out/PasswordHasherPort.java:11-18</code>. Es el principio más débil: no hay pruebas de contrato, solo dobles de Mockito. En el frontend no hay ejemplo honesto.",s:"part"},
+{t:"I — Segregación de interfaces",a:"Interface Segregation",c:"SOLID",
+ d:"Mejor muchas interfaces pequeñas que una enorme. Aquí cada caso de uso tiene su propio puerto de un solo método.",
+ an:"Una caja de herramientas con compartimentos, no un solo cajón revuelto.",
+ w:"<code>domain/port/in/ListActiveRoutesUseCase.java:8-11</code>, <code>domain/port/out/TrafficSectorRepositoryPort.java:10-18</code>.",s:"ok"},
+{t:"D — Inversión de dependencias",a:"Dependency Inversion",c:"SOLID",
+ d:"Las piezas de alto nivel dependen de interfaces, no de clases concretas. El servicio recibe el puerto por constructor y la infraestructura lo implementa.",
+ an:"Pedir «un taxi» (interfaz) en vez de «el taxi de Pedro» (clase concreta).",
+ w:"<code>application/usecase/ListActiveRoutesService.java:20-26</code> + <code>UseCaseConfig.java:65-68</code>. Excepción declarada: <code>InternalMapsProbeController.java:33-37</code>.",s:"ok"},
+
+/* ---------- 12 FACTORES ---------- */
+{t:"12-Factor App",a:"Los 12 factores",c:"12 Factores",
+ d:"Doce buenas prácticas para construir aplicaciones web desplegables en la nube. FusaRoute cumple claramente 5, cumple otros 6 parcialmente y el factor 8 no aplica hoy.",
+ an:"Una lista de chequeo para que la app viaje bien de tu computador a producción.",
+ w:"Mapa completo con evidencia en la guía, tabla B.1. Origen: <code>docs/clases/Clase 4 IF.pptx</code>.",s:"part"},
+{t:"Factor 1 — Código base",a:"Codebase",c:"12 Factores",
+ d:"Un solo repositorio rastreado en Git por servicio, con muchos despliegues a partir de él.",
+ an:"Un solo plano para muchas casas iguales.",
+ w:"Repos <code>FusaRoute-BACKEND</code> y <code>FusaRoute-FRONTEND</code>; <code>render.yaml:21</code> solo despliega commits con CI verde.",s:"ok"},
+{t:"Factor 2 — Dependencias",a:"Dependencies",c:"12 Factores",
+ d:"Declarar todas las dependencias explícitamente, no depender de paquetes instalados «a mano».",
+ an:"La lista del supermercado completa.",
+ w:"<code>pom.xml:49-162</code>; frontend <code>package.json</code>. Matiz: no hay <code>mvnw</code> (Maven solo se fija en <code>Dockerfile:6</code>).",s:"ok"},
+{t:"Factor 3 — Configuración",a:"Config",c:"12 Factores",
+ d:"La configuración que cambia entre ambientes (claves, URL de la base) va en variables de entorno, no en el código.",
+ an:"Las llaves van en tu bolsillo, no pegadas con cinta en la puerta.",
+ w:"Backend ✔: <code>application.properties:6,9,10</code> y <code>application-*.properties</code> con <code>${DB_URL}</code>, <code>${JWT_SECRET}</code>; <code>JwtConfig.java:32-45</code> aborta si falta. Frontend ✖: la URL se compila dentro del bundle (<code>angular.json:46-51</code>).",s:"part"},
+{t:"Factor 4 — Servicios de apoyo",a:"Backing services",c:"12 Factores",
+ d:"La base de datos y las APIs externas son recursos conectados por URL; cambiarlos no exige tocar código.",
+ an:"Un enchufe y un cable: cambias de proveedor sin cambiar la lámpara.",
+ w:"<code>application-dev.properties:5-7</code> (<code>DB_URL</code>); <code>application.properties:54</code> (URL de Google Maps intercambiable).",s:"ok"},
+{t:"Factor 5 — Build, release, run",a:null,c:"12 Factores",
+ d:"Separar compilar, publicar y ejecutar. Aquí: GitHub Actions compila y prueba, Docker empaqueta y Render ejecuta solo si los checks pasan.",
+ an:"Hornear, empacar y servir son pasos distintos.",
+ w:"<code>Dockerfile:6-37</code>, <code>.github/workflows/ci.yml:44</code>, <code>render.yaml:19-21</code>. Brecha: no hay versiones etiquetadas (<code>pom.xml:13</code> sigue en <code>0.0.1-SNAPSHOT</code>).",s:"part"},
+{t:"Factor 6 — Procesos",a:"Processes",c:"12 Factores",
+ d:"La app debe ser sin estado; lo que haya que recordar vive en un servicio de apoyo. Aquí la sesión viaja en el JWT.",
+ an:"Un mesero que no recuerda nada: la comanda está en la mesa.",
+ w:"<code>infrastructure/config/SecurityConfig.java:73</code> (<code>STATELESS</code>). Brecha: caché Caffeine en memoria (<code>application.properties:48-50</code>).",s:"part"},
+{t:"Factor 7 — Vinculación de puertos",a:"Port binding",c:"12 Factores",
+ d:"La app se sirve a sí misma por un puerto que el entorno le asigna.",
+ an:"El local abre su propia puerta; no depende de un edificio.",
+ w:"<code>application.properties:10</code> (<code>server.port=${PORT:8080}</code>), <code>Dockerfile:35-36</code>.",s:"ok"},
+{t:"Factor 8 — Concurrencia",a:"Concurrency",c:"12 Factores",
+ d:"Escalar agregando más procesos. Hoy corre una sola instancia gratuita en Render.",
+ an:"Para atender más gente se abren más cajas; aquí hay una sola.",
+ w:"<code>render.yaml:14</code> (plan free). Declarado como no implementado: el caché local asume un solo nodo.",s:"no"},
+{t:"Factor 9 — Desechabilidad",a:"Disposability",c:"12 Factores",
+ d:"Procesos que arrancan rápido y se apagan limpio. Hay reinicio automático ante falta de memoria, pero no apagado ordenado configurado.",
+ an:"Puedes apagar y prender sin perder el trabajo; falta el apagado «con aviso».",
+ w:"<code>Dockerfile:33</code>, <code>render.yaml:18</code>. No existe <code>server.shutdown=graceful</code>.",s:"part"},
+{t:"Factor 10 — Paridad dev/prod",a:null,c:"12 Factores",
+ d:"Mantener desarrollo y producción lo más parecidos posible. Mismo motor y mismas migraciones, pero versiones de Postgres distintas (15, 16 y 17 según dónde).",
+ an:"Ensayar en un escenario casi idéntico al del estreno.",
+ w:"<code>application-*.properties</code> (<code>ddl-auto=validate</code>), <code>docker-compose.yml:7</code>, <code>.github/workflows/database-backup.yml:21</code>. El perfil <code>pre</code> está diferido.",s:"part"},
+{t:"Factor 11 — Logs",a:null,c:"12 Factores",
+ d:"Tratar los logs como un flujo de eventos escrito a la salida estándar; la plataforma los recoge.",
+ an:"La app habla en voz alta y alguien más lo graba.",
+ w:"Salida estándar de Spring Boot; logger propio solo en <code>GlobalExceptionHandler.java:46,145,168</code>. Faltan niveles por perfil y correlation-id.",s:"part"},
+{t:"Factor 12 — Procesos administrativos",a:"Admin processes",c:"12 Factores",
+ d:"Tareas puntuales (migraciones, respaldos) como procesos aparte. Hay un respaldo diario y Flyway, pero no un lanzador de tareas únicas.",
+ an:"El mantenimiento nocturno del edificio.",
+ w:"<code>.github/workflows/database-backup.yml:5,46</code> (cron + <code>pg_dump</code>).",s:"part"},
+
+/* ---------- ARCHIVOS Y FORMATOS ---------- */
+{t:".properties",a:"application.properties",c:"Archivos y formatos",
+ d:"Archivo de configuración de Spring con líneas <code>clave=valor</code>. Aquí es el formato elegido (no hay <code>.yml</code>). Los valores con <code>${NOMBRE}</code> se leen de variables de entorno.",
+ an:"Una libreta de ajustes: «volumen=7».",
+ w:"<code>src/main/resources/application.properties</code> y <code>application-{dev,pre,prod}.properties</code>.",s:null},
+{t:".yml / .yaml",a:"YAML",c:"Archivos y formatos",
+ d:"Otro formato de configuración, basado en sangrías. En FusaRoute no se usa para Spring; se usa en los workflows de GitHub y en <code>render.yaml</code>.",
+ an:"Una lista con viñetas anidadas.",
+ w:"<code>.github/workflows/ci.yml</code>, <code>render.yaml</code>, <code>docker-compose.yml</code>.",s:null},
+{t:".json",a:"JSON",c:"Archivos y formatos",
+ d:"Texto con pares clave-valor entre llaves. Lo usan las respuestas de la API, <code>package.json</code>, <code>angular.json</code> y <code>tsconfig*.json</code>.",
+ an:"Un formulario rellenado en texto plano.",
+ w:"<code>FusaRoute-FRONTEND/package.json</code>, <code>angular.json</code>, <code>ngsw-config.json</code>.",s:null},
+{t:".sql",a:"SQL",c:"Archivos y formatos",
+ d:"Instrucciones para la base de datos. En FusaRoute son las migraciones: cada cambio de esquema es un archivo versionado que Flyway ejecuta una sola vez.",
+ an:"Las órdenes de obra que se entregan al maestro y se archivan.",
+ w:"<code>src/main/resources/db/migration/V1__crear_usuarios_y_rutas.sql:52-142</code> … <code>V9</code>.",s:null},
+{t:".env / .env.example",a:"Variables de entorno",c:"Archivos y formatos",
+ d:"<code>.env</code> guarda tus secretos locales y nunca se sube a Git (está en <code>.gitignore</code>). <code>.env.example</code> es la plantilla con los nombres, sin valores reales.",
+ an:"La llave real en tu bolsillo y una foto de la cerradura para mostrar.",
+ w:"Backend: <code>.gitignore:48</code>, <code>application.properties:6</code>. Nota: en el frontend el README menciona <code>.env</code> pero el código no lo lee.",s:"part"},
+{t:".xml",a:"pom.xml / checkstyle.xml",c:"Archivos y formatos",
+ d:"Formato con etiquetas. <code>pom.xml</code> es la receta de Maven: dependencias, plugins y versión. <code>checkstyle.xml</code> son las reglas de estilo.",
+ an:"La lista de materiales de una construcción.",
+ w:"<code>pom.xml</code>, <code>config/checkstyle/checkstyle.xml</code>, <code>config/owasp/suppression.xml</code>.",s:null},
+{t:"Dockerfile",a:null,c:"Archivos y formatos",
+ d:"Instrucciones para empaquetar el backend en una imagen: una etapa compila con Maven y la final solo lleva el JRE y el jar.",
+ an:"La receta de una lonchera lista para llevar.",
+ w:"<code>FusaRoute-BACKEND/Dockerfile:6-37</code>. El frontend no tiene Dockerfile (se despliega en Vercel).",s:null},
+{t:".ts / .html / .spec.ts",a:"TypeScript, plantilla, prueba",c:"Archivos y formatos",
+ d:"En Angular cada componente tiene un <code>.ts</code> (lógica), un <code>.html</code> (vista) y un <code>.spec.ts</code> (su prueba automatizada).",
+ an:"El cerebro, el rostro y el examen de cada pantalla.",
+ w:"<code>src/app/pages/routes/routes-list/routes-list.component.ts</code> y <code>.html</code>.",s:null},
+
+/* ---------- SEGURIDAD ---------- */
+{t:"JWT",a:"JSON Web Token",c:"Seguridad",
+ d:"Un texto firmado que el servidor entrega al hacer login y que el cliente reenvía en cada petición. Dice quién eres y para qué sirve (<code>scope</code>). Aquí se firma con HS256.",
+ an:"Una pulsera de evento con sello: la muestras en vez de decir tu nombre cada vez.",
+ w:"<code>infrastructure/config/JwtConfig.java:25-55</code>, <code>.../security/JwtTokenIssuer.java</code>, <code>SecurityConfig.java:91-117</code>.",s:"ok"},
+{t:"Bearer token",a:"Authorization: Bearer",c:"Seguridad",
+ d:"La forma estándar de enviar el JWT en el encabezado HTTP <code>Authorization</code>.",
+ an:"Mostrar la pulsera en la entrada.",
+ w:"Frontend: <code>core/interceptors/auth.interceptor.ts:31-37</code>.",s:"ok"},
+{t:"CORS",a:"Cross-Origin Resource Sharing",c:"Seguridad",
+ d:"Regla del navegador: una página solo puede llamar a otro dominio si ese dominio lo autoriza. El backend enumera los orígenes permitidos (nunca <code>*</code>).",
+ an:"La lista de invitados en la puerta de la fiesta.",
+ w:"<code>infrastructure/config/SecurityConfig.java:119-131</code>; origen desde <code>CORS_ALLOWED_ORIGINS</code>.",s:"ok"},
+{t:"CSRF",a:"Cross-Site Request Forgery",c:"Seguridad",
+ d:"Ataque que aprovecha una sesión por cookie. Aquí está desactivado porque la API no usa sesión ni cookies: usa un token en el encabezado.",
+ an:"Si no usas la llave maestra guardada en la puerta, nadie puede usarla por ti.",
+ w:"<code>SecurityConfig.java:72</code> (<code>csrf.disable()</code>).",s:"ok"},
+{t:"Scope",a:"SCOPE_full / SCOPE_totp_enroll",c:"Seguridad",
+ d:"El «alcance» del token. El de enrolamiento solo sirve para configurar el segundo factor; un token robado de ese tipo no permite leer el perfil.",
+ an:"Un pase de visitante que solo abre la recepción.",
+ w:"<code>SecurityConfig.java:83-90,107-117</code>.",s:"ok"},
+{t:"BCrypt",a:null,c:"Seguridad",
+ d:"Algoritmo para guardar contraseñas como hash lento e irreversible. Nunca se guarda la contraseña en claro. El costo está en 12.",
+ an:"Una trituradora: del papel triturado no se recupera el texto, pero se puede comparar.",
+ w:"<code>infrastructure/adapter/out/security/BCryptPasswordHasher.java:16-39</code>.",s:"ok"},
+{t:"TOTP / 2FA",a:"Segundo factor",c:"Seguridad",
+ d:"Código de 6 dígitos que cambia cada 30 segundos desde una app autenticadora, además de la contraseña. El login lo exige y hay códigos de respaldo. Ojo: en <code>main</code> el cifrado del secreto TOTP es un esqueleto (<code>encrypt()</code> y <code>decrypt()</code> lanzan <code>UnsupportedOperationException</code>), así que el flujo completo no está terminado.",
+ an:"Una segunda cerradura con una llave que cambia sola.",
+ w:"<code>application/usecase/LoginService.java:84-148</code>, <code>.../security/SamstevensTotpAdapter.java</code>, migración <code>V8</code>. Pendiente: <code>.../security/AesGcmSecretCipher.java:72-84</code> (SCRUM-179), llamado desde <code>UserPersistenceAdapter.java:49,67</code>.",s:"part"},
+{t:"OWASP Dependency-Check",a:"OWASP / CVE / CVSS",c:"Seguridad",
+ d:"Revisa las librerías contra la base de vulnerabilidades conocidas (CVE, con puntaje CVSS). El build falla con puntaje ≥ 7. Corre en un perfil aparte, no en el <code>mvn verify</code> normal.",
+ an:"Consultar si algún ingrediente fue retirado del mercado por peligroso.",
+ w:"<code>pom.xml:262-304</code>, <code>.github/workflows/security.yml</code>, <code>config/owasp/suppression.xml</code>.",s:"ok"},
+
+/* ---------- CALIDAD Y PRUEBAS ---------- */
+{t:"JaCoCo",a:"Cobertura de código",c:"Calidad y pruebas",
+ d:"Mide qué porcentaje del código ejecutan las pruebas. El build exige 70 % de instrucciones, pero solo en <code>domain</code> y <code>application</code>. El porcentaje real no está medido en estos documentos.",
+ an:"Revisar cuántas habitaciones de la casa visitó el inspector.",
+ w:"<code>pom.xml:169-212</code> (mínimo en <code>:199-200</code>).",s:"part"},
+{t:"ArchUnit",a:null,c:"Calidad y pruebas",
+ d:"Pruebas que verifican la arquitectura misma: las capas apuntan hacia adentro y el dominio no importa frameworks. Si alguien lo viola, el build falla.",
+ an:"Un guardia que revisa que nadie cruce las paredes del plano.",
+ w:"<code>src/test/java/com/fusaroute/architecture/HexagonalArchitectureTest.java:14-45</code>, <code>TestArchitectureTest.java:19-29</code>.",s:"ok"},
+{t:"Checkstyle",a:null,c:"Calidad y pruebas",
+ d:"Revisa reglas de estilo (imports sin usar, llaves obligatorias, líneas de máximo 140). Rompe el build al validar. No hay Spotless.",
+ an:"El corrector ortográfico del código.",
+ w:"<code>pom.xml:213-241</code>, <code>config/checkstyle/checkstyle.xml:21-46</code>.",s:"ok"},
+{t:"SonarCloud",a:"SonarQube",c:"Calidad y pruebas",
+ d:"Plataforma que analiza el código y reporta bugs, olores y cobertura. Aquí es informativa: no bloquea el merge y se salta si falta el token.",
+ an:"Un auditor externo que opina, pero no decide.",
+ w:"Backend <code>.github/workflows/ci.yml:53-58</code>; frontend <code>sonar-project.properties</code>.",s:"part"},
+{t:"JUnit + Mockito",a:null,c:"Calidad y pruebas",
+ d:"JUnit corre las pruebas; Mockito crea dobles (<code>@Mock</code>) de los puertos para probar un caso de uso sin base de datos real.",
+ an:"Ensayar con un actor suplente.",
+ w:"<code>src/test/java/com/fusaroute/application/usecase/*ServiceTest.java</code> (13 clases).",s:"ok"},
+{t:"Testcontainers",a:null,c:"Calidad y pruebas",
+ d:"Levanta una base Postgres real en Docker durante la prueba. Solo una prueba lo usa y se omite si no hay Docker.",
+ an:"Montar un mini-escenario real para el ensayo.",
+ w:"<code>src/test/.../persistence/UserPersistenceAdapterIT.java</code>, <code>pom.xml:147-161</code>.",s:"part"},
+{t:"Vitest",a:null,c:"Calidad y pruebas",
+ d:"Ejecutor de pruebas del frontend. Se invoca desde Angular con <code>ng test</code>; hay 20 archivos <code>.spec.ts</code>.",
+ an:"El examinador de cada pantalla.",
+ w:"<code>FusaRoute-FRONTEND/angular.json:74-84</code>, <code>src/app/services/route.service.spec.ts:20-37</code>.",s:"ok"},
+{t:"CI / GitHub Actions",a:"Integración continua",c:"Calidad y pruebas",
+ d:"Cada push o PR dispara compilar, probar y verificar. Si falla, no se despliega. El frontend no corre el lint en CI.",
+ an:"Una línea de control de calidad antes de salir de la fábrica.",
+ w:"Backend: <code>.github/workflows/ci.yml:44</code> (<code>mvn -B verify</code>). Frontend: <code>ci.yml</code> (build + tests).",s:"part"},
+
+/* ---------- OBSERVABILIDAD ---------- */
+{t:"Log / SLF4J",a:"Logger",c:"Observabilidad",
+ d:"Mensajes que el programa escribe para explicar qué pasó. Se usa SLF4J. Hoy solo se registra en el manejador global de errores.",
+ an:"La bitácora del capitán.",
+ w:"<code>infrastructure/adapter/in/web/GlobalExceptionHandler.java:46,145,168</code>. No hay <code>logback-spring.xml</code> ni MDC.",s:"part"},
+{t:"Spring Boot Actuator",a:null,c:"Observabilidad",
+ d:"Agrega endpoints de salud y métricas (<code>/actuator/health</code>, <code>/actuator/prometheus</code>). La salud es pública; el resto exige token completo.",
+ an:"El tablero de instrumentos del carro.",
+ w:"<code>application.properties:33-36</code>, <code>SecurityConfig.java:75,90</code>, <code>HealthController.java</code>.",s:"ok"},
+{t:"Micrometer",a:"Métricas",c:"Observabilidad",
+ d:"Librería que registra medidas: cuánto tarda la búsqueda de ruta, cuántas veces acertó el caché. Calcula percentiles p50, p95 y p99.",
+ an:"El cronómetro y el contador de vueltas.",
+ w:"<code>application/usecase/SearchRouteService.java:23,38,63,93</code>, <code>.../maps/GoogleMapsClient.java:54-66</code>.",s:"ok"},
+{t:"Prometheus / percentil p95",a:null,c:"Observabilidad",
+ d:"Prometheus es el formato en que se publican las métricas. El p95 es el tiempo bajo el cual responde el 95 % de las peticiones; sirve para el requisito de rendimiento RNF-01.",
+ an:"«El 95 % de los pedidos sale en menos de X minutos».",
+ w:"<code>application.properties:35-36,41,44</code>.",s:"ok"},
+{t:"Correlation ID / MDC",a:null,c:"Observabilidad",
+ d:"Un identificador que acompaña una petición por todos sus logs para poder reconstruirla. No está implementado.",
+ an:"El número de seguimiento de un paquete.",
+ w:"No existe en el código. Se declara como brecha en la guía (B.3).",s:"no"},
+
+/* ---------- FRONTEND ---------- */
+{t:"Signals",a:"signal / computed",c:"Frontend",
+ d:"Variables reactivas de Angular: cuando cambian, la pantalla se actualiza sola. <code>computed</code> deriva un valor de otros. <code>effect()</code> no se usa en el proyecto.",
+ an:"Una celda de Excel y otra celda con una fórmula que depende de ella.",
+ w:"<code>routes-list.component.ts:15-17</code>, <code>auth.service.ts:24-39</code>, <code>routes-detail.component.ts:32-42</code>.",s:"ok"},
+{t:"input() / output()",a:"Comunicación entre componentes",c:"Frontend",
+ d:"<code>input()</code> recibe datos del padre; <code>output()</code> avisa eventos hacia el padre.",
+ an:"Los parámetros y el timbre de un componente.",
+ w:"<code>components/map-view/map-view.component.ts:48-52</code>; <code>components/totp-enroll/totp-enroll.component.ts:157-159</code>.",s:"ok"},
+{t:"Componente standalone",a:null,c:"Frontend",
+ d:"Un componente que declara sus propias dependencias; no hace falta un <code>NgModule</code>. Todas las pantallas se cargan de forma perezosa con <code>loadComponent</code>.",
+ an:"Una pieza de Lego que trae sus propios tornillos.",
+ w:"<code>app.routes.ts:8-25</code>; <code>routes-list.component.ts:10</code>.",s:"ok"},
+{t:"Interceptor HTTP",a:"authInterceptor",c:"Frontend",
+ d:"Función que se ejecuta en cada petición HTTP. Aquí adjunta el token y, ante un 401, cierra la sesión y manda al login.",
+ an:"El portero que sella cada sobre que sale.",
+ w:"<code>core/interceptors/auth.interceptor.ts:23-50</code>; registro en <code>app.config.ts:12-14</code>.",s:"ok"},
+{t:"Guard",a:"authGuard",c:"Frontend",
+ d:"Decide si se puede entrar a una ruta. Solo <code>/perfil</code> lo usa; el catálogo de rutas es público.",
+ an:"El control de acceso a la zona VIP.",
+ w:"<code>core/guards/auth.guard.ts:5-15</code>, <code>app.routes.ts:24</code>.",s:"ok"},
+{t:"environment / fileReplacements",a:"Configuración por ambiente",c:"Frontend",
+ d:"Al compilar para producción, Angular reemplaza <code>environment.ts</code> por <code>environment.prod.ts</code>. Es configuración de compilación, no de ejecución.",
+ an:"Imprimir dos versiones del libro, una por país.",
+ w:"<code>src/environments/environment.ts:15</code>, <code>environment.prod.ts:15</code>, <code>angular.json:46-51</code>.",s:"part"},
+{t:"PWA / Service Worker",a:null,c:"Frontend",
+ d:"Permite instalar la app y que funcione con cobertura limitada sin red. Se activa solo fuera del modo desarrollo.",
+ an:"Un cuaderno de apuntes para cuando no hay internet.",
+ w:"<code>app.config.ts:16-19</code>, <code>ngsw-config.json</code>, <code>public/manifest.webmanifest</code>.",s:"ok"},
+{t:"Vercel",a:"Hosting del frontend",c:"Frontend",
+ d:"Plataforma donde se publica el frontend. Reescribe todas las rutas a <code>index.html</code> porque es una aplicación de una sola página.",
+ an:"El local donde se exhibe la tienda.",
+ w:"<code>FusaRoute-FRONTEND/vercel.json:3-9</code>.",s:null},
+
+/* ---------- DATOS Y MAPAS ---------- */
+{t:"Flyway",a:"Migraciones",c:"Datos y mapas",
+ d:"Herramienta que aplica los archivos <code>.sql</code> en orden y recuerda cuáles ya corrieron. Garantiza el mismo esquema en dev y prod. Hibernate solo valida.",
+ an:"El historial de obras del edificio: cada cambio queda firmado y fechado.",
+ w:"<code>src/main/resources/db/migration/V1…V9</code>; <code>application.properties:15-27</code>; <code>MigrationVersionsTest.java</code>.",s:"ok"},
+{t:"JPA / Hibernate",a:"Entidad",c:"Datos y mapas",
+ d:"Convierte tablas de la base en clases Java (<code>@Entity</code>). Está confinado a la infraestructura; el dominio no lo conoce.",
+ an:"Un traductor entre tablas y objetos.",
+ w:"<code>.../persistence/RouteJpaEntity.java:40-79</code>, <code>SpringDataRouteRepository.java:6</code>.",s:"ok"},
+{t:"PostgreSQL / Supabase",a:null,c:"Datos y mapas",
+ d:"La base de datos relacional. Supabase la aloja en la nube y entrega una sola base llamada <code>postgres</code>; el aislamiento por ambiente lo da el esquema y el rol.",
+ an:"El archivo central de la oficina, con un cajón por ambiente.",
+ w:"<code>application-*.properties</code> (<code>DB_URL</code>), <code>application.properties:26-27</code>.",s:"ok"},
+{t:"GeoJSON / LineString",a:"[lng, lat]",c:"Datos y mapas",
+ d:"Formato estándar para figuras geográficas. El trazado de cada ruta es un <code>LineString</code> con puntos <code>[longitud, latitud]</code>. Ojo: Google Maps espera <code>{lat, lng}</code>, por eso se invierte el orden a propósito.",
+ an:"Un camino de migas de pan, punto por punto.",
+ w:"BD: <code>V1__crear_usuarios_y_rutas.sql:67</code>; backend: <code>RoutePersistenceMapper.java:50-68</code>; frontend: <code>routes-detail.component.ts:36</code>, <code>map-view.component.ts:70-77</code>.",s:"ok"},
+{t:"Google Maps (Distance Matrix)",a:null,c:"Datos y mapas",
+ d:"El backend le pregunta a Google cuánto tarda un viaje y guarda la respuesta 5 minutos en caché (Caffeine). Si Google falla, responde 503 y el frontend reintenta en modo sin conexión. En el frontend, la clave del mapa está vacía en <code>main</code>.",
+ an:"Preguntarle al GPS y anotar la respuesta un rato.",
+ w:"<code>.../adapter/out/maps/GoogleMapsClient.java</code>, <code>application.properties:46-54</code>, <code>GlobalExceptionHandler.java:142-147</code>.",s:"part"}
+];
+
+var CATS = ["Todas"];
+CARDS.forEach(function(c){ if (CATS.indexOf(c.c) < 0) CATS.push(c.c); });
+
+var state = { q: "", cat: "Todas" };
+var $ = function(id){ return document.getElementById(id); };
+var BADGE = {
+  ok:  ['b-ok','✔ Implementado'],
+  part:['b-part','◐ Parcial'],
+  no:  ['b-no','✖ No implementado']
+};
+
+function norm(s){
+  return String(s).toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'');
+}
+function strip(html){ return html.replace(/<[^>]+>/g,''); }
+function esc(s){
+  return String(s).replace(/[&<>]/g, function(ch){ return {'&':'&amp;','<':'&lt;','>':'&gt;'}[ch]; });
+}
+
+function cardHtml(c){
+  var b = c.s ? '<span class="badge ' + BADGE[c.s][0] + '">' + BADGE[c.s][1] + '</span>' : '';
+  return '<article class="card">' +
+    '<div class="top"><div><div class="cat">' + esc(c.c) + '</div><h2>' + esc(c.t) + '</h2>' +
+    (c.a ? '<div class="abbr">' + esc(c.a) + '</div>' : '') + '</div>' + b + '</div>' +
+    '<p>' + c.d + '</p>' +
+    '<div class="an">' + esc(c.an) + '</div>' +
+    '<div class="where"><b>Dónde está en FusaRoute</b>' + c.w + '</div>' +
+    '</article>';
+}
+
+function render(){
+  var q = norm(state.q.trim());
+  var shown = CARDS.filter(function(c){
+    if (state.cat !== "Todas" && c.c !== state.cat) return false;
+    if (!q) return true;
+    var hay = norm([c.t, c.a || '', c.c, strip(c.d), c.an, strip(c.w)].join(' '));
+    return q.split(/\s+/).every(function(w){ return hay.indexOf(w) >= 0; });
+  });
+  $('grid').innerHTML = shown.map(cardHtml).join('');
+  $('empty').style.display = shown.length ? 'none' : 'block';
+  $('count').textContent = shown.length + ' de ' + CARDS.length + ' términos';
+}
+
+function renderChips(){
+  $('chips').innerHTML = CATS.map(function(c){
+    return '<button type="button" class="chip" data-cat="' + esc(c) + '" aria-pressed="' + (c === state.cat) + '">' + esc(c) + '</button>';
+  }).join('');
+}
+
+$('chips').addEventListener('click', function(e){
+  var btn = e.target.closest('.chip');
+  if (!btn) return;
+  state.cat = btn.getAttribute('data-cat');
+  renderChips(); render();
+});
+$('q').addEventListener('input', function(e){ state.q = e.target.value; render(); });
+
+$('theme').addEventListener('click', function(){
+  var root = document.documentElement;
+  var cur = root.getAttribute('data-theme');
+  var dark = cur ? cur === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches;
+  root.setAttribute('data-theme', dark ? 'light' : 'dark');
+});
+
+renderChips(); render();
+</script>
+</body>
+</html>

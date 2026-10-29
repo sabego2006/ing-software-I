@@ -51,11 +51,19 @@ Notas de lo que difiere del plan original:
 - `SCRUM-165` en In Progress, con comentario y enlaces a los entregables.
 - Ninguna se marcó Done: la regla es cerrar solo con PR mergeado y CI en verde.
 
-## Pendiente (decisiones del equipo)
+## Pendiente (actualizado el 2026-10-09)
 
-- Abrir y mergear los PR de RF-03 en backend y frontend (nadie los ha abierto; no se mergea sin revisión del otro integrante).
-- Confirmar la prioridad Alta de RF-15 (la asignó el V2).
-- Nombre del puerto de tiempos de viaje: la HU dice `TravelTimeProvider` y el `CLAUDE.md` del backend dice `TravelTimePort`. No se decidió.
-- Cita exacta de la fuente DANE (población ~285.000).
-- Conciliar 14 hallazgos (texto de RNF-05) contra 15 CVE en `suppression.xml`.
+Resuelto desde el 28-sep:
+
+- PR de RF-03 mergeados a `main` en backend (PR #17) y frontend (PR #8) el 28-sep; `SCRUM-14` en Done.
+- Prioridad de RF-15: **Alta**, justificada porque ya está implementado y en Done (Documento V2 cerrado el 09-oct).
+- Nombre del puerto de tiempos de viaje: **`TravelTimePort`**, coherente con los demás puertos del hexágono. Falta alinear el `CLAUDE.md` del backend si aún dice otra cosa.
+- Cita del DANE: serie municipal 2018-2042 (CNPV 2018), verificada en el `.xlsx` oficial. La cifra de ~285.000 habitantes se retiró: el alcance atiende 182.914 y la provincia del Sumapaz suma 240.497.
+
+Siguen abiertos:
+
+- Conciliar 14 hallazgos (texto de RNF-05) contra 15 CVE en `suppression.xml` (hay 15 `<cve>` en 2 bloques; la cifra del texto de RNF-05 es la que está desactualizada).
 - Aplicar parches pendientes (ArchUnit 1.5.1, JaCoCo 0.8.15) y decidir los saltos mayores con tarjeta propia.
+- Evidencia de los instrumentos de RNF-02 (monitoreo de latidos y backup con restore probado): PROD está desplegado, pero el repositorio no la tiene.
+- Registrar la rotación de la capa técnica del Sprint 3, que no figura en el tablero.
+- Actualizar el diagrama editable `.drawio` para que coincida con la Figura 2.
