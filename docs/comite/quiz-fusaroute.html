@@ -1,0 +1,735 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Quiz FusaRoute</title>
+<style>
+  :root {
+    --bg: #f6f7fb; --card: #ffffff; --ink: #14161f; --muted: #5b6072; --line: #e2e5ee;
+    --accent: #4f46e5; --accent-ink: #ffffff; --ok: #15803d; --ok-bg: #dcfce7; --bad: #b91c1c; --bad-bg: #fee2e2;
+    --code-bg: #eef0f6; --shadow: 0 1px 2px rgba(20,22,31,.06), 0 8px 24px rgba(20,22,31,.06);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0f1117; --card: #181b24; --ink: #e8eaf2; --muted: #9aa0b4; --line: #2a2f3d;
+      --accent: #818cf8; --accent-ink: #0f1117; --ok: #4ade80; --ok-bg: #14321f; --bad: #f87171; --bad-bg: #3a1717;
+      --code-bg: #232838; --shadow: none;
+    }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font: 16px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+  .wrap { max-width: 760px; margin: 0 auto; padding: 16px 16px 48px; }
+  header { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+  h1 { font-size: 1.25rem; margin: 0; letter-spacing: -.01em; }
+  h1 span { color: var(--accent); }
+  .controls { display: flex; gap: 8px; flex-wrap: wrap; }
+  select, .btn { font: inherit; font-size: .9rem; border-radius: 10px; border: 1px solid var(--line); background: var(--card); color: var(--ink); padding: 8px 12px; }
+  .btn { cursor: pointer; }
+  .btn:hover { border-color: var(--accent); }
+  .btn.primary { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); font-weight: 600; }
+  .btn:disabled { opacity: .4; cursor: default; }
+  .stats { position: sticky; top: 0; z-index: 2; background: var(--bg); padding: 8px 0 10px; }
+  .stats-row { display: flex; justify-content: space-between; font-size: .9rem; color: var(--muted); margin-bottom: 6px; gap: 8px; flex-wrap: wrap; }
+  .stats-row b { color: var(--ink); }
+  .bar { height: 6px; background: var(--line); border-radius: 99px; overflow: hidden; }
+  .bar > div { height: 100%; width: 0; background: var(--accent); transition: width .25s; }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 20px; box-shadow: var(--shadow); }
+  .meta { display: flex; justify-content: space-between; gap: 8px; font-size: .8rem; color: var(--muted); margin-bottom: 10px; }
+  .chip { background: var(--code-bg); border-radius: 99px; padding: 2px 10px; }
+  .q { font-size: 1.1rem; font-weight: 600; margin: 0 0 16px; }
+  .opts { display: grid; gap: 10px; }
+  .opt { display: flex; gap: 12px; align-items: flex-start; text-align: left; width: 100%; font: inherit; color: var(--ink);
+         background: var(--card); border: 1.5px solid var(--line); border-radius: 12px; padding: 12px 14px; cursor: pointer; transition: border-color .15s, background .15s; }
+  .opt:hover:not(:disabled) { border-color: var(--accent); }
+  .opt:disabled { cursor: default; }
+  .opt .k { flex: none; width: 26px; height: 26px; border-radius: 8px; display: grid; place-items: center; font-size: .8rem; font-weight: 700; background: var(--code-bg); color: var(--muted); }
+  .opt.ok { border-color: var(--ok); background: var(--ok-bg); }
+  .opt.ok .k { background: var(--ok); color: var(--card); }
+  .opt.bad { border-color: var(--bad); background: var(--bad-bg); }
+  .opt.bad .k { background: var(--bad); color: var(--card); }
+  .opt.dim { opacity: .55; }
+  .fb { margin-top: 16px; border-radius: 12px; padding: 12px 14px; border-left: 4px solid var(--ok); background: var(--ok-bg); }
+  .fb.bad { border-left-color: var(--bad); background: var(--bad-bg); }
+  .fb h3 { margin: 0 0 4px; font-size: .95rem; }
+  .fb p { margin: 0; font-size: .92rem; }
+  .fb .src { margin-top: 6px; font-size: .8rem; color: var(--muted); word-break: break-word; }
+  code { font-family: ui-monospace, "Cascadia Code", Consolas, monospace; font-size: .86em; background: var(--code-bg); padding: 1px 5px; border-radius: 5px; word-break: break-word; }
+  .nav { display: flex; justify-content: space-between; gap: 8px; margin-top: 16px; }
+  .hint { text-align: center; font-size: .78rem; color: var(--muted); margin-top: 14px; }
+  .summary h2 { margin: 0 0 4px; }
+  .big { font-size: 2.4rem; font-weight: 800; color: var(--accent); margin: 4px 0 12px; }
+  .missed { margin: 16px 0 0; padding: 0; list-style: none; display: grid; gap: 10px; }
+  .missed li { border: 1px solid var(--line); border-radius: 12px; padding: 10px 12px; font-size: .92rem; }
+  .missed li .ans { color: var(--ok); font-weight: 600; margin-top: 4px; }
+  @media (max-width: 480px) { .card { padding: 16px; } .q { font-size: 1rem; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>Quiz <span>FusaRoute</span> · sustentación</h1>
+    <div class="controls">
+      <select id="cat" aria-label="Categoría">
+        <option value="all">Todas las categorías</option>
+      </select>
+      <button class="btn" id="shuffle" type="button">Rebarajar</button>
+    </div>
+  </header>
+
+  <div class="stats">
+    <div class="stats-row">
+      <span id="pos"></span>
+      <span>Aciertos <b id="ok">0</b> · Respondidas <b id="done">0</b> · <b id="pct">0 %</b></span>
+    </div>
+    <div class="bar"><div id="prog"></div></div>
+  </div>
+
+  <main id="app"></main>
+  <p class="hint">Teclas: <code>1</code>–<code>4</code> para responder · <code>Enter</code> o <code>→</code> siguiente · <code>←</code> anterior</p>
+</div>
+
+<script>
+// Cada pregunta: [categoría, pregunta, respuesta correcta, [3 distractores], explicación, fuente].
+// La correcta se escribe primero aquí; al cargar se barajan las 4 opciones.
+const BANK = [
+// ───────────────────────── Siglas y conceptos ─────────────────────────
+["Siglas", "¿Qué expresa la «S» de SOLID?",
+ "Single Responsibility: cada clase debe tener una sola razón para cambiar",
+ ["Stateless: ningún servicio debe guardar estado", "Security by design: toda clase valida sus propias entradas", "Separation of storage: la persistencia va siempre en un módulo aparte"],
+ "SOLID = Single responsibility, Open/closed, Liskov substitution, Interface segregation, Dependency inversion. En FusaRoute, `RecoveryCodeRepositoryPort` existe aparte de `UserRepositoryPort` justamente «con una sola responsabilidad».",
+ "concepto · domain/port/out/RecoveryCodeRepositoryPort.java"],
+["Siglas", "`SearchRouteService` depende de la interfaz `TravelTimePort` y no de la clase `GoogleMapsClient`. ¿Qué principio SOLID se está aplicando?",
+ "Inversión de dependencias (DIP): lo de alto nivel depende de abstracciones, no de implementaciones",
+ ["Sustitución de Liskov (LSP)", "Abierto/cerrado (OCP)", "Segregación de interfaces (ISP)"],
+ "El caso de uso solo conoce el puerto; `UseCaseConfig` le inyecta el adaptador concreto (`GoogleMapsClient`). Así se puede cambiar de proveedor de mapas sin tocar la lógica.",
+ "application/usecase/SearchRouteService.java · infrastructure/config/UseCaseConfig.java"],
+["Siglas", "¿Qué dice el principio Abierto/Cerrado (la «O» de SOLID)?",
+ "Una pieza debe poder extenderse con comportamiento nuevo sin modificar su código existente",
+ ["Las clases públicas deben ser final y sus campos públicos", "Una API pública no puede cambiar nunca de versión", "Toda conexión a la BD se abre y se cierra en el mismo método"],
+ "Open for extension, closed for modification: se agrega comportamiento (p. ej. un nuevo adaptador que implementa un puerto) en vez de editar lo que ya funciona.",
+ "concepto"],
+["Siglas", "¿Qué exige el principio de sustitución de Liskov (la «L» de SOLID)?",
+ "Que un subtipo pueda usarse donde se espera su tipo base sin romper el comportamiento esperado",
+ ["Que cada interfaz tenga exactamente una implementación", "Que las subclases no sobrescriban métodos", "Que una clase hija viva en el mismo paquete que su padre"],
+ "Si un adaptador implementa `UserRepositoryPort`, cualquier caso de uso debe funcionar igual con él que con otra implementación (p. ej. un mock en las pruebas).",
+ "concepto"],
+["Siglas", "En la metodología 12-factor, ¿qué dice el factor «Config»?",
+ "La configuración que cambia entre ambientes vive en variables de entorno, no en el código",
+ ["Toda la configuración va en un application.yml versionado por ambiente", "La configuración se guarda en la base de datos para cambiarla en caliente", "Cada desarrollador compila con sus propias constantes"],
+ "En FusaRoute los `.properties` leen variables (`${CORS_ALLOWED_ORIGINS}`, `${PORT:8080}`, `${SPRING_PROFILE:dev}`), los secretos nunca entran al repo y `.env.example` es «la documentación ejecutable».",
+ "concepto · src/main/resources/application*.properties · .env.example"],
+["Siglas", "12-factor separa «build, release, run». ¿Cómo se cumple en FusaRoute?",
+ "Se construye una sola imagen Docker y entre ambientes solo cambian las variables de entorno",
+ ["Se compila un JAR distinto para DEV y PROD con constantes diferentes", "Render recompila el código en cada petición", "El código de producción vive en una rama aparte con sus propios cambios"],
+ "«El código nunca cambia entre ambientes»: el `Dockerfile` construye el artefacto y `render.yaml` lo ejecuta con `SPRING_PROFILE=prod` y sus variables.",
+ "Dockerfile · render.yaml · CLAUDE.md (backend)"],
+["Siglas", "En arquitectura hexagonal, ¿qué es un «puerto»?",
+ "Una interfaz del núcleo que define qué ofrece o qué necesita la aplicación, sin atarse a una tecnología",
+ ["El puerto TCP en el que escucha el servidor (8080)", "Un controlador REST", "Una tabla intermedia de la base de datos"],
+ "Puertos de entrada (`domain/port/in`, los casos de uso) y de salida (`domain/port/out`, p. ej. `RouteRepositoryPort`, `TravelTimePort`, `PasswordHasherPort`).",
+ "domain/port/in · domain/port/out"],
+["Siglas", "En arquitectura hexagonal, ¿qué es un «adaptador»?",
+ "La implementación en infrastructure que conecta un puerto con una tecnología concreta (HTTP, JPA, Google Maps)",
+ ["Un patrón para convertir JSON a XML", "Un caso de uso que coordina varios servicios", "Un DTO con métodos de validación"],
+ "Ejemplos: `RouteController` (entrada web), `RoutePersistenceAdapter` (JPA), `GoogleMapsClient` (Maps), `BCryptPasswordHasher` (seguridad).",
+ "infrastructure/adapter/in/web · infrastructure/adapter/out/*"],
+["Siglas", "¿Hacia dónde apuntan las dependencias en el backend hexagonal de FusaRoute?",
+ "Hacia adentro: infrastructure → application → domain; domain no importa Spring, JPA ni Jackson",
+ ["Hacia afuera: domain → application → infrastructure", "Las capas pueden importarse entre sí mientras compile", "application depende de infrastructure para poder llegar a la BD"],
+ "«La dependencia siempre apunta hacia adentro». No es solo una convención: ArchUnit lo verifica en cada build.",
+ "README.md (backend) · HexagonalArchitectureTest.java"],
+["Siglas", "¿Qué es un JWT?",
+ "Un token compacto header.payload.firma: los claims van codificados en Base64URL y firmados, no cifrados",
+ ["Un token cifrado que nadie puede leer sin la clave", "Un identificador de sesión que el servidor guarda en memoria", "Una cookie propia de Java EE"],
+ "Cualquiera puede decodificar el payload; la firma solo impide alterarlo. Por eso el token de FusaRoute lleva `sub`, `role`, `scope` y fechas, pero nunca secretos.",
+ "concepto · infrastructure/adapter/out/security/JwtTokenIssuer.java"],
+["Siglas", "¿Qué es CORS?",
+ "Un mecanismo del navegador que bloquea peticiones a otro origen salvo que el servidor lo permita con cabeceras Access-Control-Allow-*",
+ ["Un firewall del servidor que bloquea IPs extranjeras", "Una protección contra inyección SQL", "Un protocolo para cifrar el tráfico HTTP"],
+ "El frontend (fusaroute.vercel.app) y el backend (fusaroute-backend.onrender.com) son orígenes distintos, así que el backend debe declarar el origen del frontend como permitido.",
+ "concepto · SecurityConfig.java"],
+["Siglas", "¿Qué es un DTO y cómo se implementan en FusaRoute?",
+ "Data Transfer Object: solo transporta datos entre capas o por la red; en FusaRoute son records con una fábrica `from(...)` y mapeo manual",
+ ["Data Table Object: el mapeo directo de una tabla, anotado con @Entity", "Un objeto de dominio con reglas de negocio, generado con MapStruct", "Una entidad JPA con anotaciones @Valid"],
+ "Ejemplos: `RouteResponse`, `LoginResponse`, `RouteSearchResponse`. No se usa MapStruct, y el modelo de dominio (`Route`) es distinto de la entidad (`RouteJpaEntity`).",
+ "infrastructure/adapter/in/web/*Response.java"],
+["Siglas", "En GeoJSON, ¿en qué orden van las coordenadas de un punto?",
+ "[longitud, latitud]",
+ ["[latitud, longitud]", "{ lat, lng } como objeto", "Depende del sistema de referencia del país"],
+ "Es el estándar (RFC 7946) y la trampa más común. El backend lo respeta en el contrato; `RoutePersistenceMapper` lo invierte a `Coordinate(lat, lng)` en el dominio, y el frontend lo convierte a `{lat, lng}` para Google Maps.",
+ "concepto · models/route.model.ts · RoutePersistenceMapper.java"],
+["Siglas", "En Angular, ¿qué es un signal?",
+ "Un valor reactivo que avisa a Angular qué parte de la vista debe actualizarse cuando cambia",
+ ["Una señal del sistema operativo como SIGTERM", "Un reemplazo de HttpClient", "Un Observable que siempre completa tras emitir"],
+ "FusaRoute es zoneless (sin zone.js): un campo normal no re-renderiza la vista, un `signal` sí. `computed` deriva valores (p. ej. `isLoggedIn`). No se usa NgRx.",
+ "README.md (frontend) · services/auth.service.ts"],
+["Siglas", "¿Cuál es la relación entre OpenAPI y Swagger?",
+ "OpenAPI es la especificación que describe la API; Swagger UI es la página interactiva que la muestra",
+ ["Son dos frameworks REST que compiten entre sí", "OpenAPI es la versión de pago de Swagger", "Swagger genera la base de datos a partir de la API"],
+ "En FusaRoute, springdoc 2.8.6 genera la especificación en `/v3/api-docs` y la UI en `/swagger-ui.html`, con el esquema de seguridad `bearerAuth`.",
+ "infrastructure/config/OpenApiConfig.java · pom.xml"],
+["Siglas", "¿Qué es Micrometer?",
+ "Una fachada de métricas para la JVM que registra timers y contadores y los exporta a sistemas como Prometheus",
+ ["Una librería de logs para Spring", "Un microservicio de monitoreo aparte", "Una herramienta que mide el tamaño del bundle"],
+ "FusaRoute publica `fusaroute.search.route.latency`, `fusaroute.maps.travel_time` y `fusaroute.maps.cache`, expuestos por Actuator en `/actuator/prometheus`.",
+ "application.properties · SearchRouteService.java · GoogleMapsClient.java"],
+["Siglas", "Un RNF dice «p95 < 8 s». ¿Qué significa p95?",
+ "Que el 95 % de las peticiones tarda igual o menos que ese valor",
+ ["El tiempo promedio de las peticiones", "Que el 95 % de las peticiones responde con éxito", "El tiempo de la petición más lenta"],
+ "Es el RNF-01 sobre `/api/routes/search`. Por eso hay histogramas con percentiles 0.5, 0.95 y 0.99 en Micrometer.",
+ "CLAUDE.md (backend) · application.properties"],
+["Siglas", "¿Qué es un ProblemDetail?",
+ "El formato estándar (RFC 9457) para errores HTTP en JSON: type, title, status, detail…",
+ ["Una página HTML de error de Spring Boot", "Un stack trace que se devuelve al cliente para depurar", "Una excepción de Java para problemas de red"],
+ "`GlobalExceptionHandler` traduce cada excepción de dominio a un ProblemDetail con su código. El stack trace solo va al log, nunca al cliente.",
+ "infrastructure/adapter/in/web/GlobalExceptionHandler.java"],
+["Siglas", "¿Qué es BCrypt y cómo se configura en FusaRoute?",
+ "Un hash de contraseñas lento a propósito, con salt y factor de costo; FusaRoute usa costo 12",
+ ["Un cifrado reversible para guardar contraseñas; usa clave AES-256", "El algoritmo que firma los JWT; usa HS256", "Un hash rápido sin salt, como SHA-256"],
+ "`BCryptPasswordEncoder(12)`: el RNF-06 pide al menos 10 (el valor por defecto de Spring) y el proyecto sube a 12. También se usa para guardar los códigos de respaldo.",
+ "infrastructure/adapter/out/security/BCryptPasswordHasher.java"],
+["Siglas", "¿Qué es TOTP?",
+ "Una contraseña de un solo uso basada en tiempo: un código de 6 dígitos que cambia cada 30 s, derivado de un secreto compartido",
+ ["Un código que llega por SMS", "Una contraseña que caduca cada mes", "Un certificado TLS instalado en el cliente"],
+ "Es el segundo factor del login de FusaRoute: la app autenticadora y el servidor calculan el mismo código a partir del secreto que se compartió al escanear el QR.",
+ "concepto · LoginService.java · EnrollTotpService.java"],
+["Siglas", "¿Qué es una PWA?",
+ "Una aplicación web instalable, con manifest y service worker que guarda en caché la app para poder cargarla sin red",
+ ["Una app nativa compilada para Android", "Un framework de Angular para crear APIs", "Una base de datos local del navegador"],
+ "FusaRoute usa `@angular/service-worker` y `manifest.webmanifest` (display standalone). El service worker solo se activa en builds de producción, no en `ng serve`.",
+ "app.config.ts · ngsw-config.json · public/manifest.webmanifest"],
+["Siglas", "¿Qué mide el LCP, que en FusaRoute debe ser < 2,5 s?",
+ "Largest Contentful Paint: cuánto tarda en pintarse el elemento más grande visible de la página",
+ ["Lines of Code per Page", "Latency of Connection Pool del backend", "Load Complete Percentage del bundle"],
+ "Es una métrica Core Web Vital, medida con Lighthouse móvil en Slow 4G. Es la razón por la que el listado de rutas no trae los trazados.",
+ "CLAUDE.md (frontend)"],
+["Siglas", "¿Qué es el RPO?",
+ "Recovery Point Objective: cuántos datos, medidos en tiempo, se acepta perder; con backup diario, RPO < 24 h",
+ ["El tiempo máximo que el sistema puede estar caído antes de volver a estar en línea", "Recovery Process Owner: el responsable de restaurar", "Requests Per Operation que soporta la BD"],
+ "Ojo: el tiempo hasta volver a estar en línea es el RTO, no el RPO. FusaRoute cumple RPO < 24 h con `database-backup.yml`, que hace un `pg_dump` diario.",
+ "CLAUDE.md (backend) · .github/workflows/database-backup.yml"],
+["Siglas", "¿Qué es ISO/IEC 25010?",
+ "El modelo de calidad del producto software (eficiencia, usabilidad, fiabilidad, seguridad, mantenibilidad…) con el que se definen los RNF",
+ ["La norma de gestión de proyectos ágiles", "Un estándar de cifrado de datos", "La norma de accesibilidad web"],
+ "Los dos CLAUDE.md tienen una tabla de calidad por característica: p95 < 8 s, 0 violaciones hexagonales, cobertura ≥ 70 %, 0 CVSS ≥ 7, LCP < 2,5 s…",
+ "CLAUDE.md (backend y frontend)"],
+["Siglas", "¿Qué es un CVSS?",
+ "Common Vulnerability Scoring System: un puntaje de 0 a 10 que mide la severidad de una vulnerabilidad",
+ ["Un antivirus para servidores Java", "Un sistema de control de versiones", "El certificado SSL del dominio"],
+ "La política de FusaRoute es 0 vulnerabilidades con CVSS ≥ 7 sin suprimir: Dependency-Check usa `failBuildOnCVSS=7`.",
+ "pom.xml (perfil security)"],
+["Siglas", "¿Qué es OWASP?",
+ "Una fundación abierta de seguridad de aplicaciones (Open Worldwide Application Security Project), autora del Top 10 y de Dependency-Check",
+ ["Una agencia del gobierno de EE. UU. que certifica software", "Un lenguaje de reglas para firewalls", "Un estándar ISO de cifrado"],
+ "FusaRoute usa su herramienta Dependency-Check en el backend para encontrar CVE conocidas en las dependencias.",
+ "concepto · pom.xml"],
+["Siglas", "¿En qué formato está la configuración de Spring del backend de FusaRoute?",
+ "`.properties`: application.properties, -dev, -pre y -prod",
+ ["`application.yml` con un documento por perfil", "JSON en `config/application.json`", "Solo un archivo `.env` leído al arrancar"],
+ "Pregunta trampa: el YAML sí aparece, pero en los workflows de `.github/workflows/*.yml` y en `render.yaml`, no en la configuración de Spring.",
+ "src/main/resources/application*.properties"],
+["Siglas", "¿Qué contienen los archivos `.sql` de `src/main/resources/db/migration`?",
+ "Las migraciones versionadas de Flyway (V1…V9) que crean el esquema y cargan la semilla",
+ ["Consultas que el frontend ejecuta directamente", "Los respaldos diarios de Supabase", "Procedimientos almacenados que llaman los controladores"],
+ "Flyway las aplica en orden y anota cuáles corrió. Hibernate no crea tablas (`ddl-auto=validate`).",
+ "src/main/resources/db/migration/"],
+["Siglas", "¿Qué formato de commit usa el equipo?",
+ "Conventional Commits en español con la key de Jira: `feat(SCRUM-N): descripción`",
+ ["`SCRUM-N - fix stuff` en inglés", "`[FEAT] Description` en mayúsculas", "Mensaje libre; Jira se enlaza a mano"],
+ "Las ramas siguen `feature/SCRUM-N-nombre`. `main` está protegida, todo cambio entra por PR revisado y nadie mergea su propio PR.",
+ "CLAUDE.md (workspace y repos)"],
+
+// ───────────────────────── Calidad y DevOps ─────────────────────────
+["Calidad y DevOps", "Flyway gestiona el esquema y Hibernate tiene `ddl-auto=validate`. ¿Qué hace cada uno?",
+ "Flyway crea y modifica el esquema; Hibernate solo verifica que las entidades coincidan con él y falla si no",
+ ["Hibernate crea las tablas y Flyway solo las valida", "Ambos crean tablas y gana el último que corre", "validate borra las columnas que sobran en la BD"],
+ "Así la base de datos solo cambia por migraciones versionadas y revisadas, y un desfase entre la entidad y la tabla se detecta al arrancar.",
+ "application-dev/-prod.properties"],
+["Calidad y DevOps", "¿Por qué existe `MigrationVersionsTest`?",
+ "Porque dos PR eligieron V7, Git no marcó conflicto (eran archivos distintos), Flyway se negó a arrancar y el CI seguía en verde",
+ ["Porque Flyway no soporta más de 9 migraciones", "Para medir el tiempo que tarda cada migración", "Para borrar migraciones viejas automáticamente"],
+ "La prueba falla si dos migraciones tienen la misma versión o si un nombre no cumple `V<n>__descripcion.sql`. Es JUnit puro, sin Spring.",
+ "src/test/java/com/fusaroute/architecture/MigrationVersionsTest.java"],
+["Calidad y DevOps", "¿Qué regla de JaCoCo hace cumplir el backend?",
+ "Al menos 70 % de instrucciones cubiertas en los paquetes domain y application; si baja, el build falla",
+ ["80 % en todo el proyecto, controladores incluidos", "100 % en domain y nada en el resto", "Es solo un reporte informativo que nunca falla"],
+ "Solo se miden domain y application porque ahí vive la lógica de negocio; cubrir controladores sería cosmético. El XML del reporte también alimenta a Sonar.",
+ "pom.xml (jacoco-maven-plugin 0.8.14)"],
+["Calidad y DevOps", "¿Qué verifica la regla de ArchUnit `dominio_no_conoce_frameworks`?",
+ "Que ninguna clase de `com.fusaroute.domain` dependa de Spring, jakarta.persistence ni Jackson",
+ ["Que todos los controladores tengan @RestController", "Que no haya ciclos entre componentes de Angular", "Que todas las pruebas usen Mockito"],
+ "Junto con `capas_apuntan_hacia_adentro`, convierte la arquitectura hexagonal en algo que se prueba en cada `mvn verify`, no en una promesa del README.",
+ "src/test/java/com/fusaroute/architecture/HexagonalArchitectureTest.java"],
+["Calidad y DevOps", "¿Qué hace OWASP Dependency-Check en el backend de FusaRoute?",
+ "Hace fallar el build si una dependencia tiene una CVE con CVSS ≥ 7 que no esté suprimida",
+ ["Analiza el código propio en busca de inyección SQL", "Escanea los puertos abiertos del servidor en Render", "Genera un reporte informativo que nunca bloquea"],
+ "Corre en el perfil Maven `security` y en el workflow `security.yml`, con `failBuildOnCVSS=7`. Analiza dependencias (librerías), no el código propio.",
+ "pom.xml · .github/workflows/security.yml"],
+["Calidad y DevOps", "¿Cuál es la política de supresiones de Dependency-Check?",
+ "Solo se suprime una CVE sin parche publicado, con fecha de vencimiento (`until`) y justificación; si existe parche, se sube la versión",
+ ["Se suprime toda CVE que haga fallar el build", "Las supresiones son permanentes y sin justificación", "Se desactiva el escaneo cuando hay una CVE nueva"],
+ "Ejemplo: log4j2 se subió a 2.25.5 por una CVE en lugar de suprimirla; las supresiones de spring-framework y spring-security vencen el 2027-01-15.",
+ "config/owasp/suppression.xml · pom.xml"],
+["Calidad y DevOps", "¿Qué control de seguridad de dependencias tiene el frontend?",
+ "`npm audit --audit-level=high` en el workflow «Seguridad Frontend»",
+ ["OWASP Dependency-Check ejecutado con Maven", "Snyk con licencia de pago", "Reglas de seguridad de ESLint en cada commit"],
+ "Corre en push y PR a `main`, después de `npm ci`.",
+ ".github/workflows/security.yml (frontend)"],
+["Calidad y DevOps", "¿Con qué se ejecutan las pruebas unitarias del frontend?",
+ "Vitest 4 a través del builder `@angular/build:unit-test`, con jsdom; no se usa Karma ni Jasmine",
+ ["Karma con Jasmine en Chrome headless", "Jest con ts-jest", "Playwright en modo unitario"],
+ "`npm run test:ci` ejecuta `ng test --no-watch --coverage` y deja el lcov en `coverage/fusaroute-frontend/lcov.info`. No hay pruebas e2e.",
+ "angular.json · package.json"],
+["Calidad y DevOps", "¿Para qué se usa Testcontainers en el backend?",
+ "Para levantar un PostgreSQL real (`postgres:15-alpine`) en Docker y probar el adaptador de usuarios con Flyway incluido",
+ ["Para simular PostgreSQL con H2 en memoria", "Para desplegar la imagen a Render", "Para correr el frontend dentro de las pruebas"],
+ "`UserPersistenceAdapterIT` es la prueba de integración; si no hay Docker se salta (`disabledWithoutDocker = true`). Failsafe la corre en `verify`.",
+ "src/test/.../UserPersistenceAdapterIT.java · pom.xml"],
+["Calidad y DevOps", "¿Qué hace Checkstyle en el backend?",
+ "Revisa reglas de código (imports sin usar, llaves obligatorias, líneas ≤ 140…) en la fase validate y rompe el build si hay violaciones",
+ ["Formatea el código automáticamente al hacer commit", "Mide la cobertura de pruebas", "Revisa la ortografía de los comentarios en español"],
+ "Usa `failOnViolation=true` y omite a propósito las reglas de formato ruidosas.",
+ "config/checkstyle/checkstyle.xml · pom.xml"],
+["Calidad y DevOps", "¿Cómo está configurado el análisis de Sonar en el CI?",
+ "SonarCloud analiza cada PR (RNF-05); el Quality Gate es informativo y el paso se salta si no existe el secreto SONAR_TOKEN",
+ ["Bloquea el merge si la cobertura baja de 90 %", "Corre solo en la máquina de cada desarrollador", "Reemplaza a JaCoCo y a Vitest"],
+ "Como el paso tiene `if: env.SONAR_TOKEN != ''`, queda SKIPPED (no FAILED) sin el token. En el backend, `sonar.qualitygate.wait=false`.",
+ ".github/workflows/ci.yml · docs/calidad/sonarqube.md"],
+["Calidad y DevOps", "¿Qué hace el workflow de CI del backend?",
+ "`mvn -B verify` con JDK 25 (compila, Checkstyle, pruebas, JaCoCo) y después el análisis de Sonar",
+ ["Despliega directamente a producción sin pruebas", "Solo compila; las pruebas se corren a mano", "Ejecuta `npm test` y `ng build`"],
+ "Se ejecuta en push y PR a `main`. Los tres primeros pasos van en `verify`; el análisis de Sonar es el último paso.",
+ ".github/workflows/ci.yml (backend)"],
+["Calidad y DevOps", "¿Cómo está hecho el Dockerfile del backend?",
+ "Dos etapas: Maven con JDK 25 compila, y una imagen solo con JRE 25 ejecuta la app como usuario no-root",
+ ["Una sola etapa con el JDK completo, ejecutando como root", "Usa la imagen de Node 22 para compilar", "Copia el JAR compilado en la máquina del desarrollador"],
+ "La imagen final es más liviana y segura. El build se salta pruebas y Checkstyle porque el CI ya es el control de calidad.",
+ "Dockerfile"],
+["Calidad y DevOps", "¿Qué hace `database-backup.yml`?",
+ "Un `pg_dump` diario de Supabase, subido como artefacto de GitHub con 7 días de retención (RPO < 24 h)",
+ ["Copia la base de datos de PROD a DEV cada hora", "Borra registros viejos cada noche", "Restaura la base de datos al último commit"],
+ "Corre con cron `0 0 * * *` usando el cliente de PostgreSQL 17 a través del session pooler de Supabase.",
+ ".github/workflows/database-backup.yml"],
+["Calidad y DevOps", "¿Qué vigila UptimeRobot y cada cuánto?",
+ "`/health` del backend en Render, cada 5 minutos",
+ ["`/actuator/prometheus` cada minuto", "`/api/routes` cada hora", "`/swagger-ui.html` cada 5 minutos"],
+ "Usa un timeout de 30 s porque Render free duerme el servicio tras inactividad y el primer arranque es lento.",
+ "docs/monitoring.md"],
+["Calidad y DevOps", "¿Qué protege `GoogleMapsCacheWiringTest`?",
+ "Que exista la caché `googleMapsTravelTime` con `expireAfterWrite=5m` y que nadie declare un CacheManager manual",
+ ["Que Google Maps responda en menos de 5 s", "Que la API key de Maps esté en el repo", "Que el frontend guarde el mapa en localStorage"],
+ "Nació de un bug real: un CacheManager manual declaraba «travelTimes» mientras el adaptador pedía «googleMapsTravelTime», así que la configuración de las properties se ignoraba.",
+ "src/test/.../GoogleMapsCacheWiringTest.java"],
+["Calidad y DevOps", "¿Qué verifica `MetricsPercentilesTest`?",
+ "Que los timers de búsqueda y de Maps publiquen el percentil 0.95; un guion en lugar de guion bajo en el nombre lo apagaría sin dar error",
+ ["Que la API responda en menos de 8 s en producción", "Que Prometheus esté instalado en Render", "Que los logs tengan nivel INFO"],
+ "Micrometer no aplica «relaxed binding» a los nombres de los meters: `fusaroute.maps.travel_time` (con guion bajo) no es lo mismo que `travel-time`.",
+ "src/test/.../MetricsPercentilesTest.java · application.properties"],
+
+// ───────────────────────── Backend ─────────────────────────
+["Backend", "¿Qué hace `SearchRouteService`?",
+ "Elige la mejor ruta entre origen y destino: online por el menor tiempo según Google, offline por la menor distancia sobre el trazado",
+ ["Busca rutas por nombre en la base de datos", "Calcula la tarifa del viaje", "Dibuja la ruta en el mapa del usuario"],
+ "Expone `findBestRoute` (online) y `findBestRouteOffline`. Mide su latencia con el timer `fusaroute.search.route.latency`.",
+ "application/usecase/SearchRouteService.java"],
+["Backend", "¿Qué rutas considera `SearchRouteService` como candidatas?",
+ "Las activas que pasan por los dos barrios, con el origen antes que el destino, y que quedan a distancia caminable de los puntos",
+ ["Todas las rutas activas, sin filtrar", "Solo las rutas urbanas", "Las que devuelva Google Directions"],
+ "Si ninguna cumple, lanza `NoRouteAvailableException`, que se traduce en un 404.",
+ "SearchRouteService.java · domain/model/Route.java"],
+["Backend", "¿Cómo funciona la búsqueda offline (`/api/routes/search/offline`)?",
+ "Compara la distancia sobre el GeoJSON de cada ruta, no llama a Google y devuelve `estimatedMinutes = null`",
+ ["Devuelve el último resultado guardado en el navegador", "Responde 503 hasta que vuelva la conexión", "Usa tiempos promedio fijos por ruta"],
+ "Las rutas sin trazado quedan de últimas (`Double.MAX_VALUE`). Es el «modo offline» del requisito, que no es lo mismo que la PWA.",
+ "SearchRouteService.java · RouteController.java"],
+["Backend", "¿Qué API de Google usa el backend para estimar el tiempo de viaje?",
+ "Distance Matrix API (`/distancematrix/json`)",
+ ["Directions API", "Roads API", "Places API"],
+ "Ojo: el README y el CLAUDE.md dicen «Directions», pero el código llama a Distance Matrix. Esa API calcula por par origen–destino, no por un trazado específico.",
+ "infrastructure/adapter/out/maps/GoogleMapsClient.java"],
+["Backend", "¿Por qué la caché de Google Maps dura 5 minutos?",
+ "Es parte del diseño de RNF-01: reutiliza el tiempo de viaje por par origen–destino para sostener p95 < 8 s y gastar menos cuota de Google",
+ ["Porque Google prohíbe consultar el mismo par más de una vez cada 5 min", "Para que el frontend funcione sin conexión", "Porque los buses de Fusagasugá pasan cada 5 minutos"],
+ "El comentario de las properties lo dice: «no es una optimización opcional, es parte del diseño de RNF-01». 5 min es suficientemente fresco para el tráfico y ahorra llamadas repetidas.",
+ "application.properties · GoogleMapsClient.java"],
+["Backend", "¿Cómo está configurada la caché de tiempos de viaje?",
+ "Caffeine en memoria: caché `googleMapsTravelTime`, `maximumSize=1000`, `expireAfterWrite=5m`",
+ ["Redis administrado con TTL de 5 min", "Un HashMap estático sin expiración", "Caché HTTP del navegador con max-age=300"],
+ "`MapsConfig` lleva `@EnableCaching`; sin esa anotación, Spring Boot no crea el CacheManager aunque exista `spring.cache.type`.",
+ "application.properties · infrastructure/config/MapsConfig.java"],
+["Backend", "¿Por qué `GoogleMapsClient` cachea a mano en vez de usar `@Cacheable`?",
+ "Porque desde dentro del método el proxy de `@Cacheable` no deja saber si hubo hit o miss, y RNF-01 exige la métrica `fusaroute.maps.cache`",
+ ["Porque `@Cacheable` no existe en Spring Boot 3.5", "Porque Caffeine no es compatible con Spring", "Para que la caché se comparta con el frontend"],
+ "La clave es el par origen–destino con 6 decimales; el trazado no entra en la clave. Los fallos nunca se cachean.",
+ "GoogleMapsClient.java"],
+["Backend", "¿Qué responde la API si Google Maps falla durante una búsqueda online?",
+ "503, con un ProblemDetail (`TravelTimeUnavailableException`) registrado en el log como WARN",
+ ["500 con el stack trace", "404 «Ruta no encontrada»", "200 con `estimatedMinutes = 0`"],
+ "Es una falla del proveedor, no un error del servidor, por eso es 503 y no 500. El frontend puede caer al modo offline.",
+ "GlobalExceptionHandler.java"],
+["Backend", "¿Por qué el RestClient de Maps tiene timeouts de 2 s (conexión) y 5 s (lectura)?",
+ "Para que una llamada lenta a Google no se coma todo el presupuesto de 8 s del p95",
+ ["Porque Google cobra más después de 5 s", "Porque Render corta las conexiones a los 5 s", "Para reintentar 3 veces en 15 s"],
+ "`CONNECT_TIMEOUT_MS = 2_000` y `READ_TIMEOUT_MS = 5_000` están definidos en `MapsConfig`.",
+ "infrastructure/config/MapsConfig.java"],
+["Backend", "¿Qué hace `UseCaseConfig`?",
+ "Registra como `@Bean` los servicios de application, que no llevan anotaciones de Spring, y les inyecta sus puertos",
+ ["Configura las reglas de CORS", "Declara las rutas HTTP de la API", "Ejecuta las migraciones de Flyway"],
+ "Gracias a esto, los casos de uso son Java puro y se prueban con mocks, sin levantar Spring.",
+ "infrastructure/config/UseCaseConfig.java"],
+["Backend", "¿Por qué `UseCaseConfig` define un `Clock` con zona `America/Bogota`?",
+ "Porque Render corre en UTC: después de las 19:00 en Colombia la fecha UTC ya es la del día siguiente y se tomarían las tarifas de otro día",
+ ["Porque Java no tiene zona horaria por defecto", "Para sincronizar los buses con GPS", "Porque PostgreSQL solo guarda horas de Colombia"],
+ "El Clock inyectado también permite probar reglas de horario (tarifas vigentes, avisos de congestión) sin depender de la hora real.",
+ "infrastructure/config/UseCaseConfig.java"],
+["Backend", "¿Qué responde `GET /api/routes/{id}` si la ruta existe pero está SUSPENDIDA?",
+ "404: una ruta suspendida se trata como inexistente",
+ ["403 Forbidden", "200 con `status: SUSPENDIDA`", "410 Gone"],
+ "`GetRouteDetailService` solo devuelve rutas activas, con las tarifas vigentes hoy; en cualquier otro caso lanza `RouteNotFoundException`.",
+ "application/usecase/GetRouteDetailService.java"],
+["Backend", "¿Qué hace `GetCongestionWarningService` (RF-09)?",
+ "Devuelve los sectores de congestión cuya ventana de aviso está activa a la hora actual y que tocan barrios de la ruta",
+ ["Calcula el tráfico en tiempo real con Google", "Bloquea la búsqueda en horas pico", "Envía notificaciones push al celular"],
+ "La tabla `traffic_sectors` existe desde V9 pero está vacía en main; los datos reales irán en una V10 a partir de una plantilla.",
+ "application/usecase/GetCongestionWarningService.java · V9__sectores_de_congestion.sql"],
+["Backend", "¿Por qué `LoginService` verifica con BCrypt incluso cuando el correo no existe?",
+ "Para que el tiempo de respuesta no revele qué correos están registrados (anti timing attack)",
+ ["Para registrar automáticamente el correo nuevo", "Porque Spring Security lo obliga", "Para calentar la caché de BCrypt"],
+ "Con hash nulo, el adaptador hace un trabajo equivalente con un `dummyHash`. Además, correo inexistente, contraseña errada y cuenta inactiva devuelven el mismo 401.",
+ "application/usecase/LoginService.java · BCryptPasswordHasher.java"],
+["Backend", "¿Qué pasa hoy (en main) cuando alguien se equivoca de contraseña varias veces?",
+ "Se cuenta el intento fallido (`registerFailedLogin`), pero el bloqueo temporal todavía no está implementado (SCRUM-37)",
+ ["La cuenta se bloquea 15 minutos tras 5 intentos", "La cuenta se bloquea de forma permanente", "Se pide un CAPTCHA"],
+ "Hay que ser realistas ante el comité: la columna `locked_until` existe desde V1, pero la regla de bloqueo está pendiente.",
+ "LoginService.java · V1__crear_usuarios_y_rutas.sql"],
+["Backend", "Un usuario sin 2FA inicia sesión con la clave correcta. ¿Qué responde el backend?",
+ "401 `TOTP_ENROLLMENT_REQUIRED` con un token de enrolamiento de 10 min (scope `totp_enroll`) que solo sirve para activar el TOTP",
+ ["200 con el token completo de 7 días", "403 «Cuenta sin verificar»", "302 hacia la página de registro"],
+ "Con ese token solo se puede llamar `/api/users/me/totp/enroll` y `/confirm`; al confirmar se entrega el token completo (`scope full`).",
+ "LoginService.java · SecurityConfig.java · GlobalExceptionHandler.java"],
+["Backend", "¿Qué son los códigos de respaldo de FusaRoute?",
+ "10 códigos de un solo uso, guardados como hash BCrypt, que sustituyen al código TOTP si se pierde el celular",
+ ["Copias de seguridad de la base de datos", "Códigos para recuperar la contraseña por correo", "Claves de API para desarrolladores"],
+ "Se generan al confirmar el TOTP (`RECOVERY_CODE_COUNT = 10`), con 10 caracteres sin 0, O, 1 ni l para que no se confundan.",
+ "ConfirmTotpService.java · BCryptRecoveryCodeAdapter.java"],
+["Backend", "¿Cuál de estos endpoints es PÚBLICO (no pide JWT)?",
+ "`GET /api/routes/search`",
+ ["`GET /api/users/me`", "`PUT /api/users/me/password`", "`GET /actuator/prometheus`"],
+ "El catálogo y la búsqueda son públicos (RF-15). Perfil, contraseña, TOTP y métricas exigen `SCOPE_full`.",
+ "infrastructure/config/SecurityConfig.java"],
+["Backend", "¿Para qué sirve `PublicEndpointBearerTokenResolver`?",
+ "Ignora la cabecera Authorization en los endpoints públicos, para que un token vencido guardado en localStorage no rompa el catálogo",
+ ["Genera tokens para los usuarios anónimos", "Bloquea las peticiones sin token", "Renueva los tokens vencidos automáticamente"],
+ "Sin él, Spring intentaría validar el token vencido y respondería 401 incluso en `/api/routes`.",
+ "infrastructure/config/PublicEndpointBearerTokenResolver.java"],
+["Backend", "¿Quién valida el JWT en cada petición del backend?",
+ "El filtro del resource server OAuth2 de Spring Security (Nimbus), configurado con `.oauth2ResourceServer(...jwt(...))`",
+ ["Una clase propia llamada JwtAuthenticationFilter", "El interceptor de Angular", "Un filtro de Tomcat configurado en web.xml"],
+ "No hay filtro propio. `JwtConfig` define el `JwtEncoder`/`JwtDecoder` con HS256 y un secreto Base64 de al menos 32 bytes; sin él, la app no arranca.",
+ "SecurityConfig.java · JwtConfig.java"],
+["Backend", "El JWT lleva un claim `role` (USER/ADMIN). ¿Para qué se usa hoy?",
+ "Viaja en el token, pero todavía no se usa para autorizar: la autorización se basa en el claim `scope`",
+ ["Para que solo ADMIN pueda buscar rutas", "Para mostrar un panel de administración en el frontend", "Para decidir la duración del token"],
+ "`jwtAuthenticationConverter` convierte `scope` en `SCOPE_full` o `SCOPE_totp_enroll`. No existen endpoints de administración ni guard de rol.",
+ "SecurityConfig.java · JwtTokenIssuer.java"],
+["Backend", "¿Cuándo responde 409 la API?",
+ "Cuando el correo ya está registrado o el TOTP ya estaba activado",
+ ["Cuando el token venció", "Cuando la ruta no existe", "Cuando Google Maps no responde"],
+ "`EmailAlreadyRegisteredException` y `TotpAlreadyEnabledException`. El adaptador también traduce una violación de UNIQUE en carrera a 409 en vez de 500.",
+ "GlobalExceptionHandler.java · UserPersistenceAdapter.java"],
+["Backend", "¿Dónde se validan los datos de registro y de perfil?",
+ "En el dominio (NameRule, Email, PasswordPolicy, PhoneNumber), que junta todos los errores y responde 400 con la lista `errors`; no se usa Bean Validation",
+ ["Con @Valid y @NotBlank en los DTO", "Solo en el frontend", "Con triggers de PostgreSQL"],
+ "No hay `jakarta.validation` en el proyecto: las reglas viven en el dominio para que no dependan de Spring y devuelvan todas las violaciones juntas.",
+ "domain/model/PasswordPolicy.java · RegisterUserService.java"],
+["Backend", "¿Por qué `PasswordPolicy` limita la contraseña a 72 bytes UTF-8?",
+ "Porque BCrypt ignora lo que pase de 72 bytes: sin el límite, dos contraseñas distintas podrían valer igual",
+ ["Porque la columna de la BD mide 72 caracteres", "Por una norma colombiana de seguridad", "Porque el JWT no admite más de 72 bytes"],
+ "Son bytes, no caracteres: una tilde o una ñ ocupan 2 bytes. Además exige ≥ 8 caracteres, una mayúscula y un dígito.",
+ "domain/model/PasswordPolicy.java"],
+["Backend", "¿Cómo se guarda el trazado de una ruta en la base de datos?",
+ "Como texto GeoJSON en una columna JSONB (`path_geojson`); PostGIS quedó fuera de alcance",
+ ["En una columna geometry de PostGIS", "En un archivo KML en disco", "En una tabla de puntos lat/lng"],
+ "Si la ruta no tiene trazado, la API devuelve `path: null`, porque un LineString vacío no es GeoJSON válido.",
+ "V1__crear_usuarios_y_rutas.sql · GeoJsonLineStringResponse.java"],
+["Backend", "¿Por qué el detalle de ruta (`RouteDetailResponse`) es un DTO distinto del de la lista (`RouteResponse`)?",
+ "Porque cada trazado tiene 50–80 vértices; mandarlos en el listado engordaría la respuesta y perjudicaría el LCP < 2,5 s",
+ ["Porque la lista es privada y el detalle público", "Porque Spring no permite reutilizar records", "Porque el detalle viene de otra base de datos"],
+ "La lista lleva nombre, tipo, barrios y tarifas; el detalle añade `path` y `congestionSectors`.",
+ "RouteDetailResponse.java · RouteResponse.java"],
+["Backend", "¿Qué hace la migración V2?",
+ "Siembra 8 rutas reales de Fusagasugá, activas y sin trazado, con tarifas del Decreto 16/2026",
+ ["Crea las tablas de usuarios", "Agrega el TOTP a los usuarios", "Borra las rutas de prueba"],
+ "Las tarifas son 2600 para las urbanas y 2700 para Villa Leny–SENA, vigentes desde el 2026-02-05. Los trazados llegan después (V5 y V7).",
+ "db/migration/V2__semilla_rutas_fusagasuga.sql"],
+["Backend", "¿Por qué el perfil `prod` limita Hikari a 5 conexiones?",
+ "Porque el pooler gratuito de Supabase da pocas conexiones y la instancia de Render tiene 512 MB",
+ ["Porque PostgreSQL no acepta más de 5 conexiones", "Para que las búsquedas sean más rápidas", "Porque solo hay 5 rutas"],
+ "El perfil prod además apaga `show-sql`, el endpoint `maps-probe` y los detalles de `/actuator/health`.",
+ "application-prod.properties"],
+["Backend", "¿Por qué no existe todavía el ambiente PRE?",
+ "El plan gratuito de Supabase permite 2 proyectos (ya son DEV y PROD) y las 750 h gratis de Render alcanzan para un solo servicio",
+ ["Porque el docente lo prohibió", "Porque Angular no soporta tres ambientes", "Porque Flyway solo maneja dos esquemas"],
+ "Decisión del 2026-10-01 (SCRUM-128). El archivo `application-pre.properties` existe, pero el ambiente quedó diferido.",
+ "application-pre.properties · CLAUDE.md (backend)"],
+["Backend", "¿Por qué el timer de búsqueda tiene el tag `mode=online|offline`?",
+ "Para que las búsquedas offline (rápidas, sin Google) no maquillen el p95 de las online",
+ ["Para cobrar distinto cada modo", "Porque Prometheus exige un tag por métrica", "Para saber si el usuario usa celular o PC"],
+ "Son dos series de `fusaroute.search.route.latency`; el RNF-01 se evalúa con la serie online.",
+ "SearchRouteService.java"],
+
+// ───────────────────────── Frontend ─────────────────────────
+["Frontend", "¿Para qué sirve `LoginComponent`?",
+ "Inicia sesión en hasta 3 pasos (credenciales → código TOTP → enrolamiento si hace falta) y guarda la sesión",
+ ["Solo compara correo y contraseña contra localStorage", "Crea cuentas nuevas", "Muestra y edita el perfil del usuario"],
+ "Cambia de paso con `@switch (step())` según la respuesta 401 del backend: `TOTP_REQUIRED`, `TOTP_ENROLLMENT_REQUIRED` o `INVALID_TOTP`. Al terminar, navega a `/rutas`.",
+ "pages/auth/login/login.component.ts"],
+["Frontend", "En el login, el backend responde 401 con `TOTP_REQUIRED`. ¿Qué hace el frontend?",
+ "Pasa al paso «totp» y pide el código de 6 dígitos, o un código de respaldo si se activa esa opción",
+ ["Cierra la sesión y recarga la página", "Muestra «correo o contraseña incorrectos»", "Redirige a /registro"],
+ "`parseLoginError` interpreta el cuerpo del 401 para decidir a qué paso ir.",
+ "login.component.ts · lib/login-error.ts"],
+["Frontend", "¿Qué hace `RegisterComponent`?",
+ "Crea la cuenta validando la contraseña (≥ 8, una mayúscula y un dígito), muestra errores por campo o el 409, y lleva a `/login?email=…`",
+ ["Crea la cuenta e inicia sesión directamente con 2FA desactivado", "Solo guarda el usuario en localStorage", "Envía un correo de verificación"],
+ "Si todo sale bien, muestra el toast «Cuenta creada con éxito» y el login llega con el correo ya escrito.",
+ "pages/auth/register/register.component.ts"],
+["Frontend", "¿Para qué sirve `TotpEnrollComponent`?",
+ "Muestra el QR y el enlace `otpauth://` para la app autenticadora, confirma el primer código y entrega los códigos de respaldo (copiar o descargar .txt)",
+ ["Envía un SMS con el código", "Genera los códigos TOTP en el navegador", "Resetea la contraseña"],
+ "Se reutiliza en el login (enrolamiento obligatorio) y en el perfil (re-enrolamiento).",
+ "components/totp-enroll/totp-enroll.component.ts"],
+["Frontend", "¿Cómo decide `RouteSearchComponent` entre búsqueda online y offline?",
+ "Según `ConnectivityService.isOnline()`; y si la online falla con `status 0` (sin red), reintenta por el endpoint offline",
+ ["Siempre usa la online y muestra un error si falla", "Pregunta al usuario cada vez", "Usa la offline solo si la ruta es intermunicipal"],
+ "La respuesta online trae minutos estimados; la offline trae una distancia (km o m) y `estimatedMinutes = null`.",
+ "pages/routes/route-search/route-search.component.ts"],
+["Frontend", "¿Qué limitación reconoce `ConnectivityService`?",
+ "`navigator.onLine` solo indica si hay una interfaz de red, no si hay internet real; no se hace ping antes de buscar para no gastar datos",
+ ["Que no funciona en Chrome", "Que siempre devuelve false en celulares", "Que necesita permisos de ubicación"],
+ "Por eso existe el reintento offline ante `status 0`: cubre el caso en que el navegador cree que hay red pero no la hay.",
+ "core/connectivity.service.ts"],
+["Frontend", "¿Qué hace el computed `mapData` de `RoutesDetailComponent`?",
+ "Convierte el GeoJSON `[lng, lat]` a `{lat, lng}` para Google Maps y devuelve null si la ruta no tiene trazado",
+ ["Calcula la ruta más corta en el navegador", "Pide el trazado a Google Directions", "Guarda el mapa en caché por 5 minutos"],
+ "Hoy la mayoría de rutas no tienen trazado (path null) y el detalle se muestra sin mapa.",
+ "pages/routes/routes-detail/routes-detail.component.ts"],
+["Frontend", "¿Cuál es la responsabilidad de `MapViewComponent`?",
+ "Solo pinta lo que manda el backend: la polilínea GeoJSON y los marcadores de origen y destino; no calcula nada",
+ ["Calcula la mejor ruta con Google", "Permite dibujar rutas nuevas", "Geolocaliza al usuario"],
+ "Coherente con la regla del frontend: «presenta y captura, no decide». Usa `map.data.addGeoJson(...)`.",
+ "components/map-view/map-view.component.ts"],
+["Frontend", "¿Por qué `MapViewComponent` lee el color del token CSS con `getComputedStyle`?",
+ "Porque Google Maps dibuja en un canvas y no entiende variables CSS: hay que pasarle el valor ya resuelto",
+ ["Porque Angular no permite CSS en componentes", "Para cambiar el tema de Google Maps a oscuro", "Porque el token cambia en cada render"],
+ "Si no encuentra el token, usa `#4F46E5` (el índigo de la marca).",
+ "map-view.component.ts"],
+["Frontend", "¿Para qué existe `GoogleMapsLoaderService`?",
+ "Para inyectar el script de Google Maps JS una sola vez por sesión (promesa cacheada) y evitar scripts duplicados y carreras",
+ ["Para guardar en caché los tiempos de viaje", "Para ocultar la API key", "Para cargar mapas offline"],
+ "Si la carga falla, rechaza con «No se pudo cargar la Google Maps JavaScript API.» y el mapa muestra un aviso.",
+ "core/google-maps-loader.service.ts"],
+["Frontend", "¿Qué librería de mapas usa el frontend?",
+ "Google Maps JavaScript API a través de `@angular/google-maps`",
+ ["Leaflet con OpenStreetMap", "MapLibre GL", "Mapbox GL JS"],
+ "Usa `GoogleMap` y `MapMarker`, con la interfaz por defecto desactivada (`disableDefaultUI: true`).",
+ "package.json · map-view.component.ts"],
+["Frontend", "¿Qué hace `authInterceptor`?",
+ "Añade `Authorization: Bearer <token>` a las peticiones (excepto `/api/auth/`) y ante un 401 cierra sesión y manda a `/login`",
+ ["Cifra el cuerpo de todas las peticiones", "Reintenta 3 veces toda petición fallida", "Guarda en caché las respuestas GET"],
+ "Durante el enrolamiento usa el token de enrolamiento en lugar del token normal. Es el único manejo global de errores HTTP.",
+ "core/interceptors/auth.interceptor.ts"],
+["Frontend", "¿Por qué el interceptor no cierra la sesión ante un 401 de `/api/auth/login`?",
+ "Porque en el login un 401 significa credenciales incorrectas o que falta el TOTP, no una sesión vencida",
+ ["Porque el login nunca devuelve 401", "Porque el backend lo prohíbe", "Por un error que nadie ha arreglado"],
+ "`isAuthRoute = req.url.includes('/api/auth/')`: en esas URL no adjunta el token y no hace logout.",
+ "auth.interceptor.ts"],
+["Frontend", "¿Qué rutas protege `authGuard`?",
+ "Solo `/perfil`; el catálogo y la búsqueda de rutas son públicos (RF-15)",
+ ["Todas excepto `/login`", "`/rutas` y `/perfil`", "`/admin` y `/perfil`"],
+ "Si no hay sesión, devuelve un UrlTree a `/login`. No existe guard de rol ni pantalla de administración.",
+ "core/guards/auth.guard.ts · app.routes.ts"],
+["Frontend", "¿Por qué en `app.routes.ts` la ruta `rutas/buscar` va antes de `rutas/:id`?",
+ "Para que «buscar» no sea capturado como si fuera un `:id`",
+ ["Porque Angular ordena las rutas alfabéticamente", "Para que cargue más rápido", "Porque `:id` es una ruta privada"],
+ "El router de Angular toma la primera coincidencia. Todas las páginas se cargan con `loadComponent` (lazy loading).",
+ "app.routes.ts"],
+["Frontend", "¿Dónde guarda la sesión `AuthService`?",
+ "`token`, `expiresAt` y `user` en localStorage; el token de enrolamiento solo en memoria",
+ ["Todo en una cookie HttpOnly", "En sessionStorage, incluido el token de enrolamiento", "En IndexedDB cifrado"],
+ "El token de enrolamiento se pierde al recargar, a propósito: es temporal (10 min). `isLoggedIn` es un computed que revisa que el token exista y no haya vencido.",
+ "services/auth.service.ts"],
+["Frontend", "¿Qué hace `ToastService`?",
+ "Muestra mensajes success, error o info que se ocultan solos a los 4 s; reemplaza a `alert()`",
+ ["Envía notificaciones push al celular", "Registra errores en el servidor", "Muestra un diálogo modal de confirmación"],
+ "Guarda el mensaje actual en un signal `current`, y `ToastComponent` lo pinta.",
+ "components/toast/toast.service.ts"],
+["Frontend", "¿Qué hace `pickNeighborhoodSteps`?",
+ "Muestra como máximo 7 barrios repartidos uniformemente, siempre incluyendo el primero y el último",
+ ["Ordena los barrios alfabéticamente", "Elimina los barrios repetidos", "Calcula la distancia entre barrios"],
+ "`MAX_STEPS = 7`: si la ruta tiene más barrios, toma índices equiespaciados para que el recorrido quepa en pantalla.",
+ "lib/route-steps.ts"],
+["Frontend", "¿Cómo sabe el frontend a qué backend llamar en producción?",
+ "En el build de producción, `angular.json` reemplaza `environment.ts` por `environment.prod.ts`, cuya `apiUrl` es la de Render",
+ ["Lee `API_URL` del `.env` cuando el navegador abre la página", "Le pregunta a Vercel en cada petición", "Usa un proxy de desarrollo también en producción"],
+ "La URL queda compilada en el bundle (`fileReplacements`). Ningún secreto debe ir en esos archivos.",
+ "angular.json · src/environments/environment*.ts"],
+["Frontend", "¿Cuál es la diferencia entre la PWA de FusaRoute y el «modo offline» del requisito?",
+ "El service worker permite abrir la app sin red; el modo offline del requisito es un endpoint del backend que calcula por distancia",
+ ["Son lo mismo: el service worker calcula las rutas offline", "La PWA guarda todas las respuestas de la API", "El modo offline descarga Google Maps completo"],
+ "`ngsw-config.json` no tiene `dataGroups`, así que no se cachean respuestas de la API, solo los archivos de la app y los assets.",
+ "ngsw-config.json · README.md (frontend)"],
+["Frontend", "¿Para qué sirve `vercel.json`?",
+ "Indica la carpeta de salida y redirige cualquier ruta a `index.html`, para que el router de Angular maneje `/rutas/3` al recargar",
+ ["Configura la base de datos en Vercel", "Guarda la API key de Google Maps", "Define las pruebas que corren antes del deploy"],
+ "Sin esa regla de rewrite, recargar en una URL interna daría 404 en Vercel.",
+ "vercel.json"],
+["Frontend", "El frontend no usa proxy. ¿Qué pasa si en Render `CORS_ALLOWED_ORIGINS` no incluye el dominio de Vercel?",
+ "El navegador no deja usar las respuestas de la API: las peticiones fallan con 403 y la app no carga datos",
+ ["Nada, porque el backend es público", "Vercel reenvía las peticiones automáticamente", "Solo falla el login"],
+ "El frontend llama la URL absoluta del backend, así que es una petición entre orígenes distintos. En PRE y PROD la variable no tiene valor por defecto.",
+ "README.md (frontend) · SecurityConfig.java"],
+["Frontend", "¿Qué regla de arquitectura sigue el frontend con `HttpClient`?",
+ "Solo los servicios de `services/` hacen HTTP; los componentes presentan y capturan, y la lógica de negocio vive en el backend",
+ ["Cada componente llama la API directamente", "Toda la lógica de rutas se calcula en el navegador", "Se usa un store global (NgRx) para todas las peticiones"],
+ "«El frontend presenta y captura, no decide». La meta de mantenibilidad es 0 llamadas HTTP fuera de `services/`.",
+ "CLAUDE.md (frontend) · src/app/services/"],
+["Frontend", "¿Qué muestra la lista de rutas como tarifa de una ruta INTERMUNICIPAL?",
+ "«Desde» + la tarifa más baja, porque el precio depende de dónde se baje el pasajero",
+ ["Siempre la tarifa más alta", "«Tarifa no disponible»", "El promedio de todas las tarifas"],
+ "Para URBANA muestra un precio único. En el detalle, la intermunicipal trae una tabla «Bajada en / Precio / Actualizada».",
+ "routes-list.component.ts · routes-detail.component.html"],
+];
+
+// ───────────────────────── motor ─────────────────────────
+const QUESTIONS = BANK.map((r, id) => ({
+  id, cat: r[0], q: r[1], explain: r[4], src: r[5],
+  options: [{ text: r[2], correct: true }, ...r[3].map(t => ({ text: t, correct: false }))]
+}));
+
+const $ = s => document.querySelector(s);
+const app = $('#app');
+const esc = s => s.replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+const fmt = s => esc(s).replace(/`([^`]+)`/g, '<code>$1</code>');
+const shuffle = a => { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+
+let order = [], pos = 0, answers = {}, opts = {}, showingSummary = false;
+
+function start(ids) {
+  order = shuffle(ids);
+  pos = 0; answers = {}; showingSummary = false;
+  opts = {};
+  order.forEach(id => { opts[id] = shuffle(QUESTIONS[id].options); });
+  render();
+}
+
+function filteredIds() {
+  const c = $('#cat').value;
+  return QUESTIONS.filter(q => c === 'all' || q.cat === c).map(q => q.id);
+}
+
+function updateStats() {
+  const done = Object.keys(answers).length;
+  const ok = Object.values(answers).filter(a => a.correct).length;
+  $('#ok').textContent = ok;
+  $('#done').textContent = done;
+  $('#pct').textContent = (done ? Math.round(ok * 100 / done) : 0) + ' %';
+  $('#pos').textContent = showingSummary ? 'Resultados' : `Pregunta ${pos + 1} de ${order.length}`;
+  $('#prog').style.width = (order.length ? done * 100 / order.length : 0) + '%';
+}
+
+function render() {
+  updateStats();
+  if (showingSummary) return renderSummary();
+  const id = order[pos], q = QUESTIONS[id], a = answers[id];
+  const list = opts[id];
+  app.innerHTML = `
+    <article class="card">
+      <div class="meta"><span class="chip">${esc(q.cat)}</span><span>#${id + 1}</span></div>
+      <p class="q">${fmt(q.q)}</p>
+      <div class="opts">
+        ${list.map((o, i) => {
+          let cls = '';
+          if (a) { if (o.correct) cls = 'ok'; else if (i === a.chosen) cls = 'bad'; else cls = 'dim'; }
+          return `<button class="opt ${cls}" data-i="${i}" ${a ? 'disabled' : ''}><span class="k">${i + 1}</span><span>${fmt(o.text)}</span></button>`;
+        }).join('')}
+      </div>
+      ${a ? `<div class="fb ${a.correct ? '' : 'bad'}">
+        <h3>${a.correct ? '✓ Correcto' : '✗ Incorrecto: la respuesta correcta está en verde'}</h3>
+        <p>${fmt(q.explain)}</p>
+        <div class="src">Fuente: ${fmt(q.src)}</div>
+      </div>` : ''}
+      <div class="nav">
+        <button class="btn" id="prev" ${pos === 0 ? 'disabled' : ''}>← Anterior</button>
+        <button class="btn primary" id="next">${pos === order.length - 1 ? 'Ver resultados' : 'Siguiente →'}</button>
+      </div>
+    </article>`;
+  app.querySelectorAll('.opt').forEach(b => b.addEventListener('click', () => choose(+b.dataset.i)));
+  $('#prev').onclick = prev;
+  $('#next').onclick = next;
+}
+
+function choose(i) {
+  const id = order[pos];
+  if (answers[id] || showingSummary) return;
+  answers[id] = { chosen: i, correct: opts[id][i].correct };
+  render();
+}
+function next() {
+  if (showingSummary) return;
+  if (pos < order.length - 1) { pos++; render(); window.scrollTo({ top: 0 }); }
+  else { showingSummary = true; render(); }
+}
+function prev() {
+  if (showingSummary) { showingSummary = false; render(); return; }
+  if (pos > 0) { pos--; render(); }
+}
+
+function renderSummary() {
+  const done = Object.keys(answers).length;
+  const ok = Object.values(answers).filter(a => a.correct).length;
+  const missed = order.filter(id => answers[id] && !answers[id].correct);
+  const skipped = order.length - done;
+  app.innerHTML = `
+    <section class="card summary">
+      <h2>Resultados</h2>
+      <div class="big">${ok} / ${order.length}</div>
+      <p>${done} respondidas · ${missed.length} falladas${skipped ? ` · ${skipped} sin responder` : ''}</p>
+      <div class="nav">
+        <button class="btn" id="back">← Volver</button>
+        <span style="display:flex;gap:8px;flex-wrap:wrap">
+          ${missed.length ? '<button class="btn primary" id="retry">Repasar falladas</button>' : ''}
+          <button class="btn" id="again">Empezar de nuevo</button>
+        </span>
+      </div>
+      ${missed.length ? `<ul class="missed">${missed.map(id => {
+        const q = QUESTIONS[id];
+        return `<li>${fmt(q.q)}<div class="ans">✓ ${fmt(q.options[0].text)}</div></li>`;
+      }).join('')}</ul>` : ''}
+    </section>`;
+  $('#back').onclick = prev;
+  $('#again').onclick = () => start(filteredIds());
+  if (missed.length) $('#retry').onclick = () => start(missed);
+}
+
+document.addEventListener('keydown', e => {
+  if (e.target.tagName === 'SELECT') return;
+  if (['1', '2', '3', '4'].includes(e.key) && !showingSummary) choose(+e.key - 1);
+  else if (e.key === 'Enter' || e.key === 'ArrowRight') { if (e.target.tagName !== 'BUTTON' || e.key === 'ArrowRight') next(); }
+  else if (e.key === 'ArrowLeft') prev();
+});
+
+const cats = [...new Set(QUESTIONS.map(q => q.cat))];
+cats.forEach(c => {
+  const n = QUESTIONS.filter(q => q.cat === c).length;
+  $('#cat').insertAdjacentHTML('beforeend', `<option value="${esc(c)}">${esc(c)} (${n})</option>`);
+});
+$('#cat').options[0].textContent = `Todas las categorías (${QUESTIONS.length})`;
+$('#cat').addEventListener('change', () => start(filteredIds()));
+$('#shuffle').addEventListener('click', () => start(filteredIds()));
+
+start(filteredIds());
+</script>
+</body>
+</html>
