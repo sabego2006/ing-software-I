@@ -145,17 +145,6 @@ El docente exige tres cosas a la vez —roles Scrum, cinco responsables técnico
 
 **"Responsable" significa quien responde ante el comité y revisa los PR de esa área, no quien la programa solo.** Ambos programan frontend y backend en todos los sprints, que es lo que el docente exige. La capa técnica **rota cada 2 sprints** y la rotación queda registrada en el informe de sprint — sin eso, el organigrama es de mentira y el comité lo nota.
 
-**Regla OBLIGATORIA del 30 % manual, por persona, cada sprint (decidida el 2026-10-01; reemplaza el "bloque de ejecución manual" del 2026-09-17, que pedía solo una Subtask).** Buena parte del código de este proyecto se produce con Claude Code, y eso no es lo mismo que aprender a programar Spring Boot o Angular con las propias manos. El comité puede pedir sustentar cualquier línea, y después del comité del 28-sep el objetivo es explícito: que ambos entendamos, defendamos, expliquemos y vendamos nuestro trabajo como ingenieros que lo conocen. **Nadie puede omitirla, ni Santiago ni Angélica.**
-
-1. **Cuánto.** Al menos el **30 % de los ítems** de cada integrante en el sprint, redondeando hacia arriba (con 5 ítems, 2), se ejecutan a mano. El integrante escribe el código, crea o mueve los archivos y corre los comandos él mismo. Claude puede **guiar** (explicar qué hace falta y por qué, a un nivel que no asuma años de experiencia con el stack), pero **no escribe el código ni ejecuta el comando**.
-2. **Desde el inicio.** En el Sprint Planning, cada ítem manual se marca en Jira con la etiqueta **`manual`** y con **Original Estimate**. En la descripción va el formato: `✋ Santiago — SCRUM-148 creación módulo comentarios (~40 min)`.
-3. **Al cerrar.** Se registra el **worklog con el tiempo real**. La diferencia entre estimado y real también es aprendizaje.
-4. **En el PR.** Lleva la casilla `[x] Hecho a mano (SCRUM-N, est. X / real Y)`. El revisor, que es el otro integrante, le pide al autor que explique el código, en voz alta o por escrito, antes de aprobar.
-5. **En la Retro.** Se revisa el filtro `labels = manual AND sprint = <actual>` por persona. Si alguien no llega al 30 %, el déficit pasa al sprint siguiente como su **primera** tarea, y se anota en el informe de sprint como incumplido, con su razón. No se disimula.
-6. **Claude.** En cualquier sesión sobre un issue con la etiqueta `manual`, Claude se niega a escribir el código aunque se lo pidan, y solo guía.
-
-**Límite real, dicho sin adornos:** ninguna herramienta puede impedir técnicamente que alguien use un agente. La regla se sostiene con la etiqueta y la estimación visibles, con la revisión cruzada que exige explicar el código y con el control en la Retro. El instrumento anterior (que el commit no lleve `Co-Authored-By: Claude`) dejó de servir desde el 2026-09-22, cuando se prohibió esa línea en **todos** los commits.
-
 ### Eventos de Scrum adoptados
 
 | Cuándo | Evento | De dónde sale el espacio |
