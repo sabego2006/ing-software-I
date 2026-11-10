@@ -1,0 +1,334 @@
+{
+ "CENTRO_COLSUBSIDIO_CALLE_3_OLAYA": {
+  "base": {
+   "retro": 18,
+   "giros": 2,
+   "solape": 15.932914046121594,
+   "puntaje": 115.9329140461216,
+   "puntos": 11,
+   "metros": 13212
+  },
+  "final": {
+   "retro": 16,
+   "giros": 2,
+   "solape": 8.6848635235732,
+   "puntaje": 98.6848635235732,
+   "puntos": 8
+  },
+  "omitir": [
+   {
+    "nombre": "Indio",
+    "trazadoPasaA": 20,
+    "antes": 115.9,
+    "despues": 110.5
+   },
+   {
+    "nombre": "Manila",
+    "trazadoPasaA": 26,
+    "antes": 110.5,
+    "despues": 104.3
+   },
+   {
+    "nombre": "Puente Águila",
+    "trazadoPasaA": 5,
+    "antes": 104.3,
+    "despues": 98.7
+   }
+  ]
+ },
+ "SANTA_ANITA_GALERIA_COLSUBSIDIO_CEMENTERIO_RESGUARDOS": {
+  "base": {
+   "retro": 26,
+   "giros": 3,
+   "solape": 22.041763341067284,
+   "puntaje": 167.04176334106728,
+   "puntos": 12,
+   "metros": 11677
+  },
+  "final": {
+   "retro": 5,
+   "giros": 1,
+   "solape": 2.7586206896551726,
+   "puntaje": 32.758620689655174,
+   "puntos": 6
+  },
+  "omitir": [
+   {
+    "nombre": "Av. Las Palmas",
+    "trazadoPasaA": 15,
+    "antes": 167,
+    "despues": 100.4
+   },
+   {
+    "nombre": "Galería",
+    "trazadoPasaA": 32,
+    "antes": 100.4,
+    "despues": 95.4
+   },
+   {
+    "nombre": "Santa Anita (Calle 17)",
+    "trazadoPasaA": 5,
+    "antes": 95.4,
+    "despues": 74.4
+   },
+   {
+    "nombre": "Carrera 11",
+    "trazadoPasaA": 2,
+    "antes": 74.4,
+    "despues": 44.3
+   },
+   {
+    "nombre": "Cementerio",
+    "trazadoPasaA": 14,
+    "antes": 44.3,
+    "despues": 38.1
+   },
+   {
+    "nombre": "Calle 1 Norte",
+    "trazadoPasaA": 54,
+    "antes": 38.1,
+    "despues": 32.8
+   }
+  ]
+ },
+ "U_HOSPITAL_CRA_9_CLL_3_COLSUBSIDIO_CEMENTERIO": {
+  "base": {
+   "retro": 18,
+   "giros": 1,
+   "solape": 12.380952380952381,
+   "puntaje": 107.38095238095238,
+   "puntos": 12,
+   "metros": 10509
+  },
+  "final": {
+   "retro": 7,
+   "giros": 1,
+   "solape": 8.992805755395683,
+   "puntaje": 48.99280575539568,
+   "puntos": 10
+  },
+  "omitir": [
+   {
+    "nombre": "Carrera 9",
+    "trazadoPasaA": 1,
+    "antes": 107.4,
+    "despues": 92.4
+   },
+   {
+    "nombre": "Carrera 11",
+    "trazadoPasaA": 2,
+    "antes": 92.4,
+    "despues": 49
+   }
+  ]
+ },
+ "CENTRO_U_HOSPITAL_COLSUBSIDIO_CEDRITOS": {
+  "base": {
+   "retro": 4,
+   "giros": 0,
+   "solape": 10,
+   "puntaje": 30,
+   "puntos": 10,
+   "metros": 8478
+  },
+  "final": {
+   "retro": 2,
+   "giros": 0,
+   "solape": 3.571428571428571,
+   "puntaje": 13.571428571428571,
+   "puntos": 7
+  },
+  "omitir": [
+   {
+    "nombre": "Carrera 6",
+    "trazadoPasaA": 1,
+    "antes": 30,
+    "despues": 25
+   },
+   {
+    "nombre": "Calle 11",
+    "trazadoPasaA": 5,
+    "antes": 25,
+    "despues": 18.4
+   },
+   {
+    "nombre": "Antiguo Colsubsidio",
+    "trazadoPasaA": 8,
+    "antes": 18.4,
+    "despues": 13.6
+   }
+  ]
+ },
+ "CENTRO_COLSUBSIDIO_CALLE_4_CEDRITOS_SAN_ANTONIO": {
+  "base": {
+   "retro": 0,
+   "giros": 0,
+   "solape": 5.027932960893855,
+   "puntaje": 5.027932960893855,
+   "puntos": 11,
+   "metros": 6430
+  },
+  "final": {
+   "retro": 0,
+   "giros": 0,
+   "solape": 1.7964071856287425,
+   "puntaje": 1.7964071856287425,
+   "puntos": 9
+  },
+  "omitir": [
+   {
+    "nombre": "Galería",
+    "trazadoPasaA": 44,
+    "antes": 5,
+    "despues": 3.5
+   },
+   {
+    "nombre": "Carrera 4",
+    "trazadoPasaA": 8,
+    "antes": 3.5,
+    "despues": 1.8
+   }
+  ]
+ },
+ "U_HOSPITAL_BATALLON_LLANO_LARGO": {
+  "base": {
+   "retro": 30,
+   "giros": 0,
+   "solape": 20.59369202226345,
+   "puntaje": 170.59369202226344,
+   "puntos": 11,
+   "metros": 15453
+  },
+  "final": {
+   "retro": 16,
+   "giros": 0,
+   "solape": 10.432569974554708,
+   "puntaje": 90.43256997455471,
+   "puntos": 6
+  },
+  "omitir": [
+   {
+    "nombre": "Banco Caja Social",
+    "trazadoPasaA": 55,
+    "antes": 170.6,
+    "despues": 167.1
+   },
+   {
+    "nombre": "Fiscalía",
+    "trazadoPasaA": 11,
+    "antes": 167.1,
+    "despues": 126.3
+   },
+   {
+    "nombre": "U. Hospital Éxito",
+    "trazadoPasaA": 22,
+    "antes": 126.3,
+    "despues": 105.9
+   },
+   {
+    "nombre": "Indio",
+    "trazadoPasaA": 20,
+    "antes": 105.9,
+    "despues": 100.7
+   },
+   {
+    "nombre": "Villa Celeste",
+    "trazadoPasaA": 42,
+    "antes": 100.7,
+    "despues": 90.4
+   }
+  ]
+ },
+ "CENTRO_COLSUBSIDIO_CEMENTERIO_GAITAN_GALAN": {
+  "base": {
+   "retro": 3,
+   "giros": 1,
+   "solape": 19.831223628691983,
+   "puntaje": 39.83122362869199,
+   "puntos": 11,
+   "metros": 8209
+  },
+  "final": {
+   "retro": 1,
+   "giros": 1,
+   "solape": 8.411214953271028,
+   "puntaje": 18.411214953271028,
+   "puntos": 7
+  },
+  "omitir": [
+   {
+    "nombre": "Centro Comercial Avenida",
+    "trazadoPasaA": 46,
+    "antes": 39.8,
+    "despues": 38.4
+   },
+   {
+    "nombre": "Tiendas Ara (Antiguo Colsubsidio)",
+    "trazadoPasaA": 8,
+    "antes": 38.4,
+    "despues": 32.1
+   },
+   {
+    "nombre": "Funeraria La Paz",
+    "trazadoPasaA": 9,
+    "antes": 32.1,
+    "despues": 19.8
+   },
+   {
+    "nombre": "Funeraria Jardines del Renacer",
+    "trazadoPasaA": 27,
+    "antes": 19.8,
+    "despues": 18.4
+   }
+  ]
+ },
+ "HOSPITAL_BATALLON_LA_PAMPA_LLANO_GRANDE": {
+  "base": {
+   "retro": 24,
+   "giros": 0,
+   "solape": 17.058823529411764,
+   "puntaje": 137.05882352941177,
+   "puntos": 11,
+   "metros": 14097
+  },
+  "final": {
+   "retro": 11,
+   "giros": 0,
+   "solape": 4.395604395604396,
+   "puntaje": 59.395604395604394,
+   "puntos": 6
+  },
+  "omitir": [
+   {
+    "nombre": "Banco Caja Social",
+    "trazadoPasaA": 55,
+    "antes": 137.1,
+    "despues": 133.4
+   },
+   {
+    "nombre": "Fiscalía",
+    "trazadoPasaA": 11,
+    "antes": 133.4,
+    "despues": 81.9
+   },
+   {
+    "nombre": "U. Hospital Éxito",
+    "trazadoPasaA": 22,
+    "antes": 81.9,
+    "despues": 71.4
+   },
+   {
+    "nombre": "Indio",
+    "trazadoPasaA": 20,
+    "antes": 71.4,
+    "despues": 65.1
+   },
+   {
+    "nombre": "Villa Celeste",
+    "trazadoPasaA": 42,
+    "antes": 65.1,
+    "despues": 59.4
+   }
+  ]
+ }
+}

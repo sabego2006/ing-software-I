@@ -1,0 +1,233 @@
+{
+  "nota": "Ajustes DECLARADOS al ruteo con OSRM (P2). 'omitir' = el lugar NO se usa como punto de ruteo porque forzarlo provoca retroceso (optimizar-puntos.js lo propone y solo acepta si el trazado mejora y pasa a <= 60 m del lugar); verificar-trazados.js lo comprueba. El lugar sigue en el recorrido de la ruta. 'mover'/'forzar' = punto sobre la via correcta / paso extra. 'puntosFijos' = trazado entre dos puntos (Pasca).",
+  "rutas": [
+    {
+      "signFile": "CENTRO_COLSUBSIDIO_CALLE_3_OLAYA",
+      "rutaId": 13,
+      "urbana": true,
+      "triage": "#1",
+      "omitir": [
+        {
+          "nombre": "Indio",
+          "maxM": 60,
+          "motivo": "Exigirlo como punto de ruteo provocaba retroceso (puntaje 115.9 -> 110.5); el trazado pasa a 20 m del lugar."
+        },
+        {
+          "nombre": "Manila",
+          "maxM": 60,
+          "motivo": "Exigirlo como punto de ruteo provocaba retroceso (puntaje 110.5 -> 104.3); el trazado pasa a 26 m del lugar."
+        },
+        {
+          "nombre": "Puente Águila",
+          "maxM": 60,
+          "motivo": "Exigirlo como punto de ruteo provocaba retroceso (puntaje 104.3 -> 98.7); el trazado pasa a 5 m del lugar."
+        }
+      ]
+    },
+    {
+      "signFile": "SANTA_ANITA_GALERIA_COLSUBSIDIO_CEMENTERIO_RESGUARDOS",
+      "rutaId": 31,
+      "urbana": true,
+      "triage": "#30",
+      "omitir": [
+        {
+          "nombre": "Av. Las Palmas",
+          "maxM": 60,
+          "motivo": "Exigirlo como punto de ruteo provocaba retroceso (puntaje 167 -> 100.4); el trazado pasa a 15 m del lugar."
+        },
+        {
+          "nombre": "Galería",
+          "maxM": 60,
+          "motivo": "Exigirlo como punto de ruteo provocaba retroceso (puntaje 100.4 -> 95.4); el trazado pasa a 32 m del lugar."
+        },
+        {
+          "nombre": "Santa Anita (Calle 17)",
+          "maxM": 60,
+          "motivo": "Exigirlo como punto de ruteo provocaba retroceso (puntaje 95.4 -> 74.4); el trazado pasa a 5 m del lugar."
+        },
+        {
+          "nombre": "Carrera 11",
+          "maxM": 60,
+          "motivo": "Exigirlo como punto de ruteo provocaba retroceso (puntaje 74.4 -> 44.3); el trazado pasa a 2 m del lugar."
+        }
+      ]
+    },
+    {
+      "signFile": "U_HOSPITAL_CRA_9_CLL_3_COLSUBSIDIO_CEMENTERIO",
+      "rutaId": 30,
+      "urbana": true,
+      "triage": "#29",
+      "omitir": [
+        {
+          "nombre": "Carrera 9",
+          "maxM": 60,
+          "motivo": "Exigirlo como punto de ruteo provocaba retroceso (puntaje 107.4 -> 92.4); el trazado pasa a 1 m del lugar."
+        },
+        {
+          "nombre": "Carrera 11",
+          "maxM": 60,
+          "motivo": "Exigirlo como punto de ruteo provocaba retroceso (puntaje 92.4 -> 49); el trazado pasa a 2 m del lugar."
+        }
+      ]
+    },
+    {
+      "signFile": "CENTRO_U_HOSPITAL_COLSUBSIDIO_CEDRITOS",
+      "rutaId": 3,
+      "urbana": true,
+      "triage": "#27",
+      "omitir": [
+        {
+          "nombre": "Carrera 6",
+          "maxM": 60,
+          "motivo": "Exigirlo como punto de ruteo provocaba retroceso (puntaje 30 -> 25); el trazado pasa a 1 m del lugar."
+        },
+        {
+          "nombre": "Calle 11",
+          "maxM": 60,
+          "motivo": "Exigirlo como punto de ruteo provocaba retroceso (puntaje 25 -> 18.4); el trazado pasa a 5 m del lugar."
+        },
+        {
+          "nombre": "Antiguo Colsubsidio",
+          "maxM": 60,
+          "motivo": "Exigirlo como punto de ruteo provocaba retroceso (puntaje 18.4 -> 13.6); el trazado pasa a 8 m del lugar."
+        }
+      ]
+    },
+    {
+      "signFile": "CENTRO_COLSUBSIDIO_CALLE_4_CEDRITOS_SAN_ANTONIO",
+      "rutaId": 29,
+      "urbana": true,
+      "triage": "#26",
+      "omitir": [
+        {
+          "nombre": "Galería",
+          "maxM": 60,
+          "motivo": "Exigirlo como punto de ruteo provocaba retroceso (puntaje 5 -> 3.5); el trazado pasa a 44 m del lugar."
+        },
+        {
+          "nombre": "Carrera 4",
+          "maxM": 60,
+          "motivo": "Exigirlo como punto de ruteo provocaba retroceso (puntaje 3.5 -> 1.8); el trazado pasa a 8 m del lugar."
+        }
+      ]
+    },
+    {
+      "signFile": "U_HOSPITAL_BATALLON_LLANO_LARGO",
+      "rutaId": 26,
+      "urbana": true,
+      "triage": "#20",
+      "exigeCalle22": true,
+      "omitir": [
+        {
+          "nombre": "Gran Surtidor",
+          "maxM": 100000,
+          "motivo": "El marcador \"Gran Surtidor\" de este recorrido quedó sobre el Supermercado El Gran Surtidor (Santander, 4.3496,-74.3566), al otro lado de la ciudad; el recorrido va de Batallón a Villa Celeste por el occidente. No se usa como punto de ruteo."
+        },
+        {
+          "nombre": "Banco Caja Social",
+          "maxM": 60,
+          "motivo": "Exigirlo como punto de ruteo provocaba retroceso (puntaje 170.6 -> 167.1); el trazado pasa a 55 m del lugar."
+        },
+        {
+          "nombre": "Fiscalía",
+          "maxM": 60,
+          "motivo": "Exigirlo como punto de ruteo provocaba retroceso (puntaje 167.1 -> 126.3); el trazado pasa a 11 m del lugar."
+        },
+        {
+          "nombre": "U. Hospital Éxito",
+          "maxM": 60,
+          "motivo": "Exigirlo como punto de ruteo provocaba retroceso (puntaje 126.3 -> 105.9); el trazado pasa a 22 m del lugar."
+        },
+        {
+          "nombre": "Indio",
+          "maxM": 60,
+          "motivo": "Exigirlo como punto de ruteo provocaba retroceso (puntaje 105.9 -> 100.7); el trazado pasa a 20 m del lugar."
+        },
+        {
+          "nombre": "Villa Celeste",
+          "maxM": 60,
+          "motivo": "Exigirlo como punto de ruteo provocaba retroceso (puntaje 100.7 -> 90.4); el trazado pasa a 42 m del lugar."
+        }
+      ]
+    },
+    {
+      "signFile": "CENTRO_COLSUBSIDIO_CEMENTERIO_GAITAN_GALAN",
+      "rutaId": 10,
+      "urbana": true,
+      "triage": "#16",
+      "omitir": [
+        {
+          "nombre": "Centro Comercial Avenida",
+          "maxM": 60,
+          "motivo": "Exigirlo como punto de ruteo provocaba retroceso (puntaje 39.8 -> 38.4); el trazado pasa a 46 m del lugar."
+        },
+        {
+          "nombre": "Funeraria La Paz",
+          "maxM": 60,
+          "motivo": "Exigirlo como punto de ruteo provocaba retroceso (puntaje 32.1 -> 19.8); el trazado pasa a 9 m del lugar."
+        },
+        {
+          "nombre": "Funeraria Jardines del Renacer",
+          "maxM": 60,
+          "motivo": "Exigirlo como punto de ruteo provocaba retroceso (puntaje 19.8 -> 18.4); el trazado pasa a 27 m del lugar."
+        }
+      ]
+    },
+    {
+      "signFile": "HOSPITAL_BATALLON_LA_PAMPA_LLANO_GRANDE",
+      "rutaId": 4,
+      "urbana": true,
+      "triage": "#11b",
+      "exigeCalle22": true,
+      "omitir": [
+        {
+          "nombre": "Gran Surtidor",
+          "maxM": 100000,
+          "motivo": "El marcador \"Gran Surtidor\" de este recorrido quedó sobre el Supermercado El Gran Surtidor (Santander, 4.3496,-74.3566), al otro lado de la ciudad; el recorrido va de Batallón a Villa Celeste por el occidente. No se usa como punto de ruteo."
+        },
+        {
+          "nombre": "Banco Caja Social",
+          "maxM": 60,
+          "motivo": "Exigirlo como punto de ruteo provocaba retroceso (puntaje 137.1 -> 133.4); el trazado pasa a 55 m del lugar."
+        },
+        {
+          "nombre": "Fiscalía",
+          "maxM": 60,
+          "motivo": "Exigirlo como punto de ruteo provocaba retroceso (puntaje 133.4 -> 81.9); el trazado pasa a 11 m del lugar."
+        },
+        {
+          "nombre": "U. Hospital Éxito",
+          "maxM": 60,
+          "motivo": "Exigirlo como punto de ruteo provocaba retroceso (puntaje 81.9 -> 71.4); el trazado pasa a 22 m del lugar."
+        },
+        {
+          "nombre": "Indio",
+          "maxM": 60,
+          "motivo": "Exigirlo como punto de ruteo provocaba retroceso (puntaje 71.4 -> 65.1); el trazado pasa a 20 m del lugar."
+        },
+        {
+          "nombre": "Villa Celeste",
+          "maxM": 60,
+          "motivo": "Exigirlo como punto de ruteo provocaba retroceso (puntaje 65.1 -> 59.4); el trazado pasa a 42 m del lugar."
+        }
+      ]
+    },
+    {
+      "signFile": "PASCA",
+      "rutaId": 8,
+      "urbana": false,
+      "triage": "Pasca",
+      "puntosFijos": [
+        {
+          "slug": "potosi"
+        },
+        {
+          "nombre": "Iglesia de Pasca (Parroquia Nuestra Señora de la Encarnación)",
+          "lat": 4.3083679,
+          "lng": -74.2995098,
+          "nota": "OSM w205862356"
+        }
+      ]
+    }
+  ]
+}
