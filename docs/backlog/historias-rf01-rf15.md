@@ -19,6 +19,15 @@
 >
 > Los requisitos no funcionales (RNF-01 a RNF-07) viven en un documento aparte, por no ser
 > historias de usuario: `docs/backlog/requisitos-no-funcionales.md`.
+>
+> **Actualización — 2026-11-10 (RF-04 y RF-09, SCRUM-188).** La búsqueda por **nombre** de
+> barrio solo respondía el 8 % de los pares origen→destino (los nombres de los lugares estaban
+> sucios y duplicados). Se rehízo por **geometría** sobre 135 lugares canónicos con coordenada
+> (`places`), y la congestión pasó de cruzar el texto exacto "Indio" a un **círculo** sobre el
+> tramo que se recorre. RF-04 y RF-09 se reescriben abajo con lo que quedó en PROD; los
+> criterios anteriores (Directions, "última milla" del 2026-09-15, congestión por tramo con
+> nombre) quedan reemplazados. Decisiones cerradas en el grilling del 2026-11-08
+> (`dev/FusaRoute/prompts/P1-backend-busqueda-geometrica.md`).
 
 ---
 
@@ -75,30 +84,49 @@ actualizados.
 Como Usuario Final, quiero que el sistema me sugiera la ruta de buseta más rápida entre mi
 origen y mi destino, para no perder tiempo adivinando cuál tomar.
 
-**Criterios de aceptación:**
-- Dado un origen y un destino válidos dentro del alcance geográfico, cuando el usuario busca,
-  entonces el sistema devuelve la ruta candidata con menor tiempo estimado, calculado
-  combinando las rutas registradas en la base de datos con los tiempos de viaje obtenidos de
-  la API de Google Directions (usada solo para cronometrar, no para determinar el trazado).
+**Criterios de aceptación (reescritos el 2026-11-10, búsqueda por geometría):**
+- **Puntas.** Cada punta llega de una de tres formas, en este orden de prioridad: un lugar
+  canónico de `GET /api/places` (`originPlaceId`), una coordenada (GPS de "Mi ubicación" o
+  un punto tocado en el mapa: `originLat`+`originLng`) o un nombre (legado, se resuelve por
+  nombre o alias al lugar canónico). Igual con el destino. Una punta que no se puede resolver
+  es un 400 que dice cuál.
+- **Candidatas por geometría.** Cada punta se proyecta sobre el trazado (GeoJSON) de cada ruta
+  activa. Una ruta es candidata si el **abordaje queda antes que la bajada** en su recorrido
+  (una ruta = un letrero = un solo sentido; nunca se ofrece el recorrido al revés ni
+  transbordos) y las dos puntas quedan a **≤ 800 m** en línea recta del trazado.
+- **Caminata.** Distancia en línea recta **× 1,3** (factor de rodeo), a 5 km/h, y siempre
+  rotulada **"aprox."**: no hay ruteo peatonal.
+- **Respaldo a 1.500 m.** Si ninguna ruta cumple los 800 m, se ofrece la mejor con caminata de
+  hasta **1.500 m**, marcada `longWalk`, y el frontend muestra "Le toca caminar más de lo
+  normal". Si tampoco hay, es un 404 con la ruta más cercana a cada punta (`nearestRoutes`).
+- **Ranking por tiempo propio.** Gana la de menor tiempo puerta a puerta: caminata + recorrido
+  sobre el trazado ÷ velocidad (15 km/h urbana, 30 km/h intermunicipal, o la calibrada de esa
+  ruta: mediana de las últimas 50 mediciones de Google, mínimo 5).
+- **Google solo para la ganadora.** Una vez elegida, la ruta ganadora se cronometra con la
+  Routes API de Google (`TRAFFIC_AWARE`, caché de 5 min): **como máximo una llamada por
+  búsqueda**, y Google nunca decide cuál ruta gana. Si responde, `etaSource = TRAFFIC` ("con el
+  tráfico de ahora"); si falla o no hay llave, `etaSource = ESTIMATED` ("estimado"). Siempre
+  hay un número de minutos.
+- Las rutas sin trazado solo pueden salir por el camino legado de nombres y nunca le ganan a
+  una con trazado.
 - Dado que no existe ninguna ruta registrada que conecte el origen con el destino, cuando el
   usuario busca, entonces el sistema muestra un mensaje explícito de "no hay ruta disponible",
   no una lista vacía.
 - Dado que el dispositivo está sin conexión (modo offline), cuando el usuario busca, entonces
-  el sistema ordena las rutas candidatas por distancia del trazado (GeoJSON) sin mostrar
-  tiempo estimado.
+  la selección es la misma por geometría y el tiempo sale siempre `ESTIMATED` (sin Google).
 - La lógica de selección de la mejor ruta vive en el paquete `domain/` y no depende
   directamente de la API externa (RNF-03); la API externa se consume a través de un puerto de
   salida `TravelTimeProvider`.
 - El tiempo de respuesta extremo a extremo (p95) no debe superar 8 segundos (RNF-01, ajustado
   por el equipo el 2026-09-09); los tiempos de viaje se cachean por par de puntos con TTL
   corto para no exceder ese límite.
-- **Última milla (criterio añadido el 2026-09-15):** en Fusagasugá no hay paradas fijas, así que
-  el resultado indica el **punto del trazado más cercano** al origen para abordar y al destino
-  para bajarse, con la **distancia aproximada a pie** hasta/desde cada uno (calculada a ~5 km/h,
-  sin ruteo peatonal de Google — geometría pura sobre el GeoJSON). Si el punto más cercano queda
-  a más de **800 m**, la ruta se descarta como candidata para ese origen/destino (no sirve
-  realmente, aunque exista geométricamente). El cálculo vive en `domain/` (proyección
-  punto-polilínea), funciona igual online y offline, y no consume la API de Google.
+- **Última milla:** en Fusagasugá no hay paradas fijas, así que el resultado indica el punto
+  del trazado donde abordar y donde bajarse, con su caminata aprox. (criterio del 2026-09-15,
+  ahora con el × 1,3 y el respaldo a 1.500 m de arriba). El cálculo vive en `domain/`
+  (proyección punto-polilínea) y no consume la API de Google.
+- **Métrica de aceptación del módulo:** ≥ 75 % de los pares ordenados entre lugares canónicos
+  devuelven ruta directa con caminata ≤ 800 m. La mide `SearchCoverageIT` y la publica
+  `docs/calidad/cobertura-busqueda.md` en el backend.
 
 ---
 
@@ -185,12 +213,17 @@ editarlo o borrarlo mientras no haya sido respondido, para dar sugerencias de fo
 Como Usuario Final, quiero recibir un aviso de posible congestión en el tramo que voy a
 tomar, para anticipar demoras.
 
-**Criterios de aceptación:**
-- La congestión se registra por tramo de una ruta (no por ruta completa), como una ventana
-  horaria histórica (`hora_inicio`, `hora_fin`).
+**Criterios de aceptación (actualizados el 2026-11-10, congestión por círculo):**
+- Un sector de congestión es un **círculo** (centro y radio) con una ventana horaria histórica
+  (`hora_inicio`, `hora_fin`). Hoy hay uno: el **Indio**, círculo de **450 m** centrado en el
+  lugar canónico "Monumento El Indio", franjas 12:00–14:00 y 17:00–19:00.
 - Dado que la hora actual está dentro de los 30 minutos previos a `hora_inicio` o dentro de la
-  ventana `[hora_inicio, hora_fin)`, cuando el usuario busca un trayecto que atraviesa ese
-  tramo, entonces se muestra un aviso de posible congestión.
+  ventana `[hora_inicio, hora_fin)`, cuando el **tramo entre el abordaje y la bajada** pasa por
+  el círculo, entonces la respuesta de la búsqueda trae el sector en `congestionSectors` y se
+  muestra el aviso. En el detalle de una ruta basta con que cualquier parte del trazado pase
+  por el círculo.
+- Una ruta que cruza el círculo **fuera** del tramo que el usuario va a recorrer no genera
+  aviso.
 - Dado que el trayecto sugerido no atraviesa ningún tramo con ventana activa, cuando el
   usuario busca, entonces no se muestra ningún aviso.
 - El aviso se presenta como posibilidad ("puede haber congestión"), nunca como una afirmación.
