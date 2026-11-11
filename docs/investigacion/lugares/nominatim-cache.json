@@ -1,0 +1,103 @@
+{
+ "nota": "Respuestas crudas de Nominatim (OSM) para los lugares de Pasca. Las escribe lugares-canonicos.js --refrescar-nominatim. Uso: 1 petición por segundo, User-Agent FusaRoute-universidad, sin email.",
+ "viewbox": "-74.45,4.40,-74.20,4.20",
+ "consultas": {
+  "Alaska": [],
+  "Alaska, Pasca": [],
+  "Angostura": [],
+  "Buenas Tardes": [],
+  "Buenas Tardes, Pasca": [],
+  "Colegio La Presentación, Fusagasugá": [],
+  "Corregimiento": [
+   {
+    "osm": "n703339829",
+    "lat": 4.3883444,
+    "lon": -74.3248934,
+    "categoria": "place",
+    "tipo": "village",
+    "nombre": "La Aguadita, Fusagasugá, Sumapaz, Cundinamarca, RAP (Especial) Central, Colombia"
+   },
+   {
+    "osm": "n703338444",
+    "lat": 4.2146371,
+    "lon": -74.4419001,
+    "categoria": "place",
+    "tipo": "village",
+    "nombre": "Portones, San Bernardo, Sumapaz, Cundinamarca, RAP (Especial) Central, Colombia"
+   }
+  ],
+  "Corregimiento, Pasca": [],
+  "Crucero La Angostura": [],
+  "Escuela Los Sauces": [],
+  "Filipo": [],
+  "Hogar Francisco y Clara": [
+   {
+    "osm": "w1196568893",
+    "lat": 4.3358145,
+    "lon": -74.3537208,
+    "categoria": "amenity",
+    "tipo": "social_facility",
+    "nombre": "Hogar Francisco y Clara, Carrera 4 Este, Altos de Pekín, Comuna Oriental, Fusagasugá ciudad, Fusagasugá, Sumapaz, Cundinamarca, RAP (Especial) Central, 252211, Colombia"
+   }
+  ],
+  "La Angostura, Pasca": [],
+  "La Capilla": [],
+  "La Capilla, Pasca": [],
+  "La Presentación": [],
+  "Panadería Filipo, Fusagasugá": [],
+  "Pasca, Cundinamarca": [
+   {
+    "osm": "r1413207",
+    "lat": 4.3078299,
+    "lon": -74.3001795,
+    "categoria": "boundary",
+    "tipo": "administrative",
+    "nombre": "Pasca, Pasca pueblo, Sumapaz, Cundinamarca, RAP (Especial) Central, Colombia"
+   },
+   {
+    "osm": "r17419314",
+    "lat": 4.3078299,
+    "lon": -74.3001795,
+    "categoria": "boundary",
+    "tipo": "administrative",
+    "nombre": "Pasca pueblo, Pasca, Sumapaz, Cundinamarca, RAP (Especial) Central, Colombia"
+   }
+  ],
+  "Pompas": [],
+  "Pompas La Paz, Fusagasugá": [],
+  "Sauces": [
+   {
+    "osm": "w1196871755",
+    "lat": 4.3326597,
+    "lon": -74.3614442,
+    "categoria": "landuse",
+    "tipo": "residential",
+    "nombre": "Sauces III, Comuna Sur Oriental, Fusagasugá ciudad, Fusagasugá, Sumapaz, Cundinamarca, RAP (Especial) Central, Colombia"
+   },
+   {
+    "osm": "w1196871753",
+    "lat": 4.3313371,
+    "lon": -74.3602329,
+    "categoria": "landuse",
+    "tipo": "residential",
+    "nombre": "Parque Los Sauces, Comuna Sur Oriental, Fusagasugá ciudad, Fusagasugá, Sumapaz, Cundinamarca, RAP (Especial) Central, Colombia"
+   },
+   {
+    "osm": "w1196568897",
+    "lat": 4.3324846,
+    "lon": -74.3601287,
+    "categoria": "landuse",
+    "tipo": "residential",
+    "nombre": "Recreo de los Sauces, Comuna Oriental, Fusagasugá ciudad, Fusagasugá, Sumapaz, Cundinamarca, RAP (Especial) Central, Colombia"
+   },
+   {
+    "osm": "n6264810645",
+    "lat": 4.3454191,
+    "lon": -74.3616303,
+    "categoria": "tourism",
+    "tipo": "hotel",
+    "nombre": "Hotel Los Sauces, Carrera 6, La Florida, Comuna Centro, Fusagasugá ciudad, Fusagasugá, Sumapaz, Cundinamarca, RAP (Especial) Central, 252211, Colombia"
+   }
+  ]
+ }
+}

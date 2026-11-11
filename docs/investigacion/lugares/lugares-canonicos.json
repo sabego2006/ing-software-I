@@ -1,0 +1,2632 @@
+[
+  {
+    "slug": "academia-militar-pantano-de-vargas",
+    "nombre": "Academia Militar Pantano de Vargas",
+    "lat": 4.353979,
+    "lng": -74.356042,
+    "alias": [],
+    "rutas": [
+      "CENTRO_CRA_1_SANTANDER_PANTANO_DE_VARGAS_LA_CLARITA"
+    ],
+    "n_rutas": 1,
+    "fuente": "kml",
+    "dispersion_m": 0,
+    "nota": ""
+  },
+  {
+    "slug": "alaska",
+    "nombre": "Alaska",
+    "lat": null,
+    "lng": null,
+    "alias": [],
+    "rutas": [
+      "ruta-8"
+    ],
+    "n_rutas": 1,
+    "fuente": "sin-coordenada",
+    "dispersion_m": null,
+    "nota": "Lugar de Pasca sin KML; Nominatim no lo encontró con confianza."
+  },
+  {
+    "slug": "alto-canecas",
+    "nombre": "Alto Canecas",
+    "lat": 4.261751,
+    "lng": -74.527715,
+    "alias": [],
+    "rutas": [
+      "ruta-6",
+      "CHINAUTA_BOQUERON"
+    ],
+    "n_rutas": 2,
+    "fuente": "kml",
+    "dispersion_m": 0,
+    "nota": ""
+  },
+  {
+    "slug": "altos-de-pekin",
+    "nombre": "Altos de Pekín",
+    "lat": 4.345123,
+    "lng": -74.356241,
+    "alias": [],
+    "rutas": [
+      "NARINO_PEKIN_STA_MARIA_DE_LOS_ANGELES_ALTOS_DE_PEKIN"
+    ],
+    "n_rutas": 1,
+    "fuente": "kml",
+    "dispersion_m": 0,
+    "nota": ""
+  },
+  {
+    "slug": "ara-ebenezer",
+    "nombre": "Ara Ebenezer",
+    "lat": null,
+    "lng": null,
+    "alias": [],
+    "rutas": [
+      "CENTRO_COLSUBSIDIO_CALLE_3_OLAYA"
+    ],
+    "n_rutas": 1,
+    "fuente": "sin-coordenada",
+    "dispersion_m": null,
+    "nota": "Sin marcador en ningún KML."
+  },
+  {
+    "slug": "arbelaez",
+    "nombre": "Arbeláez",
+    "lat": 4.272793,
+    "lng": -74.416014,
+    "alias": [],
+    "rutas": [
+      "ARBELAEZ"
+    ],
+    "n_rutas": 1,
+    "fuente": "kml",
+    "dispersion_m": 0,
+    "nota": ""
+  },
+  {
+    "slug": "av-las-palmas",
+    "nombre": "Av. Las Palmas",
+    "lat": 4.342015,
+    "lng": -74.368188,
+    "alias": [
+      "Av. Palmas",
+      "Avda. Palmas",
+      "Avenida Las Palmas",
+      "Palmas"
+    ],
+    "rutas": [
+      "CENTRO_CRA_1_SANTANDER_PANTANO_DE_VARGAS_LA_CLARITA",
+      "CENTRO_U_HOSPITAL_COLSUBSIDIO_CEDRITOS",
+      "CENTRO_COLSUBSIDIO_CEMENTERIO_GAITAN_GALAN",
+      "CENTRO_COLSUBSIDIO_PROGRESO_SAN_ANTONIO",
+      "U_HOSPITAL_SIBONEY_MACARENA_PABLO_BELLO",
+      "CENTRO_COLSUBSIDIO_CALLE_3_OLAYA",
+      "CENTRO_GALERIA_TERMINAL",
+      "LA_PALMA_COLSUBSIDIO_SAN_ANTONIO_SANTANDER",
+      "CHINAUTA_FUSA_CENTRO",
+      "CRA_8_HOSPITAL_COOVIPROF_VILLA_PATRICIA",
+      "CRA_6_CLL_22_HOSPITAL_COOVIPROF_VILLA_PATRICIA",
+      "CUJA_HORIZONTE_MESITAS",
+      "CENTRO_COLSUBSIDIO_CALLE_4_CEDRITOS_SAN_ANTONIO",
+      "U_HOSPITAL_CRA_9_CLL_3_COLSUBSIDIO_CEMENTERIO",
+      "SANTA_ANITA_GALERIA_COLSUBSIDIO_CEMENTERIO_RESGUARDOS",
+      "CARRERA_6_FUSACATAN_SAN_FERNANDO_BOSQUES_DE_ORIENTE_LUSITANIA",
+      "CENTRO_CRA_6_GALERIA_MANDALAY_VILLA_NATALIA"
+    ],
+    "n_rutas": 17,
+    "fuente": "kml-centroide",
+    "dispersion_m": 526,
+    "nota": "Dispersión de 526 m entre 17 marcadores."
+  },
+  {
+    "slug": "av-manuel-humberto",
+    "nombre": "Av. Manuel Humberto",
+    "lat": 4.328895,
+    "lng": -74.367478,
+    "alias": [],
+    "rutas": [
+      "CENTRO_U_HOSPITAL_COLSUBSIDIO_CEDRITOS",
+      "CRA_8_HOSPITAL_COOVIPROF_VILLA_PATRICIA",
+      "U_HOSPITAL_CRA_9_CLL_3_COLSUBSIDIO_CEMENTERIO"
+    ],
+    "n_rutas": 3,
+    "fuente": "kml",
+    "dispersion_m": 0,
+    "nota": ""
+  },
+  {
+    "slug": "avenida-calle-22",
+    "nombre": "Avenida Calle 22",
+    "lat": 4.32888,
+    "lng": -74.386076,
+    "alias": [],
+    "rutas": [
+      "CENTRO_GALERIA_TERMINAL",
+      "NARINO_PEKIN_STA_MARIA_DE_LOS_ANGELES_ALTOS_DE_PEKIN",
+      "CANEY_GALERIA_CENTRO_COLSUBSIDIO_EL_EDEN",
+      "EXITO_CALLE_22_PRADOS_DE_ALTAGRACIA_CAMINO_REAL",
+      "CENTRO_CARRERA_9_GALERIA",
+      "CRA_8_HOSPITAL_COOVIPROF_VILLA_PATRICIA",
+      "CRA_6_CLL_22_HOSPITAL_COOVIPROF_VILLA_PATRICIA",
+      "CENTRO_CRA_6_GALERIA_MANDALAY_VILLA_NATALIA"
+    ],
+    "n_rutas": 8,
+    "fuente": "kml",
+    "dispersion_m": 0,
+    "nota": ""
+  },
+  {
+    "slug": "avisos-j-neon",
+    "nombre": "Avisos J-Neon",
+    "lat": 4.350608,
+    "lng": -74.360823,
+    "alias": [],
+    "rutas": [
+      "CENTRO_COLSUBSIDIO_PROGRESO_SAN_ANTONIO"
+    ],
+    "n_rutas": 1,
+    "fuente": "kml",
+    "dispersion_m": 0,
+    "nota": ""
+  },
+  {
+    "slug": "banco-agrario",
+    "nombre": "Banco Agrario",
+    "lat": 4.342428,
+    "lng": -74.360051,
+    "alias": [],
+    "rutas": [
+      "NARINO_PEKIN_STA_MARIA_DE_LOS_ANGELES_ALTOS_DE_PEKIN"
+    ],
+    "n_rutas": 1,
+    "fuente": "kml",
+    "dispersion_m": 0,
+    "nota": ""
+  },
+  {
+    "slug": "banco-caja-social",
+    "nombre": "Banco Caja Social",
+    "lat": 4.342291,
+    "lng": -74.363295,
+    "alias": [],
+    "rutas": [
+      "U_HOSPITAL_MAIZ_AMARILLO_COMFENALCO_CIUDAD_EBENEZER",
+      "HOSPITAL_BATALLON_LA_PAMPA_LLANO_GRANDE",
+      "U_HOSPITAL_GRAN_COLOMBIA_ESC_POLICIA_C_EBENEZER",
+      "U_HOSPITAL_BATALLON_LLANO_LARGO"
+    ],
+    "n_rutas": 4,
+    "fuente": "kml",
+    "dispersion_m": 0,
+    "nota": ""
+  },
+  {
+    "slug": "banco-popular",
+    "nombre": "Banco Popular",
+    "lat": 4.342603,
+    "lng": -74.360015,
+    "alias": [],
+    "rutas": [
+      "U_HOSPITAL_CRA_9_CLL_3_COLSUBSIDIO_CEMENTERIO"
+    ],
+    "n_rutas": 1,
+    "fuente": "kml",
+    "dispersion_m": 0,
+    "nota": ""
+  },
+  {
+    "slug": "barcelona",
+    "nombre": "Barcelona",
+    "lat": null,
+    "lng": null,
+    "alias": [],
+    "rutas": [
+      "HORIZONTE_PALACIOS_TRINIDAD_BARCELONA"
+    ],
+    "n_rutas": 1,
+    "fuente": "sin-coordenada",
+    "dispersion_m": null,
+    "nota": "Sin marcador en ningún KML."
+  },
+  {
+    "slug": "barrio-el-eden",
+    "nombre": "Barrio El Edén",
+    "lat": 4.352064,
+    "lng": -74.365226,
+    "alias": [],
+    "rutas": [
+      "CANEY_GALERIA_CENTRO_COLSUBSIDIO_EL_EDEN"
+    ],
+    "n_rutas": 1,
+    "fuente": "kml",
+    "dispersion_m": 0,
+    "nota": ""
+  },
+  {
+    "slug": "barrio-la-florida",
+    "nombre": "Barrio La Florida",
+    "lat": 4.347641,
+    "lng": -74.360825,
+    "alias": [],
+    "rutas": [
+      "CANEY_GALERIA_CENTRO_COLSUBSIDIO_EL_EDEN"
+    ],
+    "n_rutas": 1,
+    "fuente": "kml",
+    "dispersion_m": 0,
+    "nota": ""
+  },
+  {
+    "slug": "barrio-progreso",
+    "nombre": "Barrio Progreso",
+    "lat": 4.351532,
+    "lng": -74.362266,
+    "alias": [],
+    "rutas": [
+      "CENTRO_COLSUBSIDIO_PROGRESO_SAN_ANTONIO"
+    ],
+    "n_rutas": 1,
+    "fuente": "kml",
+    "dispersion_m": 0,
+    "nota": ""
+  },
+  {
+    "slug": "barrio-santander",
+    "nombre": "Barrio Santander",
+    "lat": 4.346926,
+    "lng": -74.359414,
+    "alias": [
+      "D1 Barrio Santander",
+      "Santander"
+    ],
+    "rutas": [
+      "CENTRO_CRA_1_SANTANDER_PANTANO_DE_VARGAS_LA_CLARITA",
+      "LA_PALMA_COLSUBSIDIO_SAN_ANTONIO_SANTANDER",
+      "CENTRO_COLSUBSIDIO_CALLE_4_CEDRITOS_SAN_ANTONIO"
+    ],
+    "n_rutas": 3,
+    "fuente": "kml",
+    "dispersion_m": 0,
+    "nota": ""
+  },
+  {
+    "slug": "batallon",
+    "nombre": "Batallón",
+    "lat": 4.326571,
+    "lng": -74.399738,
+    "alias": [],
+    "rutas": [
+      "U_HOSPITAL_MAIZ_AMARILLO_COMFENALCO_CIUDAD_EBENEZER",
+      "HOSPITAL_BATALLON_LA_PAMPA_LLANO_GRANDE",
+      "CHINAUTA_FUSA_CENTRO",
+      "CHINAUTA_ESCUELA",
+      "U_HOSPITAL_BATALLON_LLANO_LARGO"
+    ],
+    "n_rutas": 5,
+    "fuente": "kml",
+    "dispersion_m": 0,
+    "nota": ""
+  },
+  {
+    "slug": "batallon-sumapaz",
+    "nombre": "Batallón Sumapaz",
+    "lat": 4.301681,
+    "lng": -74.403776,
+    "alias": [],
+    "rutas": [
+      "ARBELAEZ",
+      "HOSPITAL_LA_SHELL_CUJA_HORIZONTE_BATALLON"
+    ],
+    "n_rutas": 2,
+    "fuente": "kml",
+    "dispersion_m": 0,
+    "nota": ""
+  },
+  {
+    "slug": "bochica",
+    "nombre": "Bochica",
+    "lat": 4.292133,
+    "lng": -74.390715,
+    "alias": [],
+    "rutas": [
+      "PALACIOS_TRINIDAD_GUAVIO"
+    ],
+    "n_rutas": 1,
+    "fuente": "kml",
+    "dispersion_m": 0,
+    "nota": ""
+  },
+  {
+    "slug": "bomberos",
+    "nombre": "Bomberos",
+    "lat": 4.341778,
+    "lng": -74.360785,
+    "alias": [],
+    "rutas": [
+      "ruta-8",
+      "NARINO_PEKIN_STA_MARIA_DE_LOS_ANGELES_ALTOS_DE_PEKIN"
+    ],
+    "n_rutas": 2,
+    "fuente": "kml",
+    "dispersion_m": 0,
+    "nota": "Ya tiene marcador (ruta Nariño Pekín): se reutiliza."
+  },
+  {
+    "slug": "boqueron",
+    "nombre": "Boquerón",
+    "lat": 4.283658,
+    "lng": -74.474533,
+    "alias": [],
+    "rutas": [
+      "CHINAUTA_BOQUERON"
+    ],
+    "n_rutas": 1,
+    "fuente": "kml",
+    "dispersion_m": 0,
+    "nota": ""
+  },
+  {
+    "slug": "bosques-de-oriente",
+    "nombre": "Bosques de Oriente",
+    "lat": 4.324255,
+    "lng": -74.361829,
+    "alias": [],
+    "rutas": [
+      "CARRERA_6_FUSACATAN_SAN_FERNANDO_BOSQUES_DE_ORIENTE_LUSITANIA"
+    ],
+    "n_rutas": 1,
+    "fuente": "kml",
+    "dispersion_m": 0,
+    "nota": ""
+  },
+  {
+    "slug": "buenas-tardes",
+    "nombre": "Buenas Tardes",
+    "lat": null,
+    "lng": null,
+    "alias": [],
+    "rutas": [
+      "ruta-8"
+    ],
+    "n_rutas": 1,
+    "fuente": "sin-coordenada",
+    "dispersion_m": null,
+    "nota": "Lugar de Pasca sin KML; Nominatim no lo encontró con confianza."
+  },
+  {
+    "slug": "calle-1-norte",
+    "nombre": "Calle 1 Norte",
+    "lat": 4.347891,
+    "lng": -74.365058,
+    "alias": [],
+    "rutas": [
+      "SANTA_ANITA_GALERIA_COLSUBSIDIO_CEMENTERIO_RESGUARDOS"
+    ],
+    "n_rutas": 1,
+    "fuente": "kml",
+    "dispersion_m": 0,
+    "nota": ""
+  },
+  {
+    "slug": "calle-11",
+    "nombre": "Calle 11",
+    "lat": 4.339916,
+    "lng": -74.36276,
+    "alias": [],
+    "rutas": [
+      "CENTRO_U_HOSPITAL_COLSUBSIDIO_CEDRITOS",
+      "U_HOSPITAL_CRA_9_CLL_3_COLSUBSIDIO_CEMENTERIO",
+      "CARRERA_6_FUSACATAN_SAN_FERNANDO_BOSQUES_DE_ORIENTE_LUSITANIA"
+    ],
+    "n_rutas": 3,
+    "fuente": "kml",
+    "dispersion_m": 0,
+    "nota": ""
+  },
+  {
+    "slug": "calle-2",
+    "nombre": "Calle 2",
+    "lat": 4.347228,
+    "lng": -74.360173,
+    "alias": [],
+    "rutas": [
+      "CENTRO_U_HOSPITAL_COLSUBSIDIO_CEDRITOS",
+      "CENTRO_COLSUBSIDIO_CALLE_4_CEDRITOS_SAN_ANTONIO"
+    ],
+    "n_rutas": 2,
+    "fuente": "kml",
+    "dispersion_m": 0,
+    "nota": ""
+  },
+  {
+    "slug": "calle-21",
+    "nombre": "Calle 21",
+    "lat": 4.328275,
+    "lng": -74.364739,
+    "alias": [],
+    "rutas": [
+      "CARRERA_6_FUSACATAN_SAN_FERNANDO_BOSQUES_DE_ORIENTE_LUSITANIA"
+    ],
+    "n_rutas": 1,
+    "fuente": "kml",
+    "dispersion_m": 0,
+    "nota": ""
+  },
+  {
+    "slug": "calle-22",
+    "nombre": "Calle 22",
+    "lat": 4.326675,
+    "lng": -74.400372,
+    "alias": [],
+    "rutas": [
+      "EXITO_CALLE_22_PRADOS_DE_ALTAGRACIA_CAMINO_REAL",
+      "PALACIOS_TRINIDAD_GUAVIO",
+      "CRA_6_CLL_22_HOSPITAL_COOVIPROF_VILLA_PATRICIA",
+      "CUJA_HORIZONTE_MESITAS",
+      "HOSPITAL_LA_SHELL_CUJA_HORIZONTE_BATALLON",
+      "HORIZONTE_PALACIOS_TRINIDAD_BARCELONA"
+    ],
+    "n_rutas": 6,
+    "fuente": "kml",
+    "dispersion_m": 0,
+    "nota": ""
+  },
+  {
+    "slug": "calle-3-cra-9",
+    "nombre": "Calle 3 (Cra. 9)",
+    "lat": 4.346218,
+    "lng": -74.36396,
+    "alias": [
+      "Calle 3"
+    ],
+    "rutas": [
+      "U_HOSPITAL_CRA_9_CLL_3_COLSUBSIDIO_CEMENTERIO"
+    ],
+    "n_rutas": 1,
+    "fuente": "kml",
+    "dispersion_m": 0,
+    "nota": "Homónimo separado (> 150 m): calle-3-olaya a 266 m; calle-3-la-palma a 815 m."
+  },
+  {
+    "slug": "calle-3-la-palma",
+    "nombre": "Calle 3 (La Palma)",
+    "lat": 4.350452,
+    "lng": -74.357955,
+    "alias": [
+      "Calle 3"
+    ],
+    "rutas": [
+      "LA_PALMA_COLSUBSIDIO_SAN_ANTONIO_SANTANDER"
+    ],
+    "n_rutas": 1,
+    "fuente": "kml",
+    "dispersion_m": 0,
+    "nota": "Homónimo separado (> 150 m): calle-3-olaya a 602 m; calle-3-cra-9 a 815 m."
+  },
+  {
+    "slug": "calle-3-olaya",
+    "nombre": "Calle 3 (Olaya)",
+    "lat": 4.346405,
+    "lng": -74.361567,
+    "alias": [
+      "Calle 3"
+    ],
+    "rutas": [
+      "CENTRO_COLSUBSIDIO_CALLE_3_OLAYA"
+    ],
+    "n_rutas": 1,
+    "fuente": "kml",
+    "dispersion_m": 0,
+    "nota": "Homónimo separado (> 150 m): calle-3-la-palma a 602 m; calle-3-cra-9 a 266 m."
+  },
+  {
+    "slug": "calle-4",
+    "nombre": "Calle 4",
+    "lat": 4.345621,
+    "lng": -74.361834,
+    "alias": [],
+    "rutas": [
+      "CENTRO_U_HOSPITAL_COLSUBSIDIO_CEDRITOS",
+      "LA_PALMA_COLSUBSIDIO_SAN_ANTONIO_SANTANDER",
+      "CENTRO_COLSUBSIDIO_CALLE_4_CEDRITOS_SAN_ANTONIO"
+    ],
+    "n_rutas": 3,
+    "fuente": "kml-centroide",
+    "dispersion_m": 90,
+    "nota": "Dispersión de 90 m entre 3 marcadores."
+  },
+  {
+    "slug": "calle-7",
+    "nombre": "Calle 7",
+    "lat": 4.343453,
+    "lng": -74.360869,
+    "alias": [],
+    "rutas": [
+      "CENTRO_CRA_1_SANTANDER_PANTANO_DE_VARGAS_LA_CLARITA"
+    ],
+    "n_rutas": 1,
+    "fuente": "kml",
+    "dispersion_m": 0,
+    "nota": ""
+  },
+  {
+    "slug": "calle-caliente",
+    "nombre": "Calle Caliente",
+    "lat": null,
+    "lng": null,
+    "alias": [],
+    "rutas": [
+      "CENTRO_COLSUBSIDIO_CEMENTERIO_GAITAN_GALAN"
+    ],
+    "n_rutas": 1,
+    "fuente": "sin-coordenada",
+    "dispersion_m": null,
+    "nota": "Sin marcador en ningún KML."
+  },
+  {
+    "slug": "cambulos-3",
+    "nombre": "Cambulos 3",
+    "lat": 4.335344,
+    "lng": -74.397886,
+    "alias": [],
+    "rutas": [
+      "U_HOSPITAL_MAIZ_AMARILLO_COMFENALCO_CIUDAD_EBENEZER",
+      "U_HOSPITAL_GRAN_COLOMBIA_ESC_POLICIA_C_EBENEZER"
+    ],
+    "n_rutas": 2,
+    "fuente": "kml",
+    "dispersion_m": 0,
+    "nota": ""
+  },
+  {
+    "slug": "camino-real",
+    "nombre": "Camino Real",
+    "lat": 4.325554,
+    "lng": -74.356101,
+    "alias": [],
+    "rutas": [
+      "EXITO_CALLE_22_PRADOS_DE_ALTAGRACIA_CAMINO_REAL"
+    ],
+    "n_rutas": 1,
+    "fuente": "kml",
+    "dispersion_m": 0,
+    "nota": ""
+  },
+  {
+    "slug": "caney",
+    "nombre": "Caney",
+    "lat": null,
+    "lng": null,
+    "alias": [],
+    "rutas": [
+      "CANEY_GALERIA_CENTRO_COLSUBSIDIO_EL_EDEN"
+    ],
+    "n_rutas": 1,
+    "fuente": "sin-coordenada",
+    "dispersion_m": null,
+    "nota": "Sin marcador en ningún KML."
+  },
+  {
+    "slug": "carrera-1-barrio-santander",
+    "nombre": "Carrera 1 (Barrio Santander)",
+    "lat": 4.347184,
+    "lng": -74.357712,
+    "alias": [
+      "Carrera 1"
+    ],
+    "rutas": [
+      "CENTRO_COLSUBSIDIO_CALLE_4_CEDRITOS_SAN_ANTONIO"
+    ],
+    "n_rutas": 1,
+    "fuente": "kml",
+    "dispersion_m": 0,
+    "nota": "Homónimo separado (> 150 m): carrera-1-gran-surtidor a 204 m."
+  },
+  {
+    "slug": "carrera-1-gran-surtidor",
+    "nombre": "Carrera 1 (Gran Surtidor)",
+    "lat": 4.349019,
+    "lng": -74.357773,
+    "alias": [
+      "Carrera 1"
+    ],
+    "rutas": [
+      "LA_PALMA_COLSUBSIDIO_SAN_ANTONIO_SANTANDER"
+    ],
+    "n_rutas": 1,
+    "fuente": "kml",
+    "dispersion_m": 0,
+    "nota": "Homónimo separado (> 150 m): carrera-1-barrio-santander a 204 m."
+  },
+  {
+    "slug": "carrera-1-santander",
+    "nombre": "Carrera 1 Santander",
+    "lat": 4.353204,
+    "lng": -74.358172,
+    "alias": [],
+    "rutas": [
+      "CENTRO_CRA_1_SANTANDER_PANTANO_DE_VARGAS_LA_CLARITA"
+    ],
+    "n_rutas": 1,
+    "fuente": "kml",
+    "dispersion_m": 0,
+    "nota": ""
+  },
+  {
+    "slug": "carrera-11",
+    "nombre": "Carrera 11",
+    "lat": 4.34142,
+    "lng": -74.365171,
+    "alias": [],
+    "rutas": [
+      "U_HOSPITAL_CRA_9_CLL_3_COLSUBSIDIO_CEMENTERIO",
+      "SANTA_ANITA_GALERIA_COLSUBSIDIO_CEMENTERIO_RESGUARDOS"
+    ],
+    "n_rutas": 2,
+    "fuente": "kml",
+    "dispersion_m": 0,
+    "nota": ""
+  },
+  {
+    "slug": "carrera-17",
+    "nombre": "Carrera 17",
+    "lat": 4.340367,
+    "lng": -74.370046,
+    "alias": [],
+    "rutas": [
+      "SANTA_ANITA_GALERIA_COLSUBSIDIO_CEMENTERIO_RESGUARDOS"
+    ],
+    "n_rutas": 1,
+    "fuente": "kml",
+    "dispersion_m": 0,
+    "nota": ""
+  },
+  {
+    "slug": "carrera-4",
+    "nombre": "Carrera 4",
+    "lat": 4.345675,
+    "lng": -74.36012,
+    "alias": [],
+    "rutas": [
+      "CENTRO_COLSUBSIDIO_CALLE_4_CEDRITOS_SAN_ANTONIO"
+    ],
+    "n_rutas": 1,
+    "fuente": "kml",
+    "dispersion_m": 0,
+    "nota": ""
+  },
+  {
+    "slug": "carrera-41",
+    "nombre": "Carrera 41",
+    "lat": 4.327908,
+    "lng": -74.385978,
+    "alias": [],
+    "rutas": [
+      "CRA_8_HOSPITAL_COOVIPROF_VILLA_PATRICIA",
+      "CRA_6_CLL_22_HOSPITAL_COOVIPROF_VILLA_PATRICIA"
+    ],
+    "n_rutas": 2,
+    "fuente": "kml",
+    "dispersion_m": 0,
+    "nota": ""
+  },
+  {
+    "slug": "carrera-6",
+    "nombre": "Carrera 6",
+    "lat": 4.337822,
+    "lng": -74.361642,
+    "alias": [],
+    "rutas": [
+      "CENTRO_U_HOSPITAL_COLSUBSIDIO_CEDRITOS",
+      "CENTRO_COLSUBSIDIO_CEMENTERIO_GAITAN_GALAN",
+      "CRA_6_CLL_22_HOSPITAL_COOVIPROF_VILLA_PATRICIA",
+      "CARRERA_6_FUSACATAN_SAN_FERNANDO_BOSQUES_DE_ORIENTE_LUSITANIA"
+    ],
+    "n_rutas": 4,
+    "fuente": "kml",
+    "dispersion_m": 0,
+    "nota": ""
+  },
+  {
+    "slug": "carrera-8",
+    "nombre": "Carrera 8",
+    "lat": 4.334549,
+    "lng": -74.364353,
+    "alias": [],
+    "rutas": [
+      "CRA_8_HOSPITAL_COOVIPROF_VILLA_PATRICIA"
+    ],
+    "n_rutas": 1,
+    "fuente": "kml",
+    "dispersion_m": 0,
+    "nota": ""
+  },
+  {
+    "slug": "carrera-9",
+    "nombre": "Carrera 9",
+    "lat": 4.341963,
+    "lng": -74.363917,
+    "alias": [],
+    "rutas": [
+      "CENTRO_CARRERA_9_GALERIA",
+      "U_HOSPITAL_CRA_9_CLL_3_COLSUBSIDIO_CEMENTERIO"
+    ],
+    "n_rutas": 2,
+    "fuente": "kml",
+    "dispersion_m": 0,
+    "nota": ""
+  },
+  {
+    "slug": "cedritos",
+    "nombre": "Cedritos",
+    "lat": 4.346054,
+    "lng": -74.354753,
+    "alias": [],
+    "rutas": [
+      "CENTRO_U_HOSPITAL_COLSUBSIDIO_CEDRITOS",
+      "CENTRO_COLSUBSIDIO_CALLE_4_CEDRITOS_SAN_ANTONIO"
+    ],
+    "n_rutas": 2,
+    "fuente": "kml",
+    "dispersion_m": 0,
+    "nota": ""
+  },
+  {
+    "slug": "cementerio",
+    "nombre": "Cementerio",
+    "lat": 4.349053,
+    "lng": -74.365516,
+    "alias": [],
+    "rutas": [
+      "U_HOSPITAL_CRA_9_CLL_3_COLSUBSIDIO_CEMENTERIO",
+      "SANTA_ANITA_GALERIA_COLSUBSIDIO_CEMENTERIO_RESGUARDOS"
+    ],
+    "n_rutas": 2,
+    "fuente": "kml",
+    "dispersion_m": 0,
+    "nota": ""
+  },
+  {
+    "slug": "centro-comercial-avenida",
+    "nombre": "Centro Comercial Avenida",
+    "lat": 4.343802,
+    "lng": -74.373782,
+    "alias": [
+      "CC Avenida",
+      "Centro comercial avenida"
+    ],
+    "rutas": [
+      "CENTRO_COLSUBSIDIO_CEMENTERIO_GAITAN_GALAN",
+      "U_HOSPITAL_SIBONEY_MACARENA_PABLO_BELLO",
+      "CENTRO_GALERIA_TERMINAL",
+      "CENTRO_CRA_6_GALERIA_MANDALAY_VILLA_NATALIA"
+    ],
+    "n_rutas": 4,
+    "fuente": "kml",
+    "dispersion_m": 0,
+    "nota": ""
+  },
+  {
+    "slug": "centro-comercial-jardin",
+    "nombre": "Centro Comercial Jardin",
+    "lat": 4.33221,
+    "lng": -74.374955,
+    "alias": [],
+    "rutas": [
+      "CENTRO_COLSUBSIDIO_PROGRESO_SAN_ANTONIO"
+    ],
+    "n_rutas": 1,
+    "fuente": "kml",
+    "dispersion_m": 0,
+    "nota": ""
+  },
+  {
+    "slug": "centro-comercial-manila",
+    "nombre": "Centro Comercial Manila",
+    "lat": 4.332934,
+    "lng": -74.370028,
+    "alias": [
+      "Centro comercial Manila",
+      "Manila"
+    ],
+    "rutas": [
+      "CENTRO_COLSUBSIDIO_PROGRESO_SAN_ANTONIO",
+      "U_HOSPITAL_SIBONEY_MACARENA_PABLO_BELLO",
+      "CENTRO_COLSUBSIDIO_CALLE_3_OLAYA"
+    ],
+    "n_rutas": 3,
+    "fuente": "kml",
+    "dispersion_m": 0,
+    "nota": ""
+  },
+  {
+    "slug": "centro-de-integracion-infantil",
+    "nombre": "Centro de integración Infantil",
+    "lat": 4.345614,
+    "lng": -74.363084,
+    "alias": [],
+    "rutas": [
+      "CENTRO_COLSUBSIDIO_CEMENTERIO_GAITAN_GALAN"
+    ],
+    "n_rutas": 1,
+    "fuente": "kml",
+    "dispersion_m": 0,
+    "nota": ""
+  },
+  {
+    "slug": "centro-parque-principal",
+    "nombre": "Centro (Parque Principal)",
+    "lat": 4.343838,
+    "lng": -74.362005,
+    "alias": [
+      "Centro"
+    ],
+    "rutas": [
+      "CENTRO_CRA_1_SANTANDER_PANTANO_DE_VARGAS_LA_CLARITA",
+      "CENTRO_U_HOSPITAL_COLSUBSIDIO_CEDRITOS",
+      "ruta-5",
+      "CENTRO_COLSUBSIDIO_CEMENTERIO_GAITAN_GALAN",
+      "LA_PALMA_COLSUBSIDIO_SAN_ANTONIO_SANTANDER",
+      "CRA_8_HOSPITAL_COOVIPROF_VILLA_PATRICIA",
+      "CRA_6_CLL_22_HOSPITAL_COOVIPROF_VILLA_PATRICIA",
+      "CUJA_HORIZONTE_MESITAS",
+      "CENTRO_COLSUBSIDIO_CALLE_4_CEDRITOS_SAN_ANTONIO",
+      "U_HOSPITAL_CRA_9_CLL_3_COLSUBSIDIO_CEMENTERIO",
+      "SANTA_ANITA_GALERIA_COLSUBSIDIO_CEMENTERIO_RESGUARDOS",
+      "CARRERA_6_FUSACATAN_SAN_FERNANDO_BOSQUES_DE_ORIENTE_LUSITANIA"
+    ],
+    "n_rutas": 12,
+    "fuente": "kml",
+    "dispersion_m": 0,
+    "nota": ""
+  },
+  {
+    "slug": "chinauta",
+    "nombre": "Chinauta",
+    "lat": 4.295601,
+    "lng": -74.452283,
+    "alias": [
+      "Chinauta (retorno antes del peaje)"
+    ],
+    "rutas": [
+      "ruta-6",
+      "CHINAUTA_FUSA_CENTRO",
+      "CHINAUTA_BOQUERON"
+    ],
+    "n_rutas": 3,
+    "fuente": "kml",
+    "dispersion_m": 0,
+    "nota": ""
+  },
+  {
+    "slug": "chinauta-escuela",
+    "nombre": "Chinauta Escuela",
+    "lat": null,
+    "lng": null,
+    "alias": [],
+    "rutas": [
+      "CHINAUTA_ESCUELA"
+    ],
+    "n_rutas": 1,
+    "fuente": "sin-coordenada",
+    "dispersion_m": null,
+    "nota": "Sin marcador en ningún KML."
+  },
+  {
+    "slug": "ciudad-ebenezer",
+    "nombre": "Ciudad Ebenezer",
+    "lat": 4.332597,
+    "lng": -74.39468,
+    "alias": [],
+    "rutas": [
+      "U_HOSPITAL_MAIZ_AMARILLO_COMFENALCO_CIUDAD_EBENEZER"
+    ],
+    "n_rutas": 1,
+    "fuente": "kml",
+    "dispersion_m": 0,
+    "nota": ""
+  },
+  {
+    "slug": "clinica-belen",
+    "nombre": "Clínica Belén",
+    "lat": 4.336164,
+    "lng": -74.366491,
+    "alias": [
+      "Clinica Belen"
+    ],
+    "rutas": [
+      "CENTRO_COLSUBSIDIO_PROGRESO_SAN_ANTONIO",
+      "U_HOSPITAL_SIBONEY_MACARENA_PABLO_BELLO",
+      "CANEY_GALERIA_CENTRO_COLSUBSIDIO_EL_EDEN",
+      "HOSPITAL_LA_SHELL_CUJA_HORIZONTE_BATALLON",
+      "SANTA_ANITA_GALERIA_COLSUBSIDIO_CEMENTERIO_RESGUARDOS",
+      "HORIZONTE_PALACIOS_TRINIDAD_BARCELONA"
+    ],
+    "n_rutas": 6,
+    "fuente": "kml",
+    "dispersion_m": 0,
+    "nota": ""
+  },
+  {
+    "slug": "colegio-accion-comunal",
+    "nombre": "Colegio Accion Comunal",
+    "lat": 4.354025,
+    "lng": -74.358219,
+    "alias": [],
+    "rutas": [
+      "CENTRO_COLSUBSIDIO_PROGRESO_SAN_ANTONIO"
+    ],
+    "n_rutas": 1,
+    "fuente": "kml",
+    "dispersion_m": 0,
+    "nota": ""
+  },
+  {
+    "slug": "colegio-chinauta",
+    "nombre": "Colegio Chinauta",
+    "lat": 4.296892,
+    "lng": -74.445757,
+    "alias": [],
+    "rutas": [
+      "ruta-6",
+      "CHINAUTA_ESCUELA"
+    ],
+    "n_rutas": 2,
+    "fuente": "kml",
+    "dispersion_m": 0,
+    "nota": ""
+  },
+  {
+    "slug": "colegio-la-presentacion",
+    "nombre": "Colegio La Presentación",
+    "lat": null,
+    "lng": null,
+    "alias": [],
+    "rutas": [
+      "ruta-8"
+    ],
+    "n_rutas": 1,
+    "fuente": "sin-coordenada",
+    "dispersion_m": null,
+    "nota": "Lugar de Pasca sin KML; Nominatim no lo encontró con confianza."
+  },
+  {
+    "slug": "comfenalco",
+    "nombre": "Comfenalco",
+    "lat": 4.330162,
+    "lng": -74.396356,
+    "alias": [],
+    "rutas": [
+      "U_HOSPITAL_MAIZ_AMARILLO_COMFENALCO_CIUDAD_EBENEZER"
+    ],
+    "n_rutas": 1,
+    "fuente": "kml",
+    "dispersion_m": 0,
+    "nota": ""
+  },
+  {
+    "slug": "comuneros",
+    "nombre": "Comuneros",
+    "lat": 4.325439,
+    "lng": -74.360839,
+    "alias": [],
+    "rutas": [
+      "EXITO_CALLE_22_PRADOS_DE_ALTAGRACIA_CAMINO_REAL"
+    ],
+    "n_rutas": 1,
+    "fuente": "kml",
+    "dispersion_m": 0,
+    "nota": ""
+  },
+  {
+    "slug": "cooviprof",
+    "nombre": "Cooviprof",
+    "lat": 4.327071,
+    "lng": -74.385425,
+    "alias": [],
+    "rutas": [
+      "CRA_8_HOSPITAL_COOVIPROF_VILLA_PATRICIA",
+      "CRA_6_CLL_22_HOSPITAL_COOVIPROF_VILLA_PATRICIA"
+    ],
+    "n_rutas": 2,
+    "fuente": "kml",
+    "dispersion_m": 0,
+    "nota": ""
+  },
+  {
+    "slug": "corregimiento",
+    "nombre": "Corregimiento",
+    "lat": null,
+    "lng": null,
+    "alias": [],
+    "rutas": [
+      "ruta-8"
+    ],
+    "n_rutas": 1,
+    "fuente": "sin-coordenada",
+    "dispersion_m": null,
+    "nota": "Lugar de Pasca sin KML; Nominatim no lo encontró con confianza."
+  },
+  {
+    "slug": "cra-7-calle-11",
+    "nombre": "Cra 7 (Calle 11)",
+    "lat": 4.339878,
+    "lng": -74.362733,
+    "alias": [
+      "Cra 7"
+    ],
+    "rutas": [
+      "CENTRO_CRA_6_GALERIA_MANDALAY_VILLA_NATALIA"
+    ],
+    "n_rutas": 1,
+    "fuente": "kml",
+    "dispersion_m": 0,
+    "nota": "Homónimo separado (> 150 m): cra-7-colsubsidio a 222 m."
+  },
+  {
+    "slug": "cra-7-colsubsidio",
+    "nombre": "Cra 7 (Colsubsidio)",
+    "lat": 4.341816,
+    "lng": -74.36226,
+    "alias": [
+      "Cra 7"
+    ],
+    "rutas": [
+      "CENTRO_COLSUBSIDIO_CALLE_3_OLAYA",
+      "CENTRO_GALERIA_TERMINAL"
+    ],
+    "n_rutas": 2,
+    "fuente": "kml",
+    "dispersion_m": 0,
+    "nota": "Homónimo separado (> 150 m): cra-7-calle-11 a 222 m."
+  },
+  {
+    "slug": "crucero-la-angostura",
+    "nombre": "Crucero La Angostura",
+    "lat": null,
+    "lng": null,
+    "alias": [],
+    "rutas": [
+      "ruta-8"
+    ],
+    "n_rutas": 1,
+    "fuente": "sin-coordenada",
+    "dispersion_m": null,
+    "nota": "Lugar de Pasca sin KML; Nominatim no lo encontró con confianza."
+  },
+  {
+    "slug": "cutucumay",
+    "nombre": "Cutucumay",
+    "lat": 4.311639,
+    "lng": -74.438697,
+    "alias": [],
+    "rutas": [
+      "CHINAUTA_FUSA_CENTRO",
+      "CHINAUTA_ESCUELA"
+    ],
+    "n_rutas": 2,
+    "fuente": "kml",
+    "dispersion_m": 0,
+    "nota": ""
+  },
+  {
+    "slug": "d1-balmoral",
+    "nombre": "D1 Balmoral",
+    "lat": 4.330544,
+    "lng": -74.368074,
+    "alias": [],
+    "rutas": [
+      "U_HOSPITAL_SIBONEY_MACARENA_PABLO_BELLO"
+    ],
+    "n_rutas": 1,
+    "fuente": "kml",
+    "dispersion_m": 0,
+    "nota": ""
+  },
+  {
+    "slug": "d1-de-la-22",
+    "nombre": "D1 de la 22",
+    "lat": 4.332795,
+    "lng": -74.372413,
+    "alias": [],
+    "rutas": [
+      "EXITO_CALLE_22_PRADOS_DE_ALTAGRACIA_CAMINO_REAL"
+    ],
+    "n_rutas": 1,
+    "fuente": "kml",
+    "dispersion_m": 0,
+    "nota": ""
+  },
+  {
+    "slug": "diagonal-1",
+    "nombre": "Diagonal 1",
+    "lat": 4.349163,
+    "lng": -74.362025,
+    "alias": [],
+    "rutas": [
+      "LA_PALMA_COLSUBSIDIO_SAN_ANTONIO_SANTANDER"
+    ],
+    "n_rutas": 1,
+    "fuente": "kml",
+    "dispersion_m": 0,
+    "nota": ""
+  },
+  {
+    "slug": "ebenezer",
+    "nombre": "Ebenezer",
+    "lat": 4.32902,
+    "lng": -74.364291,
+    "alias": [
+      "Paradero Ebenezer"
+    ],
+    "rutas": [
+      "U_HOSPITAL_GRAN_COLOMBIA_ESC_POLICIA_C_EBENEZER",
+      "CENTRO_COLSUBSIDIO_PROGRESO_SAN_ANTONIO",
+      "CENTRO_COLSUBSIDIO_CALLE_3_OLAYA"
+    ],
+    "n_rutas": 3,
+    "fuente": "kml",
+    "dispersion_m": 0,
+    "nota": ""
+  },
+  {
+    "slug": "el-cuja",
+    "nombre": "El Cuja",
+    "lat": null,
+    "lng": null,
+    "alias": [
+      "Cuja"
+    ],
+    "rutas": [
+      "ARBELAEZ",
+      "CUJA_HORIZONTE_MESITAS",
+      "HOSPITAL_LA_SHELL_CUJA_HORIZONTE_BATALLON"
+    ],
+    "n_rutas": 3,
+    "fuente": "sin-coordenada",
+    "dispersion_m": null,
+    "nota": "Sin marcador en ningún KML."
+  },
+  {
+    "slug": "el-placer-espinalito",
+    "nombre": "El Placer / Espinalito",
+    "lat": 4.311099,
+    "lng": -74.402815,
+    "alias": [],
+    "rutas": [
+      "ARBELAEZ"
+    ],
+    "n_rutas": 1,
+    "fuente": "kml",
+    "dispersion_m": 0,
+    "nota": ""
+  },
+  {
+    "slug": "entrada-pampa",
+    "nombre": "Entrada Pampa",
+    "lat": null,
+    "lng": null,
+    "alias": [],
+    "rutas": [
+      "CHINAUTA_FUSA_CENTRO",
+      "CHINAUTA_ESCUELA"
+    ],
+    "n_rutas": 2,
+    "fuente": "sin-coordenada",
+    "dispersion_m": null,
+    "nota": "Sin marcador en ningún KML."
+  },
+  {
+    "slug": "escuela-de-los-sauces",
+    "nombre": "Escuela de los Sauces",
+    "lat": null,
+    "lng": null,
+    "alias": [],
+    "rutas": [
+      "ruta-8"
+    ],
+    "n_rutas": 1,
+    "fuente": "sin-coordenada",
+    "dispersion_m": null,
+    "nota": "Lugar de Pasca sin KML; Nominatim no lo encontró con confianza."
+  },
+  {
+    "slug": "escuela-julio-sabogal",
+    "nombre": "Escuela Julio Sabogal",
+    "lat": 4.346622,
+    "lng": -74.363777,
+    "alias": [],
+    "rutas": [
+      "CENTRO_COLSUBSIDIO_CEMENTERIO_GAITAN_GALAN"
+    ],
+    "n_rutas": 1,
+    "fuente": "kml",
+    "dispersion_m": 0,
+    "nota": ""
+  },
+  {
+    "slug": "escuela-kennedy",
+    "nombre": "Escuela Kennedy",
+    "lat": null,
+    "lng": null,
+    "alias": [],
+    "rutas": [
+      "ARBELAEZ",
+      "HOSPITAL_LA_SHELL_CUJA_HORIZONTE_BATALLON"
+    ],
+    "n_rutas": 2,
+    "fuente": "sin-coordenada",
+    "dispersion_m": null,
+    "nota": "Sin marcador en ningún KML."
+  },
+  {
+    "slug": "escuela-policia",
+    "nombre": "Escuela Policía",
+    "lat": 4.332648,
+    "lng": -74.392737,
+    "alias": [],
+    "rutas": [
+      "U_HOSPITAL_GRAN_COLOMBIA_ESC_POLICIA_C_EBENEZER",
+      "CENTRO_COLSUBSIDIO_CALLE_3_OLAYA"
+    ],
+    "n_rutas": 2,
+    "fuente": "kml",
+    "dispersion_m": 0,
+    "nota": ""
+  },
+  {
+    "slug": "espinalito-alto",
+    "nombre": "Espinalito Alto",
+    "lat": 4.31222,
+    "lng": -74.40328,
+    "alias": [],
+    "rutas": [
+      "PALACIOS_TRINIDAD_GUAVIO",
+      "CUJA_HORIZONTE_MESITAS"
+    ],
+    "n_rutas": 2,
+    "fuente": "kml",
+    "dispersion_m": 0,
+    "nota": ""
+  },
+  {
+    "slug": "fiscalia-general-de-fusagasuga",
+    "nombre": "Fiscalía General de Fusagasugá",
+    "lat": 4.33882,
+    "lng": -74.363869,
+    "alias": [
+      "Fiscalía"
+    ],
+    "rutas": [
+      "U_HOSPITAL_MAIZ_AMARILLO_COMFENALCO_CIUDAD_EBENEZER",
+      "HOSPITAL_BATALLON_LA_PAMPA_LLANO_GRANDE",
+      "U_HOSPITAL_GRAN_COLOMBIA_ESC_POLICIA_C_EBENEZER",
+      "CENTRO_COLSUBSIDIO_PROGRESO_SAN_ANTONIO",
+      "U_HOSPITAL_BATALLON_LLANO_LARGO",
+      "SANTA_ANITA_GALERIA_COLSUBSIDIO_CEMENTERIO_RESGUARDOS"
+    ],
+    "n_rutas": 6,
+    "fuente": "kml",
+    "dispersion_m": 0,
+    "nota": ""
+  },
+  {
+    "slug": "funeraria-jardines-del-renacer",
+    "nombre": "Funeraria Jardines del Renacer",
+    "lat": 4.345364,
+    "lng": -74.362291,
+    "alias": [],
+    "rutas": [
+      "CENTRO_COLSUBSIDIO_CEMENTERIO_GAITAN_GALAN"
+    ],
+    "n_rutas": 1,
+    "fuente": "kml",
+    "dispersion_m": 0,
+    "nota": ""
+  },
+  {
+    "slug": "funeraria-la-paz",
+    "nombre": "Funeraria La Paz",
+    "lat": 4.344887,
+    "lng": -74.360778,
+    "alias": [
+      "Pompas La Paz"
+    ],
+    "rutas": [
+      "ruta-8",
+      "CENTRO_COLSUBSIDIO_CEMENTERIO_GAITAN_GALAN",
+      "CENTRO_COLSUBSIDIO_PROGRESO_SAN_ANTONIO"
+    ],
+    "n_rutas": 3,
+    "fuente": "kml",
+    "dispersion_m": 0,
+    "nota": "SUPUESTO: \"Pompas La Paz\" del recorrido de Pasca se tomó como la Funeraria La Paz que ya tiene marcador."
+  },
+  {
+    "slug": "fusacatan",
+    "nombre": "Fusacatán",
+    "lat": 4.328102,
+    "lng": -74.364192,
+    "alias": [],
+    "rutas": [
+      "CARRERA_6_FUSACATAN_SAN_FERNANDO_BOSQUES_DE_ORIENTE_LUSITANIA"
+    ],
+    "n_rutas": 1,
+    "fuente": "kml",
+    "dispersion_m": 0,
+    "nota": ""
+  },
+  {
+    "slug": "fusagasuga",
+    "nombre": "Fusagasugá",
+    "lat": 4.345152,
+    "lng": -74.361823,
+    "alias": [],
+    "rutas": [
+      "ruta-6",
+      "ARBELAEZ"
+    ],
+    "n_rutas": 2,
+    "fuente": "kml",
+    "dispersion_m": 0,
+    "nota": ""
+  },
+  {
+    "slug": "galeria-plaza-de-mercado",
+    "nombre": "Galería (Plaza de Mercado)",
+    "lat": 4.341817,
+    "lng": -74.365001,
+    "alias": [
+      "Galería",
+      "Plaza de Mercado"
+    ],
+    "rutas": [
+      "CENTRO_CRA_1_SANTANDER_PANTANO_DE_VARGAS_LA_CLARITA",
+      "CENTRO_GALERIA_TERMINAL",
+      "CANEY_GALERIA_CENTRO_COLSUBSIDIO_EL_EDEN",
+      "LA_PALMA_COLSUBSIDIO_SAN_ANTONIO_SANTANDER",
+      "CHINAUTA_FUSA_CENTRO",
+      "CENTRO_CARRERA_9_GALERIA",
+      "CENTRO_COLSUBSIDIO_CALLE_4_CEDRITOS_SAN_ANTONIO",
+      "U_HOSPITAL_CRA_9_CLL_3_COLSUBSIDIO_CEMENTERIO",
+      "SANTA_ANITA_GALERIA_COLSUBSIDIO_CEMENTERIO_RESGUARDOS",
+      "CENTRO_CRA_6_GALERIA_MANDALAY_VILLA_NATALIA"
+    ],
+    "n_rutas": 10,
+    "fuente": "kml",
+    "dispersion_m": 0,
+    "nota": ""
+  },
+  {
+    "slug": "gasolinera",
+    "nombre": "Gasolinera",
+    "lat": null,
+    "lng": null,
+    "alias": [
+      "gasolinera"
+    ],
+    "rutas": [
+      "CENTRO_COLSUBSIDIO_PROGRESO_SAN_ANTONIO"
+    ],
+    "n_rutas": 1,
+    "fuente": "sin-coordenada",
+    "dispersion_m": null,
+    "nota": "Sin marcador en ningún KML."
+  },
+  {
+    "slug": "guavio",
+    "nombre": "Guavio",
+    "lat": 4.273237,
+    "lng": -74.376032,
+    "alias": [],
+    "rutas": [
+      "PALACIOS_TRINIDAD_GUAVIO"
+    ],
+    "n_rutas": 1,
+    "fuente": "kml",
+    "dispersion_m": 0,
+    "nota": ""
+  },
+  {
+    "slug": "guayabol",
+    "nombre": "Guayabol",
+    "lat": 4.29445,
+    "lng": -74.39418,
+    "alias": [],
+    "rutas": [
+      "PALACIOS_TRINIDAD_GUAVIO",
+      "HORIZONTE_PALACIOS_TRINIDAD_BARCELONA"
+    ],
+    "n_rutas": 2,
+    "fuente": "kml",
+    "dispersion_m": 0,
+    "nota": ""
+  },
+  {
+    "slug": "hogar-francisco-y-clara",
+    "nombre": "Hogar Francisco y Clara",
+    "lat": 4.335814,
+    "lng": -74.353721,
+    "alias": [],
+    "rutas": [
+      "ruta-8"
+    ],
+    "n_rutas": 1,
+    "fuente": "nominatim",
+    "dispersion_m": 0,
+    "nota": "OSM w1196568893 (amenity/social_facility): Hogar Francisco y Clara, Carrera 4 Este, Altos de Pekín. Ubicado en Nominatim (Altos de Pekín, Fusagasugá)."
+  },
+  {
+    "slug": "horizonte-colegio-nuevo-horizonte",
+    "nombre": "Horizonte (Colegio Nuevo Horizonte)",
+    "lat": 4.311917,
+    "lng": -74.401966,
+    "alias": [],
+    "rutas": [
+      "CUJA_HORIZONTE_MESITAS",
+      "HOSPITAL_LA_SHELL_CUJA_HORIZONTE_BATALLON",
+      "HORIZONTE_PALACIOS_TRINIDAD_BARCELONA"
+    ],
+    "n_rutas": 3,
+    "fuente": "kml-centroide",
+    "dispersion_m": 62,
+    "nota": "Dispersión de 62 m entre 3 marcadores."
+  },
+  {
+    "slug": "hotel-madaura",
+    "nombre": "Hotel Madaura",
+    "lat": 4.304767,
+    "lng": -74.448509,
+    "alias": [],
+    "rutas": [
+      "CHINAUTA_FUSA_CENTRO"
+    ],
+    "n_rutas": 1,
+    "fuente": "kml",
+    "dispersion_m": 0,
+    "nota": ""
+  },
+  {
+    "slug": "iglesia-gran-colombia",
+    "nombre": "Iglesia Gran Colombia",
+    "lat": 4.328952,
+    "lng": -74.391611,
+    "alias": [],
+    "rutas": [
+      "U_HOSPITAL_GRAN_COLOMBIA_ESC_POLICIA_C_EBENEZER",
+      "CENTRO_COLSUBSIDIO_CALLE_3_OLAYA"
+    ],
+    "n_rutas": 2,
+    "fuente": "kml",
+    "dispersion_m": 0,
+    "nota": ""
+  },
+  {
+    "slug": "inspeccion-el-triunfo",
+    "nombre": "Inspección El Triunfo",
+    "lat": null,
+    "lng": null,
+    "alias": [],
+    "rutas": [
+      "ruta-6",
+      "CHINAUTA_BOQUERON"
+    ],
+    "n_rutas": 2,
+    "fuente": "sin-coordenada",
+    "dispersion_m": null,
+    "nota": "Sin marcador en ningún KML."
+  },
+  {
+    "slug": "jaibana",
+    "nombre": "Jaibáná",
+    "lat": 4.324571,
+    "lng": -74.417938,
+    "alias": [
+      "Jaibaná"
+    ],
+    "rutas": [
+      "ruta-6",
+      "CHINAUTA_BOQUERON",
+      "CHINAUTA_ESCUELA"
+    ],
+    "n_rutas": 3,
+    "fuente": "kml",
+    "dispersion_m": 0,
+    "nota": ""
+  },
+  {
+    "slug": "jardin-de-dona-bertha",
+    "nombre": "Jardín de Doña Bertha",
+    "lat": 4.353556,
+    "lng": -74.354624,
+    "alias": [],
+    "rutas": [
+      "CENTRO_CRA_1_SANTANDER_PANTANO_DE_VARGAS_LA_CLARITA"
+    ],
+    "n_rutas": 1,
+    "fuente": "kml",
+    "dispersion_m": 0,
+    "nota": ""
+  },
+  {
+    "slug": "jardin-los-periquillos",
+    "nombre": "Jardin Los Periquillos",
+    "lat": null,
+    "lng": null,
+    "alias": [],
+    "rutas": [
+      "CENTRO_COLSUBSIDIO_CEMENTERIO_GAITAN_GALAN"
+    ],
+    "n_rutas": 1,
+    "fuente": "sin-coordenada",
+    "dispersion_m": null,
+    "nota": "Sin marcador en ningún KML."
+  },
+  {
+    "slug": "la-capilla",
+    "nombre": "La Capilla",
+    "lat": null,
+    "lng": null,
+    "alias": [],
+    "rutas": [
+      "ruta-8"
+    ],
+    "n_rutas": 1,
+    "fuente": "sin-coordenada",
+    "dispersion_m": null,
+    "nota": "Lugar de Pasca sin KML; Nominatim no lo encontró con confianza."
+  },
+  {
+    "slug": "la-clarita",
+    "nombre": "La Clarita",
+    "lat": 4.353556,
+    "lng": -74.354624,
+    "alias": [],
+    "rutas": [
+      "CENTRO_CRA_1_SANTANDER_PANTANO_DE_VARGAS_LA_CLARITA"
+    ],
+    "n_rutas": 1,
+    "fuente": "kml",
+    "dispersion_m": 0,
+    "nota": ""
+  },
+  {
+    "slug": "la-gran-colombia",
+    "nombre": "La Gran Colombia",
+    "lat": 4.32924,
+    "lng": -74.392655,
+    "alias": [
+      "Gran Colombia"
+    ],
+    "rutas": [
+      "U_HOSPITAL_GRAN_COLOMBIA_ESC_POLICIA_C_EBENEZER",
+      "CENTRO_COLSUBSIDIO_PROGRESO_SAN_ANTONIO"
+    ],
+    "n_rutas": 2,
+    "fuente": "kml",
+    "dispersion_m": 0,
+    "nota": ""
+  },
+  {
+    "slug": "la-palma",
+    "nombre": "La Palma",
+    "lat": 4.350635,
+    "lng": -74.352722,
+    "alias": [],
+    "rutas": [
+      "LA_PALMA_COLSUBSIDIO_SAN_ANTONIO_SANTANDER"
+    ],
+    "n_rutas": 1,
+    "fuente": "kml",
+    "dispersion_m": 0,
+    "nota": ""
+  },
+  {
+    "slug": "la-querencia",
+    "nombre": "La Querencia",
+    "lat": 4.328923,
+    "lng": -74.387546,
+    "alias": [
+      "Querencia"
+    ],
+    "rutas": [
+      "U_HOSPITAL_MAIZ_AMARILLO_COMFENALCO_CIUDAD_EBENEZER",
+      "HOSPITAL_BATALLON_LA_PAMPA_LLANO_GRANDE",
+      "U_HOSPITAL_GRAN_COLOMBIA_ESC_POLICIA_C_EBENEZER",
+      "CENTRO_COLSUBSIDIO_PROGRESO_SAN_ANTONIO",
+      "CHINAUTA_FUSA_CENTRO",
+      "CHINAUTA_BOQUERON",
+      "CHINAUTA_ESCUELA",
+      "PALACIOS_TRINIDAD_GUAVIO",
+      "U_HOSPITAL_BATALLON_LLANO_LARGO",
+      "CUJA_HORIZONTE_MESITAS",
+      "HOSPITAL_LA_SHELL_CUJA_HORIZONTE_BATALLON",
+      "HORIZONTE_PALACIOS_TRINIDAD_BARCELONA"
+    ],
+    "n_rutas": 12,
+    "fuente": "kml",
+    "dispersion_m": 0,
+    "nota": ""
+  },
+  {
+    "slug": "la-shell",
+    "nombre": "La Shell",
+    "lat": null,
+    "lng": null,
+    "alias": [],
+    "rutas": [
+      "PALACIOS_TRINIDAD_GUAVIO",
+      "HOSPITAL_LA_SHELL_CUJA_HORIZONTE_BATALLON"
+    ],
+    "n_rutas": 2,
+    "fuente": "sin-coordenada",
+    "dispersion_m": null,
+    "nota": "Sin marcador en ningún KML."
+  },
+  {
+    "slug": "la-trinidad-barcelona",
+    "nombre": "La Trinidad (Barcelona)",
+    "lat": 4.300519,
+    "lng": -74.396774,
+    "alias": [
+      "La Trinidad"
+    ],
+    "rutas": [
+      "HORIZONTE_PALACIOS_TRINIDAD_BARCELONA"
+    ],
+    "n_rutas": 1,
+    "fuente": "kml",
+    "dispersion_m": 0,
+    "nota": "Homónimo separado (> 150 m): la-trinidad-palacios a 1413 m."
+  },
+  {
+    "slug": "la-trinidad-palacios",
+    "nombre": "La Trinidad (Palacios)",
+    "lat": 4.29115,
+    "lng": -74.388171,
+    "alias": [
+      "La Trinidad"
+    ],
+    "rutas": [
+      "PALACIOS_TRINIDAD_GUAVIO"
+    ],
+    "n_rutas": 1,
+    "fuente": "kml",
+    "dispersion_m": 0,
+    "nota": "Homónimo separado (> 150 m): la-trinidad-barcelona a 1413 m."
+  },
+  {
+    "slug": "llano-grande",
+    "nombre": "Llano Grande",
+    "lat": 4.326001,
+    "lng": -74.414747,
+    "alias": [],
+    "rutas": [
+      "HOSPITAL_BATALLON_LA_PAMPA_LLANO_GRANDE"
+    ],
+    "n_rutas": 1,
+    "fuente": "kml",
+    "dispersion_m": 0,
+    "nota": ""
+  },
+  {
+    "slug": "llano-largo",
+    "nombre": "Llano Largo",
+    "lat": 4.328369,
+    "lng": -74.402552,
+    "alias": [],
+    "rutas": [
+      "U_HOSPITAL_BATALLON_LLANO_LARGO"
+    ],
+    "n_rutas": 1,
+    "fuente": "kml",
+    "dispersion_m": 0,
+    "nota": ""
+  },
+  {
+    "slug": "los-rios",
+    "nombre": "Los Ríos",
+    "lat": null,
+    "lng": null,
+    "alias": [],
+    "rutas": [
+      "ARBELAEZ"
+    ],
+    "n_rutas": 1,
+    "fuente": "sin-coordenada",
+    "dispersion_m": null,
+    "nota": "Sin marcador en ningún KML."
+  },
+  {
+    "slug": "los-robles",
+    "nombre": "Los Robles",
+    "lat": 4.3354,
+    "lng": -74.360406,
+    "alias": [],
+    "rutas": [
+      "CARRERA_6_FUSACATAN_SAN_FERNANDO_BOSQUES_DE_ORIENTE_LUSITANIA"
+    ],
+    "n_rutas": 1,
+    "fuente": "kml",
+    "dispersion_m": 0,
+    "nota": ""
+  },
+  {
+    "slug": "lusitania",
+    "nombre": "Lusitania",
+    "lat": 4.328584,
+    "lng": -74.365328,
+    "alias": [],
+    "rutas": [
+      "CARRERA_6_FUSACATAN_SAN_FERNANDO_BOSQUES_DE_ORIENTE_LUSITANIA"
+    ],
+    "n_rutas": 1,
+    "fuente": "kml",
+    "dispersion_m": 0,
+    "nota": ""
+  },
+  {
+    "slug": "luxemburgo",
+    "nombre": "Luxemburgo",
+    "lat": 4.353204,
+    "lng": -74.358114,
+    "alias": [],
+    "rutas": [
+      "CENTRO_CARRERA_9_GALERIA"
+    ],
+    "n_rutas": 1,
+    "fuente": "kml",
+    "dispersion_m": 0,
+    "nota": ""
+  },
+  {
+    "slug": "maiz-amarillo",
+    "nombre": "Maíz Amarillo",
+    "lat": 4.32718,
+    "lng": -74.400457,
+    "alias": [],
+    "rutas": [
+      "U_HOSPITAL_MAIZ_AMARILLO_COMFENALCO_CIUDAD_EBENEZER"
+    ],
+    "n_rutas": 1,
+    "fuente": "kml",
+    "dispersion_m": 0,
+    "nota": ""
+  },
+  {
+    "slug": "mandalay",
+    "nombre": "Mandalay",
+    "lat": 4.345194,
+    "lng": -74.373066,
+    "alias": [],
+    "rutas": [
+      "CENTRO_CRA_6_GALERIA_MANDALAY_VILLA_NATALIA"
+    ],
+    "n_rutas": 1,
+    "fuente": "kml",
+    "dispersion_m": 0,
+    "nota": ""
+  },
+  {
+    "slug": "mesitas",
+    "nombre": "Mesitas",
+    "lat": null,
+    "lng": null,
+    "alias": [],
+    "rutas": [
+      "CUJA_HORIZONTE_MESITAS"
+    ],
+    "n_rutas": 1,
+    "fuente": "sin-coordenada",
+    "dispersion_m": null,
+    "nota": "Sin marcador en ningún KML."
+  },
+  {
+    "slug": "mirador-pampa",
+    "nombre": "Mirador Pampa",
+    "lat": 4.324631,
+    "lng": -74.416001,
+    "alias": [],
+    "rutas": [
+      "CENTRO_GALERIA_TERMINAL",
+      "NARINO_PEKIN_STA_MARIA_DE_LOS_ANGELES_ALTOS_DE_PEKIN",
+      "EXITO_CALLE_22_PRADOS_DE_ALTAGRACIA_CAMINO_REAL",
+      "CENTRO_CARRERA_9_GALERIA",
+      "CENTRO_CRA_6_GALERIA_MANDALAY_VILLA_NATALIA"
+    ],
+    "n_rutas": 5,
+    "fuente": "kml",
+    "dispersion_m": 0,
+    "nota": ""
+  },
+  {
+    "slug": "mirazul",
+    "nombre": "Mirazul",
+    "lat": 4.32489,
+    "lng": -74.415621,
+    "alias": [],
+    "rutas": [
+      "CENTRO_GALERIA_TERMINAL",
+      "NARINO_PEKIN_STA_MARIA_DE_LOS_ANGELES_ALTOS_DE_PEKIN",
+      "CANEY_GALERIA_CENTRO_COLSUBSIDIO_EL_EDEN",
+      "EXITO_CALLE_22_PRADOS_DE_ALTAGRACIA_CAMINO_REAL",
+      "CENTRO_CARRERA_9_GALERIA",
+      "CENTRO_CRA_6_GALERIA_MANDALAY_VILLA_NATALIA"
+    ],
+    "n_rutas": 6,
+    "fuente": "kml",
+    "dispersion_m": 0,
+    "nota": ""
+  },
+  {
+    "slug": "monumento-el-indio",
+    "nombre": "Monumento El Indio",
+    "lat": 4.331682,
+    "lng": -74.377517,
+    "alias": [
+      "Indio"
+    ],
+    "rutas": [
+      "U_HOSPITAL_MAIZ_AMARILLO_COMFENALCO_CIUDAD_EBENEZER",
+      "HOSPITAL_BATALLON_LA_PAMPA_LLANO_GRANDE",
+      "U_HOSPITAL_GRAN_COLOMBIA_ESC_POLICIA_C_EBENEZER",
+      "CENTRO_COLSUBSIDIO_PROGRESO_SAN_ANTONIO",
+      "CENTRO_COLSUBSIDIO_CALLE_3_OLAYA",
+      "CENTRO_GALERIA_TERMINAL",
+      "NARINO_PEKIN_STA_MARIA_DE_LOS_ANGELES_ALTOS_DE_PEKIN",
+      "CANEY_GALERIA_CENTRO_COLSUBSIDIO_EL_EDEN",
+      "CHINAUTA_FUSA_CENTRO",
+      "EXITO_CALLE_22_PRADOS_DE_ALTAGRACIA_CAMINO_REAL",
+      "CENTRO_CARRERA_9_GALERIA",
+      "CHINAUTA_BOQUERON",
+      "CHINAUTA_ESCUELA",
+      "PALACIOS_TRINIDAD_GUAVIO",
+      "CRA_8_HOSPITAL_COOVIPROF_VILLA_PATRICIA",
+      "CRA_6_CLL_22_HOSPITAL_COOVIPROF_VILLA_PATRICIA",
+      "U_HOSPITAL_BATALLON_LLANO_LARGO",
+      "CUJA_HORIZONTE_MESITAS",
+      "HOSPITAL_LA_SHELL_CUJA_HORIZONTE_BATALLON",
+      "CENTRO_CRA_6_GALERIA_MANDALAY_VILLA_NATALIA"
+    ],
+    "n_rutas": 20,
+    "fuente": "kml",
+    "dispersion_m": 0,
+    "nota": ""
+  },
+  {
+    "slug": "mr-beef",
+    "nombre": "Mr Beef",
+    "lat": 4.332962,
+    "lng": -74.369112,
+    "alias": [],
+    "rutas": [
+      "U_HOSPITAL_SIBONEY_MACARENA_PABLO_BELLO"
+    ],
+    "n_rutas": 1,
+    "fuente": "kml",
+    "dispersion_m": 0,
+    "nota": ""
+  },
+  {
+    "slug": "nueva-eps",
+    "nombre": "Nueva EPS",
+    "lat": 4.334024,
+    "lng": -74.368992,
+    "alias": [],
+    "rutas": [
+      "HORIZONTE_PALACIOS_TRINIDAD_BARCELONA"
+    ],
+    "n_rutas": 1,
+    "fuente": "kml",
+    "dispersion_m": 0,
+    "nota": ""
+  },
+  {
+    "slug": "olaya",
+    "nombre": "Olaya",
+    "lat": 4.344632,
+    "lng": -74.365239,
+    "alias": [],
+    "rutas": [
+      "CENTRO_COLSUBSIDIO_CALLE_3_OLAYA",
+      "CENTRO_CARRERA_9_GALERIA"
+    ],
+    "n_rutas": 2,
+    "fuente": "kml",
+    "dispersion_m": 0,
+    "nota": ""
+  },
+  {
+    "slug": "palacios",
+    "nombre": "Palacios",
+    "lat": 4.306687,
+    "lng": -74.395016,
+    "alias": [],
+    "rutas": [
+      "PALACIOS_TRINIDAD_GUAVIO",
+      "HORIZONTE_PALACIOS_TRINIDAD_BARCELONA"
+    ],
+    "n_rutas": 2,
+    "fuente": "kml",
+    "dispersion_m": 0,
+    "nota": ""
+  },
+  {
+    "slug": "panaderia-filipo",
+    "nombre": "Panadería Filipo",
+    "lat": 4.341763,
+    "lng": -74.363046,
+    "alias": [
+      "Paradero Filipo"
+    ],
+    "rutas": [
+      "U_HOSPITAL_MAIZ_AMARILLO_COMFENALCO_CIUDAD_EBENEZER",
+      "HOSPITAL_BATALLON_LA_PAMPA_LLANO_GRANDE",
+      "U_HOSPITAL_GRAN_COLOMBIA_ESC_POLICIA_C_EBENEZER",
+      "U_HOSPITAL_SIBONEY_MACARENA_PABLO_BELLO",
+      "U_HOSPITAL_BATALLON_LLANO_LARGO"
+    ],
+    "n_rutas": 5,
+    "fuente": "kml",
+    "dispersion_m": 0,
+    "nota": ""
+  },
+  {
+    "slug": "panaderia-filipo-pekin",
+    "nombre": "Panadería Filipo (Pekín)",
+    "lat": null,
+    "lng": null,
+    "alias": [],
+    "rutas": [
+      "ruta-8"
+    ],
+    "n_rutas": 1,
+    "fuente": "sin-coordenada",
+    "dispersion_m": null,
+    "nota": "Lugar de Pasca sin KML; Nominatim no lo encontró con confianza. Lugar DISTINTO de \"Panadería Filipo\" de las rutas urbanas (decisión de Santiago)."
+  },
+  {
+    "slug": "pantano-de-vargas",
+    "nombre": "Pantano de Vargas",
+    "lat": null,
+    "lng": null,
+    "alias": [],
+    "rutas": [
+      "CENTRO_CRA_1_SANTANDER_PANTANO_DE_VARGAS_LA_CLARITA"
+    ],
+    "n_rutas": 1,
+    "fuente": "sin-coordenada",
+    "dispersion_m": null,
+    "nota": "Sin marcador en ningún KML."
+  },
+  {
+    "slug": "papa-picha",
+    "nombre": "Papa Picha",
+    "lat": null,
+    "lng": null,
+    "alias": [],
+    "rutas": [
+      "CHINAUTA_BOQUERON",
+      "CHINAUTA_ESCUELA"
+    ],
+    "n_rutas": 2,
+    "fuente": "sin-coordenada",
+    "dispersion_m": null,
+    "nota": "Sin marcador en ningún KML."
+  },
+  {
+    "slug": "paradero-comuneros",
+    "nombre": "Paradero Comuneros",
+    "lat": 4.326455,
+    "lng": -74.360096,
+    "alias": [],
+    "rutas": [
+      "U_HOSPITAL_SIBONEY_MACARENA_PABLO_BELLO"
+    ],
+    "n_rutas": 1,
+    "fuente": "kml",
+    "dispersion_m": 0,
+    "nota": ""
+  },
+  {
+    "slug": "paradero-gaitan",
+    "nombre": "Paradero Gaitan",
+    "lat": 4.346577,
+    "lng": -74.365967,
+    "alias": [],
+    "rutas": [
+      "CENTRO_COLSUBSIDIO_CEMENTERIO_GAITAN_GALAN"
+    ],
+    "n_rutas": 1,
+    "fuente": "kml",
+    "dispersion_m": 0,
+    "nota": ""
+  },
+  {
+    "slug": "paradero-san-antonio",
+    "nombre": "Paradero San Antonio",
+    "lat": 4.353645,
+    "lng": -74.358417,
+    "alias": [],
+    "rutas": [
+      "CENTRO_COLSUBSIDIO_PROGRESO_SAN_ANTONIO"
+    ],
+    "n_rutas": 1,
+    "fuente": "kml",
+    "dispersion_m": 0,
+    "nota": ""
+  },
+  {
+    "slug": "paris-night-club",
+    "nombre": "Paris Night Club",
+    "lat": 4.35241,
+    "lng": -74.359435,
+    "alias": [],
+    "rutas": [
+      "CENTRO_CRA_1_SANTANDER_PANTANO_DE_VARGAS_LA_CLARITA",
+      "CENTRO_COLSUBSIDIO_PROGRESO_SAN_ANTONIO"
+    ],
+    "n_rutas": 2,
+    "fuente": "kml",
+    "dispersion_m": 0,
+    "nota": ""
+  },
+  {
+    "slug": "pasca",
+    "nombre": "Pasca",
+    "lat": 4.30783,
+    "lng": -74.300179,
+    "alias": [],
+    "rutas": [
+      "ruta-8"
+    ],
+    "n_rutas": 1,
+    "fuente": "nominatim",
+    "dispersion_m": 0,
+    "nota": "OSM r1413207 (boundary/administrative): Pasca, Pasca pueblo, Sumapaz."
+  },
+  {
+    "slug": "pekin",
+    "nombre": "Pekín",
+    "lat": 4.343783,
+    "lng": -74.356815,
+    "alias": [],
+    "rutas": [
+      "NARINO_PEKIN_STA_MARIA_DE_LOS_ANGELES_ALTOS_DE_PEKIN"
+    ],
+    "n_rutas": 1,
+    "fuente": "kml",
+    "dispersion_m": 0,
+    "nota": ""
+  },
+  {
+    "slug": "piramides",
+    "nombre": "Pirámides",
+    "lat": 4.263395,
+    "lng": -74.50557,
+    "alias": [],
+    "rutas": [
+      "ruta-6",
+      "CHINAUTA_BOQUERON"
+    ],
+    "n_rutas": 2,
+    "fuente": "kml",
+    "dispersion_m": 0,
+    "nota": ""
+  },
+  {
+    "slug": "potosi",
+    "nombre": "Potosí",
+    "lat": 4.339825,
+    "lng": -74.364038,
+    "alias": [
+      "Potosi"
+    ],
+    "rutas": [
+      "ruta-8",
+      "CENTRO_COLSUBSIDIO_PROGRESO_SAN_ANTONIO",
+      "CHINAUTA_FUSA_CENTRO",
+      "CENTRO_CARRERA_9_GALERIA"
+    ],
+    "n_rutas": 4,
+    "fuente": "kml",
+    "dispersion_m": 0,
+    "nota": "Ya tiene marcador en otras rutas: se reutiliza."
+  },
+  {
+    "slug": "prados-de-altagracia",
+    "nombre": "Prados de Altagracia",
+    "lat": 4.327316,
+    "lng": -74.362612,
+    "alias": [],
+    "rutas": [
+      "EXITO_CALLE_22_PRADOS_DE_ALTAGRACIA_CAMINO_REAL"
+    ],
+    "n_rutas": 1,
+    "fuente": "kml",
+    "dispersion_m": 0,
+    "nota": ""
+  },
+  {
+    "slug": "puente-del-aguila",
+    "nombre": "Puente del Águila",
+    "lat": 4.339146,
+    "lng": -74.363748,
+    "alias": [
+      "Puente El Águila",
+      "Puente del Aguila",
+      "Puente Águila"
+    ],
+    "rutas": [
+      "ruta-5",
+      "U_HOSPITAL_SIBONEY_MACARENA_PABLO_BELLO",
+      "CENTRO_COLSUBSIDIO_CALLE_3_OLAYA",
+      "CENTRO_GALERIA_TERMINAL",
+      "NARINO_PEKIN_STA_MARIA_DE_LOS_ANGELES_ALTOS_DE_PEKIN",
+      "CENTRO_CARRERA_9_GALERIA",
+      "CHINAUTA_BOQUERON",
+      "CHINAUTA_ESCUELA",
+      "CENTRO_CRA_6_GALERIA_MANDALAY_VILLA_NATALIA"
+    ],
+    "n_rutas": 9,
+    "fuente": "kml",
+    "dispersion_m": 0,
+    "nota": ""
+  },
+  {
+    "slug": "puesto-de-salud-progreso",
+    "nombre": "Puesto de salud Progreso",
+    "lat": 4.351279,
+    "lng": -74.362257,
+    "alias": [],
+    "rutas": [
+      "CENTRO_COLSUBSIDIO_PROGRESO_SAN_ANTONIO"
+    ],
+    "n_rutas": 1,
+    "fuente": "kml",
+    "dispersion_m": 0,
+    "nota": ""
+  },
+  {
+    "slug": "resguardos",
+    "nombre": "Resguardos",
+    "lat": 4.355159,
+    "lng": -74.373688,
+    "alias": [],
+    "rutas": [
+      "SANTA_ANITA_GALERIA_COLSUBSIDIO_CEMENTERIO_RESGUARDOS"
+    ],
+    "n_rutas": 1,
+    "fuente": "kml",
+    "dispersion_m": 0,
+    "nota": ""
+  },
+  {
+    "slug": "restaurante-universitario",
+    "nombre": "Restaurante Universitario",
+    "lat": 4.332853,
+    "lng": -74.368222,
+    "alias": [],
+    "rutas": [
+      "U_HOSPITAL_SIBONEY_MACARENA_PABLO_BELLO"
+    ],
+    "n_rutas": 1,
+    "fuente": "kml",
+    "dispersion_m": 0,
+    "nota": ""
+  },
+  {
+    "slug": "rio-cuja",
+    "nombre": "Río Cuja",
+    "lat": 4.320376,
+    "lng": -74.388709,
+    "alias": [],
+    "rutas": [
+      "CUJA_HORIZONTE_MESITAS",
+      "HOSPITAL_LA_SHELL_CUJA_HORIZONTE_BATALLON",
+      "HORIZONTE_PALACIOS_TRINIDAD_BARCELONA"
+    ],
+    "n_rutas": 3,
+    "fuente": "kml",
+    "dispersion_m": 0,
+    "nota": ""
+  },
+  {
+    "slug": "rotonda-calle-24b",
+    "nombre": "Rotonda Calle 24B",
+    "lat": null,
+    "lng": null,
+    "alias": [],
+    "rutas": [
+      "CRA_8_HOSPITAL_COOVIPROF_VILLA_PATRICIA",
+      "CRA_6_CLL_22_HOSPITAL_COOVIPROF_VILLA_PATRICIA"
+    ],
+    "n_rutas": 2,
+    "fuente": "sin-coordenada",
+    "dispersion_m": null,
+    "nota": "Sin marcador en ningún KML."
+  },
+  {
+    "slug": "rotonda-san-fernando",
+    "nombre": "Rotonda San Fernando",
+    "lat": null,
+    "lng": null,
+    "alias": [],
+    "rutas": [
+      "EXITO_CALLE_22_PRADOS_DE_ALTAGRACIA_CAMINO_REAL"
+    ],
+    "n_rutas": 1,
+    "fuente": "sin-coordenada",
+    "dispersion_m": null,
+    "nota": "Sin marcador en ningún KML."
+  },
+  {
+    "slug": "salon-comunal-ebenezer",
+    "nombre": "Salón Comunal Ebenezer",
+    "lat": 4.332774,
+    "lng": -74.394971,
+    "alias": [],
+    "rutas": [
+      "U_HOSPITAL_MAIZ_AMARILLO_COMFENALCO_CIUDAD_EBENEZER",
+      "U_HOSPITAL_GRAN_COLOMBIA_ESC_POLICIA_C_EBENEZER"
+    ],
+    "n_rutas": 2,
+    "fuente": "kml",
+    "dispersion_m": 0,
+    "nota": ""
+  },
+  {
+    "slug": "san-antonio",
+    "nombre": "San Antonio",
+    "lat": 4.353147,
+    "lng": -74.357168,
+    "alias": [],
+    "rutas": [
+      "LA_PALMA_COLSUBSIDIO_SAN_ANTONIO_SANTANDER",
+      "CENTRO_COLSUBSIDIO_CALLE_4_CEDRITOS_SAN_ANTONIO"
+    ],
+    "n_rutas": 2,
+    "fuente": "kml",
+    "dispersion_m": 0,
+    "nota": ""
+  },
+  {
+    "slug": "san-fernando",
+    "nombre": "San Fernando",
+    "lat": 4.32401,
+    "lng": -74.364336,
+    "alias": [],
+    "rutas": [
+      "CARRERA_6_FUSACATAN_SAN_FERNANDO_BOSQUES_DE_ORIENTE_LUSITANIA"
+    ],
+    "n_rutas": 1,
+    "fuente": "kml",
+    "dispersion_m": 0,
+    "nota": ""
+  },
+  {
+    "slug": "san-fernando-centro-comercial",
+    "nombre": "San Fernando Centro Comercial",
+    "lat": 4.324546,
+    "lng": -74.363371,
+    "alias": [],
+    "rutas": [
+      "CARRERA_6_FUSACATAN_SAN_FERNANDO_BOSQUES_DE_ORIENTE_LUSITANIA"
+    ],
+    "n_rutas": 1,
+    "fuente": "kml",
+    "dispersion_m": 0,
+    "nota": ""
+  },
+  {
+    "slug": "san-francisco",
+    "nombre": "San Francisco",
+    "lat": 4.32766,
+    "lng": -74.412563,
+    "alias": [],
+    "rutas": [
+      "HOSPITAL_BATALLON_LA_PAMPA_LLANO_GRANDE",
+      "CENTRO_GALERIA_TERMINAL",
+      "NARINO_PEKIN_STA_MARIA_DE_LOS_ANGELES_ALTOS_DE_PEKIN",
+      "CANEY_GALERIA_CENTRO_COLSUBSIDIO_EL_EDEN",
+      "EXITO_CALLE_22_PRADOS_DE_ALTAGRACIA_CAMINO_REAL",
+      "CENTRO_CARRERA_9_GALERIA",
+      "U_HOSPITAL_BATALLON_LLANO_LARGO",
+      "CENTRO_CRA_6_GALERIA_MANDALAY_VILLA_NATALIA"
+    ],
+    "n_rutas": 8,
+    "fuente": "kml",
+    "dispersion_m": 0,
+    "nota": ""
+  },
+  {
+    "slug": "santa-anita",
+    "nombre": "Santa Anita",
+    "lat": 4.33879,
+    "lng": -74.369122,
+    "alias": [],
+    "rutas": [
+      "CANEY_GALERIA_CENTRO_COLSUBSIDIO_EL_EDEN"
+    ],
+    "n_rutas": 1,
+    "fuente": "kml",
+    "dispersion_m": 0,
+    "nota": ""
+  },
+  {
+    "slug": "santa-anita-calle-17",
+    "nombre": "Santa Anita (Calle 17)",
+    "lat": 4.339404,
+    "lng": -74.369754,
+    "alias": [],
+    "rutas": [
+      "SANTA_ANITA_GALERIA_COLSUBSIDIO_CEMENTERIO_RESGUARDOS"
+    ],
+    "n_rutas": 1,
+    "fuente": "kml",
+    "dispersion_m": 0,
+    "nota": ""
+  },
+  {
+    "slug": "sena",
+    "nombre": "SENA",
+    "lat": null,
+    "lng": null,
+    "alias": [],
+    "rutas": [
+      "ruta-5"
+    ],
+    "n_rutas": 1,
+    "fuente": "sin-coordenada",
+    "dispersion_m": null,
+    "nota": "Sin marcador en ningún KML."
+  },
+  {
+    "slug": "sta-maria-de-los-angeles",
+    "nombre": "Sta. María de los Ángeles",
+    "lat": 4.345235,
+    "lng": -74.352925,
+    "alias": [],
+    "rutas": [
+      "NARINO_PEKIN_STA_MARIA_DE_LOS_ANGELES_ALTOS_DE_PEKIN"
+    ],
+    "n_rutas": 1,
+    "fuente": "kml",
+    "dispersion_m": 0,
+    "nota": ""
+  },
+  {
+    "slug": "supermercado-el-gran-surtidor",
+    "nombre": "Supermercado El Gran Surtidor",
+    "lat": 4.34962,
+    "lng": -74.356613,
+    "alias": [
+      "Gran Surtidor"
+    ],
+    "rutas": [
+      "CENTRO_CRA_1_SANTANDER_PANTANO_DE_VARGAS_LA_CLARITA",
+      "HOSPITAL_BATALLON_LA_PAMPA_LLANO_GRANDE",
+      "LA_PALMA_COLSUBSIDIO_SAN_ANTONIO_SANTANDER",
+      "U_HOSPITAL_BATALLON_LLANO_LARGO"
+    ],
+    "n_rutas": 4,
+    "fuente": "kml",
+    "dispersion_m": 0,
+    "nota": ""
+  },
+  {
+    "slug": "terminal-de-transporte",
+    "nombre": "Terminal de Transporte",
+    "lat": 4.345887,
+    "lng": -74.377859,
+    "alias": [
+      "Terminal",
+      "Terminal de transportes"
+    ],
+    "rutas": [
+      "U_HOSPITAL_MAIZ_AMARILLO_COMFENALCO_CIUDAD_EBENEZER",
+      "HOSPITAL_BATALLON_LA_PAMPA_LLANO_GRANDE",
+      "U_HOSPITAL_GRAN_COLOMBIA_ESC_POLICIA_C_EBENEZER",
+      "CENTRO_COLSUBSIDIO_CEMENTERIO_GAITAN_GALAN",
+      "U_HOSPITAL_SIBONEY_MACARENA_PABLO_BELLO",
+      "CENTRO_GALERIA_TERMINAL",
+      "CHINAUTA_FUSA_CENTRO",
+      "CRA_8_HOSPITAL_COOVIPROF_VILLA_PATRICIA",
+      "CRA_6_CLL_22_HOSPITAL_COOVIPROF_VILLA_PATRICIA",
+      "U_HOSPITAL_BATALLON_LLANO_LARGO"
+    ],
+    "n_rutas": 10,
+    "fuente": "kml",
+    "dispersion_m": 0,
+    "nota": ""
+  },
+  {
+    "slug": "tiendas-ara-antiguo-colsubsidio",
+    "nombre": "Tiendas Ara (Antiguo Colsubsidio)",
+    "lat": 4.341256,
+    "lng": -74.361504,
+    "alias": [
+      "Antiguo Colsubsidio",
+      "Ara (Antiguo Colsubsidio)"
+    ],
+    "rutas": [
+      "CENTRO_U_HOSPITAL_COLSUBSIDIO_CEDRITOS",
+      "CENTRO_COLSUBSIDIO_CEMENTERIO_GAITAN_GALAN",
+      "CENTRO_COLSUBSIDIO_PROGRESO_SAN_ANTONIO",
+      "CENTRO_COLSUBSIDIO_CALLE_3_OLAYA",
+      "CANEY_GALERIA_CENTRO_COLSUBSIDIO_EL_EDEN",
+      "LA_PALMA_COLSUBSIDIO_SAN_ANTONIO_SANTANDER",
+      "CENTRO_COLSUBSIDIO_CALLE_4_CEDRITOS_SAN_ANTONIO",
+      "U_HOSPITAL_CRA_9_CLL_3_COLSUBSIDIO_CEMENTERIO",
+      "SANTA_ANITA_GALERIA_COLSUBSIDIO_CEMENTERIO_RESGUARDOS"
+    ],
+    "n_rutas": 9,
+    "fuente": "kml",
+    "dispersion_m": 0,
+    "nota": ""
+  },
+  {
+    "slug": "u-hospital-exito",
+    "nombre": "U. Hospital Éxito",
+    "lat": 4.333353,
+    "lng": -74.370943,
+    "alias": [
+      "Hospital San Rafael",
+      "Éxito"
+    ],
+    "rutas": [
+      "U_HOSPITAL_MAIZ_AMARILLO_COMFENALCO_CIUDAD_EBENEZER",
+      "CENTRO_U_HOSPITAL_COLSUBSIDIO_CEDRITOS",
+      "HOSPITAL_BATALLON_LA_PAMPA_LLANO_GRANDE",
+      "ruta-5",
+      "U_HOSPITAL_GRAN_COLOMBIA_ESC_POLICIA_C_EBENEZER",
+      "CENTRO_COLSUBSIDIO_PROGRESO_SAN_ANTONIO",
+      "CENTRO_GALERIA_TERMINAL",
+      "NARINO_PEKIN_STA_MARIA_DE_LOS_ANGELES_ALTOS_DE_PEKIN",
+      "CANEY_GALERIA_CENTRO_COLSUBSIDIO_EL_EDEN",
+      "CHINAUTA_FUSA_CENTRO",
+      "EXITO_CALLE_22_PRADOS_DE_ALTAGRACIA_CAMINO_REAL",
+      "CENTRO_CARRERA_9_GALERIA",
+      "CHINAUTA_BOQUERON",
+      "CHINAUTA_ESCUELA",
+      "PALACIOS_TRINIDAD_GUAVIO",
+      "CRA_8_HOSPITAL_COOVIPROF_VILLA_PATRICIA",
+      "CRA_6_CLL_22_HOSPITAL_COOVIPROF_VILLA_PATRICIA",
+      "U_HOSPITAL_BATALLON_LLANO_LARGO",
+      "CUJA_HORIZONTE_MESITAS",
+      "HOSPITAL_LA_SHELL_CUJA_HORIZONTE_BATALLON",
+      "U_HOSPITAL_CRA_9_CLL_3_COLSUBSIDIO_CEMENTERIO",
+      "HORIZONTE_PALACIOS_TRINIDAD_BARCELONA",
+      "CENTRO_CRA_6_GALERIA_MANDALAY_VILLA_NATALIA"
+    ],
+    "n_rutas": 23,
+    "fuente": "kml",
+    "dispersion_m": 0,
+    "nota": ""
+  },
+  {
+    "slug": "universidad-de-cundinamarca",
+    "nombre": "Universidad de Cundinamarca",
+    "lat": 4.334028,
+    "lng": -74.369473,
+    "alias": [],
+    "rutas": [
+      "CENTRO_COLSUBSIDIO_PROGRESO_SAN_ANTONIO",
+      "U_HOSPITAL_SIBONEY_MACARENA_PABLO_BELLO"
+    ],
+    "n_rutas": 2,
+    "fuente": "kml",
+    "dispersion_m": 0,
+    "nota": ""
+  },
+  {
+    "slug": "via-arbelaez",
+    "nombre": "Vía Arbeláez",
+    "lat": 4.326239,
+    "lng": -74.396043,
+    "alias": [],
+    "rutas": [
+      "PALACIOS_TRINIDAD_GUAVIO",
+      "CUJA_HORIZONTE_MESITAS",
+      "HOSPITAL_LA_SHELL_CUJA_HORIZONTE_BATALLON",
+      "HORIZONTE_PALACIOS_TRINIDAD_BARCELONA"
+    ],
+    "n_rutas": 4,
+    "fuente": "kml",
+    "dispersion_m": 0,
+    "nota": ""
+  },
+  {
+    "slug": "via-quebrajacho",
+    "nombre": "Vía Quebrajacho",
+    "lat": null,
+    "lng": null,
+    "alias": [],
+    "rutas": [
+      "ruta-5"
+    ],
+    "n_rutas": 1,
+    "fuente": "sin-coordenada",
+    "dispersion_m": null,
+    "nota": "Sin marcador en ningún KML."
+  },
+  {
+    "slug": "villa-celeste",
+    "nombre": "Villa Celeste",
+    "lat": 4.327354,
+    "lng": -74.410143,
+    "alias": [],
+    "rutas": [
+      "HOSPITAL_BATALLON_LA_PAMPA_LLANO_GRANDE",
+      "CHINAUTA_BOQUERON",
+      "CHINAUTA_ESCUELA",
+      "U_HOSPITAL_BATALLON_LLANO_LARGO"
+    ],
+    "n_rutas": 4,
+    "fuente": "kml",
+    "dispersion_m": 0,
+    "nota": ""
+  },
+  {
+    "slug": "villa-leny",
+    "nombre": "Villa Leny",
+    "lat": null,
+    "lng": null,
+    "alias": [],
+    "rutas": [
+      "ruta-5"
+    ],
+    "n_rutas": 1,
+    "fuente": "sin-coordenada",
+    "dispersion_m": null,
+    "nota": "Sin marcador en ningún KML."
+  },
+  {
+    "slug": "villa-natalia",
+    "nombre": "Villa Natalia",
+    "lat": 4.350858,
+    "lng": -74.370426,
+    "alias": [],
+    "rutas": [
+      "ruta-5",
+      "CENTRO_CRA_6_GALERIA_MANDALAY_VILLA_NATALIA"
+    ],
+    "n_rutas": 2,
+    "fuente": "kml",
+    "dispersion_m": 0,
+    "nota": ""
+  },
+  {
+    "slug": "villa-patricia",
+    "nombre": "Villa Patricia",
+    "lat": 4.328222,
+    "lng": -74.384813,
+    "alias": [],
+    "rutas": [
+      "CRA_8_HOSPITAL_COOVIPROF_VILLA_PATRICIA",
+      "CRA_6_CLL_22_HOSPITAL_COOVIPROF_VILLA_PATRICIA"
+    ],
+    "n_rutas": 2,
+    "fuente": "kml",
+    "dispersion_m": 0,
+    "nota": ""
+  },
+  {
+    "slug": "zona-rosa",
+    "nombre": "Zona Rosa",
+    "lat": null,
+    "lng": null,
+    "alias": [],
+    "rutas": [
+      "U_HOSPITAL_MAIZ_AMARILLO_COMFENALCO_CIUDAD_EBENEZER",
+      "HOSPITAL_BATALLON_LA_PAMPA_LLANO_GRANDE",
+      "U_HOSPITAL_GRAN_COLOMBIA_ESC_POLICIA_C_EBENEZER",
+      "U_HOSPITAL_BATALLON_LLANO_LARGO"
+    ],
+    "n_rutas": 4,
+    "fuente": "sin-coordenada",
+    "dispersion_m": null,
+    "nota": "Sin marcador en ningún KML."
+  }
+]
