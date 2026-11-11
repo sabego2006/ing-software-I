@@ -10,19 +10,56 @@
         {
           "nombre": "Indio",
           "maxM": 60,
-          "motivo": "Exigirlo como punto de ruteo provocaba retroceso (puntaje 115.9 -> 110.5); el trazado pasa a 20 m del lugar."
+          "motivo": "Exigirlo como punto de ruteo provocaba retroceso aun probando los puntos candidatos de OSM (buscar-puntos.js); el trazado pasa a 20 m del lugar."
         },
         {
           "nombre": "Manila",
           "maxM": 60,
-          "motivo": "Exigirlo como punto de ruteo provocaba retroceso (puntaje 110.5 -> 104.3); el trazado pasa a 26 m del lugar."
-        },
-        {
-          "nombre": "Puente Águila",
-          "maxM": 60,
-          "motivo": "Exigirlo como punto de ruteo provocaba retroceso (puntaje 104.3 -> 98.7); el trazado pasa a 5 m del lugar."
+          "motivo": "Exigirlo como punto de ruteo provocaba retroceso aun probando los puntos candidatos de OSM (buscar-puntos.js); el trazado pasa a 26 m del lugar."
         }
-      ]
+      ],
+      "mover": {
+        "ebenezer": {
+          "lat": 4.329142,
+          "lng": -74.364229,
+          "motivo": "Movido 15 m sobre la via \"Calle 20\" (punto de OSM mas cercano que no provoca retroceso); marcador original 4.32902, -74.364291."
+        },
+        "escuela-policia": {
+          "lat": 4.332556,
+          "lng": -74.392823,
+          "motivo": "Movido 14 m sobre la via \"sin nombre en OSM\" (punto de OSM mas cercano que cumple los controles, probado con el verificador completo); marcador original 4.332648, -74.392737."
+        },
+        "iglesia-gran-colombia": {
+          "lat": 4.329152,
+          "lng": -74.391592,
+          "motivo": "Movido 22 m sobre la via \"Calle 21\" (punto de OSM mas cercano que no provoca retroceso); marcador original 4.328952, -74.391611."
+        },
+        "puente-del-aguila": {
+          "lat": 4.339055,
+          "lng": -74.363776,
+          "motivo": "Movido 11 m sobre la via \"Avenida Manuel Humberto Cárdenas\" (punto de OSM mas cercano que no provoca retroceso); marcador original 4.339146, -74.363748."
+        },
+        "av-las-palmas": {
+          "lat": 4.341925,
+          "lng": -74.368133,
+          "motivo": "Movido 12 m sobre la via \"sin nombre en OSM\" (punto de OSM mas cercano que no provoca retroceso); marcador original 4.342015, -74.368188."
+        },
+        "tiendas-ara-antiguo-colsubsidio": {
+          "lat": 4.341257,
+          "lng": -74.361574,
+          "motivo": "Movido 8 m sobre la via \"Carrera 6\" (punto de OSM mas cercano que no provoca retroceso); marcador original 4.341256, -74.361504."
+        },
+        "olaya": {
+          "lat": 4.344631,
+          "lng": -74.365291,
+          "motivo": "Movido 6 m sobre la via \"Carrera 11\" (punto de OSM mas cercano que no provoca retroceso); marcador original 4.344632, -74.365239."
+        },
+        "cra-7-colsubsidio": {
+          "lat": 4.341825,
+          "lng": -74.36226,
+          "motivo": "Movido 1 m sobre la via \"Calle 9\" (punto de OSM mas cercano que cumple los controles, probado con el verificador completo); marcador original 4.341816, -74.36226."
+        }
+      }
     },
     {
       "signFile": "SANTA_ANITA_GALERIA_COLSUBSIDIO_CEMENTERIO_RESGUARDOS",
@@ -31,26 +68,58 @@
       "triage": "#30",
       "omitir": [
         {
-          "nombre": "Av. Las Palmas",
+          "nombre": "Clínica Belén",
           "maxM": 60,
-          "motivo": "Exigirlo como punto de ruteo provocaba retroceso (puntaje 167 -> 100.4); el trazado pasa a 15 m del lugar."
+          "motivo": "Exigirlo como punto de ruteo provocaba retroceso aun probando los puntos candidatos de OSM (buscar-puntos.js); el trazado pasa a 21 m del lugar."
         },
         {
-          "nombre": "Galería",
+          "nombre": "Av. Las Palmas",
           "maxM": 60,
-          "motivo": "Exigirlo como punto de ruteo provocaba retroceso (puntaje 100.4 -> 95.4); el trazado pasa a 32 m del lugar."
+          "motivo": "Exigirlo como punto de ruteo provocaba retroceso aun probando los puntos candidatos de OSM (buscar-puntos.js); el trazado pasa a 15 m del lugar."
         },
         {
           "nombre": "Santa Anita (Calle 17)",
           "maxM": 60,
-          "motivo": "Exigirlo como punto de ruteo provocaba retroceso (puntaje 95.4 -> 74.4); el trazado pasa a 5 m del lugar."
+          "motivo": "Exigirlo como punto de ruteo provocaba retroceso aun probando los puntos candidatos de OSM (buscar-puntos.js); el trazado pasa a 5 m del lugar."
         },
         {
           "nombre": "Carrera 11",
           "maxM": 60,
-          "motivo": "Exigirlo como punto de ruteo provocaba retroceso (puntaje 74.4 -> 44.3); el trazado pasa a 2 m del lugar."
+          "motivo": "Exigirlo como punto de ruteo provocaba retroceso aun probando los puntos candidatos de OSM (buscar-puntos.js); el trazado pasa a 18 m del lugar."
+        },
+        {
+          "nombre": "Cementerio",
+          "maxM": 60,
+          "motivo": "Exigirlo como punto de ruteo hacia que fallara un control aun probando los puntos candidatos de OSM (refinar-trazados.js); el verificador comprueba que el trazado pasa a <= 60 m del lugar."
         }
-      ]
+      ],
+      "mover": {
+        "fiscalia-general-de-fusagasuga": {
+          "lat": 4.338877,
+          "lng": -74.363772,
+          "motivo": "Movido 12 m sobre la via \"Transversal 9\" (punto de OSM mas cercano que no provoca retroceso); marcador original 4.33882, -74.363869."
+        },
+        "centro-parque-principal": {
+          "lat": 4.343829,
+          "lng": -74.362316,
+          "motivo": "Movido 34 m sobre la via \"Carrera 7\" (punto de OSM mas cercano que no provoca retroceso); marcador original 4.343838, -74.362005."
+        },
+        "galeria-plaza-de-mercado": {
+          "lat": 4.34198,
+          "lng": -74.364692,
+          "motivo": "Movido 39 m sobre la via \"Carrera 11\" (punto de OSM mas cercano que no provoca retroceso); marcador original 4.341817, -74.365001."
+        },
+        "carrera-17": {
+          "lat": 4.340253,
+          "lng": -74.369833,
+          "motivo": "Movido 27 m sobre la via \"Calle 16A Bis\" (punto de OSM mas cercano que no provoca retroceso); marcador original 4.340367, -74.370046."
+        },
+        "tiendas-ara-antiguo-colsubsidio": {
+          "lat": 4.341158,
+          "lng": -74.36187,
+          "motivo": "Movido 42 m sobre la via \"Calle 10\" (punto de OSM mas cercano que no provoca retroceso); marcador original 4.341256, -74.361504."
+        }
+      }
     },
     {
       "signFile": "U_HOSPITAL_CRA_9_CLL_3_COLSUBSIDIO_CEMENTERIO",
@@ -59,16 +128,63 @@
       "triage": "#29",
       "omitir": [
         {
-          "nombre": "Carrera 9",
+          "nombre": "Galería",
           "maxM": 60,
-          "motivo": "Exigirlo como punto de ruteo provocaba retroceso (puntaje 107.4 -> 92.4); el trazado pasa a 1 m del lugar."
+          "motivo": "Exigirlo como punto de ruteo provocaba retroceso aun probando los puntos candidatos de OSM (buscar-puntos.js); el trazado pasa a 32 m del lugar."
         },
         {
           "nombre": "Carrera 11",
           "maxM": 60,
-          "motivo": "Exigirlo como punto de ruteo provocaba retroceso (puntaje 92.4 -> 49); el trazado pasa a 2 m del lugar."
+          "motivo": "Exigirlo como punto de ruteo provocaba retroceso aun probando los puntos candidatos de OSM (buscar-puntos.js); el trazado pasa a 2 m del lugar."
         }
-      ]
+      ],
+      "mover": {
+        "u-hospital-exito": {
+          "lat": 4.333162,
+          "lng": -74.370885,
+          "motivo": "Movido 22 m sobre la via \"Avenida Manuel Humberto Cárdenas\" (punto de OSM mas cercano que no provoca retroceso); marcador original 4.333353, -74.370943."
+        },
+        "av-manuel-humberto": {
+          "lat": 4.329126,
+          "lng": -74.367619,
+          "motivo": "Movido 30 m sobre la via \"Avenida 22\" (punto de OSM mas cercano que no provoca retroceso); marcador original 4.328895, -74.367478."
+        },
+        "calle-11": {
+          "lat": 4.339929,
+          "lng": -74.362769,
+          "motivo": "Movido 2 m sobre la via \"Avenida Manuel Humberto Cárdenas\" (punto de OSM mas cercano que no provoca retroceso); marcador original 4.339916, -74.36276."
+        },
+        "av-las-palmas": {
+          "lat": 4.341925,
+          "lng": -74.368133,
+          "motivo": "Movido 12 m sobre la via \"sin nombre en OSM\" (punto de OSM mas cercano que no provoca retroceso); marcador original 4.342015, -74.368188."
+        },
+        "banco-popular": {
+          "lat": 4.342557,
+          "lng": -74.360021,
+          "motivo": "Movido 5 m sobre la via \"Calle 8A\" (punto de OSM mas cercano que no provoca retroceso); marcador original 4.342603, -74.360015."
+        },
+        "centro-parque-principal": {
+          "lat": 4.343829,
+          "lng": -74.362316,
+          "motivo": "Movido 34 m sobre la via \"Carrera 7\" (punto de OSM mas cercano que no provoca retroceso); marcador original 4.343838, -74.362005."
+        },
+        "tiendas-ara-antiguo-colsubsidio": {
+          "lat": 4.341257,
+          "lng": -74.361574,
+          "motivo": "Movido 8 m sobre la via \"Carrera 6\" (punto de OSM mas cercano que no provoca retroceso); marcador original 4.341256, -74.361504."
+        },
+        "cementerio": {
+          "lat": 4.348962,
+          "lng": -74.365429,
+          "motivo": "Movido 14 m sobre la via \"Calle 2\" (punto de OSM mas cercano que no provoca retroceso); marcador original 4.349053, -74.365516."
+        },
+        "carrera-9": {
+          "lat": 4.341956,
+          "lng": -74.363914,
+          "motivo": "Movido 1 m sobre la via \"Avenida Las Palmas\" (punto de OSM mas cercano que cumple los controles, probado con el verificador completo); marcador original 4.341963, -74.363917."
+        }
+      }
     },
     {
       "signFile": "CENTRO_U_HOSPITAL_COLSUBSIDIO_CEDRITOS",
@@ -77,21 +193,48 @@
       "triage": "#27",
       "omitir": [
         {
-          "nombre": "Carrera 6",
-          "maxM": 60,
-          "motivo": "Exigirlo como punto de ruteo provocaba retroceso (puntaje 30 -> 25); el trazado pasa a 1 m del lugar."
-        },
-        {
           "nombre": "Calle 11",
           "maxM": 60,
-          "motivo": "Exigirlo como punto de ruteo provocaba retroceso (puntaje 25 -> 18.4); el trazado pasa a 5 m del lugar."
+          "motivo": "Exigirlo como punto de ruteo provocaba retroceso aun probando los puntos candidatos de OSM (buscar-puntos.js); el trazado pasa a 5 m del lugar."
         },
         {
-          "nombre": "Antiguo Colsubsidio",
+          "nombre": "U. Hospital Éxito",
           "maxM": 60,
-          "motivo": "Exigirlo como punto de ruteo provocaba retroceso (puntaje 18.4 -> 13.6); el trazado pasa a 8 m del lugar."
+          "motivo": "Exigirlo como punto de ruteo hacia que fallara un control aun probando los puntos candidatos de OSM (refinar-trazados.js); el verificador comprueba que el trazado pasa a <= 60 m del lugar."
         }
-      ]
+      ],
+      "mover": {
+        "av-las-palmas": {
+          "lat": 4.342057,
+          "lng": -74.36828,
+          "motivo": "Movido 11 m sobre la via \"sin nombre en OSM\" (punto de OSM mas cercano que no provoca retroceso); marcador original 4.342015, -74.368188."
+        },
+        "centro-parque-principal": {
+          "lat": 4.343829,
+          "lng": -74.362316,
+          "motivo": "Movido 34 m sobre la via \"Carrera 7\" (punto de OSM mas cercano que no provoca retroceso); marcador original 4.343838, -74.362005."
+        },
+        "av-manuel-humberto": {
+          "lat": 4.328949,
+          "lng": -74.367428,
+          "motivo": "Movido 8 m sobre la via \"Avenida 22\" (punto de OSM mas cercano que no provoca retroceso); marcador original 4.328895, -74.367478."
+        },
+        "u-hospital-exito": {
+          "lat": 4.333305,
+          "lng": -74.370717,
+          "motivo": "Movido 26 m sobre la via \"sin nombre en OSM\" (punto de OSM mas cercano que no provoca retroceso); marcador original 4.333353, -74.370943."
+        },
+        "tiendas-ara-antiguo-colsubsidio": {
+          "lat": 4.341136,
+          "lng": -74.361507,
+          "motivo": "Movido 13 m sobre la via \"Calle 10\" (punto de OSM mas cercano que no provoca retroceso); marcador original 4.341256, -74.361504."
+        },
+        "cedritos": {
+          "lat": 4.346046,
+          "lng": -74.354807,
+          "motivo": "Movido 6 m sobre la via \"Carrera 4\" (punto de OSM mas cercano que no provoca retroceso); marcador original 4.346054, -74.354753."
+        }
+      }
     },
     {
       "signFile": "CENTRO_COLSUBSIDIO_CALLE_4_CEDRITOS_SAN_ANTONIO",
@@ -100,16 +243,58 @@
       "triage": "#26",
       "omitir": [
         {
-          "nombre": "Galería",
+          "nombre": "Carrera 1",
           "maxM": 60,
-          "motivo": "Exigirlo como punto de ruteo provocaba retroceso (puntaje 5 -> 3.5); el trazado pasa a 44 m del lugar."
-        },
-        {
-          "nombre": "Carrera 4",
-          "maxM": 60,
-          "motivo": "Exigirlo como punto de ruteo provocaba retroceso (puntaje 3.5 -> 1.8); el trazado pasa a 8 m del lugar."
+          "motivo": "Exigirlo como punto de ruteo provocaba retroceso aun probando los puntos candidatos de OSM (buscar-puntos.js); el trazado pasa a 44 m del lugar."
         }
-      ]
+      ],
+      "mover": {
+        "av-las-palmas": {
+          "lat": 4.342057,
+          "lng": -74.36828,
+          "motivo": "Movido 11 m sobre la via \"sin nombre en OSM\" (punto de OSM mas cercano que no provoca retroceso); marcador original 4.342015, -74.368188."
+        },
+        "galeria-plaza-de-mercado": {
+          "lat": 4.34198,
+          "lng": -74.364692,
+          "motivo": "Movido 39 m sobre la via \"Carrera 11\" (punto de OSM mas cercano que no provoca retroceso); marcador original 4.341817, -74.365001."
+        },
+        "centro-parque-principal": {
+          "lat": 4.343829,
+          "lng": -74.362316,
+          "motivo": "Movido 34 m sobre la via \"Carrera 7\" (punto de OSM mas cercano que no provoca retroceso); marcador original 4.343838, -74.362005."
+        },
+        "tiendas-ara-antiguo-colsubsidio": {
+          "lat": 4.341257,
+          "lng": -74.361574,
+          "motivo": "Movido 8 m sobre la via \"Carrera 6\" (punto de OSM mas cercano que no provoca retroceso); marcador original 4.341256, -74.361504."
+        },
+        "carrera-4": {
+          "lat": 4.345675,
+          "lng": -74.360092,
+          "motivo": "Movido 3 m sobre la via \"Carrera 4\" (punto de OSM mas cercano que no provoca retroceso); marcador original 4.345675, -74.36012."
+        },
+        "cedritos": {
+          "lat": 4.346046,
+          "lng": -74.354807,
+          "motivo": "Movido 6 m sobre la via \"Carrera 4\" (punto de OSM mas cercano que no provoca retroceso); marcador original 4.346054, -74.354753."
+        },
+        "barrio-santander": {
+          "lat": 4.346572,
+          "lng": -74.359392,
+          "motivo": "Movido 39 m sobre la via \"Calle 3\" (punto de OSM mas cercano que no provoca retroceso); marcador original 4.346926, -74.359414."
+        },
+        "san-antonio": {
+          "lat": 4.353062,
+          "lng": -74.357103,
+          "motivo": "Movido 12 m sobre la via \"Calle 6\" (punto de OSM mas cercano que no provoca retroceso); marcador original 4.353147, -74.357168."
+        },
+        "calle-2": {
+          "lat": 4.347254,
+          "lng": -74.360176,
+          "motivo": "Movido 3 m sobre la via \"Calle 2\" (punto de OSM mas cercano que cumple los controles, probado con el verificador completo); marcador original 4.347228, -74.360173."
+        }
+      }
     },
     {
       "signFile": "U_HOSPITAL_BATALLON_LLANO_LARGO",
@@ -126,29 +311,61 @@
         {
           "nombre": "Banco Caja Social",
           "maxM": 60,
-          "motivo": "Exigirlo como punto de ruteo provocaba retroceso (puntaje 170.6 -> 167.1); el trazado pasa a 55 m del lugar."
-        },
-        {
-          "nombre": "Fiscalía",
-          "maxM": 60,
-          "motivo": "Exigirlo como punto de ruteo provocaba retroceso (puntaje 167.1 -> 126.3); el trazado pasa a 11 m del lugar."
-        },
-        {
-          "nombre": "U. Hospital Éxito",
-          "maxM": 60,
-          "motivo": "Exigirlo como punto de ruteo provocaba retroceso (puntaje 126.3 -> 105.9); el trazado pasa a 22 m del lugar."
+          "motivo": "Exigirlo como punto de ruteo provocaba retroceso aun probando los puntos candidatos de OSM (buscar-puntos.js); el trazado pasa a 18 m del lugar."
         },
         {
           "nombre": "Indio",
           "maxM": 60,
-          "motivo": "Exigirlo como punto de ruteo provocaba retroceso (puntaje 105.9 -> 100.7); el trazado pasa a 20 m del lugar."
+          "motivo": "Exigirlo como punto de ruteo provocaba retroceso aun probando los puntos candidatos de OSM (buscar-puntos.js); el trazado pasa a 24 m del lugar."
         },
         {
-          "nombre": "Villa Celeste",
+          "nombre": "Fiscalía",
           "maxM": 60,
-          "motivo": "Exigirlo como punto de ruteo provocaba retroceso (puntaje 100.7 -> 90.4); el trazado pasa a 42 m del lugar."
+          "motivo": "Exigirlo como punto de ruteo provocaba retroceso aun probando los puntos candidatos de OSM (buscar-puntos.js); el trazado pasa a 20 m del lugar."
         }
-      ]
+      ],
+      "mover": {
+        "terminal-de-transporte": {
+          "lat": 4.346072,
+          "lng": -74.377506,
+          "motivo": "Movido 44 m sobre la via \"Avenida Antigua Panamericana\" (punto de OSM mas cercano que no provoca retroceso); marcador original 4.345887, -74.377859."
+        },
+        "panaderia-filipo": {
+          "lat": 4.341754,
+          "lng": -74.363193,
+          "motivo": "Movido 16 m sobre la via \"Carrera 8\" (punto de OSM mas cercano que no provoca retroceso); marcador original 4.341763, -74.363046."
+        },
+        "u-hospital-exito": {
+          "lat": 4.333434,
+          "lng": -74.370877,
+          "motivo": "Movido 12 m sobre la via \"sin nombre en OSM\" (punto de OSM mas cercano que cumple los controles, probado con el verificador completo); marcador original 4.333353, -74.370943."
+        },
+        "la-querencia": {
+          "lat": 4.328655,
+          "lng": -74.387491,
+          "motivo": "Movido 30 m sobre la via \"Avenida Antigua Panamericana\" (punto de OSM mas cercano que no provoca retroceso); marcador original 4.328923, -74.387546."
+        },
+        "batallon": {
+          "lat": 4.32673,
+          "lng": -74.399738,
+          "motivo": "Movido 18 m sobre la via \"Avenida Antigua Panamericana\" (punto de OSM mas cercano que no provoca retroceso); marcador original 4.326571, -74.399738."
+        },
+        "san-francisco": {
+          "lat": 4.328052,
+          "lng": -74.412669,
+          "motivo": "Movido 45 m sobre la via \"sin nombre en OSM\" (punto de OSM mas cercano que no provoca retroceso); marcador original 4.32766, -74.412563."
+        },
+        "llano-largo": {
+          "lat": 4.328845,
+          "lng": -74.402538,
+          "motivo": "Movido 53 m sobre la via \"sin nombre en OSM\" (punto de OSM mas cercano que cumple los controles, probado con el verificador completo); marcador original 4.328369, -74.402552."
+        },
+        "villa-celeste": {
+          "lat": 4.327492,
+          "lng": -74.410652,
+          "motivo": "Movido 59 m sobre la via \"sin nombre en OSM\" (punto de OSM mas cercano que cumple los controles, probado con el verificador completo); marcador original 4.327354, -74.410143."
+        }
+      }
     },
     {
       "signFile": "CENTRO_COLSUBSIDIO_CEMENTERIO_GAITAN_GALAN",
@@ -159,19 +376,61 @@
         {
           "nombre": "Centro Comercial Avenida",
           "maxM": 60,
-          "motivo": "Exigirlo como punto de ruteo provocaba retroceso (puntaje 39.8 -> 38.4); el trazado pasa a 46 m del lugar."
+          "motivo": "Exigirlo como punto de ruteo provocaba retroceso aun probando los puntos candidatos de OSM (buscar-puntos.js); el trazado pasa a 46 m del lugar."
+        },
+        {
+          "nombre": "Tiendas Ara (Antiguo Colsubsidio)",
+          "maxM": 60,
+          "motivo": "Exigirlo como punto de ruteo provocaba retroceso aun probando los puntos candidatos de OSM (buscar-puntos.js); el trazado pasa a 8 m del lugar."
         },
         {
           "nombre": "Funeraria La Paz",
           "maxM": 60,
-          "motivo": "Exigirlo como punto de ruteo provocaba retroceso (puntaje 32.1 -> 19.8); el trazado pasa a 9 m del lugar."
-        },
-        {
-          "nombre": "Funeraria Jardines del Renacer",
-          "maxM": 60,
-          "motivo": "Exigirlo como punto de ruteo provocaba retroceso (puntaje 19.8 -> 18.4); el trazado pasa a 27 m del lugar."
+          "motivo": "Exigirlo como punto de ruteo provocaba retroceso aun probando los puntos candidatos de OSM (buscar-puntos.js); el trazado pasa a 9 m del lugar."
         }
-      ]
+      ],
+      "mover": {
+        "terminal-de-transporte": {
+          "lat": 4.346072,
+          "lng": -74.377506,
+          "motivo": "Movido 44 m sobre la via \"Avenida Antigua Panamericana\" (punto de OSM mas cercano que no provoca retroceso); marcador original 4.345887, -74.377859."
+        },
+        "av-las-palmas": {
+          "lat": 4.341925,
+          "lng": -74.368133,
+          "motivo": "Movido 12 m sobre la via \"sin nombre en OSM\" (punto de OSM mas cercano que no provoca retroceso); marcador original 4.342015, -74.368188."
+        },
+        "centro-parque-principal": {
+          "lat": 4.343829,
+          "lng": -74.362316,
+          "motivo": "Movido 34 m sobre la via \"Carrera 7\" (punto de OSM mas cercano que no provoca retroceso); marcador original 4.343838, -74.362005."
+        },
+        "carrera-6": {
+          "lat": 4.338241,
+          "lng": -74.361598,
+          "motivo": "Movido 47 m sobre la via \"Calle 14\" (punto de OSM mas cercano que no provoca retroceso); marcador original 4.337822, -74.361642."
+        },
+        "funeraria-jardines-del-renacer": {
+          "lat": 4.345361,
+          "lng": -74.362365,
+          "motivo": "Movido 8 m sobre la via \"Carrera 7\" (punto de OSM mas cercano que no provoca retroceso); marcador original 4.345364, -74.362291."
+        },
+        "centro-de-integracion-infantil": {
+          "lat": 4.34561,
+          "lng": -74.36325,
+          "motivo": "Movido 18 m sobre la via \"Carrera 8\" (punto de OSM mas cercano que no provoca retroceso); marcador original 4.345614, -74.363084."
+        },
+        "escuela-julio-sabogal": {
+          "lat": 4.34657,
+          "lng": -74.364015,
+          "motivo": "Movido 27 m sobre la via \"Carrera 9\" (punto de OSM mas cercano que no provoca retroceso); marcador original 4.346622, -74.363777."
+        },
+        "paradero-gaitan": {
+          "lat": 4.346612,
+          "lng": -74.365975,
+          "motivo": "Movido 4 m sobre la via \"Calle 2\" (punto de OSM mas cercano que no provoca retroceso); marcador original 4.346577, -74.365967."
+        }
+      }
     },
     {
       "signFile": "HOSPITAL_BATALLON_LA_PAMPA_LLANO_GRANDE",
@@ -188,29 +447,61 @@
         {
           "nombre": "Banco Caja Social",
           "maxM": 60,
-          "motivo": "Exigirlo como punto de ruteo provocaba retroceso (puntaje 137.1 -> 133.4); el trazado pasa a 55 m del lugar."
-        },
-        {
-          "nombre": "Fiscalía",
-          "maxM": 60,
-          "motivo": "Exigirlo como punto de ruteo provocaba retroceso (puntaje 133.4 -> 81.9); el trazado pasa a 11 m del lugar."
-        },
-        {
-          "nombre": "U. Hospital Éxito",
-          "maxM": 60,
-          "motivo": "Exigirlo como punto de ruteo provocaba retroceso (puntaje 81.9 -> 71.4); el trazado pasa a 22 m del lugar."
+          "motivo": "Exigirlo como punto de ruteo provocaba retroceso aun probando los puntos candidatos de OSM (buscar-puntos.js); el trazado pasa a 18 m del lugar."
         },
         {
           "nombre": "Indio",
           "maxM": 60,
-          "motivo": "Exigirlo como punto de ruteo provocaba retroceso (puntaje 71.4 -> 65.1); el trazado pasa a 20 m del lugar."
+          "motivo": "Exigirlo como punto de ruteo provocaba retroceso aun probando los puntos candidatos de OSM (buscar-puntos.js); el trazado pasa a 24 m del lugar."
         },
         {
-          "nombre": "Villa Celeste",
+          "nombre": "Fiscalía",
           "maxM": 60,
-          "motivo": "Exigirlo como punto de ruteo provocaba retroceso (puntaje 65.1 -> 59.4); el trazado pasa a 42 m del lugar."
+          "motivo": "Exigirlo como punto de ruteo provocaba retroceso aun probando los puntos candidatos de OSM (buscar-puntos.js); el trazado pasa a 20 m del lugar."
         }
-      ]
+      ],
+      "mover": {
+        "terminal-de-transporte": {
+          "lat": 4.346072,
+          "lng": -74.377506,
+          "motivo": "Movido 44 m sobre la via \"Avenida Antigua Panamericana\" (punto de OSM mas cercano que no provoca retroceso); marcador original 4.345887, -74.377859."
+        },
+        "panaderia-filipo": {
+          "lat": 4.341754,
+          "lng": -74.363193,
+          "motivo": "Movido 16 m sobre la via \"Carrera 8\" (punto de OSM mas cercano que no provoca retroceso); marcador original 4.341763, -74.363046."
+        },
+        "u-hospital-exito": {
+          "lat": 4.333434,
+          "lng": -74.370877,
+          "motivo": "Movido 12 m sobre la via \"sin nombre en OSM\" (punto de OSM mas cercano que cumple los controles, probado con el verificador completo); marcador original 4.333353, -74.370943."
+        },
+        "la-querencia": {
+          "lat": 4.328655,
+          "lng": -74.387491,
+          "motivo": "Movido 30 m sobre la via \"Avenida Antigua Panamericana\" (punto de OSM mas cercano que no provoca retroceso); marcador original 4.328923, -74.387546."
+        },
+        "batallon": {
+          "lat": 4.32673,
+          "lng": -74.399738,
+          "motivo": "Movido 18 m sobre la via \"Avenida Antigua Panamericana\" (punto de OSM mas cercano que no provoca retroceso); marcador original 4.326571, -74.399738."
+        },
+        "villa-celeste": {
+          "lat": 4.327613,
+          "lng": -74.410215,
+          "motivo": "Movido 30 m sobre la via \"sin nombre en OSM\" (punto de OSM mas cercano que no provoca retroceso); marcador original 4.327354, -74.410143."
+        },
+        "san-francisco": {
+          "lat": 4.328052,
+          "lng": -74.412669,
+          "motivo": "Movido 45 m sobre la via \"sin nombre en OSM\" (punto de OSM mas cercano que no provoca retroceso); marcador original 4.32766, -74.412563."
+        },
+        "llano-grande": {
+          "lat": 4.32596,
+          "lng": -74.414737,
+          "motivo": "Movido 5 m sobre la via \"sin nombre en OSM\" (punto de OSM mas cercano que no provoca retroceso); marcador original 4.326001, -74.414747."
+        }
+      }
     },
     {
       "signFile": "PASCA",

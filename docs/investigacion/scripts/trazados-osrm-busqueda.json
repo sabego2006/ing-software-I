@@ -1,0 +1,2482 @@
+{
+ "CENTRO_U_HOSPITAL_COLSUBSIDIO_CEDRITOS|completo": {
+  "sinOmitir": true,
+  "sitios": 10,
+  "noRuteados": [],
+  "base": {
+   "retro": 5,
+   "giros": 1,
+   "solape": 10.1,
+   "largoM": 8387
+  },
+  "final": {
+   "retro": 1,
+   "giros": 0,
+   "solape": 4.1,
+   "largoM": 7732
+  },
+  "mover": [
+   {
+    "nombre": "Av. Las Palmas",
+    "slug": "av-las-palmas",
+    "original": [
+     4.342015,
+     -74.368188
+    ],
+    "lat": 4.342057,
+    "lng": -74.36828,
+    "movidoM": 11,
+    "via": "",
+    "indice": 0,
+    "candidatos": 3
+   },
+   {
+    "nombre": "Centro",
+    "slug": "centro-parque-principal",
+    "original": [
+     4.343838,
+     -74.362005
+    ],
+    "lat": 4.343829,
+    "lng": -74.362316,
+    "movidoM": 34,
+    "via": "Carrera 7",
+    "indice": 0,
+    "candidatos": 2
+   },
+   {
+    "nombre": "Carrera 6",
+    "slug": "carrera-6",
+    "original": [
+     4.337822,
+     -74.361642
+    ],
+    "lat": 4.337823,
+    "lng": -74.361649,
+    "movidoM": 1,
+    "via": "Carrera 6",
+    "indice": 0,
+    "candidatos": 3
+   },
+   {
+    "nombre": "Av. Manuel Humberto",
+    "slug": "av-manuel-humberto",
+    "original": [
+     4.328895,
+     -74.367478
+    ],
+    "lat": 4.328949,
+    "lng": -74.367428,
+    "movidoM": 8,
+    "via": "Avenida 22",
+    "indice": 0,
+    "candidatos": 4
+   },
+   {
+    "nombre": "U. Hospital Éxito",
+    "slug": "u-hospital-exito",
+    "original": [
+     4.333353,
+     -74.370943
+    ],
+    "lat": 4.333305,
+    "lng": -74.370717,
+    "movidoM": 26,
+    "via": "",
+    "indice": 3,
+    "candidatos": 4
+   },
+   {
+    "nombre": "Calle 11",
+    "slug": "calle-11",
+    "original": [
+     4.339916,
+     -74.36276
+    ],
+    "lat": 4.339654,
+    "lng": -74.36259,
+    "movidoM": 35,
+    "via": "Carrera 8",
+    "indice": 1,
+    "candidatos": 3
+   },
+   {
+    "nombre": "Antiguo Colsubsidio",
+    "slug": "tiendas-ara-antiguo-colsubsidio",
+    "original": [
+     4.341256,
+     -74.361504
+    ],
+    "lat": 4.341136,
+    "lng": -74.361507,
+    "movidoM": 13,
+    "via": "Calle 10",
+    "indice": 1,
+    "candidatos": 3
+   },
+   {
+    "nombre": "Calle 4",
+    "slug": "calle-4",
+    "original": [
+     4.345621,
+     -74.361834
+    ],
+    "lat": 4.34563,
+    "lng": -74.361835,
+    "movidoM": 1,
+    "via": "Calle 4",
+    "indice": 0,
+    "candidatos": 3
+   },
+   {
+    "nombre": "Calle 2",
+    "slug": "calle-2",
+    "original": [
+     4.347228,
+     -74.360173
+    ],
+    "lat": 4.347228,
+    "lng": -74.360166,
+    "movidoM": 1,
+    "via": "Carrera 4",
+    "indice": 0,
+    "candidatos": 2
+   },
+   {
+    "nombre": "Cedritos",
+    "slug": "cedritos",
+    "original": [
+     4.346054,
+     -74.354753
+    ],
+    "lat": 4.346046,
+    "lng": -74.354807,
+    "movidoM": 6,
+    "via": "Carrera 4",
+    "indice": 0,
+    "candidatos": 3
+   }
+  ]
+ },
+ "CENTRO_COLSUBSIDIO_CALLE_3_OLAYA|completo": {
+  "sinOmitir": true,
+  "sitios": 11,
+  "noRuteados": [
+   "Ara Ebenezer (sin coordenada)"
+  ],
+  "base": {
+   "retro": 15,
+   "giros": 2,
+   "solape": 15.3,
+   "largoM": 12721
+  },
+  "final": {
+   "retro": 12,
+   "giros": 0,
+   "solape": 14.2,
+   "largoM": 12266
+  },
+  "mover": [
+   {
+    "nombre": "Ebenezer",
+    "slug": "ebenezer",
+    "original": [
+     4.32902,
+     -74.364291
+    ],
+    "lat": 4.329142,
+    "lng": -74.364229,
+    "movidoM": 15,
+    "via": "Calle 20",
+    "indice": 1,
+    "candidatos": 4
+   },
+   {
+    "nombre": "Escuela Policía",
+    "slug": "escuela-policia",
+    "original": [
+     4.332648,
+     -74.392737
+    ],
+    "lat": 4.332667,
+    "lng": -74.393148,
+    "movidoM": 46,
+    "via": "",
+    "indice": 2,
+    "candidatos": 3
+   },
+   {
+    "nombre": "Iglesia Gran Colombia",
+    "slug": "iglesia-gran-colombia",
+    "original": [
+     4.328952,
+     -74.391611
+    ],
+    "lat": 4.329152,
+    "lng": -74.391592,
+    "movidoM": 22,
+    "via": "Calle 21",
+    "indice": 2,
+    "candidatos": 5
+   },
+   {
+    "nombre": "Indio",
+    "slug": "monumento-el-indio",
+    "original": [
+     4.331682,
+     -74.377517
+    ],
+    "lat": 4.331502,
+    "lng": -74.377506,
+    "movidoM": 20,
+    "via": "Rotonda del Indio",
+    "indice": 0,
+    "candidatos": 1
+   },
+   {
+    "nombre": "Manila",
+    "slug": "centro-comercial-manila",
+    "original": [
+     4.332934,
+     -74.370028
+    ],
+    "lat": 4.333151,
+    "lng": -74.370275,
+    "movidoM": 37,
+    "via": "",
+    "indice": 2,
+    "candidatos": 4
+   },
+   {
+    "nombre": "Puente Águila",
+    "slug": "puente-del-aguila",
+    "original": [
+     4.339146,
+     -74.363748
+    ],
+    "lat": 4.339055,
+    "lng": -74.363776,
+    "movidoM": 11,
+    "via": "Avenida Manuel Humberto Cárdenas",
+    "indice": 1,
+    "candidatos": 3
+   },
+   {
+    "nombre": "Cra 7",
+    "slug": "cra-7-colsubsidio",
+    "original": [
+     4.341816,
+     -74.36226
+    ],
+    "lat": 4.341816,
+    "lng": -74.362255,
+    "movidoM": 1,
+    "via": "Carrera 7",
+    "indice": 0,
+    "candidatos": 3
+   },
+   {
+    "nombre": "Palmas",
+    "slug": "av-las-palmas",
+    "original": [
+     4.342015,
+     -74.368188
+    ],
+    "lat": 4.341925,
+    "lng": -74.368133,
+    "movidoM": 12,
+    "via": "",
+    "indice": 1,
+    "candidatos": 3
+   },
+   {
+    "nombre": "Antiguo Colsubsidio",
+    "slug": "tiendas-ara-antiguo-colsubsidio",
+    "original": [
+     4.341256,
+     -74.361504
+    ],
+    "lat": 4.341158,
+    "lng": -74.36187,
+    "movidoM": 42,
+    "via": "Calle 10",
+    "indice": 2,
+    "candidatos": 3
+   },
+   {
+    "nombre": "Calle 3",
+    "slug": "calle-3-olaya",
+    "original": [
+     4.346405,
+     -74.361567
+    ],
+    "lat": 4.346405,
+    "lng": -74.361578,
+    "movidoM": 1,
+    "via": "Carrera 6",
+    "indice": 0,
+    "candidatos": 3
+   },
+   {
+    "nombre": "Olaya",
+    "slug": "olaya",
+    "original": [
+     4.344632,
+     -74.365239
+    ],
+    "lat": 4.344631,
+    "lng": -74.365291,
+    "movidoM": 6,
+    "via": "Carrera 11",
+    "indice": 0,
+    "candidatos": 5
+   }
+  ]
+ },
+ "SANTA_ANITA_GALERIA_COLSUBSIDIO_CEMENTERIO_RESGUARDOS|completo": {
+  "sinOmitir": true,
+  "sitios": 12,
+  "noRuteados": [],
+  "base": {
+   "retro": 26,
+   "giros": 3,
+   "solape": 21.7,
+   "largoM": 11295
+  },
+  "final": {
+   "retro": 9,
+   "giros": 1,
+   "solape": 19,
+   "largoM": 10720
+  },
+  "mover": [
+   {
+    "nombre": "Fiscalía",
+    "slug": "fiscalia-general-de-fusagasuga",
+    "original": [
+     4.33882,
+     -74.363869
+    ],
+    "lat": 4.338998,
+    "lng": -74.363837,
+    "movidoM": 20,
+    "via": "Avenida Manuel Humberto Cárdenas",
+    "indice": 2,
+    "candidatos": 3
+   },
+   {
+    "nombre": "Clínica Belén",
+    "slug": "clinica-belen",
+    "original": [
+     4.336164,
+     -74.366491
+    ],
+    "lat": 4.336013,
+    "lng": -74.366384,
+    "movidoM": 21,
+    "via": "Avenida Manuel Humberto Cárdenas",
+    "indice": 1,
+    "candidatos": 5
+   },
+   {
+    "nombre": "Av. Las Palmas",
+    "slug": "av-las-palmas",
+    "original": [
+     4.342015,
+     -74.368188
+    ],
+    "lat": 4.3419,
+    "lng": -74.36826,
+    "movidoM": 15,
+    "via": "Avenida Las Palmas",
+    "indice": 2,
+    "candidatos": 3
+   },
+   {
+    "nombre": "Centro",
+    "slug": "centro-parque-principal",
+    "original": [
+     4.343838,
+     -74.362005
+    ],
+    "lat": 4.343829,
+    "lng": -74.362316,
+    "movidoM": 34,
+    "via": "Carrera 7",
+    "indice": 0,
+    "candidatos": 2
+   },
+   {
+    "nombre": "Galería",
+    "slug": "galeria-plaza-de-mercado",
+    "original": [
+     4.341817,
+     -74.365001
+    ],
+    "lat": 4.341721,
+    "lng": -74.365407,
+    "movidoM": 46,
+    "via": "Carrera 12",
+    "indice": 4,
+    "candidatos": 5
+   },
+   {
+    "nombre": "Santa Anita (Calle 17)",
+    "slug": "santa-anita-calle-17",
+    "original": [
+     4.339404,
+     -74.369754
+    ],
+    "lat": 4.33936,
+    "lng": -74.369757,
+    "movidoM": 5,
+    "via": "Rotonda Santa Anita",
+    "indice": 0,
+    "candidatos": 1
+   },
+   {
+    "nombre": "Carrera 17",
+    "slug": "carrera-17",
+    "original": [
+     4.340367,
+     -74.370046
+    ],
+    "lat": 4.340385,
+    "lng": -74.37007,
+    "movidoM": 3,
+    "via": "Carrera 17",
+    "indice": 0,
+    "candidatos": 3
+   },
+   {
+    "nombre": "Antiguo Colsubsidio",
+    "slug": "tiendas-ara-antiguo-colsubsidio",
+    "original": [
+     4.341256,
+     -74.361504
+    ],
+    "lat": 4.341158,
+    "lng": -74.36187,
+    "movidoM": 42,
+    "via": "Calle 10",
+    "indice": 2,
+    "candidatos": 3
+   },
+   {
+    "nombre": "Carrera 11",
+    "slug": "carrera-11",
+    "original": [
+     4.34142,
+     -74.365171
+    ],
+    "lat": 4.341395,
+    "lng": -74.36533,
+    "movidoM": 18,
+    "via": "Avenida Las Palmas",
+    "indice": 2,
+    "candidatos": 4
+   },
+   {
+    "nombre": "Cementerio",
+    "slug": "cementerio",
+    "original": [
+     4.349053,
+     -74.365516
+    ],
+    "lat": 4.349059,
+    "lng": -74.365327,
+    "movidoM": 21,
+    "via": "Carrera 9",
+    "indice": 3,
+    "candidatos": 5
+   },
+   {
+    "nombre": "Calle 1 Norte",
+    "slug": "calle-1-norte",
+    "original": [
+     4.347891,
+     -74.365058
+    ],
+    "lat": 4.348196,
+    "lng": -74.36533,
+    "movidoM": 45,
+    "via": "Calle 1 N",
+    "indice": 2,
+    "candidatos": 3
+   },
+   {
+    "nombre": "Resguardos",
+    "slug": "resguardos",
+    "original": [
+     4.355159,
+     -74.373688
+    ],
+    "lat": 4.355159,
+    "lng": -74.373688,
+    "movidoM": 0,
+    "via": "(sin via cercana)",
+    "indice": 0,
+    "candidatos": 1
+   }
+  ]
+ },
+ "U_HOSPITAL_CRA_9_CLL_3_COLSUBSIDIO_CEMENTERIO|completo": {
+  "sinOmitir": true,
+  "sitios": 12,
+  "noRuteados": [],
+  "base": {
+   "retro": 24,
+   "giros": 2,
+   "solape": 13.7,
+   "largoM": 10401
+  },
+  "final": {
+   "retro": 11,
+   "giros": 0,
+   "solape": 9.7,
+   "largoM": 9833
+  },
+  "mover": [
+   {
+    "nombre": "U. Hospital Éxito",
+    "slug": "u-hospital-exito",
+    "original": [
+     4.333353,
+     -74.370943
+    ],
+    "lat": 4.333397,
+    "lng": -74.37096,
+    "movidoM": 5,
+    "via": "",
+    "indice": 0,
+    "candidatos": 4
+   },
+   {
+    "nombre": "Av. Manuel Humberto",
+    "slug": "av-manuel-humberto",
+    "original": [
+     4.328895,
+     -74.367478
+    ],
+    "lat": 4.328807,
+    "lng": -74.367277,
+    "movidoM": 24,
+    "via": "Carrera 6",
+    "indice": 1,
+    "candidatos": 4
+   },
+   {
+    "nombre": "Calle 11",
+    "slug": "calle-11",
+    "original": [
+     4.339916,
+     -74.36276
+    ],
+    "lat": 4.339929,
+    "lng": -74.362769,
+    "movidoM": 2,
+    "via": "Avenida Manuel Humberto Cárdenas",
+    "indice": 0,
+    "candidatos": 3
+   },
+   {
+    "nombre": "Av. Las Palmas",
+    "slug": "av-las-palmas",
+    "original": [
+     4.342015,
+     -74.368188
+    ],
+    "lat": 4.3419,
+    "lng": -74.36826,
+    "movidoM": 15,
+    "via": "Avenida Las Palmas",
+    "indice": 2,
+    "candidatos": 3
+   },
+   {
+    "nombre": "Galería",
+    "slug": "galeria-plaza-de-mercado",
+    "original": [
+     4.341817,
+     -74.365001
+    ],
+    "lat": 4.341452,
+    "lng": -74.364844,
+    "movidoM": 44,
+    "via": "Avenida Las Palmas",
+    "indice": 2,
+    "candidatos": 5
+   },
+   {
+    "nombre": "Banco Popular",
+    "slug": "banco-popular",
+    "original": [
+     4.342603,
+     -74.360015
+    ],
+    "lat": 4.342557,
+    "lng": -74.360021,
+    "movidoM": 5,
+    "via": "Calle 8A",
+    "indice": 0,
+    "candidatos": 3
+   },
+   {
+    "nombre": "Centro",
+    "slug": "centro-parque-principal",
+    "original": [
+     4.343838,
+     -74.362005
+    ],
+    "lat": 4.343829,
+    "lng": -74.362316,
+    "movidoM": 34,
+    "via": "Carrera 7",
+    "indice": 0,
+    "candidatos": 2
+   },
+   {
+    "nombre": "Carrera 9",
+    "slug": "carrera-9",
+    "original": [
+     4.341963,
+     -74.363917
+    ],
+    "lat": 4.341964,
+    "lng": -74.36391,
+    "movidoM": 1,
+    "via": "Carrera 9",
+    "indice": 0,
+    "candidatos": 2
+   },
+   {
+    "nombre": "Calle 3",
+    "slug": "calle-3-cra-9",
+    "original": [
+     4.346218,
+     -74.36396
+    ],
+    "lat": 4.346218,
+    "lng": -74.363964,
+    "movidoM": 0,
+    "via": "Carrera 9",
+    "indice": 0,
+    "candidatos": 2
+   },
+   {
+    "nombre": "Antiguo Colsubsidio",
+    "slug": "tiendas-ara-antiguo-colsubsidio",
+    "original": [
+     4.341256,
+     -74.361504
+    ],
+    "lat": 4.341136,
+    "lng": -74.361507,
+    "movidoM": 13,
+    "via": "Calle 10",
+    "indice": 1,
+    "candidatos": 3
+   },
+   {
+    "nombre": "Carrera 11",
+    "slug": "carrera-11",
+    "original": [
+     4.34142,
+     -74.365171
+    ],
+    "lat": 4.341395,
+    "lng": -74.36533,
+    "movidoM": 18,
+    "via": "Avenida Las Palmas",
+    "indice": 2,
+    "candidatos": 4
+   },
+   {
+    "nombre": "Cementerio",
+    "slug": "cementerio",
+    "original": [
+     4.349053,
+     -74.365516
+    ],
+    "lat": 4.349206,
+    "lng": -74.365588,
+    "movidoM": 19,
+    "via": "",
+    "indice": 2,
+    "candidatos": 5
+   }
+  ]
+ },
+ "CENTRO_COLSUBSIDIO_CALLE_4_CEDRITOS_SAN_ANTONIO|completo": {
+  "sinOmitir": true,
+  "sitios": 11,
+  "noRuteados": [],
+  "base": {
+   "retro": 1,
+   "giros": 2,
+   "solape": 8,
+   "largoM": 6351
+  },
+  "final": {
+   "retro": 1,
+   "giros": 1,
+   "solape": 7.1,
+   "largoM": 6360
+  },
+  "mover": [
+   {
+    "nombre": "Av. Las Palmas",
+    "slug": "av-las-palmas",
+    "original": [
+     4.342015,
+     -74.368188
+    ],
+    "lat": 4.341925,
+    "lng": -74.368133,
+    "movidoM": 12,
+    "via": "",
+    "indice": 1,
+    "candidatos": 3
+   },
+   {
+    "nombre": "Galería",
+    "slug": "galeria-plaza-de-mercado",
+    "original": [
+     4.341817,
+     -74.365001
+    ],
+    "lat": 4.34198,
+    "lng": -74.364692,
+    "movidoM": 39,
+    "via": "Carrera 11",
+    "indice": 1,
+    "candidatos": 5
+   },
+   {
+    "nombre": "Centro",
+    "slug": "centro-parque-principal",
+    "original": [
+     4.343838,
+     -74.362005
+    ],
+    "lat": 4.343829,
+    "lng": -74.362316,
+    "movidoM": 34,
+    "via": "Carrera 7",
+    "indice": 0,
+    "candidatos": 2
+   },
+   {
+    "nombre": "Antiguo Colsubsidio",
+    "slug": "tiendas-ara-antiguo-colsubsidio",
+    "original": [
+     4.341256,
+     -74.361504
+    ],
+    "lat": 4.341257,
+    "lng": -74.361574,
+    "movidoM": 8,
+    "via": "Carrera 6",
+    "indice": 0,
+    "candidatos": 3
+   },
+   {
+    "nombre": "Calle 4",
+    "slug": "calle-4",
+    "original": [
+     4.345621,
+     -74.361834
+    ],
+    "lat": 4.34563,
+    "lng": -74.361835,
+    "movidoM": 1,
+    "via": "Calle 4",
+    "indice": 0,
+    "candidatos": 3
+   },
+   {
+    "nombre": "Carrera 4",
+    "slug": "carrera-4",
+    "original": [
+     4.345675,
+     -74.36012
+    ],
+    "lat": 4.345675,
+    "lng": -74.360092,
+    "movidoM": 3,
+    "via": "Carrera 4",
+    "indice": 0,
+    "candidatos": 2
+   },
+   {
+    "nombre": "Calle 2",
+    "slug": "calle-2",
+    "original": [
+     4.347228,
+     -74.360173
+    ],
+    "lat": 4.347583,
+    "lng": -74.36045,
+    "movidoM": 50,
+    "via": "Calle 1",
+    "indice": 1,
+    "candidatos": 2
+   },
+   {
+    "nombre": "Cedritos",
+    "slug": "cedritos",
+    "original": [
+     4.346054,
+     -74.354753
+    ],
+    "lat": 4.34626,
+    "lng": -74.35484,
+    "movidoM": 25,
+    "via": "Carrera 4C Este",
+    "indice": 1,
+    "candidatos": 3
+   },
+   {
+    "nombre": "Barrio Santander",
+    "slug": "barrio-santander",
+    "original": [
+     4.346926,
+     -74.359414
+    ],
+    "lat": 4.346925,
+    "lng": -74.359353,
+    "movidoM": 7,
+    "via": "Carrera 3",
+    "indice": 0,
+    "candidatos": 4
+   },
+   {
+    "nombre": "Carrera 1",
+    "slug": "carrera-1-barrio-santander",
+    "original": [
+     4.347184,
+     -74.357712
+    ],
+    "lat": 4.347184,
+    "lng": -74.357699,
+    "movidoM": 1,
+    "via": "Carrera 1",
+    "indice": 0,
+    "candidatos": 5
+   },
+   {
+    "nombre": "San Antonio",
+    "slug": "san-antonio",
+    "original": [
+     4.353147,
+     -74.357168
+    ],
+    "lat": 4.353062,
+    "lng": -74.357103,
+    "movidoM": 12,
+    "via": "Calle 6",
+    "indice": 0,
+    "candidatos": 4
+   }
+  ]
+ },
+ "U_HOSPITAL_BATALLON_LLANO_LARGO|completo": {
+  "sinOmitir": true,
+  "sitios": 11,
+  "noRuteados": [
+   "Zona Rosa (sin coordenada)",
+   "Gran Surtidor (marcador mal ubicado)"
+  ],
+  "base": {
+   "retro": 29,
+   "giros": 3,
+   "solape": 20.8,
+   "largoM": 15207
+  },
+  "final": {
+   "retro": 15,
+   "giros": 1,
+   "solape": 16.3,
+   "largoM": 13070
+  },
+  "mover": [
+   {
+    "nombre": "Terminal",
+    "slug": "terminal-de-transporte",
+    "original": [
+     4.345887,
+     -74.377859
+    ],
+    "lat": 4.346072,
+    "lng": -74.377506,
+    "movidoM": 44,
+    "via": "Avenida Antigua Panamericana",
+    "indice": 0,
+    "candidatos": 1
+   },
+   {
+    "nombre": "Banco Caja Social",
+    "slug": "banco-caja-social",
+    "original": [
+     4.342291,
+     -74.363295
+    ],
+    "lat": 4.342222,
+    "lng": -74.363266,
+    "movidoM": 8,
+    "via": "Avenida Las Palmas",
+    "indice": 0,
+    "candidatos": 2
+   },
+   {
+    "nombre": "Panadería Filipo",
+    "slug": "panaderia-filipo",
+    "original": [
+     4.341763,
+     -74.363046
+    ],
+    "lat": 4.341754,
+    "lng": -74.363193,
+    "movidoM": 16,
+    "via": "Carrera 8",
+    "indice": 1,
+    "candidatos": 3
+   },
+   {
+    "nombre": "Fiscalía",
+    "slug": "fiscalia-general-de-fusagasuga",
+    "original": [
+     4.33882,
+     -74.363869
+    ],
+    "lat": 4.338998,
+    "lng": -74.363837,
+    "movidoM": 20,
+    "via": "Avenida Manuel Humberto Cárdenas",
+    "indice": 2,
+    "candidatos": 3
+   },
+   {
+    "nombre": "U. Hospital Éxito",
+    "slug": "u-hospital-exito",
+    "original": [
+     4.333353,
+     -74.370943
+    ],
+    "lat": 4.333162,
+    "lng": -74.370885,
+    "movidoM": 22,
+    "via": "Avenida Manuel Humberto Cárdenas",
+    "indice": 1,
+    "candidatos": 4
+   },
+   {
+    "nombre": "Indio",
+    "slug": "monumento-el-indio",
+    "original": [
+     4.331682,
+     -74.377517
+    ],
+    "lat": 4.331502,
+    "lng": -74.377506,
+    "movidoM": 20,
+    "via": "Rotonda del Indio",
+    "indice": 0,
+    "candidatos": 1
+   },
+   {
+    "nombre": "Querencia",
+    "slug": "la-querencia",
+    "original": [
+     4.328923,
+     -74.387546
+    ],
+    "lat": 4.328655,
+    "lng": -74.387491,
+    "movidoM": 30,
+    "via": "Avenida Antigua Panamericana",
+    "indice": 1,
+    "candidatos": 5
+   },
+   {
+    "nombre": "Batallón",
+    "slug": "batallon",
+    "original": [
+     4.326571,
+     -74.399738
+    ],
+    "lat": 4.32673,
+    "lng": -74.399738,
+    "movidoM": 18,
+    "via": "Avenida Antigua Panamericana",
+    "indice": 0,
+    "candidatos": 1
+   },
+   {
+    "nombre": "Villa Celeste",
+    "slug": "villa-celeste",
+    "original": [
+     4.327354,
+     -74.410143
+    ],
+    "lat": 4.327299,
+    "lng": -74.409982,
+    "movidoM": 19,
+    "via": "",
+    "indice": 1,
+    "candidatos": 4
+   },
+   {
+    "nombre": "San Francisco",
+    "slug": "san-francisco",
+    "original": [
+     4.32766,
+     -74.412563
+    ],
+    "lat": 4.328052,
+    "lng": -74.412669,
+    "movidoM": 45,
+    "via": "",
+    "indice": 3,
+    "candidatos": 4
+   },
+   {
+    "nombre": "Llano Largo",
+    "slug": "llano-largo",
+    "original": [
+     4.328369,
+     -74.402552
+    ],
+    "lat": 4.328369,
+    "lng": -74.402521,
+    "movidoM": 3,
+    "via": "Carrera 67",
+    "indice": 0,
+    "candidatos": 3
+   }
+  ]
+ },
+ "CENTRO_COLSUBSIDIO_CEMENTERIO_GAITAN_GALAN|completo": {
+  "sinOmitir": true,
+  "sitios": 11,
+  "noRuteados": [
+   "Calle Caliente (sin coordenada)",
+   "Jardin Los Periquillos (sin coordenada)"
+  ],
+  "base": {
+   "retro": 1,
+   "giros": 2,
+   "solape": 19.5,
+   "largoM": 7802
+  },
+  "final": {
+   "retro": 1,
+   "giros": 0,
+   "solape": 12.6,
+   "largoM": 7475
+  },
+  "mover": [
+   {
+    "nombre": "Terminal de Transporte",
+    "slug": "terminal-de-transporte",
+    "original": [
+     4.345887,
+     -74.377859
+    ],
+    "lat": 4.346072,
+    "lng": -74.377506,
+    "movidoM": 44,
+    "via": "Avenida Antigua Panamericana",
+    "indice": 0,
+    "candidatos": 1
+   },
+   {
+    "nombre": "Centro Comercial Avenida",
+    "slug": "centro-comercial-avenida",
+    "original": [
+     4.343802,
+     -74.373782
+    ],
+    "lat": 4.343797,
+    "lng": -74.373645,
+    "movidoM": 15,
+    "via": "",
+    "indice": 0,
+    "candidatos": 5
+   },
+   {
+    "nombre": "Avenida Las Palmas",
+    "slug": "av-las-palmas",
+    "original": [
+     4.342015,
+     -74.368188
+    ],
+    "lat": 4.341925,
+    "lng": -74.368133,
+    "movidoM": 12,
+    "via": "",
+    "indice": 1,
+    "candidatos": 3
+   },
+   {
+    "nombre": "Centro",
+    "slug": "centro-parque-principal",
+    "original": [
+     4.343838,
+     -74.362005
+    ],
+    "lat": 4.343829,
+    "lng": -74.362316,
+    "movidoM": 34,
+    "via": "Carrera 7",
+    "indice": 0,
+    "candidatos": 2
+   },
+   {
+    "nombre": "Tiendas Ara (Antiguo Colsubsidio)",
+    "slug": "tiendas-ara-antiguo-colsubsidio",
+    "original": [
+     4.341256,
+     -74.361504
+    ],
+    "lat": 4.341158,
+    "lng": -74.36187,
+    "movidoM": 42,
+    "via": "Calle 10",
+    "indice": 2,
+    "candidatos": 3
+   },
+   {
+    "nombre": "Funeraria La Paz",
+    "slug": "funeraria-la-paz",
+    "original": [
+     4.344887,
+     -74.360778
+    ],
+    "lat": 4.34493,
+    "lng": -74.360782,
+    "movidoM": 5,
+    "via": "Calle 5",
+    "indice": 0,
+    "candidatos": 3
+   },
+   {
+    "nombre": "Carrera 6",
+    "slug": "carrera-6",
+    "original": [
+     4.337822,
+     -74.361642
+    ],
+    "lat": 4.338241,
+    "lng": -74.361598,
+    "movidoM": 47,
+    "via": "Calle 14",
+    "indice": 2,
+    "candidatos": 3
+   },
+   {
+    "nombre": "Funeraria Jardines del Renacer",
+    "slug": "funeraria-jardines-del-renacer",
+    "original": [
+     4.345364,
+     -74.362291
+    ],
+    "lat": 4.345361,
+    "lng": -74.362365,
+    "movidoM": 8,
+    "via": "Carrera 7",
+    "indice": 0,
+    "candidatos": 2
+   },
+   {
+    "nombre": "Centro de integración Infantil",
+    "slug": "centro-de-integracion-infantil",
+    "original": [
+     4.345614,
+     -74.363084
+    ],
+    "lat": 4.34561,
+    "lng": -74.36325,
+    "movidoM": 18,
+    "via": "Carrera 8",
+    "indice": 1,
+    "candidatos": 2
+   },
+   {
+    "nombre": "Escuela Julio Sabogal",
+    "slug": "escuela-julio-sabogal",
+    "original": [
+     4.346622,
+     -74.363777
+    ],
+    "lat": 4.34657,
+    "lng": -74.364015,
+    "movidoM": 27,
+    "via": "Carrera 9",
+    "indice": 0,
+    "candidatos": 5
+   },
+   {
+    "nombre": "Paradero Gaitan",
+    "slug": "paradero-gaitan",
+    "original": [
+     4.346577,
+     -74.365967
+    ],
+    "lat": 4.346612,
+    "lng": -74.365975,
+    "movidoM": 4,
+    "via": "Calle 2",
+    "indice": 0,
+    "candidatos": 3
+   }
+  ]
+ },
+ "HOSPITAL_BATALLON_LA_PAMPA_LLANO_GRANDE|completo": {
+  "sinOmitir": true,
+  "sitios": 11,
+  "noRuteados": [
+   "Zona Rosa (sin coordenada)",
+   "Gran Surtidor (marcador mal ubicado)"
+  ],
+  "base": {
+   "retro": 23,
+   "giros": 3,
+   "solape": 17.2,
+   "largoM": 13850
+  },
+  "final": {
+   "retro": 11,
+   "giros": 0,
+   "solape": 10.4,
+   "largoM": 11520
+  },
+  "mover": [
+   {
+    "nombre": "Terminal",
+    "slug": "terminal-de-transporte",
+    "original": [
+     4.345887,
+     -74.377859
+    ],
+    "lat": 4.346072,
+    "lng": -74.377506,
+    "movidoM": 44,
+    "via": "Avenida Antigua Panamericana",
+    "indice": 0,
+    "candidatos": 1
+   },
+   {
+    "nombre": "Banco Caja Social",
+    "slug": "banco-caja-social",
+    "original": [
+     4.342291,
+     -74.363295
+    ],
+    "lat": 4.342222,
+    "lng": -74.363266,
+    "movidoM": 8,
+    "via": "Avenida Las Palmas",
+    "indice": 0,
+    "candidatos": 2
+   },
+   {
+    "nombre": "Panadería Filipo",
+    "slug": "panaderia-filipo",
+    "original": [
+     4.341763,
+     -74.363046
+    ],
+    "lat": 4.341754,
+    "lng": -74.363193,
+    "movidoM": 16,
+    "via": "Carrera 8",
+    "indice": 1,
+    "candidatos": 3
+   },
+   {
+    "nombre": "Fiscalía",
+    "slug": "fiscalia-general-de-fusagasuga",
+    "original": [
+     4.33882,
+     -74.363869
+    ],
+    "lat": 4.338998,
+    "lng": -74.363837,
+    "movidoM": 20,
+    "via": "Avenida Manuel Humberto Cárdenas",
+    "indice": 2,
+    "candidatos": 3
+   },
+   {
+    "nombre": "U. Hospital Éxito",
+    "slug": "u-hospital-exito",
+    "original": [
+     4.333353,
+     -74.370943
+    ],
+    "lat": 4.333162,
+    "lng": -74.370885,
+    "movidoM": 22,
+    "via": "Avenida Manuel Humberto Cárdenas",
+    "indice": 1,
+    "candidatos": 4
+   },
+   {
+    "nombre": "Indio",
+    "slug": "monumento-el-indio",
+    "original": [
+     4.331682,
+     -74.377517
+    ],
+    "lat": 4.331502,
+    "lng": -74.377506,
+    "movidoM": 20,
+    "via": "Rotonda del Indio",
+    "indice": 0,
+    "candidatos": 1
+   },
+   {
+    "nombre": "Querencia",
+    "slug": "la-querencia",
+    "original": [
+     4.328923,
+     -74.387546
+    ],
+    "lat": 4.328655,
+    "lng": -74.387491,
+    "movidoM": 30,
+    "via": "Avenida Antigua Panamericana",
+    "indice": 1,
+    "candidatos": 5
+   },
+   {
+    "nombre": "Batallón",
+    "slug": "batallon",
+    "original": [
+     4.326571,
+     -74.399738
+    ],
+    "lat": 4.32673,
+    "lng": -74.399738,
+    "movidoM": 18,
+    "via": "Avenida Antigua Panamericana",
+    "indice": 0,
+    "candidatos": 1
+   },
+   {
+    "nombre": "Villa Celeste",
+    "slug": "villa-celeste",
+    "original": [
+     4.327354,
+     -74.410143
+    ],
+    "lat": 4.327613,
+    "lng": -74.410215,
+    "movidoM": 30,
+    "via": "",
+    "indice": 2,
+    "candidatos": 4
+   },
+   {
+    "nombre": "San Francisco",
+    "slug": "san-francisco",
+    "original": [
+     4.32766,
+     -74.412563
+    ],
+    "lat": 4.327384,
+    "lng": -74.412489,
+    "movidoM": 32,
+    "via": "",
+    "indice": 2,
+    "candidatos": 4
+   },
+   {
+    "nombre": "Llano Grande",
+    "slug": "llano-grande",
+    "original": [
+     4.326001,
+     -74.414747
+    ],
+    "lat": 4.32596,
+    "lng": -74.414737,
+    "movidoM": 5,
+    "via": "",
+    "indice": 0,
+    "candidatos": 4
+   }
+  ]
+ },
+ "CENTRO_COLSUBSIDIO_CALLE_3_OLAYA|hibrido": {
+  "modo": "hibrido",
+  "sitios": 11,
+  "noRuteados": [
+   "Ara Ebenezer (sin coordenada)"
+  ],
+  "base": {
+   "retro": 12,
+   "giros": 0,
+   "solape": 14.2
+  },
+  "final": {
+   "retro": 10,
+   "giros": 1,
+   "solape": 7.3,
+   "largoM": 12211
+  },
+  "omitidos": [
+   {
+    "nombre": "Indio",
+    "a": 20,
+    "maxM": 60
+   },
+   {
+    "nombre": "Manila",
+    "a": 26,
+    "maxM": 60
+   }
+  ],
+  "mover": [
+   {
+    "nombre": "Ebenezer",
+    "slug": "ebenezer",
+    "original": [
+     4.32902,
+     -74.364291
+    ],
+    "lat": 4.329142,
+    "lng": -74.364229,
+    "movidoM": 15,
+    "via": "Calle 20"
+   },
+   {
+    "nombre": "Escuela Policía",
+    "slug": "escuela-policia",
+    "original": [
+     4.332648,
+     -74.392737
+    ],
+    "lat": 4.332571,
+    "lng": -74.392725,
+    "movidoM": 9,
+    "via": ""
+   },
+   {
+    "nombre": "Iglesia Gran Colombia",
+    "slug": "iglesia-gran-colombia",
+    "original": [
+     4.328952,
+     -74.391611
+    ],
+    "lat": 4.329152,
+    "lng": -74.391592,
+    "movidoM": 22,
+    "via": "Calle 21"
+   },
+   {
+    "nombre": "Puente Águila",
+    "slug": "puente-del-aguila",
+    "original": [
+     4.339146,
+     -74.363748
+    ],
+    "lat": 4.339055,
+    "lng": -74.363776,
+    "movidoM": 11,
+    "via": "Avenida Manuel Humberto Cárdenas"
+   },
+   {
+    "nombre": "Cra 7",
+    "slug": "cra-7-colsubsidio",
+    "original": [
+     4.341816,
+     -74.36226
+    ],
+    "lat": 4.341816,
+    "lng": -74.362255,
+    "movidoM": 1,
+    "via": "Carrera 7"
+   },
+   {
+    "nombre": "Palmas",
+    "slug": "av-las-palmas",
+    "original": [
+     4.342015,
+     -74.368188
+    ],
+    "lat": 4.341925,
+    "lng": -74.368133,
+    "movidoM": 12,
+    "via": ""
+   },
+   {
+    "nombre": "Antiguo Colsubsidio",
+    "slug": "tiendas-ara-antiguo-colsubsidio",
+    "original": [
+     4.341256,
+     -74.361504
+    ],
+    "lat": 4.341257,
+    "lng": -74.361574,
+    "movidoM": 8,
+    "via": "Carrera 6"
+   },
+   {
+    "nombre": "Calle 3",
+    "slug": "calle-3-olaya",
+    "original": [
+     4.346405,
+     -74.361567
+    ],
+    "lat": 4.346405,
+    "lng": -74.361578,
+    "movidoM": 1,
+    "via": "Carrera 6"
+   },
+   {
+    "nombre": "Olaya",
+    "slug": "olaya",
+    "original": [
+     4.344632,
+     -74.365239
+    ],
+    "lat": 4.344631,
+    "lng": -74.365291,
+    "movidoM": 6,
+    "via": "Carrera 11"
+   }
+  ]
+ },
+ "SANTA_ANITA_GALERIA_COLSUBSIDIO_CEMENTERIO_RESGUARDOS|hibrido": {
+  "modo": "hibrido",
+  "sitios": 12,
+  "noRuteados": [],
+  "base": {
+   "retro": 9,
+   "giros": 1,
+   "solape": 19
+  },
+  "final": {
+   "retro": 1,
+   "giros": 0,
+   "solape": 6.3,
+   "largoM": 7482
+  },
+  "omitidos": [
+   {
+    "nombre": "Clínica Belén",
+    "a": 21,
+    "maxM": 60
+   },
+   {
+    "nombre": "Av. Las Palmas",
+    "a": 15,
+    "maxM": 60
+   },
+   {
+    "nombre": "Santa Anita (Calle 17)",
+    "a": 5,
+    "maxM": 60
+   },
+   {
+    "nombre": "Carrera 11",
+    "a": 18,
+    "maxM": 60
+   },
+   {
+    "nombre": "Cementerio",
+    "a": 14,
+    "maxM": 60
+   },
+   {
+    "nombre": "Calle 1 Norte",
+    "a": 54,
+    "maxM": 60
+   }
+  ],
+  "mover": [
+   {
+    "nombre": "Fiscalía",
+    "slug": "fiscalia-general-de-fusagasuga",
+    "original": [
+     4.33882,
+     -74.363869
+    ],
+    "lat": 4.338877,
+    "lng": -74.363772,
+    "movidoM": 12,
+    "via": "Transversal 9"
+   },
+   {
+    "nombre": "Centro",
+    "slug": "centro-parque-principal",
+    "original": [
+     4.343838,
+     -74.362005
+    ],
+    "lat": 4.343829,
+    "lng": -74.362316,
+    "movidoM": 34,
+    "via": "Carrera 7"
+   },
+   {
+    "nombre": "Galería",
+    "slug": "galeria-plaza-de-mercado",
+    "original": [
+     4.341817,
+     -74.365001
+    ],
+    "lat": 4.34198,
+    "lng": -74.364692,
+    "movidoM": 39,
+    "via": "Carrera 11"
+   },
+   {
+    "nombre": "Carrera 17",
+    "slug": "carrera-17",
+    "original": [
+     4.340367,
+     -74.370046
+    ],
+    "lat": 4.340253,
+    "lng": -74.369833,
+    "movidoM": 27,
+    "via": "Calle 16A Bis"
+   },
+   {
+    "nombre": "Antiguo Colsubsidio",
+    "slug": "tiendas-ara-antiguo-colsubsidio",
+    "original": [
+     4.341256,
+     -74.361504
+    ],
+    "lat": 4.341158,
+    "lng": -74.36187,
+    "movidoM": 42,
+    "via": "Calle 10"
+   },
+   {
+    "nombre": "Resguardos",
+    "slug": "resguardos",
+    "original": [
+     4.355159,
+     -74.373688
+    ],
+    "lat": 4.355159,
+    "lng": -74.373688,
+    "movidoM": 0,
+    "via": "(sin via cercana)"
+   }
+  ]
+ },
+ "U_HOSPITAL_CRA_9_CLL_3_COLSUBSIDIO_CEMENTERIO|hibrido": {
+  "modo": "hibrido",
+  "sitios": 12,
+  "noRuteados": [],
+  "base": {
+   "retro": 11,
+   "giros": 0,
+   "solape": 9.7
+  },
+  "final": {
+   "retro": 9,
+   "giros": 0,
+   "solape": 8,
+   "largoM": 9125
+  },
+  "omitidos": [
+   {
+    "nombre": "Galería",
+    "a": 32,
+    "maxM": 60
+   },
+   {
+    "nombre": "Carrera 9",
+    "a": 1,
+    "maxM": 60
+   },
+   {
+    "nombre": "Carrera 11",
+    "a": 2,
+    "maxM": 60
+   }
+  ],
+  "mover": [
+   {
+    "nombre": "U. Hospital Éxito",
+    "slug": "u-hospital-exito",
+    "original": [
+     4.333353,
+     -74.370943
+    ],
+    "lat": 4.333162,
+    "lng": -74.370885,
+    "movidoM": 22,
+    "via": "Avenida Manuel Humberto Cárdenas"
+   },
+   {
+    "nombre": "Av. Manuel Humberto",
+    "slug": "av-manuel-humberto",
+    "original": [
+     4.328895,
+     -74.367478
+    ],
+    "lat": 4.329126,
+    "lng": -74.367619,
+    "movidoM": 30,
+    "via": "Avenida 22"
+   },
+   {
+    "nombre": "Calle 11",
+    "slug": "calle-11",
+    "original": [
+     4.339916,
+     -74.36276
+    ],
+    "lat": 4.339929,
+    "lng": -74.362769,
+    "movidoM": 2,
+    "via": "Avenida Manuel Humberto Cárdenas"
+   },
+   {
+    "nombre": "Av. Las Palmas",
+    "slug": "av-las-palmas",
+    "original": [
+     4.342015,
+     -74.368188
+    ],
+    "lat": 4.341925,
+    "lng": -74.368133,
+    "movidoM": 12,
+    "via": ""
+   },
+   {
+    "nombre": "Banco Popular",
+    "slug": "banco-popular",
+    "original": [
+     4.342603,
+     -74.360015
+    ],
+    "lat": 4.342557,
+    "lng": -74.360021,
+    "movidoM": 5,
+    "via": "Calle 8A"
+   },
+   {
+    "nombre": "Centro",
+    "slug": "centro-parque-principal",
+    "original": [
+     4.343838,
+     -74.362005
+    ],
+    "lat": 4.343829,
+    "lng": -74.362316,
+    "movidoM": 34,
+    "via": "Carrera 7"
+   },
+   {
+    "nombre": "Calle 3",
+    "slug": "calle-3-cra-9",
+    "original": [
+     4.346218,
+     -74.36396
+    ],
+    "lat": 4.346218,
+    "lng": -74.363964,
+    "movidoM": 0,
+    "via": "Carrera 9"
+   },
+   {
+    "nombre": "Antiguo Colsubsidio",
+    "slug": "tiendas-ara-antiguo-colsubsidio",
+    "original": [
+     4.341256,
+     -74.361504
+    ],
+    "lat": 4.341257,
+    "lng": -74.361574,
+    "movidoM": 8,
+    "via": "Carrera 6"
+   },
+   {
+    "nombre": "Cementerio",
+    "slug": "cementerio",
+    "original": [
+     4.349053,
+     -74.365516
+    ],
+    "lat": 4.348962,
+    "lng": -74.365429,
+    "movidoM": 14,
+    "via": "Calle 2"
+   }
+  ]
+ },
+ "CENTRO_U_HOSPITAL_COLSUBSIDIO_CEDRITOS|hibrido": {
+  "modo": "hibrido",
+  "sitios": 10,
+  "noRuteados": [],
+  "base": {
+   "retro": 1,
+   "giros": 0,
+   "solape": 4.1
+  },
+  "final": {
+   "retro": 1,
+   "giros": 0,
+   "solape": 3.2,
+   "largoM": 7672
+  },
+  "omitidos": [
+   {
+    "nombre": "Calle 11",
+    "a": 5,
+    "maxM": 60
+   }
+  ],
+  "mover": [
+   {
+    "nombre": "Av. Las Palmas",
+    "slug": "av-las-palmas",
+    "original": [
+     4.342015,
+     -74.368188
+    ],
+    "lat": 4.342057,
+    "lng": -74.36828,
+    "movidoM": 11,
+    "via": ""
+   },
+   {
+    "nombre": "Centro",
+    "slug": "centro-parque-principal",
+    "original": [
+     4.343838,
+     -74.362005
+    ],
+    "lat": 4.343829,
+    "lng": -74.362316,
+    "movidoM": 34,
+    "via": "Carrera 7"
+   },
+   {
+    "nombre": "Carrera 6",
+    "slug": "carrera-6",
+    "original": [
+     4.337822,
+     -74.361642
+    ],
+    "lat": 4.337823,
+    "lng": -74.361649,
+    "movidoM": 1,
+    "via": "Carrera 6"
+   },
+   {
+    "nombre": "Av. Manuel Humberto",
+    "slug": "av-manuel-humberto",
+    "original": [
+     4.328895,
+     -74.367478
+    ],
+    "lat": 4.328949,
+    "lng": -74.367428,
+    "movidoM": 8,
+    "via": "Avenida 22"
+   },
+   {
+    "nombre": "U. Hospital Éxito",
+    "slug": "u-hospital-exito",
+    "original": [
+     4.333353,
+     -74.370943
+    ],
+    "lat": 4.333305,
+    "lng": -74.370717,
+    "movidoM": 26,
+    "via": ""
+   },
+   {
+    "nombre": "Antiguo Colsubsidio",
+    "slug": "tiendas-ara-antiguo-colsubsidio",
+    "original": [
+     4.341256,
+     -74.361504
+    ],
+    "lat": 4.341136,
+    "lng": -74.361507,
+    "movidoM": 13,
+    "via": "Calle 10"
+   },
+   {
+    "nombre": "Calle 4",
+    "slug": "calle-4",
+    "original": [
+     4.345621,
+     -74.361834
+    ],
+    "lat": 4.34563,
+    "lng": -74.361835,
+    "movidoM": 1,
+    "via": "Calle 4"
+   },
+   {
+    "nombre": "Calle 2",
+    "slug": "calle-2",
+    "original": [
+     4.347228,
+     -74.360173
+    ],
+    "lat": 4.347228,
+    "lng": -74.360166,
+    "movidoM": 1,
+    "via": "Carrera 4"
+   },
+   {
+    "nombre": "Cedritos",
+    "slug": "cedritos",
+    "original": [
+     4.346054,
+     -74.354753
+    ],
+    "lat": 4.346046,
+    "lng": -74.354807,
+    "movidoM": 6,
+    "via": "Carrera 4"
+   }
+  ]
+ },
+ "CENTRO_COLSUBSIDIO_CALLE_4_CEDRITOS_SAN_ANTONIO|hibrido": {
+  "modo": "hibrido",
+  "sitios": 11,
+  "noRuteados": [],
+  "base": {
+   "retro": 1,
+   "giros": 1,
+   "solape": 7.1
+  },
+  "final": {
+   "retro": 0,
+   "giros": 0,
+   "solape": 0.5,
+   "largoM": 6529
+  },
+  "omitidos": [
+   {
+    "nombre": "Calle 2",
+    "a": 3,
+    "maxM": 60
+   },
+   {
+    "nombre": "Carrera 1",
+    "a": 44,
+    "maxM": 60
+   }
+  ],
+  "mover": [
+   {
+    "nombre": "Av. Las Palmas",
+    "slug": "av-las-palmas",
+    "original": [
+     4.342015,
+     -74.368188
+    ],
+    "lat": 4.342057,
+    "lng": -74.36828,
+    "movidoM": 11,
+    "via": ""
+   },
+   {
+    "nombre": "Galería",
+    "slug": "galeria-plaza-de-mercado",
+    "original": [
+     4.341817,
+     -74.365001
+    ],
+    "lat": 4.34198,
+    "lng": -74.364692,
+    "movidoM": 39,
+    "via": "Carrera 11"
+   },
+   {
+    "nombre": "Centro",
+    "slug": "centro-parque-principal",
+    "original": [
+     4.343838,
+     -74.362005
+    ],
+    "lat": 4.343829,
+    "lng": -74.362316,
+    "movidoM": 34,
+    "via": "Carrera 7"
+   },
+   {
+    "nombre": "Antiguo Colsubsidio",
+    "slug": "tiendas-ara-antiguo-colsubsidio",
+    "original": [
+     4.341256,
+     -74.361504
+    ],
+    "lat": 4.341257,
+    "lng": -74.361574,
+    "movidoM": 8,
+    "via": "Carrera 6"
+   },
+   {
+    "nombre": "Calle 4",
+    "slug": "calle-4",
+    "original": [
+     4.345621,
+     -74.361834
+    ],
+    "lat": 4.34563,
+    "lng": -74.361835,
+    "movidoM": 1,
+    "via": "Calle 4"
+   },
+   {
+    "nombre": "Carrera 4",
+    "slug": "carrera-4",
+    "original": [
+     4.345675,
+     -74.36012
+    ],
+    "lat": 4.345675,
+    "lng": -74.360092,
+    "movidoM": 3,
+    "via": "Carrera 4"
+   },
+   {
+    "nombre": "Cedritos",
+    "slug": "cedritos",
+    "original": [
+     4.346054,
+     -74.354753
+    ],
+    "lat": 4.346046,
+    "lng": -74.354807,
+    "movidoM": 6,
+    "via": "Carrera 4"
+   },
+   {
+    "nombre": "Barrio Santander",
+    "slug": "barrio-santander",
+    "original": [
+     4.346926,
+     -74.359414
+    ],
+    "lat": 4.346572,
+    "lng": -74.359392,
+    "movidoM": 39,
+    "via": "Calle 3"
+   },
+   {
+    "nombre": "San Antonio",
+    "slug": "san-antonio",
+    "original": [
+     4.353147,
+     -74.357168
+    ],
+    "lat": 4.353062,
+    "lng": -74.357103,
+    "movidoM": 12,
+    "via": "Calle 6"
+   }
+  ]
+ },
+ "U_HOSPITAL_BATALLON_LLANO_LARGO|hibrido": {
+  "modo": "hibrido",
+  "sitios": 11,
+  "noRuteados": [
+   "Zona Rosa (sin coordenada)",
+   "Gran Surtidor (marcador mal ubicado)"
+  ],
+  "base": {
+   "retro": 15,
+   "giros": 1,
+   "solape": 16.3
+  },
+  "final": {
+   "retro": 3,
+   "giros": 1,
+   "solape": 9.3,
+   "largoM": 9851
+  },
+  "omitidos": [
+   {
+    "nombre": "Banco Caja Social",
+    "a": 18,
+    "maxM": 60
+   },
+   {
+    "nombre": "Indio",
+    "a": 24,
+    "maxM": 60
+   },
+   {
+    "nombre": "Villa Celeste",
+    "a": 42,
+    "maxM": 60
+   },
+   {
+    "nombre": "Fiscalía",
+    "a": 20,
+    "maxM": 60
+   }
+  ],
+  "mover": [
+   {
+    "nombre": "Terminal",
+    "slug": "terminal-de-transporte",
+    "original": [
+     4.345887,
+     -74.377859
+    ],
+    "lat": 4.346072,
+    "lng": -74.377506,
+    "movidoM": 44,
+    "via": "Avenida Antigua Panamericana"
+   },
+   {
+    "nombre": "Panadería Filipo",
+    "slug": "panaderia-filipo",
+    "original": [
+     4.341763,
+     -74.363046
+    ],
+    "lat": 4.341754,
+    "lng": -74.363193,
+    "movidoM": 16,
+    "via": "Carrera 8"
+   },
+   {
+    "nombre": "U. Hospital Éxito",
+    "slug": "u-hospital-exito",
+    "original": [
+     4.333353,
+     -74.370943
+    ],
+    "lat": 4.333162,
+    "lng": -74.370885,
+    "movidoM": 22,
+    "via": "Avenida Manuel Humberto Cárdenas"
+   },
+   {
+    "nombre": "Querencia",
+    "slug": "la-querencia",
+    "original": [
+     4.328923,
+     -74.387546
+    ],
+    "lat": 4.328655,
+    "lng": -74.387491,
+    "movidoM": 30,
+    "via": "Avenida Antigua Panamericana"
+   },
+   {
+    "nombre": "Batallón",
+    "slug": "batallon",
+    "original": [
+     4.326571,
+     -74.399738
+    ],
+    "lat": 4.32673,
+    "lng": -74.399738,
+    "movidoM": 18,
+    "via": "Avenida Antigua Panamericana"
+   },
+   {
+    "nombre": "San Francisco",
+    "slug": "san-francisco",
+    "original": [
+     4.32766,
+     -74.412563
+    ],
+    "lat": 4.328052,
+    "lng": -74.412669,
+    "movidoM": 45,
+    "via": ""
+   },
+   {
+    "nombre": "Llano Largo",
+    "slug": "llano-largo",
+    "original": [
+     4.328369,
+     -74.402552
+    ],
+    "lat": 4.328369,
+    "lng": -74.402521,
+    "movidoM": 3,
+    "via": "Carrera 67"
+   }
+  ]
+ },
+ "CENTRO_COLSUBSIDIO_CEMENTERIO_GAITAN_GALAN|hibrido": {
+  "modo": "hibrido",
+  "sitios": 11,
+  "noRuteados": [
+   "Calle Caliente (sin coordenada)",
+   "Jardin Los Periquillos (sin coordenada)"
+  ],
+  "base": {
+   "retro": 1,
+   "giros": 0,
+   "solape": 12.6
+  },
+  "final": {
+   "retro": 1,
+   "giros": 0,
+   "solape": 7.2,
+   "largoM": 5707
+  },
+  "omitidos": [
+   {
+    "nombre": "Centro Comercial Avenida",
+    "a": 46,
+    "maxM": 60
+   },
+   {
+    "nombre": "Tiendas Ara (Antiguo Colsubsidio)",
+    "a": 8,
+    "maxM": 60
+   },
+   {
+    "nombre": "Funeraria La Paz",
+    "a": 9,
+    "maxM": 60
+   }
+  ],
+  "mover": [
+   {
+    "nombre": "Terminal de Transporte",
+    "slug": "terminal-de-transporte",
+    "original": [
+     4.345887,
+     -74.377859
+    ],
+    "lat": 4.346072,
+    "lng": -74.377506,
+    "movidoM": 44,
+    "via": "Avenida Antigua Panamericana"
+   },
+   {
+    "nombre": "Avenida Las Palmas",
+    "slug": "av-las-palmas",
+    "original": [
+     4.342015,
+     -74.368188
+    ],
+    "lat": 4.341925,
+    "lng": -74.368133,
+    "movidoM": 12,
+    "via": ""
+   },
+   {
+    "nombre": "Centro",
+    "slug": "centro-parque-principal",
+    "original": [
+     4.343838,
+     -74.362005
+    ],
+    "lat": 4.343829,
+    "lng": -74.362316,
+    "movidoM": 34,
+    "via": "Carrera 7"
+   },
+   {
+    "nombre": "Carrera 6",
+    "slug": "carrera-6",
+    "original": [
+     4.337822,
+     -74.361642
+    ],
+    "lat": 4.338241,
+    "lng": -74.361598,
+    "movidoM": 47,
+    "via": "Calle 14"
+   },
+   {
+    "nombre": "Funeraria Jardines del Renacer",
+    "slug": "funeraria-jardines-del-renacer",
+    "original": [
+     4.345364,
+     -74.362291
+    ],
+    "lat": 4.345361,
+    "lng": -74.362365,
+    "movidoM": 8,
+    "via": "Carrera 7"
+   },
+   {
+    "nombre": "Centro de integración Infantil",
+    "slug": "centro-de-integracion-infantil",
+    "original": [
+     4.345614,
+     -74.363084
+    ],
+    "lat": 4.34561,
+    "lng": -74.36325,
+    "movidoM": 18,
+    "via": "Carrera 8"
+   },
+   {
+    "nombre": "Escuela Julio Sabogal",
+    "slug": "escuela-julio-sabogal",
+    "original": [
+     4.346622,
+     -74.363777
+    ],
+    "lat": 4.34657,
+    "lng": -74.364015,
+    "movidoM": 27,
+    "via": "Carrera 9"
+   },
+   {
+    "nombre": "Paradero Gaitan",
+    "slug": "paradero-gaitan",
+    "original": [
+     4.346577,
+     -74.365967
+    ],
+    "lat": 4.346612,
+    "lng": -74.365975,
+    "movidoM": 4,
+    "via": "Calle 2"
+   }
+  ]
+ },
+ "HOSPITAL_BATALLON_LA_PAMPA_LLANO_GRANDE|hibrido": {
+  "modo": "hibrido",
+  "sitios": 11,
+  "noRuteados": [
+   "Zona Rosa (sin coordenada)",
+   "Gran Surtidor (marcador mal ubicado)"
+  ],
+  "base": {
+   "retro": 11,
+   "giros": 0,
+   "solape": 10.4
+  },
+  "final": {
+   "retro": 0,
+   "giros": 0,
+   "solape": 0,
+   "largoM": 8794
+  },
+  "omitidos": [
+   {
+    "nombre": "Banco Caja Social",
+    "a": 18,
+    "maxM": 60
+   },
+   {
+    "nombre": "Indio",
+    "a": 24,
+    "maxM": 60
+   },
+   {
+    "nombre": "Fiscalía",
+    "a": 20,
+    "maxM": 60
+   }
+  ],
+  "mover": [
+   {
+    "nombre": "Terminal",
+    "slug": "terminal-de-transporte",
+    "original": [
+     4.345887,
+     -74.377859
+    ],
+    "lat": 4.346072,
+    "lng": -74.377506,
+    "movidoM": 44,
+    "via": "Avenida Antigua Panamericana"
+   },
+   {
+    "nombre": "Panadería Filipo",
+    "slug": "panaderia-filipo",
+    "original": [
+     4.341763,
+     -74.363046
+    ],
+    "lat": 4.341754,
+    "lng": -74.363193,
+    "movidoM": 16,
+    "via": "Carrera 8"
+   },
+   {
+    "nombre": "U. Hospital Éxito",
+    "slug": "u-hospital-exito",
+    "original": [
+     4.333353,
+     -74.370943
+    ],
+    "lat": 4.333162,
+    "lng": -74.370885,
+    "movidoM": 22,
+    "via": "Avenida Manuel Humberto Cárdenas"
+   },
+   {
+    "nombre": "Querencia",
+    "slug": "la-querencia",
+    "original": [
+     4.328923,
+     -74.387546
+    ],
+    "lat": 4.328655,
+    "lng": -74.387491,
+    "movidoM": 30,
+    "via": "Avenida Antigua Panamericana"
+   },
+   {
+    "nombre": "Batallón",
+    "slug": "batallon",
+    "original": [
+     4.326571,
+     -74.399738
+    ],
+    "lat": 4.32673,
+    "lng": -74.399738,
+    "movidoM": 18,
+    "via": "Avenida Antigua Panamericana"
+   },
+   {
+    "nombre": "Villa Celeste",
+    "slug": "villa-celeste",
+    "original": [
+     4.327354,
+     -74.410143
+    ],
+    "lat": 4.327613,
+    "lng": -74.410215,
+    "movidoM": 30,
+    "via": ""
+   },
+   {
+    "nombre": "San Francisco",
+    "slug": "san-francisco",
+    "original": [
+     4.32766,
+     -74.412563
+    ],
+    "lat": 4.328052,
+    "lng": -74.412669,
+    "movidoM": 45,
+    "via": ""
+   },
+   {
+    "nombre": "Llano Grande",
+    "slug": "llano-grande",
+    "original": [
+     4.326001,
+     -74.414747
+    ],
+    "lat": 4.32596,
+    "lng": -74.414737,
+    "movidoM": 5,
+    "via": ""
+   }
+  ]
+ }
+}

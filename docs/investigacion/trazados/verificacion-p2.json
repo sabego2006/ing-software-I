@@ -1,32 +1,32 @@
 {
- "generado": "2026-11-10",
+ "generado": "2026-11-11",
  "rutas": {
   "CENTRO_COLSUBSIDIO_CALLE_3_OLAYA": {
    "triage": "#1",
-   "longitudM": 12769,
+   "longitudM": 12524,
    "vertices": 402,
    "controles": [
     {
      "id": "retroceso",
      "nombre": "Sin retroceso ni giros en U",
      "pasa": false,
-     "detalle": "15 tramos en sentido opuesto a < 15 m, 2 giros en U",
+     "detalle": "13 tramos en sentido opuesto a < 15 m, 1 giros en U",
      "retrocesos": [
       {
        "lng": -74.3701,
        "lat": 4.33345
       },
       {
-       "lng": -74.3713,
-       "lat": 4.33304
+       "lng": -74.37035,
+       "lat": 4.33333
       },
       {
        "lng": -74.37467,
        "lat": 4.33197
       },
       {
-       "lng": -74.37524,
-       "lat": 4.3318
+       "lng": -74.37507,
+       "lat": 4.33185
       },
       {
        "lng": -74.37684,
@@ -37,59 +37,47 @@
        "lat": 4.33146
       },
       {
-       "lng": -74.37856,
-       "lat": 4.33075
+       "lng": -74.37819,
+       "lat": 4.33111
+      },
+      {
+       "lng": -74.37838,
+       "lat": 4.33092
+      },
+      {
+       "lng": -74.37942,
+       "lat": 4.33008
       },
       {
        "lng": -74.37965,
        "lat": 4.33003
       },
       {
-       "lng": -74.37978,
-       "lat": 4.33004
-      },
-      {
-       "lng": -74.37978,
-       "lat": 4.33004
-      },
-      {
        "lng": -74.39184,
        "lat": 4.33099
       },
       {
-       "lng": -74.39289,
-       "lat": 4.33107
+       "lng": -74.39239,
+       "lat": 4.33104
       },
       {
-       "lng": -74.36236,
-       "lat": 4.3426
-      },
-      {
-       "lng": -74.36425,
-       "lat": 4.34182
-      },
-      {
-       "lng": -74.36831,
-       "lat": 4.34198
+       "lng": -74.36527,
+       "lat": 4.34141
       }
      ],
      "giros": [
       {
-       "lng": -74.39211,
-       "lat": 4.3335
-      },
-      {
-       "lng": -74.36818,
-       "lat": 4.34255
+       "lng": -74.39307,
+       "lat": 4.33286
       }
      ]
     },
     {
      "id": "solape",
      "nombre": "Solape consigo mismo <= 8 %",
-     "pasa": false,
-     "detalle": "8.7 % (35 de 402 vertices)",
-     "valor": 8.7
+     "pasa": true,
+     "detalle": "7.5 % (30 de 402 vertices)",
+     "valor": 7.5
     },
     {
      "id": "saltos",
@@ -102,7 +90,7 @@
      "id": "extremos",
      "nombre": "Extremos a <= 100 m del primer y ultimo lugar",
      "pasa": true,
-     "detalle": "inicio a 5 m de \"Ebenezer\", fin a 6 m de \"Olaya\""
+     "detalle": "inicio a 0 m de \"Ebenezer\", fin a 0 m de \"Olaya\""
     },
     {
      "id": "vias-prohibidas",
@@ -126,21 +114,14 @@
      "metros": 26
     },
     {
-     "id": "omitido-cerca",
-     "nombre": "Lugar no ruteado \"Puente Águila\" a <= 60 m del trazado",
-     "pasa": true,
-     "detalle": "a 5 m",
-     "metros": 5
-    },
-    {
      "id": "contravia",
      "nombre": "Sin contravia (OSM oneway)",
      "pasa": false,
      "detalle": "41 m en contravia en: way 1264565160",
      "metros": {
       "contravia": 41,
-      "onewayVerificado": 7208,
-      "sinEtiqueta": 5573,
+      "onewayVerificado": 7383,
+      "sinEtiqueta": 5153,
       "sinViaOsm": 0
      },
      "contravias": [
@@ -160,53 +141,21 @@
   },
   "SANTA_ANITA_GALERIA_COLSUBSIDIO_CEMENTERIO_RESGUARDOS": {
    "triage": "#30",
-   "longitudM": 8837,
-   "vertices": 301,
+   "longitudM": 7737,
+   "vertices": 270,
    "controles": [
     {
      "id": "retroceso",
      "nombre": "Sin retroceso ni giros en U",
      "pasa": false,
-     "detalle": "8 tramos en sentido opuesto a < 15 m, 2 giros en U",
+     "detalle": "1 tramos en sentido opuesto a < 15 m, 1 giros en U",
      "retrocesos": [
       {
-       "lng": -74.3639,
-       "lat": 4.33904
-      },
-      {
-       "lng": -74.36397,
-       "lat": 4.33897
-      },
-      {
-       "lng": -74.36541,
-       "lat": 4.33708
-      },
-      {
-       "lng": -74.36607,
-       "lat": 4.33624
-      },
-      {
-       "lng": -74.36355,
-       "lat": 4.3421
-      },
-      {
-       "lng": -74.36425,
-       "lat": 4.34182
-      },
-      {
-       "lng": -74.36527,
-       "lat": 4.34141
-      },
-      {
-       "lng": -74.36567,
-       "lat": 4.34873
+       "lng": -74.36592,
+       "lat": 4.3364
       }
      ],
      "giros": [
-      {
-       "lng": -74.36725,
-       "lat": 4.33657
-      },
       {
        "lng": -74.36529,
        "lat": 4.34773
@@ -217,21 +166,21 @@
      "id": "solape",
      "nombre": "Solape consigo mismo <= 8 %",
      "pasa": true,
-     "detalle": "4.3 % (13 de 301 vertices)",
-     "valor": 4.3
+     "detalle": "5.9 % (16 de 270 vertices)",
+     "valor": 5.9
     },
     {
      "id": "saltos",
      "nombre": "Sin saltos > 300 m",
      "pasa": true,
-     "detalle": "salto maximo 112 m",
-     "valor": 112
+     "detalle": "salto maximo 118 m",
+     "valor": 118
     },
     {
      "id": "extremos",
      "nombre": "Extremos a <= 100 m del primer y ultimo lugar",
      "pasa": true,
-     "detalle": "inicio a 11 m de \"Fiscalía\", fin a 54 m de \"Resguardos\""
+     "detalle": "inicio a 0 m de \"Fiscalía\", fin a 54 m de \"Resguardos\""
     },
     {
      "id": "vias-prohibidas",
@@ -242,17 +191,17 @@
     },
     {
      "id": "omitido-cerca",
+     "nombre": "Lugar no ruteado \"Clínica Belén\" a <= 60 m del trazado",
+     "pasa": true,
+     "detalle": "a 21 m",
+     "metros": 21
+    },
+    {
+     "id": "omitido-cerca",
      "nombre": "Lugar no ruteado \"Av. Las Palmas\" a <= 60 m del trazado",
      "pasa": true,
      "detalle": "a 15 m",
      "metros": 15
-    },
-    {
-     "id": "omitido-cerca",
-     "nombre": "Lugar no ruteado \"Galería\" a <= 60 m del trazado",
-     "pasa": true,
-     "detalle": "a 32 m",
-     "metros": 32
     },
     {
      "id": "omitido-cerca",
@@ -265,18 +214,25 @@
      "id": "omitido-cerca",
      "nombre": "Lugar no ruteado \"Carrera 11\" a <= 60 m del trazado",
      "pasa": true,
-     "detalle": "a 2 m",
-     "metros": 2
+     "detalle": "a 18 m",
+     "metros": 18
+    },
+    {
+     "id": "omitido-cerca",
+     "nombre": "Lugar no ruteado \"Cementerio\" a <= 60 m del trazado",
+     "pasa": true,
+     "detalle": "a 14 m",
+     "metros": 14
     },
     {
      "id": "contravia",
      "nombre": "Sin contravia (OSM oneway)",
      "pasa": true,
-     "detalle": "0 m en contravia; 5087 m (57.5 %) sobre vias con oneway verificadas; 3766 m (42.5 %) sobre vias sin etiqueta oneway (OSM asume doble sentido: sin dato de sentido en OSM, no verificado)",
+     "detalle": "0 m en contravia; 4548 m (58.7 %) sobre vias con oneway verificadas; 3205 m (41.3 %) sobre vias sin etiqueta oneway (OSM asume doble sentido: sin dato de sentido en OSM, no verificado)",
      "metros": {
       "contravia": 0,
-      "onewayVerificado": 5087,
-      "sinEtiqueta": 3766,
+      "onewayVerificado": 4548,
+      "sinEtiqueta": 3205,
       "sinViaOsm": 0
      },
      "contravias": []
@@ -285,57 +241,44 @@
   },
   "U_HOSPITAL_CRA_9_CLL_3_COLSUBSIDIO_CEMENTERIO": {
    "triage": "#29",
-   "longitudM": 8985,
-   "vertices": 277,
+   "longitudM": 9871,
+   "vertices": 290,
    "controles": [
     {
      "id": "retroceso",
      "nombre": "Sin retroceso ni giros en U",
      "pasa": false,
-     "detalle": "7 tramos en sentido opuesto a < 15 m, 1 giros en U",
+     "detalle": "5 tramos en sentido opuesto a < 15 m, 0 giros en U",
      "retrocesos": [
       {
        "lng": -74.36425,
        "lat": 4.34182
       },
       {
-       "lng": -74.36527,
-       "lat": 4.34141
-      },
-      {
-       "lng": -74.36831,
-       "lat": 4.34198
+       "lng": -74.36424,
+       "lat": 4.34171
       },
       {
        "lng": -74.36223,
        "lat": 4.34257
       },
       {
-       "lng": -74.36211,
-       "lat": 4.3426
-      },
-      {
-       "lng": -74.36031,
-       "lat": 4.3426
+       "lng": -74.36124,
+       "lat": 4.34261
       },
       {
        "lng": -74.36391,
        "lat": 4.34695
       }
      ],
-     "giros": [
-      {
-       "lng": -74.36818,
-       "lat": 4.34255
-      }
-     ]
+     "giros": []
     },
     {
      "id": "solape",
      "nombre": "Solape consigo mismo <= 8 %",
-     "pasa": false,
-     "detalle": "9 % (25 de 277 vertices)",
-     "valor": 9
+     "pasa": true,
+     "detalle": "5.9 % (17 de 290 vertices)",
+     "valor": 5.9
     },
     {
      "id": "saltos",
@@ -348,7 +291,7 @@
      "id": "extremos",
      "nombre": "Extremos a <= 100 m del primer y ultimo lugar",
      "pasa": true,
-     "detalle": "inicio a 5 m de \"U. Hospital Éxito\", fin a 14 m de \"Cementerio\""
+     "detalle": "inicio a 0 m de \"U. Hospital Éxito\", fin a 0 m de \"Cementerio\""
     },
     {
      "id": "vias-prohibidas",
@@ -359,10 +302,10 @@
     },
     {
      "id": "omitido-cerca",
-     "nombre": "Lugar no ruteado \"Carrera 9\" a <= 60 m del trazado",
+     "nombre": "Lugar no ruteado \"Galería\" a <= 60 m del trazado",
      "pasa": true,
-     "detalle": "a 1 m",
-     "metros": 1
+     "detalle": "a 32 m",
+     "metros": 32
     },
     {
      "id": "omitido-cerca",
@@ -378,8 +321,8 @@
      "detalle": "7 m en contravia en: Calle 11",
      "metros": {
       "contravia": 7,
-      "onewayVerificado": 6119,
-      "sinEtiqueta": 2886,
+      "onewayVerificado": 6916,
+      "sinEtiqueta": 2975,
       "sinViaOsm": 0
      },
      "contravias": [
@@ -399,93 +342,8 @@
   },
   "CENTRO_U_HOSPITAL_COLSUBSIDIO_CEDRITOS": {
    "triage": "#27",
-   "longitudM": 7747,
-   "vertices": 224,
-   "controles": [
-    {
-     "id": "retroceso",
-     "nombre": "Sin retroceso ni giros en U",
-     "pasa": false,
-     "detalle": "2 tramos en sentido opuesto a < 15 m, 0 giros en U",
-     "retrocesos": [
-      {
-       "lng": -74.3701,
-       "lat": 4.33345
-      },
-      {
-       "lng": -74.37067,
-       "lat": 4.33327
-      }
-     ],
-     "giros": []
-    },
-    {
-     "id": "solape",
-     "nombre": "Solape consigo mismo <= 8 %",
-     "pasa": true,
-     "detalle": "3.6 % (8 de 224 vertices)",
-     "valor": 3.6
-    },
-    {
-     "id": "saltos",
-     "nombre": "Sin saltos > 300 m",
-     "pasa": true,
-     "detalle": "salto maximo 163 m",
-     "valor": 163
-    },
-    {
-     "id": "extremos",
-     "nombre": "Extremos a <= 100 m del primer y ultimo lugar",
-     "pasa": true,
-     "detalle": "inicio a 11 m de \"Av. Las Palmas\", fin a 6 m de \"Cedritos\""
-    },
-    {
-     "id": "vias-prohibidas",
-     "nombre": "Urbana: sin Variante, Cucharal ni Novillero",
-     "pasa": true,
-     "detalle": "ninguna",
-     "vias": []
-    },
-    {
-     "id": "omitido-cerca",
-     "nombre": "Lugar no ruteado \"Carrera 6\" a <= 60 m del trazado",
-     "pasa": true,
-     "detalle": "a 1 m",
-     "metros": 1
-    },
-    {
-     "id": "omitido-cerca",
-     "nombre": "Lugar no ruteado \"Calle 11\" a <= 60 m del trazado",
-     "pasa": true,
-     "detalle": "a 5 m",
-     "metros": 5
-    },
-    {
-     "id": "omitido-cerca",
-     "nombre": "Lugar no ruteado \"Antiguo Colsubsidio\" a <= 60 m del trazado",
-     "pasa": true,
-     "detalle": "a 8 m",
-     "metros": 8
-    },
-    {
-     "id": "contravia",
-     "nombre": "Sin contravia (OSM oneway)",
-     "pasa": true,
-     "detalle": "0 m en contravia; 5391 m (69.4 %) sobre vias con oneway verificadas; 2373 m (30.6 %) sobre vias sin etiqueta oneway (OSM asume doble sentido: sin dato de sentido en OSM, no verificado)",
-     "metros": {
-      "contravia": 0,
-      "onewayVerificado": 5391,
-      "sinEtiqueta": 2373,
-      "sinViaOsm": 0
-     },
-     "contravias": []
-    }
-   ]
-  },
-  "CENTRO_COLSUBSIDIO_CALLE_4_CEDRITOS_SAN_ANTONIO": {
-   "triage": "#26",
-   "longitudM": 5908,
-   "vertices": 167,
+   "longitudM": 7477,
+   "vertices": 203,
    "controles": [
     {
      "id": "retroceso",
@@ -499,8 +357,77 @@
      "id": "solape",
      "nombre": "Solape consigo mismo <= 8 %",
      "pasa": true,
-     "detalle": "1.8 % (3 de 167 vertices)",
-     "valor": 1.8
+     "detalle": "2 % (4 de 203 vertices)",
+     "valor": 2
+    },
+    {
+     "id": "saltos",
+     "nombre": "Sin saltos > 300 m",
+     "pasa": true,
+     "detalle": "salto maximo 163 m",
+     "valor": 163
+    },
+    {
+     "id": "extremos",
+     "nombre": "Extremos a <= 100 m del primer y ultimo lugar",
+     "pasa": true,
+     "detalle": "inicio a 0 m de \"Av. Las Palmas\", fin a 0 m de \"Cedritos\""
+    },
+    {
+     "id": "vias-prohibidas",
+     "nombre": "Urbana: sin Variante, Cucharal ni Novillero",
+     "pasa": true,
+     "detalle": "ninguna",
+     "vias": []
+    },
+    {
+     "id": "omitido-cerca",
+     "nombre": "Lugar no ruteado \"Calle 11\" a <= 60 m del trazado",
+     "pasa": true,
+     "detalle": "a 5 m",
+     "metros": 5
+    },
+    {
+     "id": "omitido-cerca",
+     "nombre": "Lugar no ruteado \"U. Hospital Éxito\" a <= 60 m del trazado",
+     "pasa": false,
+     "detalle": "a 101 m",
+     "metros": 101
+    },
+    {
+     "id": "contravia",
+     "nombre": "Sin contravia (OSM oneway)",
+     "pasa": true,
+     "detalle": "0 m en contravia; 5381 m (71.8 %) sobre vias con oneway verificadas; 2112 m (28.2 %) sobre vias sin etiqueta oneway (OSM asume doble sentido: sin dato de sentido en OSM, no verificado)",
+     "metros": {
+      "contravia": 0,
+      "onewayVerificado": 5381,
+      "sinEtiqueta": 2112,
+      "sinViaOsm": 0
+     },
+     "contravias": []
+    }
+   ]
+  },
+  "CENTRO_COLSUBSIDIO_CALLE_4_CEDRITOS_SAN_ANTONIO": {
+   "triage": "#26",
+   "longitudM": 6611,
+   "vertices": 215,
+   "controles": [
+    {
+     "id": "retroceso",
+     "nombre": "Sin retroceso ni giros en U",
+     "pasa": true,
+     "detalle": "0 tramos en sentido opuesto a < 15 m, 0 giros en U",
+     "retrocesos": [],
+     "giros": []
+    },
+    {
+     "id": "solape",
+     "nombre": "Solape consigo mismo <= 8 %",
+     "pasa": true,
+     "detalle": "2.3 % (5 de 215 vertices)",
+     "valor": 2.3
     },
     {
      "id": "saltos",
@@ -513,7 +440,7 @@
      "id": "extremos",
      "nombre": "Extremos a <= 100 m del primer y ultimo lugar",
      "pasa": true,
-     "detalle": "inicio a 11 m de \"Av. Las Palmas\", fin a 12 m de \"San Antonio\""
+     "detalle": "inicio a 0 m de \"Av. Las Palmas\", fin a 0 m de \"San Antonio\""
     },
     {
      "id": "vias-prohibidas",
@@ -524,27 +451,20 @@
     },
     {
      "id": "omitido-cerca",
-     "nombre": "Lugar no ruteado \"Galería\" a <= 60 m del trazado",
+     "nombre": "Lugar no ruteado \"Carrera 1\" a <= 60 m del trazado",
      "pasa": true,
-     "detalle": "a 44 m",
-     "metros": 44
-    },
-    {
-     "id": "omitido-cerca",
-     "nombre": "Lugar no ruteado \"Carrera 4\" a <= 60 m del trazado",
-     "pasa": true,
-     "detalle": "a 8 m",
-     "metros": 8
+     "detalle": "a 2 m",
+     "metros": 2
     },
     {
      "id": "contravia",
      "nombre": "Sin contravia (OSM oneway)",
      "pasa": true,
-     "detalle": "0 m en contravia; 3854 m (65.1 %) sobre vias con oneway verificadas; 2065 m (34.9 %) sobre vias sin etiqueta oneway (OSM asume doble sentido: sin dato de sentido en OSM, no verificado)",
+     "detalle": "0 m en contravia; 3654 m (55.2 %) sobre vias con oneway verificadas; 2968 m (44.8 %) sobre vias sin etiqueta oneway (OSM asume doble sentido: sin dato de sentido en OSM, no verificado)",
      "metros": {
       "contravia": 0,
-      "onewayVerificado": 3854,
-      "sinEtiqueta": 2065,
+      "onewayVerificado": 3654,
+      "sinEtiqueta": 2968,
       "sinViaOsm": 0
      },
      "contravias": []
@@ -553,106 +473,57 @@
   },
   "U_HOSPITAL_BATALLON_LLANO_LARGO": {
    "triage": "#20",
-   "longitudM": 12525,
-   "vertices": 392,
+   "longitudM": 10307,
+   "vertices": 336,
    "controles": [
     {
      "id": "retroceso",
      "nombre": "Sin retroceso ni giros en U",
      "pasa": false,
-     "detalle": "16 tramos en sentido opuesto a < 15 m, 1 giros en U",
+     "detalle": "5 tramos en sentido opuesto a < 15 m, 0 giros en U",
      "retrocesos": [
-      {
-       "lng": -74.37711,
-       "lat": 4.33153
-      },
-      {
-       "lng": -74.37569,
-       "lat": 4.33165
-      },
-      {
-       "lng": -74.37505,
-       "lat": 4.33175
-      },
-      {
-       "lng": -74.37129,
-       "lat": 4.33295
-      },
-      {
-       "lng": -74.37024,
-       "lat": 4.33329
-      },
-      {
-       "lng": -74.36936,
-       "lat": 4.33386
-      },
-      {
-       "lng": -74.36779,
-       "lat": 4.33496
-      },
-      {
-       "lng": -74.36609,
-       "lat": 4.33613
-      },
-      {
-       "lng": -74.36496,
-       "lat": 4.33758
-      },
-      {
-       "lng": -74.36409,
-       "lat": 4.33873
-      },
-      {
-       "lng": -74.36358,
-       "lat": 4.33923
-      },
       {
        "lng": -74.40284,
        "lat": 4.32673
       },
       {
-       "lng": -74.40509,
+       "lng": -74.40387,
        "lat": 4.32673
       },
       {
-       "lng": -74.406,
+       "lng": -74.40674,
        "lat": 4.32673
       },
       {
-       "lng": -74.40891,
-       "lat": 4.32673
+       "lng": -74.40793,
+       "lat": 4.32674
       },
       {
-       "lng": -74.40898,
-       "lat": 4.32673
+       "lng": -74.40938,
+       "lat": 4.32662
       }
      ],
-     "giros": [
-      {
-       "lng": -74.41258,
-       "lat": 4.32772
-      }
-     ]
+     "giros": []
     },
     {
      "id": "solape",
      "nombre": "Solape consigo mismo <= 8 %",
-     "pasa": false,
-     "detalle": "10.5 % (41 de 392 vertices)",
-     "valor": 10.5
+     "pasa": true,
+     "detalle": "8 % (27 de 336 vertices)",
+     "valor": 8
     },
     {
      "id": "saltos",
      "nombre": "Sin saltos > 300 m",
      "pasa": true,
-     "detalle": "salto maximo 216 m",
-     "valor": 216
+     "detalle": "salto maximo 213 m",
+     "valor": 213
     },
     {
      "id": "extremos",
      "nombre": "Extremos a <= 100 m del primer y ultimo lugar",
      "pasa": true,
-     "detalle": "inicio a 44 m de \"Terminal\", fin a 3 m de \"Llano Largo\""
+     "detalle": "inicio a 0 m de \"Terminal\", fin a 0 m de \"Llano Largo\""
     },
     {
      "id": "vias-prohibidas",
@@ -674,46 +545,32 @@
      "id": "omitido-cerca",
      "nombre": "Lugar no ruteado \"Banco Caja Social\" a <= 60 m del trazado",
      "pasa": true,
-     "detalle": "a 55 m",
-     "metros": 55
-    },
-    {
-     "id": "omitido-cerca",
-     "nombre": "Lugar no ruteado \"Fiscalía\" a <= 60 m del trazado",
-     "pasa": true,
-     "detalle": "a 11 m",
-     "metros": 11
-    },
-    {
-     "id": "omitido-cerca",
-     "nombre": "Lugar no ruteado \"U. Hospital Éxito\" a <= 60 m del trazado",
-     "pasa": true,
-     "detalle": "a 22 m",
-     "metros": 22
+     "detalle": "a 18 m",
+     "metros": 18
     },
     {
      "id": "omitido-cerca",
      "nombre": "Lugar no ruteado \"Indio\" a <= 60 m del trazado",
      "pasa": true,
-     "detalle": "a 20 m",
-     "metros": 20
+     "detalle": "a 24 m",
+     "metros": 24
     },
     {
      "id": "omitido-cerca",
-     "nombre": "Lugar no ruteado \"Villa Celeste\" a <= 60 m del trazado",
+     "nombre": "Lugar no ruteado \"Fiscalía\" a <= 60 m del trazado",
      "pasa": true,
-     "detalle": "a 42 m",
-     "metros": 42
+     "detalle": "a 20 m",
+     "metros": 20
     },
     {
      "id": "contravia",
      "nombre": "Sin contravia (OSM oneway)",
      "pasa": true,
-     "detalle": "0 m en contravia; 4934 m (39.4 %) sobre vias con oneway verificadas; 7604 m (60.6 %) sobre vias sin etiqueta oneway (OSM asume doble sentido: sin dato de sentido en OSM, no verificado)",
+     "detalle": "0 m en contravia; 3984 m (38.6 %) sobre vias con oneway verificadas; 6327 m (61.4 %) sobre vias sin etiqueta oneway (OSM asume doble sentido: sin dato de sentido en OSM, no verificado)",
      "metros": {
       "contravia": 0,
-      "onewayVerificado": 4934,
-      "sinEtiqueta": 7604,
+      "onewayVerificado": 3984,
+      "sinEtiqueta": 6327,
       "sinViaOsm": 0
      },
      "contravias": []
@@ -722,41 +579,28 @@
   },
   "CENTRO_COLSUBSIDIO_CEMENTERIO_GAITAN_GALAN": {
    "triage": "#16",
-   "longitudM": 6241,
-   "vertices": 218,
+   "longitudM": 5695,
+   "vertices": 209,
    "controles": [
     {
      "id": "retroceso",
      "nombre": "Sin retroceso ni giros en U",
      "pasa": false,
-     "detalle": "3 tramos en sentido opuesto a < 15 m, 1 giros en U",
+     "detalle": "1 tramos en sentido opuesto a < 15 m, 0 giros en U",
      "retrocesos": [
-      {
-       "lng": -74.36831,
-       "lat": 4.34198
-      },
       {
        "lng": -74.36153,
        "lat": 4.34015
-      },
-      {
-       "lng": -74.36146,
-       "lat": 4.33991
       }
      ],
-     "giros": [
-      {
-       "lng": -74.36818,
-       "lat": 4.34255
-      }
-     ]
+     "giros": []
     },
     {
      "id": "solape",
      "nombre": "Solape consigo mismo <= 8 %",
-     "pasa": false,
-     "detalle": "9.6 % (21 de 218 vertices)",
-     "valor": 9.6
+     "pasa": true,
+     "detalle": "7.2 % (15 de 209 vertices)",
+     "valor": 7.2
     },
     {
      "id": "saltos",
@@ -769,7 +613,7 @@
      "id": "extremos",
      "nombre": "Extremos a <= 100 m del primer y ultimo lugar",
      "pasa": true,
-     "detalle": "inicio a 44 m de \"Terminal de Transporte\", fin a 4 m de \"Paradero Gaitan\""
+     "detalle": "inicio a 0 m de \"Terminal de Transporte\", fin a 0 m de \"Paradero Gaitan\""
     },
     {
      "id": "vias-prohibidas",
@@ -787,27 +631,27 @@
     },
     {
      "id": "omitido-cerca",
+     "nombre": "Lugar no ruteado \"Tiendas Ara (Antiguo Colsubsidio)\" a <= 60 m del trazado",
+     "pasa": true,
+     "detalle": "a 8 m",
+     "metros": 8
+    },
+    {
+     "id": "omitido-cerca",
      "nombre": "Lugar no ruteado \"Funeraria La Paz\" a <= 60 m del trazado",
      "pasa": true,
      "detalle": "a 9 m",
      "metros": 9
     },
     {
-     "id": "omitido-cerca",
-     "nombre": "Lugar no ruteado \"Funeraria Jardines del Renacer\" a <= 60 m del trazado",
-     "pasa": true,
-     "detalle": "a 27 m",
-     "metros": 27
-    },
-    {
      "id": "contravia",
      "nombre": "Sin contravia (OSM oneway)",
      "pasa": true,
-     "detalle": "0 m en contravia; 5111 m (81.7 %) sobre vias con oneway verificadas; 1141 m (18.3 %) sobre vias sin etiqueta oneway (OSM asume doble sentido: sin dato de sentido en OSM, no verificado)",
+     "detalle": "0 m en contravia; 5059 m (88.6 %) sobre vias con oneway verificadas; 648 m (11.4 %) sobre vias sin etiqueta oneway (OSM asume doble sentido: sin dato de sentido en OSM, no verificado)",
      "metros": {
       "contravia": 0,
-      "onewayVerificado": 5111,
-      "sinEtiqueta": 1141,
+      "onewayVerificado": 5059,
+      "sinEtiqueta": 648,
       "sinViaOsm": 0
      },
      "contravias": []
@@ -816,86 +660,36 @@
   },
   "HOSPITAL_BATALLON_LA_PAMPA_LLANO_GRANDE": {
    "triage": "#11b",
-   "longitudM": 11170,
-   "vertices": 363,
+   "longitudM": 8972,
+   "vertices": 308,
    "controles": [
     {
      "id": "retroceso",
      "nombre": "Sin retroceso ni giros en U",
-     "pasa": false,
-     "detalle": "11 tramos en sentido opuesto a < 15 m, 1 giros en U",
-     "retrocesos": [
-      {
-       "lng": -74.37711,
-       "lat": 4.33153
-      },
-      {
-       "lng": -74.37569,
-       "lat": 4.33165
-      },
-      {
-       "lng": -74.37505,
-       "lat": 4.33175
-      },
-      {
-       "lng": -74.37129,
-       "lat": 4.33295
-      },
-      {
-       "lng": -74.37024,
-       "lat": 4.33329
-      },
-      {
-       "lng": -74.36936,
-       "lat": 4.33386
-      },
-      {
-       "lng": -74.36779,
-       "lat": 4.33496
-      },
-      {
-       "lng": -74.36609,
-       "lat": 4.33613
-      },
-      {
-       "lng": -74.36496,
-       "lat": 4.33758
-      },
-      {
-       "lng": -74.36409,
-       "lat": 4.33873
-      },
-      {
-       "lng": -74.36358,
-       "lat": 4.33923
-      }
-     ],
-     "giros": [
-      {
-       "lng": -74.41258,
-       "lat": 4.32772
-      }
-     ]
+     "pasa": true,
+     "detalle": "0 tramos en sentido opuesto a < 15 m, 0 giros en U",
+     "retrocesos": [],
+     "giros": []
     },
     {
      "id": "solape",
      "nombre": "Solape consigo mismo <= 8 %",
      "pasa": true,
-     "detalle": "4.4 % (16 de 363 vertices)",
-     "valor": 4.4
+     "detalle": "1 % (3 de 308 vertices)",
+     "valor": 1
     },
     {
      "id": "saltos",
      "nombre": "Sin saltos > 300 m",
      "pasa": true,
-     "detalle": "salto maximo 216 m",
-     "valor": 216
+     "detalle": "salto maximo 213 m",
+     "valor": 213
     },
     {
      "id": "extremos",
      "nombre": "Extremos a <= 100 m del primer y ultimo lugar",
      "pasa": true,
-     "detalle": "inicio a 44 m de \"Terminal\", fin a 5 m de \"Llano Grande\""
+     "detalle": "inicio a 0 m de \"Terminal\", fin a 0 m de \"Llano Grande\""
     },
     {
      "id": "vias-prohibidas",
@@ -917,46 +711,32 @@
      "id": "omitido-cerca",
      "nombre": "Lugar no ruteado \"Banco Caja Social\" a <= 60 m del trazado",
      "pasa": true,
-     "detalle": "a 55 m",
-     "metros": 55
-    },
-    {
-     "id": "omitido-cerca",
-     "nombre": "Lugar no ruteado \"Fiscalía\" a <= 60 m del trazado",
-     "pasa": true,
-     "detalle": "a 11 m",
-     "metros": 11
-    },
-    {
-     "id": "omitido-cerca",
-     "nombre": "Lugar no ruteado \"U. Hospital Éxito\" a <= 60 m del trazado",
-     "pasa": true,
-     "detalle": "a 22 m",
-     "metros": 22
+     "detalle": "a 18 m",
+     "metros": 18
     },
     {
      "id": "omitido-cerca",
      "nombre": "Lugar no ruteado \"Indio\" a <= 60 m del trazado",
      "pasa": true,
-     "detalle": "a 20 m",
-     "metros": 20
+     "detalle": "a 24 m",
+     "metros": 24
     },
     {
      "id": "omitido-cerca",
-     "nombre": "Lugar no ruteado \"Villa Celeste\" a <= 60 m del trazado",
+     "nombre": "Lugar no ruteado \"Fiscalía\" a <= 60 m del trazado",
      "pasa": true,
-     "detalle": "a 42 m",
-     "metros": 42
+     "detalle": "a 20 m",
+     "metros": 20
     },
     {
      "id": "contravia",
      "nombre": "Sin contravia (OSM oneway)",
      "pasa": true,
-     "detalle": "0 m en contravia; 4934 m (44.1 %) sobre vias con oneway verificadas; 6247 m (55.9 %) sobre vias sin etiqueta oneway (OSM asume doble sentido: sin dato de sentido en OSM, no verificado)",
+     "detalle": "0 m en contravia; 3984 m (44.4 %) sobre vias con oneway verificadas; 4990 m (55.6 %) sobre vias sin etiqueta oneway (OSM asume doble sentido: sin dato de sentido en OSM, no verificado)",
      "metros": {
       "contravia": 0,
-      "onewayVerificado": 4934,
-      "sinEtiqueta": 6247,
+      "onewayVerificado": 3984,
+      "sinEtiqueta": 4990,
       "sinViaOsm": 0
      },
      "contravias": []
